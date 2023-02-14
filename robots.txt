@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chayanforyou.github.io/avr-guide/sitemap.xml

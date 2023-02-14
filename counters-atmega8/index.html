@@ -1,0 +1,876 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/images/apple-touch-icon.png" type="image/png" />
+
+  <meta name="title" content="COUNTERS ON THE ATmega8 - QEEWiki" />
+  <meta itemprop="name" content="COUNTERS ON THE ATmega8 - QEEWiki" />
+  <meta property="og:title" content="COUNTERS ON THE ATmega8 - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>COUNTERS ON THE ATmega8 - QEEWiki</title>
+  <meta itemprop="image" content="/avr-guide/counters-atmega8/ATmega8%20-%20COUNTERS%20.JPG" />
+  <meta property="og:image" content="/avr-guide/counters-atmega8/ATmega8%20-%20COUNTERS%20.JPG" />
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt;
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">COUNTERS ON THE ATmega8</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr">
+                                <font face="'courier new', monospace" size="3"><b>INTRODUCTION:</b></font>
+                                <div><br />
+                                </div>
+                                <div><span>    This chapter describes the operation of the hardware counters of the ATmega8. While software counters are fairly simple they can easily miss fast signals in long complex programs.  Hardware counters are always looking for inputs and if configured correctly will not miss even fast signals.</span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span>    The ATmega8 has 3 counters, 2 8bit counters and 1 16bit counter.  Since all 3 counters have unique registers and special functions I will break this chapter subsections by counter insted of my usual hardware, theory and software format.</span><br />
+                                </div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span><br />
+                                    <div style="display:block;text-align:left"><a href="/avr-guide/counters-atmega8/ATmega8%20-%20COUNTERS%20.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/counters-atmega8/ATmega8%20-%20COUNTERS%20.JPG" /></a></div><span style="font-family:courier new,monospace">Figure 1: ATmega8 - Counter Pins</span><br /><br /><br />
+                                  </span></div>
+                                <div><span>
+                                    <hr />
+                                  </span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span>
+                                    <font face="'courier new', monospace" size="3"><b>COUNTER0 (8 Bit):</b></font>
+                                  </span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><i>Theory of Operation:</i></div>
+                                <div><br />
+                                </div>
+                                <div>
+                                  <div style="display:block;text-align:left"><a href="/avr-guide/counters-atmega8/Counter0%20-%20ATmega8.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/counters-atmega8/Counter0%20-%20ATmega8.JPG" /></a></div>
+                                  <i style="font-family:courier new,monospace">Figure 2: Counter0</i>
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><span>    Counter0 is the most basic Counter on the AVR.  It gets its input from the T0 pin(as always T0 has the same restrictions as any  INPUT or OUTPUT), passes the signals into the Edge Detection, which when triggered sends a pulse to the Control Logic.  The Control Logic receives the signal and increments the TCNT0 register.  When the TCNT0 register passes the TOP value (0xFF or 255) it simply overflows (or overruns) back to 0, at the same time the TOV0 flag is set.  Note that the prescaler is part not of the Counter.</span><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><span>    An interrupt can be set to trigger when Counter0 overflows, however since the value at which the overflow occurs is set in stone to (0xFF or 255) we need to use a bit of programming if we want to count to a given number that is bigger then 255 and not an increment of 256.</span><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><span>    The only other thing that you I could say about Counter0 is that if it is enabled, it will count events on the T0 pin regardless of if it is set as an input or an output.</span><br />
+                                </div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;text-align:center;border-collapse:collapse">
+                                      <tbody>
+                                        <tr>
+                                          <td style="text-align:center;width:59px;height:15px"> </td>
+                                          <td style="text-align:center;width:59px"><b> 7 bit</b></td>
+                                          <td style="text-align:center;width:59px"><b> 6 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b> 5 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b> 4 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b> 3 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b> 2 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b> 1 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b> 0 bit</b> </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;height:15px"> <b>TCCR0</b></td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> -</td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center"> CS02</td>
+                                          <td style="text-align:center"> CS01</td>
+                                          <td style="text-align:center">CS00 </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <div style="text-align:left;font-family:courier new,monospace"><i>Timer/Counter Control Register 0</i></div>
+                                  </span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <blockquote style="border:medium none;margin:0pt 0pt 0pt 40px;padding:0px">
+                                  <div>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                      <tbody>
+                                        <tr>
+                                          <td style="width:54px;height:15px"><b> CS02</b></td>
+                                          <td style="width:54px;height:15px"><b> CS01 </b></td>
+                                          <td style="width:54px;height:15px"><b> CS00 </b></td>
+                                          <td style="width:365px;height:15px"><b> DESCRIPTION</b></td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;width:54px;height:15px">0</td>
+                                          <td style="text-align:center;width:54px;height:15px">0</td>
+                                          <td style="text-align:center;width:54px;height:15px">0</td>
+                                          <td style="text-align:left;width:365px;height:15px"> Timer/Counter0 Disabled </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;width:54px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)">X</td>
+                                          <td style="text-align:center;width:54px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)">X</td>
+                                          <td style="text-align:center;width:54px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)">X</td>
+                                          <td style="text-align:left;width:365px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> Prescaler settings (omited in this tutorial)</td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;width:54px;height:15px">1</td>
+                                          <td style="text-align:center;width:54px;height:15px">1</td>
+                                          <td style="text-align:center;width:54px;height:15px">0</td>
+                                          <td style="text-align:left;width:365px;height:15px"> External Clock Source on T0 pin, Clock on falling Edge</td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;width:54px;height:15px">1</td>
+                                          <td style="text-align:center;width:54px;height:15px">1</td>
+                                          <td style="text-align:center;width:54px;height:15px">1</td>
+                                          <td style="text-align:left;width:365px;height:15px"> External Clock Source on T0 pin, Clock on Rising Edge </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <i style="font-family:courier new,monospace">CS bits</i>
+                                  </div>
+                                </blockquote>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div>
+                                  <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;text-align:center;border-collapse:collapse">
+                                    <tbody>
+                                      <tr>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                      </tr>
+                                      <tr>
+                                        <td style="vertical-align:top;text-align:center;height:15px"> <b>TIMSK</b></td>
+                                        <td style="vertical-align:top;text-align:center;background-color:rgb(243,243,243);color:rgb(153,153,153)"> OCIE2</td>
+                                        <td style="vertical-align:top;text-align:center;background-color:rgb(243,243,243);color:rgb(153,153,153)">TOIE2 </td>
+                                        <td style="vertical-align:top;text-align:center;background-color:rgb(243,243,243);color:rgb(153,153,153)">TICIE1 </td>
+                                        <td style="vertical-align:top;text-align:center;background-color:rgb(243,243,243);color:rgb(153,153,153)">OCIE1A </td>
+                                        <td style="vertical-align:top;text-align:center;background-color:rgb(243,243,243);color:rgb(153,153,153)">OCIE1B </td>
+                                        <td style="vertical-align:top;text-align:center;background-color:rgb(243,243,243);color:rgb(153,153,153)"> TOIE1</td>
+                                        <td style="vertical-align:top;text-align:center;background-color:rgb(243,243,243);color:rgb(153,153,153)"> -</td>
+                                        <td style="vertical-align:top;text-align:center">TOIE0 </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <div style="text-align:left;font-family:courier new,monospace"><i>Timer/Counter Interrupt Mask Register</i></div>
+                                </div>
+                                <div style="text-align:left"><i><br />
+                                  </i></div>
+                                <div style="text-align:left"><i><br />
+                                  </i></div>
+                                <div style="text-align:left"><i><span style="font-style:normal">
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;text-align:center;border-collapse:collapse">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"> <b>TIFR</b></td>
+                                            <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> OCF2</td>
+                                            <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">TOV2 </td>
+                                            <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">ICF1 </td>
+                                            <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">OCF1A </td>
+                                            <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">OCF1B </td>
+                                            <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> TOV1</td>
+                                            <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> -</td>
+                                            <td style="vertical-align:top;text-align:center">TOV0 </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left;font-family:courier new,monospace"><i>Timer/Counter Interrupt Flag Register</i></div>
+                                    </span></i></div>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><i><span style="font-style:normal">
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;text-align:center;border-collapse:collapse">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"> <b>TCNT0</b></td>
+                                            <td style="vertical-align:top;text-align:center"> </td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br />
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center"><br />
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center"><br />
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center"><br />
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center"><br />
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center"> </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left;font-family:courier new,monospace"><i>Timer/Counter Register (stores the counter value)</i></div>
+                                    </span></i></div>
+                                <div><br /><br /><br />
+                                </div>
+                                <div><i>Software:</i></div>
+                                <div><br />
+                                </div>
+                                <div><span>    You want simple, you got it.  When it comes to a Counter all you have to do is activate it for clock on falling edge or clock on rising edge using the CS0n bits within the TCCR0 register,  then decide if you want to use the overflow interrupt or not using the TOIEn bit within the TIMSK register.  Brilliantly simple.</span><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><i>ATmega8 Code:</i><br />
+                                </div>
+                                <div class="sites-codeblock sites-codesnippet-block">
+                                  <div><code>// this code sets up counter0 and with no interrupts</code><br />
+                                    <br />
+                                    <br />
+                                    <code>#include &lt;avr/io.h&gt;</code><br />
+                                    <br />
+                                    <br />
+                                    <code>int main(void)</code><br />
+                                    <code>{</code><br />
+                                    <code><span>    </span>DDRD &amp;= ~(1 &lt;&lt; DDD4); <span>    </span>// Clear the PD4 pin</code><br />
+                                    <code><span>    </span>// PD4 is now an input</code><br />
+                                    <br />
+                                    <code><span>    </span>PORTD |= (1 &lt;&lt; PORTD4); <span>  </span>// turn On the Pull-up</code><br />
+                                    <code><span>    </span>// PD4 is now an input with pull-up enabled</code><br />
+                                    <br />
+                                    <code><span>    </span>TCCR0 |= (1 &lt;&lt; CS02) | (1 &lt;&lt; CS01) | (1 &lt;&lt; CS00);</code><br />
+                                    <code><span>    </span>// Turn on the counter, Clock on Rise</code>
+                                  </div>
+                                  <div>
+                                    <br />
+                                    <br />
+                                    <code><span>    </span>while (1)</code><br />
+                                    <code><span>    </span>{</code><br />
+                                    <code><span>    <span>    </span></span>// we can read the value of TCNT0 hurray !!</code>
+                                  </div>
+                                  <div><code><span>    </span>}</code><br />
+                                    <code>}</code>
+                                  </div>
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div>
+                                  <div><i>ATmega8 Code:</i><br />
+                                  </div>
+                                </div>
+                                <div></div>
+                                <div class="sites-codeblock sites-codesnippet-block">
+                                  <div><code>// this code sets up counter0 and with interrupts enabled</code><br />
+                                    <br />
+                                    <br />
+                                    <code>#include &lt;avr/io.h&gt;</code><br />
+                                    <code>#include &lt;avr/interrupt.h&gt;</code><br />
+                                    <br />
+                                  </div>
+                                  <div><br />
+                                  </div>
+                                  <div><br />
+                                  </div>
+                                  <div><code>int main(void)</code><br />
+                                    <code>{</code><br />
+                                    <code><span>    </span>DDRD &amp;= ~(1 &lt;&lt; DDD4); <span>    </span>// Clear the PD4 pin</code><br />
+                                    <code><span>    </span>// PD0 is now an input</code><br />
+                                    <br />
+                                    <code><span>    </span>PORTD |= (1 &lt;&lt; PORTD4); <span>  </span>// turn On the Pull-up</code><br />
+                                    <code><span>    </span>// PD4 is now an input with pull-up enabled</code><br />
+                                    <br />
+                                    <code><span>    </span>TIMSK |= (1 &lt;&lt; TOIE0); <span>   </span>// enable timer interrupt</code><br />
+                                    <br />
+                                    <code><span>    </span>TCCR0 |= (1 &lt;&lt; CS02) | (1 &lt;&lt; CS01) | (1 &lt;&lt; CS00);</code><br />
+                                    <code><span>    </span>// Turn on the counter, Clock on Rise</code>
+                                  </div>
+                                  <div>
+                                    <font color="#006000" face="monospace"><br /></font>
+                                  </div>
+                                  <div>
+                                    <font color="#006000" face="monospace"><span>    sei();</span><br /></font>
+                                    <br />
+                                  </div>
+                                  <div><br />
+                                    <code><span>    </span>while (1)</code><br />
+                                    <code><span>    </span>{</code><br />
+                                    <code><span>    <span>    </span></span>// we can read the value of TCNT0 hurray !!</code><br />
+                                    <code><span>    </span>}</code><br />
+                                    <code>}</code><br />
+                                    <br />
+                                    <br />
+                                    <code>ISR (TIMER0_OVF_vect)</code><br />
+                                    <code>{</code><br />
+                                    <code><span>    </span>// interrupt just fired</code><br />
+                                    <code>}</code><br />
+                                  </div>
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div>
+                                  <hr />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><b>
+                                    <font face="'courier new', monospace" size="3">COUNTER1 (16 Bit):</font>
+                                  </b></div>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><i>Theory of Operation:</i></div>
+                                <div><br />
+                                </div>
+                                <div>
+                                  <div style="display:block;text-align:left"><a href="/avr-guide/counters-atmega8/Counter1%20-%20ATmega8.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/counters-atmega8/Counter1%20-%20ATmega8.JPG" /></a></div>
+                                  <i style="font-family:courier new,monospace">Figure 3: Counter1</i>
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><span>    As you could see counter1 is a bit more fancy then Counter0 but, all the theory is still the same.  The T1 </span>pin(as always T0 has the same restrictions as any  INPUT or OUTPUT), passes the signals into the Edge Detection, which when triggered sends a pulse to the Control Logic.  The Control Logic updates the TCNT1 register which is a 16 bit register.   The biggest between Counter0 and Counter1 (aside from being 16bit) is that the Control Logic unit in counter1 has the ability to increment, decrement or clear(reset) the TCNT1 register.  There are 16 different modes of operation that govern the Control Logic, however, most of them are only useful for PWM operations.  </div>
+                                <div><br />
+                                </div>
+                                <div><span>    </span>For counting external inputs only 2 modes really apply.  the Normal Mode, and the CTC (Clear Timer On Comparer). </div>
+                                <div><br />
+                                </div>
+                                <div><span>    </span>In Normal Mode the counter will count untill it reaches the TOP value.  When the TCNT1 register passes the TOP value (0xFFFF or 65535) it simply overflows (or overruns) back to 0, at the same time the TOV1 flag is set.  In CTC (Clear Timer on Compare) mode the counter will count until it hits the value specified in the OCR1 register.  When the TCNT1 passes the TOP value (Specified by the OCR1) it resets to 0 and at the same time sets the TOV1 flag.</div>
+                                <div><br />
+                                </div>
+                                <div><span>    An interrupt can be configured to trigger when the TOV1 flag is set.</span><br />
+                                </div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <div style="text-align:left">
+                                  <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;text-align:center;border-collapse:collapse">
+                                    <tbody>
+                                      <tr>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                      </tr>
+                                      <tr>
+                                        <td style="vertical-align:top;text-align:center;height:15px"><b>TCCR1A</b></td>
+                                        <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">COM1A1</td>
+                                        <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">COM1A0</td>
+                                        <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">COM1B1</td>
+                                        <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">COM1B0 </td>
+                                        <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">FOC1A </td>
+                                        <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> FOC1B</td>
+                                        <td style="vertical-align:top;text-align:center">
+                                          <font color="#666666"> </font>WGM11
+                                        </td>
+                                        <td style="vertical-align:top;text-align:center">WGM10 </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <div style="text-align:left;font-family:courier new,monospace"><i>Timer/Counter1 Control Register A</i></div>
+                                </div>
+                                <div><span><br />
+                                  </span></div>
+                                <div><span><br />
+                                  </span></div>
+                                <div>
+                                  <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;text-align:center;border-collapse:collapse">
+                                    <tbody>
+                                      <tr>
+                                        <td style="vertical-align:top;text-align:center;width:64px;height:15px"> </td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"><b> 7 bit</b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"><b> 6 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"><b> 5 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"><b> 4 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"><b> 3 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"><b> 2 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"><b> 1 bit </b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"><b> 0 bit</b> </td>
+                                      </tr>
+                                      <tr>
+                                        <td style="vertical-align:top;text-align:center;width:64px;height:15px"> <b>TCCR1B</b></td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> ICNC1</td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)">ICES1 </td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px">WGM13 </td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px">WGM12 </td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"> CS12</td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px"> CS11</td>
+                                        <td style="vertical-align:top;text-align:center;width:59px;height:15px">CS10 </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <div style="text-align:left;font-family:courier new,monospace"><i>Timer/Counter1 Control Register B</i></div>
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <blockquote style="border:medium none;margin:0pt 0pt 0pt 40px;padding:0px">
+                                  <div>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;border-collapse:collapse">
+                                      <tbody>
+                                        <tr>
+                                          <td style="vertical-align:top;width:54px;height:15px"><b> CS12</b></td>
+                                          <td style="vertical-align:top;width:54px;height:15px"><b> CS11 </b></td>
+                                          <td style="vertical-align:top;width:54px;height:15px"><b> CS10 </b></td>
+                                          <td style="vertical-align:top;width:365px;height:15px"><b> DESCRIPTION</b></td>
+                                        </tr>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px">0</td>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px">0</td>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px">0</td>
+                                          <td style="vertical-align:top;text-align:left;width:365px;height:15px"> Timer/Counter0 Disabled </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)">X</td>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)">X</td>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)">X</td>
+                                          <td style="vertical-align:top;text-align:left;width:365px;height:15px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> Prescaler settings (omited in this tutorial)</td>
+                                        </tr>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px">1</td>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px">1</td>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px">0</td>
+                                          <td style="vertical-align:top;text-align:left;width:365px;height:15px"> External Clock Source on T1 pin, Clock on falling Edge</td>
+                                        </tr>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px">1</td>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px">1</td>
+                                          <td style="vertical-align:top;text-align:center;width:54px;height:15px">1</td>
+                                          <td style="vertical-align:top;text-align:left;width:365px;height:15px"> External Clock Source on T1 pin, Clock on Rising Edge </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </blockquote>
+                                <blockquote style="border:medium none;margin:0pt 0pt 0pt 40px;padding:0px;font-family:courier new,monospace">
+                                  <div><i>CS bits</i></div>
+                                </blockquote>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <blockquote style="border:medium none;margin:0pt 0pt 0pt 40px;padding:0px">
+                                  <div>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                      <tbody>
+                                        <tr>
+                                          <td style="width:62px;height:19px"> <b>WGM13</b></td>
+                                          <td style="width:60px;height:19px"><b> WGM12 </b></td>
+                                          <td style="width:59px;height:19px"><b> WGM11 </b></td>
+                                          <td style="width:61px;height:19px"><b> WGM10 </b></td>
+                                          <td style="width:114px;height:19px"><b> MODE </b></td>
+                                          <td style="width:53px;height:19px"><b> TOP </b></td>
+                                          <td style="width:65px;height:19px"><b> TOV1</b> </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="width:62px;height:15px;text-align:center">0</td>
+                                          <td style="width:60px;height:15px;text-align:center">0</td>
+                                          <td style="width:59px;height:15px;text-align:center">0</td>
+                                          <td style="width:61px;height:15px;text-align:center">0</td>
+                                          <td style="width:114px;height:15px"> Normal</td>
+                                          <td style="width:53px;height:15px"> 0xFF</td>
+                                          <td style="width:65px;height:15px"> MAX </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="width:62px;height:15px;text-align:center">0</td>
+                                          <td style="width:60px;height:15px;text-align:center">1</td>
+                                          <td style="width:59px;height:15px;text-align:center">0</td>
+                                          <td style="width:61px;height:15px;text-align:center">0</td>
+                                          <td style="width:114px;height:15px"> CTC</td>
+                                          <td style="width:53px;height:15px"> OCR1A</td>
+                                          <td style="width:65px;height:15px"> MAX</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </blockquote>
+                                <blockquote style="border:medium none;margin:0pt 0pt 0pt 40px;padding:0px;font-family:courier new,monospace">
+                                  <div>Counter Modes (Abbreviated Version)</div>
+                                </blockquote>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div>
+                                  <div>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;text-align:center;border-collapse:collapse">
+                                      <tbody>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;height:15px"> <b>TIMSK</b></td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> OCIE2</td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">TOIE2 </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">TICIE1 </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">OCIE1A </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">OCIE1B </td>
+                                          <td style="vertical-align:top;text-align:center">
+                                            <font color="#666666"> </font>TOIE1
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> -</td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">TOIE0 </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <div style="text-align:left;font-family:courier new,monospace"><i>Timer/Counter Interrupt Mask Register</i></div>
+                                  </div>
+                                  <div style="text-align:left"><i><br />
+                                    </i></div>
+                                  <div style="text-align:left"><i><br />
+                                    </i></div>
+                                  <div style="text-align:left"><i><span style="font-style:normal">
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;text-align:center;border-collapse:collapse">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:58px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:58px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:58px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:58px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:58px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:58px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:58px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:58px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:58px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"> <b>TIFR</b></td>
+                                              <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> OCF2</td>
+                                              <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">TOV2 </td>
+                                              <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">ICF1 </td>
+                                              <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">OCF1A </td>
+                                              <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">OCF1B </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666"> </font>TOV1
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> -</td>
+                                              <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">TOV0 </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left;font-family:courier new,monospace"><i>Timer/Counter Interrupt Flag Register</i></div>
+                                      </span></i></div>
+                                  <div><br />
+                                  </div>
+                                  <div><br />
+                                  </div>
+                                  <div>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;text-align:center;border-collapse:collapse;font-style:normal">
+                                      <tbody>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;height:15px"><b>TCNT1L</b></td>
+                                          <td style="vertical-align:top;text-align:center"> </td>
+                                          <td style="vertical-align:top;text-align:center"><br /></td>
+                                          <td style="vertical-align:top;text-align:center"><br />
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center"><br />
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center"><br />
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center"><br />
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center"><br />
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center"> </td>
+                                        </tr>
+                                        <tr>
+                                          <td><b>TCNT1H</b> </td>
+                                          <td> </td>
+                                          <td> </td>
+                                          <td> </td>
+                                          <td> </td>
+                                          <td> </td>
+                                          <td> </td>
+                                          <td> </td>
+                                          <td> </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <div style="text-align:left;font-family:courier new,monospace"><i>Timer/Counter Register (stores the counter value) Can be accessed as</i><i style="font-style:normal"> </i><b>TCNT1</b></div>
+                                    <div style="font-style:normal"><i><br />
+                                      </i></div>
+                                  </div>
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><i>Software:
+                                  </i></div>
+                                <div><br /></div>
+                                <div><span>    Counter1 isn't any different then Counter0.  If we don't change the values of the WGMnx registers it will function the same way as Counter0 (well aside from being 16 bit instead of 8 bit that is).  So first we set our mode using the WGM1n bits within the TCCR1A and TCCR1B register.  Then we choose if we want to clock on the falling edge or the rising edge using CS1n within the TCCR1B register. And finally decide if we want to enable the interrupt using the TOIE1 within the TIMSK register.</span><br /></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span>
+                                    <div><i>ATmega8 Code:</i><br /></div>
+                                    <div class="sites-codeblock sites-codesnippet-block" style="border:1px solid rgb(211,211,211);padding:0.5em 0px 0.5em 1em;background-color:rgb(239,239,239);display:block;line-height:13px">
+                                      <div><code style="color:rgb(0,96,0)">// this code sets up counter1 and with no interrupts in normal mode</code><br /><br /><br /><code style="color:rgb(0,96,0)">#include &lt;avr/io.h&gt;</code><br /><br /><br /><code style="color:rgb(0,96,0)">int main(void)</code><br /><code style="color:rgb(0,96,0)">{</code><br /><code style="color:rgb(0,96,0)"><span>    </span>DDRD &amp;= ~(1 &lt;&lt; DDD5); <span>    </span>// Clear the PD5 pin</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD5 is now an input</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>PORTD |= (1 &lt;&lt; PORTD5); <span>  </span>// turn On the Pull-up</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD5 is now an input with pull-up enabled</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>TCCR1B |= (1 &lt;&lt; CS12) | (1 &lt;&lt; CS11) | (1 &lt;&lt; CS10);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// Turn on the counter, Clock on Rise</code><br /><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>while (1)</code><br /><code style="color:rgb(0,96,0)"><span>    </span>{</code><br /><code style="color:rgb(0,96,0)"><span>    <span>    </span></span>// we can read the value of TCNT1 hurray !!</code></div>
+                                      <div><code style="color:rgb(0,96,0)"><span>    </span>}</code><br /><code style="color:rgb(0,96,0)">}</code></div>
+                                    </div>
+                                    <div><br /></div>
+                                    <div><br /></div>
+                                    <div>
+                                      <div><i>ATmega8 Code:</i><br /></div>
+                                    </div>
+                                    <div></div>
+                                    <div class="sites-codeblock sites-codesnippet-block" style="border:1px solid rgb(211,211,211);padding:0.5em 0px 0.5em 1em;background-color:rgb(239,239,239);display:block;line-height:13px">
+                                      <div><code style="color:rgb(0,96,0)">// this code sets up counter1 and with interrupts enabled</code><br /><br /><br /><code style="color:rgb(0,96,0)">#include &lt;avr/io.h&gt;</code><br /><code style="color:rgb(0,96,0)">#include &lt;avr/interrupt.h&gt;</code><br /><br /></div>
+                                      <div><br /></div>
+                                      <div><br /></div>
+                                      <div><code style="color:rgb(0,96,0)">int main(void)</code><br /><code style="color:rgb(0,96,0)">{</code><br /><code style="color:rgb(0,96,0)"><span>    </span>DDRD &amp;= ~(1 &lt;&lt; DDD5); <span>    </span>// Clear the PD4 pin</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD5 is now an input</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>PORTD |= (1 &lt;&lt; PORTD5); <span>  </span>// turn On the Pull-up</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD5 is now an input with pull-up enabled</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>TIMSK |= (1 &lt;&lt; TOIE1); <span>   </span>// enable timer interrupt</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>TCCR1B |= (1 &lt;&lt; CS12) | (1 &lt;&lt; CS11) | (1 &lt;&lt; CS10);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// Turn on the counter,</code></div>
+                                      <div>
+                                        <font color="#006000" face="monospace"><br /></font>
+                                      </div>
+                                      <div>
+                                        <font color="#006000" face="monospace"><span>    sei();</span><br /></font><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>while (1)</code><br /><code style="color:rgb(0,96,0)"><span>    </span>{</code><br /><code style="color:rgb(0,96,0)"><span>    <span>    </span></span>// we can read the value of TCNT1 hurray !!</code><br /><code style="color:rgb(0,96,0)"><span>    </span>}</code><br /><code style="color:rgb(0,96,0)">}</code><br /><br /><br /><code style="color:rgb(0,96,0)">ISR (TIMER1_OVF_vect)</code><br /><code style="color:rgb(0,96,0)">{</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// interrupt just fired</code><br /><code style="color:rgb(0,96,0)">}</code><br />
+                                      </div>
+                                      <div><code style="color:rgb(0,96,0)"><br /></code></div>
+                                    </div>
+                                  </span></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><br />
+                                </div>
+                                <div>
+                                  <div>
+                                    <hr style="border-width:0px;background-color:rgb(204,204,204);height:1px" />
+                                    <div><br />
+                                    </div>
+                                    <b>
+                                      <font face="'courier new', monospace" size="3">COUNTER2 (8 Bit):</font>
+                                    </b>
+                                  </div>
+                                  <div><br />
+                                  </div>
+                                  <div><br />
+                                  </div>
+                                  <div><i>Theory of Operation:</i></div>
+                                  <div><br />
+                                  </div>
+                                  <div>
+                                    <div style="display:block;text-align:left"><a href="/avr-guide/counters-atmega8/Counter2%20-%20ATmega8.JPG?attredirects=0" imageanchor="1" style="color:rgb(0,0,204);text-decoration:none;border-bottom-style:none"><img border="0" src="/avr-guide/counters-atmega8/Counter2%20-%20ATmega8.JPG" style="border-style:solid;border-width:1px;padding:7px;background-color:rgb(255,255,255)" /></a></div>
+                                    <i style="font-family:courier new,monospace">Figure 4: Counter 2</i>
+                                  </div>
+                                  <div><br />
+                                  </div>
+                                  <div><span>    Counter2 is designed to be used with an external Crystal Oscillatory.  In fact, it is optimized for a 32.768 kHz XTAL, this will provide you with a very accurate Real Time Clock.  Because this is a lot closer to being a Timer then a counter I will cover this topic in the Timer tutorial.</span><br />
+                                  </div>
+                                  <div><span><br /></span></div>
+                                  <div><span><span>    Lastly, the datasheet states that hooking up a input to TOSC1 is not recommended.  I have never done it so I can say what it will do.</span><br /></span></div>
+                                  <div><span><span><br /></span></span></div>
+                                  <div><span><span><br /></span></span></div>
+                                  <div><span><span><span>    Woot, another one bites the dust!</span><br /></span></span></div>
+                                  <div><span><span><span><br /></span></span></span></div>
+                                  <div><span><span><span>Cheers</span></span></span></div>
+                                  <div><span><span><span>Q</span></span></span></div>
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><br />
+                                </div>
+                                <div><br /></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="sites-chrome-footer-wrapper">
+            <div id="sites-chrome-footer-wrapper-inside">
+              <div id="sites-chrome-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

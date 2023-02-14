@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+  <meta name="title" content="COMMON TIMER/COUNTER THEORY - QEEWiki" />
+  <meta itemprop="name" content="COMMON TIMER/COUNTER THEORY - QEEWiki" />
+  <meta property="og:title" content="COMMON TIMER/COUNTER THEORY - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>COMMON TIMER/COUNTER THEORY - QEEWiki</title>
+  <meta itemprop="image" content="/avr-guide/common-timer-theory/Timer%20-%20Common.JPG" />
+  <meta property="og:image" content="/avr-guide/common-timer-theory/Timer%20-%20Common.JPG" />
+
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt; 
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">COMMON TIMER/COUNTER THEORY</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr"><b>
+                                  <font face="'courier new', monospace" size="3">INTRODUCTION:</font>
+                                </b>
+                                <div><br /></div>
+                                <div><span>    The AVR has an interesting counting circuit.  This circuit has 2 inputs and one output.  </span>If you tie it into the Tn pin it will count the pulses on the pin (this is referred to as a counter on the datasheet).  If you tie it into the AVRs internal(or external) clock you now have a timer.  If you tie the counter to the output you will get an Pulse Width Modulator signal on the OCnx pin.</div>
+                                <div><span><br /></span></div>
+                                <div><span><span>    This chapter talks about the Timer/Counter/PWM circuit in a basic way.  More details can be found in each of the following sections. </span><br /></span></div>
+                                <div><span><br /><br /></span></div>
+                                <div><span>
+                                    <hr />
+                                  </span></div>
+                                <div><span>
+                                    <font size="3">
+                                      <font face="'courier new', monospace"><b><br /><br /></b></font>
+                                    </font>
+                                  </span>
+                                  <font face="'courier new', monospace" size="3"><b>THEORY OF OPERATION:</b></font>
+                                </div>
+                                <div><br /></div>
+                                <div><span><br /></span></div>
+                                <div><span>
+                                    <div style="display:block;text-align:left"><a href="/avr-guide/common-timer-theory/Timer%20-%20Common.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/common-timer-theory/Timer%20-%20Common.JPG" /></a></div><i>Figure 1: Common Timer/Counter with PWM Circuit</i>
+                                  </span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span><span><span>    </span>When the Control Logic<span> </span>component gets a pulse from the prescaler(more on the Prescaler later) it increments(or decrements) the TCNTn register.  The TCNTn register is compared to the OCRn register.  When the TCNTn register reaches the same value as the OCRn value or the TOP/BOTTOM value(0xFF for 8bit registers and 0xFFFF for 16bit counters) the Control Logic clears the TCNT register and activates the TOVn bit (Timer Overflow) which stays set until it is reset by the user.  Figure 2 shows this in graph form.<br /><br /></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span>
+                                      <div style="display:block;text-align:left"></div>
+                                      <div style="display:block;text-align:left"><a href="/avr-guide/common-timer-theory/Timer%20-%20Timing%20Diagram.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/common-timer-theory/Timer%20-%20Timing%20Diagram.JPG" /></a></div><i>Figure 2: Timer/Counter Timing Diagram</i>
+                                    </span></span></div>
+                                <div><span><span><br /><span>    </span>Figure 2 is a bit confusing so I will explain it.  <br /><br /><span>    </span>First graph (in red) shows the pulses generated by the system clock(clk).  <br /><br /><span>    </span>The second graph(in blue) shows us the pulses coming out of the prescaler (clk_tn or clk/8).  In our example the prescaler is set to 8 so, it divides the clk(red) by 8.  More details on the prescaler in the next section.<br /><br /><span>    </span>The third line shows the TCNTn (basically the count).  The TCNTn updates on the falling edge of the pulse coming out of the prescaler. On our first prescaler pulse (in blue) our TCNTn is TOP-1 (or 254). On our second prescaler pulse(in blue) our TCNTn goes to TOP (or 255).  Now, on our third prescaler(in blue) pulse the TCNTn register overflows back to the BOTTOM (or 0) because it was at its TOP value on the previous pulse. On our forth prescaler pulse(in blue) the TCNTn register gets incremented again this time to BOTTOM + 1 (or 1).<br /><br /><span>    </span>The forth line shows the TCNTn register again.  The only difference is that it shows TCNTn register in a Phase Corrected PWM pattern, which means that it counts up until it hits the TOP and then start to count down until it hits the BOTTOM.  I will get into greater details about this in the PWM chapter.<br /><br /><span>    </span>The fifth line (in green) shows us the TOVn (Timer Overflow bit).  This bit is set the first time that a timer overflows.  Or in other words the first time that the timer goes from its TOP state to its next state (BOTTOM in the Third line or, TOP -1 in the forth line).<br /><br /><span>    </span>The sixth line shows the OCRnx register.  This register deals with the PWM.  The only thing that it is showing, is that the OCRnx register can only be updated when an TOVn (timer overflow) condition happens.  More on the OCRnx register in the PWM section. <br /><br /><br /></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span>
+                                      <font face="'courier new', monospace" size="3"><i>Prescaler:</i></font>
+                                    </span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span>
+                                      <div style="display:block;text-align:left"><a href="/avr-guide/common-timer-theory/Timer-Prescaler.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/common-timer-theory/Timer-Prescaler.JPG" /></a></div><i>Figure 3: Timer/counter2 Prescaler</i>
+                                    </span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><br /></div>
+                                <div><span><span><span>    The divides the number of input pulses.  In other words, the prescaler counts the number of input pulses (from the internal clock or from external sources) and when the number reaches the preset number (0, 8, 32, 64, 128, 256 or 1024) it generates a pulse of its own.  This can be seen in Figure 2 (above) which divides the input by 8.  </span></span></span>This is needed because the AVR only has an 8bit and a 16bit register and the AVR can run as fast as 20Mhz.  This means that the larger 16bit timer would pulse every 3ms. But what if we want a 1 second timer?  Well we would have to divide the number of incoming pulses by 1024 we could then generate a counter pulse ever 3 seconds.<br /><br /><span>    </span>The math is fairly simple:  <br /><br />
+                                  <div style="margin-left:80px"><span style="color:rgb(0,0,255)">Prescaler_output_freq = Prescaler_input_frequency / Prescaler</span><br /></div>
+                                </div>
+                                <div><span><span><span><br /></span></span></span>
+                                  <div style="margin-left:240px"><span><span><span>AND</span></span></span><br /></div>
+                                  <div style="margin-left:40px"></div><span><span><span><br /></span></span></span>
+                                  <div style="margin-left:80px"><span style="color:rgb(0,0,255)"><span><span>Prescaler_output_time = Prescaler_input_time * Prescaler</span></span></span><br /></div>
+                                  <div style="margin-left:40px"></div><span><span><span><br /></span></span></span>
+                                  <div style="margin-left:160px"><span><span><span>And don't forget the old</span></span></span><br /></div>
+                                  <div style="margin-left:40px"></div><span><span><span><br /></span></span></span>
+                                  <div style="margin-left:80px"><span style="color:rgb(0,0,255)"><span><span><span>Frequency = Period / Time</span></span></span></span><br /></div>
+                                  <div style="margin-left:40px"></div><span><span><span><br /><br /><span>    </span>Above I said that an AVR running at its max speed (20Mhz) could only could only generate a pulse ever 0.003 seconds without a prescaler.  I go this number by:<br /><br /></span></span></span>
+                                  <div style="margin-left:80px"><span style="color:rgb(0,0,255)"><span><span><span>Frequency = Period / Time</span></span></span></span><br style="color:rgb(0,0,255)" /><span style="color:rgb(0,0,255)"><span><span><span><br />Period / Frequency = Time</span></span></span></span><br style="color:rgb(0,0,255)" /><span style="color:rgb(0,0,255)"><span><span><span><br />Time = Period / Frequency</span></span></span></span><br style="color:rgb(0,0,255)" /><span style="color:rgb(0,0,255)"><span><span><span><br />Time = 16bit_register_size / System_clock_speed</span></span></span></span><br style="color:rgb(0,0,255)" /><span style="color:rgb(0,0,255)"><span><span><span><br />Time = 0xFFFF / 20Mhz</span></span></span></span><br style="color:rgb(0,0,255)" /><span style="color:rgb(0,0,255)"><span><span><span><br />Time = 0.00327675 s</span></span></span></span><br style="color:rgb(0,0,255)" /><span style="color:rgb(0,0,255)"><span><span><span><br />Time = 3.27675 ms  .... then I rounded for the writeup</span></span></span></span><br /></div>
+                                  <div style="margin-left:40px"></div><span><span><span><br /><span>    </span>Then I said that thanks to the prescaler we could generated up to a 3s timer.  I got this by using the max time from above and the max prescaler setting of 1024.<br /><br /></span></span></span>
+                                  <div style="margin-left:80px"><span style="color:rgb(0,0,255)"><span><span>Prescaler_output_time = Prescaler_input_time * Prescaler</span></span></span><br /><span style="color:rgb(0,0,255)"><span><span><br />Prescaler_output_time = </span></span></span><span style="color:rgb(0,0,255)"><span><span><span>0.00327675</span></span></span></span><span style="color:rgb(0,0,255)"><span><span> * 1024</span></span></span><br /><span style="color:rgb(0,0,255)"><span><span><br />Prescaler_output_time = 3.355392 s</span></span></span> ... <span style="color:rgb(0,0,255)">Again, I rounded for the writeup</span><br /></div><span><span><span><br /><br /></span></span></span>
+                                </div>
+                                <div><span><span>    Digging around the datasheet, if found and interesting fact.  It is recommended that all external sources are limited to <font color="#0000ff">system clock / 2.5 </font>therefore if you are running at the maximum speed of 20Mhz you are only able to reliably measure up to an 8Mhz signal.  The Arduino runs at 16Mhz therefore we are limited to 6.4Mhz or less.</span></span></div>
+                                <div><span><br /></span></div>
+                                <div><span>    Finally, starting the prescaler will start the timer, so I recommend setting the prescaler bits last when setting up your timer in your program. </span><br /></div>
+                                <div><span><br /></span></div>
+                                <div><br />
+                                  <hr size="2" width="100%" /><br /><br />
+                                  <font size="3"><b style="font-family:courier new,monospace">OTHER RESOURCES:</b></font><br />
+                                  <br />
+                                  <br />
+                                  <a href="https://ww1.microchip.com/downloads/en/Appnotes/Atmel-2505-Setup-and-Use-of-AVR-Timers_ApplicationNote_AVR130.pdf" target="_blank" rel="nofollow">AVR130: Setup and Use the AVR Timers</a><br />Covers everything about timers (this chapter and all the other chapters within this section).<br /><br />
+                                  <br />
+                                  <hr size="2" width="100%" /><br />
+                                  <br /><br />
+                                </div>
+                                <div><span>    As always, the first one is free, and just enough to get you hooked.</span><br /></div>
+                                <div><span><br /></span></div>
+                                <div><span>Cheers</span></div>
+                                <div><span>Q</span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="sites-chrome-footer-wrapper">
+            <div id="sites-chrome-footer-wrapper-inside">
+              <div id="sites-chrome-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

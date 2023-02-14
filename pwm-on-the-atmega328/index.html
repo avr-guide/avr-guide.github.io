@@ -1,0 +1,2171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/4a6475/system/app/images/apple-touch-icon.png" type="image/png" />
+
+  <meta name="title" content="PWM On The ATmega328 - QEEWiki" />
+  <meta itemprop="name" content="PWM On The ATmega328 - QEEWiki" />
+  <meta property="og:title" content="PWM On The ATmega328 - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/4a6475/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1619893518000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1619893518000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>PWM On The ATmega328 - QEEWiki</title>
+  <meta itemprop="image" content="/avr-guide/pwm-on-the-atmega328/ATmega328%20-%20PWM.JPG" />
+  <meta property="og:image" content="/avr-guide/pwm-on-the-atmega328/ATmega328%20-%20PWM.JPG" />
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt;
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">PWM On The ATmega328</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr"><b>
+                                  <font face="'courier new', monospace" size="3">INTRODUCTION:</font>
+                                </b>
+                                <div><br /></div>
+                                <div><span>    This tutorial is a mirror of the ATmega8 tutorial.  Because the registers for this feature are completely different I have split it into 2 complete chapters.</span><br /></div>
+                                <div><br /></div>
+                                <div><span>    We know that the AVR lets us turn outputs on and off, but, what if we want to control the brightness of an LED or the speed of a motor?  Well the easiest way to do this is to change the voltage of the output but we can fake it.  If we take a voltage source and connect it for a second and then disconnect it  for a second it will .... well be on for a second then off for a second. BUT, if we manage to speed this up so that we connect/disconnect the power supply over 1000 times a second we can fool the power supply into thinking that our signal is half the value of the power supply.</span> This is called Pulse Width Modulation or PWM for short.</div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <hr style="border-width:0px;background-color:rgb(204,204,204);height:1px" />
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><span style="font-family:courier new,monospace;font-size:medium"><b>THEORY OF OPERATION:</b></span></div>
+                                <div><br /></div>
+                                <div>
+                                  <div style="display:block;text-align:left"><br />
+                                    <div style="display:block;text-align:left"><a href="/avr-guide/pwm-on-the-atmega328/ATmega328%20-%20PWM.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/pwm-on-the-atmega328/ATmega328%20-%20PWM.JPG" /></a></div>
+                                  </div>
+                                </div>
+                                <div><i>Figure 1: ATmega168/328 PWM Pins</i></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><span>    When you take a square wave, its on for a while and off for a while.  If we divide the on by the off and multiply by 100% we will get what is called a duty cycle.</span><br /></div>
+                                <div><span><br /></span></div>
+                                <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px"><span style="color:rgb(0,0,255)">Duty_Cycle = [</span><span style="color:rgb(0,0,255)">ON_time / (ON_time + OFF_time) ] * 100 </span></blockquote>
+                                <div><span><br /></span></div>
+                                <div><span><span>    So if we are on for 1ms and then off for 1ms we will end up with a 50% duty cycle;  If we are on for 1ms and off for 3ms we end up with a 25% duty cycle.</span><br /></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px"><span style="color:rgb(0,0,255)">Output_Voltage = </span><span style="color:rgb(0,0,255)">Duty_Cycle * Input_Voltage</span>
+                                  <div><span><span><br /></span></span></div>
+                                </blockquote><span>    Now if we take our duty cycle and multiply it by our voltage we will get the output voltage.  So if we have a 5V power supply and we activate a PWM on a 25% duty cycle we will make an analog device behave as if it was receiving a 1.25V signal. </span>Cool eh!?<div><br /></div>
+                                <div><span>    Much like the counter functions PWM can be simulated in software however, the hardware version is preferred because it just sort of does its own thing and, with very little coding you can get a constant square wave going.</span></div>
+                                <div><br /></div>
+                                <div><span>    Remember the Prescaler? well its back in the PWM.  And much like in the counter, its roll is to slow things down.  This is good because it allows us to run the PWM at different frequencies.  This is important because some devices are sensitive to PWM speeds.  A motor for example will get hot if the PWM waveform is too fast, and will jitter if the PWM is too slow.  Since I already planted the question in your head, the answer is start at 10kHz.  Different motors like different frequencies but 10kHz will get you into the ball park.</span></div>
+                                <div><br /></div>
+                                <div><span><span>    The ATmega168/328 has 6(!!!) PWM outputs, 2 are located on each timer/counter.</span><br /></span></div>
+                                <div><br /></div>
+                                <div><span>    As always, the output pin has the same limitations as any output (see the <a href="/avr-guide/digital-outputs" style="color:rgb(0,0,204);text-decoration:none">Digital Output Chapter</a> for details).</span><br /></div>
+                                <div><br /></div>
+                                <div><span><span><span><span>    The AVR's PWM timer is capable of running in 3 different modes: Fast PWM, Phase Corrected PWM and Phase and Frequency Phase Corrected PWM.  </span><br /></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3">Fast PWM mode:</font>
+                                          </i></div>
+                                        <div>
+                                          <font face="'courier new', monospace" size="3"><i><br /></i></font>
+                                        </div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><span><span><span><span>    </span>Fast PWM works the same way as the normal counter.  </span></span></span>The Control Logic receives the signal and increments the TCNTn register.  When a match is detected the OCFnx flag is set and signal is send to the Waveform Generator.  The Waveform Generator then changes the state of the OCnx pin (the state is determined by the selected mode).  When the TCNTn register passes the TOP value (0xFF or OCRnA) it simply overflows (or overruns) back to 0, at the same time the OCFnx flag is set. The OCFnx flag can be configured to trigger an interrupt.  The OCFnx flag can be cleared by software, but as always is cleared automatically when an interrupt request is triggered. </span></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><br /></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px">    Due to the high frequency of this mode is best used for DAC, fading LEDs, rectification and Power regulation.</span></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><br /></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px">
+                                                <div><span><span>    The Frequency of the fast PWM can be calculated by the following equation.</span><br /></span></div>
+                                                <div><span><br /></span></div>
+                                                <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                                  <div>
+                                                    <div>
+                                                      <font color="#0000ff">PWM_fequency = clock_speed / [Prescaller_value * (1 + TOP_Value) ]</font>
+                                                    </div>
+                                                  </div>
+                                                </blockquote>
+                                              </span></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><br /></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><br /></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><br /></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><i>
+                                                  <font face="'courier new', monospace" size="3">Phase Corrected PWM mode:</font>
+                                                </i></span></font>
+                                          </i></div>
+                                        <div>
+                                          <font face="'courier new', monospace" size="3"><i><br /></i></font>
+                                        </div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><i>
+                                                  <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px">
+                                                      <div><i>
+                                                          <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><i>
+                                                                <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px">
+                                                                    <div><span><span>    </span>The phase corrected mode is a bit strange, it counts up until it hits the TOP value (FIXED, OCRnA or ICRn) then starts to count down until it hits the BOTTOM (0). </span>The Control Logic receives the signal and increments the TCNTn register.  When a match is detected the OCFnx flag is set and signal is send to the Waveform Generator.  The Waveform Generator then changes the state of the OCnx pin (the state is determined by the selected mode).  When the TCNTn register hits the TOP value (FIXED, OCRnA or ICRn) the OCFnx flag is set. The OCFnx flag can be configured to trigger an interrupt.  The OCF1x flag can be cleared by software, but as always is cleared automatically when an interrupt request is triggered.</div>
+                                                                  </span></font>
+                                                              </i></span></font>
+                                                        </i></div>
+                                                      <div><br /></div>
+                                                      <div><span>    This mode can be inverted or none-inverted.  </span>In none-inverting mode, the OCn pin is LOW(GND) on the Compare Match between TCNTn and OCRnx while up-counting, and HIGH(VCC) on the Compare Match while down-counting.  In inverting mode, the OCn pin is HIGH(VCC) on the Compare Match between TCNTn and OCRnx while up-counting, and LOW(GND) on the Compare Match while down-counting.</div>
+                                                      <div><br /></div>
+                                                      <div><span>    This mode is recommended for motor control.</span></div>
+                                                      <div><span><br /></span></div>
+                                                      <div><span><span>    The frequency of the Phase Corrected PWM can be calculated by the following equation.</span></span></div>
+                                                      <div><span><br /></span></div>
+                                                      <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                                        <div>
+                                                          <font color="#0000ff">PWM_frequency = clock_speed / (2 * Prescaller_value * TOP_value )</font>
+                                                        </div>
+                                                      </blockquote>
+                                                    </span></font>
+                                                </i></span></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><i>
+                                                  <font face="'courier new', monospace" size="3"><br /></font>
+                                                </i></span></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><i>
+                                                  <font face="'courier new', monospace" size="3"><br /></font>
+                                                </i></span></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><i>
+                                                  <font face="'courier new', monospace" size="3"><br /></font>
+                                                </i></span></font>
+                                          </i></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><i>
+                                                  <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><i>
+                                                        <font face="'courier new', monospace" size="3">Phase and Frequency Corrected PWM mode:</font>
+                                                      </i></span></font>
+                                                </i></span></font>
+                                          </i></div>
+                                        <div><br /></div>
+                                        <div><span>    Phase Corrected and Phase and Frequency Corrected PWM modes function the same way if we are not planning on changing our TOP value once the PWM mode is started.  The only difference that I could see on the data sheet is that the Phase and Frequency Corrected mode updates its TOP value when it hits Bottom while the Phase Corrected mode updates its TOP value when it hits the TOP.</span><br /></div>
+                                        <div><span><br /></span></div>
+                                        <div><span><span>    If anyone knows anything more (or if I'm wrong) about these 2 modes please let me know.</span></span></div>
+                                        <div><br /></div>
+                                        <div><i>
+                                            <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px"><i>
+                                                  <font face="'courier new', monospace" size="3"><span style="font-family:Verdana,Helvetica,Arial,sans-serif;font-style:normal;font-size:13px">
+                                                      <div><span>    This mode is recommended for motor control.</span></div>
+                                                      <div><span><br /></span></div>
+                                                      <div><span><span>    The frequency of the Phase and Frequency Corrected PWM can be calculated by the following equation.</span></span></div>
+                                                      <div><span><br /></span></div>
+                                                      <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                                        <div>
+                                                          <font color="#0000ff">PWM_frequency = clock_speed / (2 * Prescaller_value * TOP_value )</font>
+                                                        </div>
+                                                        <div>
+                                                          <font color="#0000ff"><br /></font>
+                                                        </div>
+                                                      </blockquote>
+                                                    </span></font>
+                                                </i></span></font>
+                                          </i></div>
+                                      </span></span></span></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><span><span><span>
+                                        <hr style="border-width:0px;background-color:rgb(204,204,204);height:1px" />
+                                      </span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div>
+                                  <font face="'courier new'"><span style="line-height:normal"><br /></span></font>
+                                </div>
+                                <div>
+                                  <div><b>
+                                      <font face="'courier new', monospace" size="3">TIMER0 (8BIT PWM):</font>
+                                    </b></div>
+                                </div>
+                                <div><br /></div>
+                                <div>
+                                  <div style="display:block;text-align:left"></div>
+                                  <div style="display:block;text-align:left"><a href="/avr-guide/pwm-on-the-atmega328/PWM%20-%20ATmega328.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/pwm-on-the-atmega328/PWM%20-%20ATmega328.JPG" /></a></div><i>Figure 2: ATmega328 Timer0 (8bit)</i>
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>    Timer/Counter0 has 2 outputs, OC0A and OC0B.  Since both of these outputs run off the same timer and waveform generators both OC0A and OC0B are synchronized, this make the timer perfect for making tank robots (I love tank robots).</div>
+                                <div><br /></div>
+                                <div><span>    Timer/Counter0 does not have a 32 or 128 devision in its prescaler.  Because of this it is somewhat limited to the frequencies that it could produce.  If you need a specific frequency on your PWM use Timer/Counter2 which has all of its prescaler values.</span><br /></div>
+                                <div><br /></div>
+                                <div><span><span>    Timer/Counter0 is capable of running on 4 modes the Fast PWM with a max TOP (0xFF), a Fast PWM mode with a variable TOP (OCR0A), a Phase Corrected PWM mode with a max TOP (0xFF) and a Phase Corrected PWM mode with a variable TOP (OCR0A).  Each of these modes can be inverted or none-inverted.  </span></span></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <div><span>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"><b>TCCR0A</b></td>
+                                            <td style="vertical-align:top;text-align:center">COM0A1</td>
+                                            <td style="vertical-align:top;text-align:center">COM0A0 </td>
+                                            <td style="vertical-align:top;text-align:center">COM0B1</td>
+                                            <td style="vertical-align:top;text-align:center">COM0B0</td>
+                                            <td style="vertical-align:top;text-align:center">-</td>
+                                            <td style="vertical-align:top;text-align:center"> -</td>
+                                            <td style="vertical-align:top;text-align:center"> WGM01</td>
+                                            <td style="vertical-align:top;text-align:center">WGM00 </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left"><i>Timer/Counter Control Register 0 A</i></div>
+                                    </span></div>
+                                  <div><span><br /></span></div>
+                                  <div><span><br /></span></div>
+                                  <div><span>
+                                      <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                        <div>
+                                          <div>
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="vertical-align:top;width:62px;height:15px"><b>COM0A1</b></td>
+                                                  <td style="vertical-align:top;width:63px;height:15px"><b>COM0A0</b></td>
+                                                  <td style="vertical-align:top;width:395px;height:15px"><b> DESCRIPTION</b></td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:62px;height:15px">0</td>
+                                                  <td style="vertical-align:top;text-align:center;width:63px;height:15px">0 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:395px;height:15px"> OC0A disabled</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:62px;height:31px">0</td>
+                                                  <td style="vertical-align:top;text-align:center;width:63px;height:31px">1 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:395px;height:31px"> WGM02 = 0: Normal Port Operation, OC0A Disconnected<br /> WGM02 = 1: Toggle OC0A on Compare Match</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:62px;height:15px">1</td>
+                                                  <td style="vertical-align:top;text-align:center;width:63px;height:15px">0 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:395px;height:15px"> None-inverted mode (HIGH at bottom, LOW on Match)</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:62px;height:15px">1</td>
+                                                  <td style="vertical-align:top;text-align:center;width:63px;height:15px">1 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:395px;height:15px"> Inverted mode (LOW at bottom, HIGH on Match)</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                      </blockquote>
+                                      <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                        <div>
+                                          <div><i>Applies only to PWM modes</i></div>
+                                        </div>
+                                      </blockquote>
+                                    </span></div>
+                                  <div><span><br /></span></div>
+                                  <div><span><br /></span></div>
+                                  <div><span>
+                                      <div><span>
+                                          <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                            <div>
+                                              <div>
+                                                <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                                  <tbody>
+                                                    <tr>
+                                                      <td style="vertical-align:top;width:60px;height:15px"><b>COM0B1</b></td>
+                                                      <td style="vertical-align:top;width:60px;height:15px"><b>COM0B0</b></td>
+                                                      <td style="vertical-align:top;width:393px;height:15px"><b> DESCRIPTION</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td style="vertical-align:top;text-align:center;width:60px;height:15px">0</td>
+                                                      <td style="vertical-align:top;text-align:center;width:60px;height:15px">0 </td>
+                                                      <td style="vertical-align:top;text-align:left;width:393px;height:15px"> OC0B disabled</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td style="vertical-align:top;text-align:center;width:60px;height:17px">0</td>
+                                                      <td style="vertical-align:top;text-align:center;width:60px;height:17px">1 </td>
+                                                      <td style="vertical-align:top;text-align:left;width:393px;height:17px"> Reserved</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td style="vertical-align:top;text-align:center;width:60px;height:15px">1</td>
+                                                      <td style="vertical-align:top;text-align:center;width:60px;height:15px">0 </td>
+                                                      <td style="vertical-align:top;text-align:left;width:393px;height:15px"> None-inverted mode (HIGH at bottom, LOW on Match)</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td style="vertical-align:top;text-align:center;width:60px;height:15px">1</td>
+                                                      <td style="vertical-align:top;text-align:center;width:60px;height:15px">1 </td>
+                                                      <td style="vertical-align:top;text-align:left;width:393px;height:15px"> Inverted mode (LOW at bottom, HIGH on Match)</td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </div>
+                                            </div>
+                                          </blockquote>
+                                          <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                            <div>
+                                              <div><i>Applies only to PWM modes</i></div>
+                                            </div>
+                                            <div><i><br /></i></div>
+                                            <div><i><br /></i></div>
+                                          </blockquote>
+                                        </span></div>
+                                    </span></div>
+                                  <div><span>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"><b>TCCR0B</b></td>
+                                            <td style="vertical-align:top;text-align:center">FOC0A</td>
+                                            <td style="vertical-align:top;text-align:center">FOC0B</td>
+                                            <td style="vertical-align:top;text-align:center">-</td>
+                                            <td style="vertical-align:top;text-align:center">-</td>
+                                            <td style="vertical-align:top;text-align:center">WGM02</td>
+                                            <td style="vertical-align:top;text-align:center"> CS02</td>
+                                            <td style="vertical-align:top;text-align:center"> CS01</td>
+                                            <td style="vertical-align:top;text-align:center">CS00 </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left"><i>Timer/Counter Control Register 0 A</i></div>
+                                    </span></div>
+                                  <div><span><br /></span></div>
+                                  <div><span><br /></span></div>
+                                  <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                    <div>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;width:52px;height:15px"><b> CS02</b></td>
+                                            <td style="vertical-align:top;width:52px;height:15px"><b> CS01 </b></td>
+                                            <td style="vertical-align:top;width:52px;height:15px"><b> CS00 </b></td>
+                                            <td style="vertical-align:top;width:362px;height:15px"><b> DESCRIPTION</b></td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0</td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                            <td style="vertical-align:top;text-align:left;width:362px;height:15px"> Timer/Counter2 Disabled </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0</td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                            <td style="vertical-align:top;text-align:left;width:362px;height:15px"> No Prescaling</td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0</td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                            <td style="vertical-align:top;width:362px;height:15px"> Clock / 8</td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0</td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                            <td style="vertical-align:top;width:362px;height:15px"> Clock / 64</td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">1</td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                            <td style="vertical-align:top;width:362px;height:15px"> Clock / 256</td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">1</td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                            <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                            <td style="vertical-align:top;width:362px;height:15px"> Clock / 1024</td>
+                                          </tr>
+                                        </tbody>
+                                      </table><i>CS bits</i>
+                                    </div>
+                                  </blockquote>
+                                  <div><br /></div>
+                                  <div><br /></div>
+                                </div>
+                                <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                  <div>
+                                    <div>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;width:46px;height:15px"><b> MODE</b></td>
+                                            <td style="width:53px;height:15px"><b>WGM02</b></td>
+                                            <td style="vertical-align:top;width:53px;height:15px"><b>WGM01</b></td>
+                                            <td style="vertical-align:top;width:53px;height:15px"><b>WGM00</b></td>
+                                            <td style="width:58px;height:15px"> <b>TOP</b></td>
+                                            <td style="vertical-align:top;width:248px;height:15px"><b> DESCRIPTION</b></td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:46px;height:15px">
+                                              <font color="#666666">0</font>
+                                            </td>
+                                            <td style="text-align:center;width:53px;height:15px">
+                                              <font color="#666666">0</font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                              <font color="#666666">0 </font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                              <font color="#666666">0 </font>
+                                            </td>
+                                            <td style="width:58px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:left;width:248px;height:15px">
+                                              <font color="#666666"> Normal </font>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:46px;height:15px">1</td>
+                                            <td style="text-align:center;width:53px;height:15px">0</td>
+                                            <td style="vertical-align:top;text-align:center;width:53px;height:15px">0 </td>
+                                            <td style="vertical-align:top;text-align:center;width:53px;height:15px">1 </td>
+                                            <td style="width:58px;height:15px"> 0xFF</td>
+                                            <td style="vertical-align:top;text-align:left;width:248px;height:15px"> PWM Phase Corrected</td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:46px;height:15px">
+                                              <font color="#666666">2</font>
+                                            </td>
+                                            <td style="text-align:center;width:53px;height:15px">
+                                              <font color="#666666">0</font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                              <font color="#666666">1 </font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                              <font color="#666666">0 </font>
+                                            </td>
+                                            <td style="width:58px;height:15px">
+                                              <font color="#666666"> OCRA</font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:left;width:248px;height:15px">
+                                              <font color="#666666"> CTC</font>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:46px;height:15px">3</td>
+                                            <td style="text-align:center;width:53px;height:15px">0</td>
+                                            <td style="vertical-align:top;text-align:center;width:53px;height:15px">1 </td>
+                                            <td style="vertical-align:top;text-align:center;width:53px;height:15px">1 </td>
+                                            <td style="width:58px;height:15px"> 0xFF</td>
+                                            <td style="vertical-align:top;text-align:left;width:248px;height:15px"> Fast PWM </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center">
+                                              <font color="#666666">4</font>
+                                            </td>
+                                            <td style="text-align:center">
+                                              <font color="#666666">1</font>
+                                            </td>
+                                            <td style="text-align:center">
+                                              <font color="#666666">0</font>
+                                            </td>
+                                            <td style="text-align:center">
+                                              <font color="#666666">0</font>
+                                            </td>
+                                            <td>
+                                              <font color="#666666"> -</font>
+                                            </td>
+                                            <td>
+                                              <font color="#666666"> Reserved </font>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center">5</td>
+                                            <td style="text-align:center">1 </td>
+                                            <td style="text-align:center">0</td>
+                                            <td style="text-align:center">1 </td>
+                                            <td> OCR0A </td>
+                                            <td> PWM Phase Corrected </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center">
+                                              <font color="#666666">6</font>
+                                            </td>
+                                            <td style="text-align:center">
+                                              <font color="#666666">1 </font>
+                                            </td>
+                                            <td style="text-align:center">
+                                              <font color="#666666">1 </font>
+                                            </td>
+                                            <td style="text-align:center">
+                                              <font color="#666666">0 </font>
+                                            </td>
+                                            <td>
+                                              <font color="#666666"> - </font>
+                                            </td>
+                                            <td>
+                                              <font color="#666666"> Reserved</font>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center">7</td>
+                                            <td style="text-align:center">1 </td>
+                                            <td style="text-align:center">1 </td>
+                                            <td style="text-align:center">1 </td>
+                                            <td> OCR0A </td>
+                                            <td> Fast PWM </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </blockquote>
+                                <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                  <div>
+                                    <div><i>Waveform Generator Mode bits</i></div>
+                                  </div>
+                                </blockquote>
+                                <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                  <div>
+                                    <div><br /></div>
+                                  </div>
+                                </blockquote>
+                                <div>
+                                  <div><br /></div>
+                                  <div><br /></div>
+                                  <div>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                      <tbody>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;height:15px"> <b>TIMSK0</b></td>
+                                          <td style="vertical-align:top;text-align:center"> -</td>
+                                          <td style="vertical-align:top;text-align:center">
+                                            <font color="#666666">- </font>
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center">
+                                            <font color="#666666">- </font>
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center">
+                                            <font color="#666666">- </font>
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center">
+                                            <font color="#666666">-</font> 
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center">
+                                            <font color="#666666"> </font>OCIE0B
+                                          </td>
+                                          <td style="vertical-align:top;text-align:center"> OIE0A</td>
+                                          <td style="vertical-align:top;text-align:center">TOIE0 </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <div style="text-align:left"><i>Timer/Counter Interrupt Mask Register</i></div>
+                                  </div>
+                                  <div style="text-align:left"><i><br /></i></div>
+                                  <div style="text-align:left"><i><br /></i></div>
+                                  <div style="text-align:left"><i><span style="font-style:normal">
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"> <b>TIFR0</b></td>
+                                              <td style="vertical-align:top;text-align:center"> -</td>
+                                              <td style="vertical-align:top;text-align:center">-<font color="#666666"> </font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">- </font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">- </font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">-</font> 
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666"> </font>OCF0B
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center"> OCF0A</td>
+                                              <td style="vertical-align:top;text-align:center">TOV0 </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left"><i>Timer/Counter Interrupt Flag Register</i></div>
+                                      </span></i></div>
+                                  <div><br /></div>
+                                  <div><br /></div>
+                                  <div><i><span style="font-style:normal">
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"> <b>TCNT0</b></td>
+                                              <td style="vertical-align:top;text-align:center"> </td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"> </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left"><i>Timer/Counter Register (stores the counter value)</i></div>
+                                        <div><i><br /></i></div>
+                                        <div><i><br /></i></div>
+                                      </span></i></div>
+                                </div>
+                                <div><i><span style="font-style:normal">
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"> <b>OCR0A</b></td>
+                                            <td style="vertical-align:top;text-align:center"> </td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"> </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left"><i>Output Compare Register A (stores the compare value)</i></div>
+                                    </span></i></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><i><span style="font-style:normal">
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"> <b>OCR0B</b></td>
+                                            <td style="vertical-align:top;text-align:center"> </td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"> </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left"><i>Output Compare Register B (stores the compare value)</i></div>
+                                    </span></i></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <div><i>ATmega168/328 Code:</i><br /></div>
+                                  <div class="sites-codeblock sites-codesnippet-block" style="background-color:rgb(239,239,239);border:1px solid rgb(211,211,211);display:block;padding:0.5em 0px 0.5em 1em;line-height:13px">
+                                    <div><code style="color:rgb(0,96,0)">// this code sets up counter0 for an 8kHz Fast PWM wave @ 16Mhz Clock</code><br /><br /><br /><code style="color:rgb(0,96,0)">#include &lt;avr/io.h&gt;</code><br /><br /><br /><code style="color:rgb(0,96,0)">int main(void)</code><br /><code style="color:rgb(0,96,0)">{</code><br /><code style="color:rgb(0,96,0)"><span>    </span>DDRD |= (1 &lt;&lt; DDD6);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD6 is now an output</code></div>
+                                    <div>
+                                      <font color="#006000" face="monospace"><br /></font>
+                                    </div>
+                                    <div>
+                                      <font color="#006000" face="monospace"><span>    OCR0A = 128;</span></font>
+                                    </div>
+                                    <div>
+                                      <font color="#006000" face="monospace"><span>    // set PWM for 50% duty cycle</span><br /></font><br />
+                                    </div>
+                                    <div><br /></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span>    TCCR0A |= (1 &lt;&lt; COM0A1);</span></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span>    // set none-inverting mode</span></span><br /></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><br /></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span>    TCCR0A |= (1 &lt;&lt; WGM01) | (1 &lt;&lt; WGM00);</span><br /></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span><span>    // set fast PWM Mode</span><br /></span></span></code></div>
+                                    <div><br /></div>
+                                    <div><code style="color:rgb(0,96,0)"><span>    </span>TCCR0B |= (1 &lt;&lt; CS01);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// set prescaler to 8 and starts PWM</code></div>
+                                    <div><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>while (1);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>{</code><br /><code style="color:rgb(0,96,0)"><span>    <span>    </span></span>// we have a working Fast PWM</code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span>    </span>}</code><br /><code style="color:rgb(0,96,0)">}</code></div>
+                                  </div>
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <hr style="border-width:0px;background-color:rgb(204,204,204);height:1px" /><br />
+                                </div>
+                                <div><b>
+                                    <font face="'courier new', monospace" size="3"><br /></font>
+                                  </b></div>
+                                <div><b>
+                                    <font face="'courier new', monospace" size="3">TIMER1 (16BIT PWM):</font>
+                                  </b></div>
+                                <div><br /></div>
+                                <div>
+                                  <div style="display:block;text-align:left"><a href="/avr-guide/pwm-atmega8/PWM%20-%2016%20Bit%20-%20ATmega8.JPG?attredirects=0" imageanchor="1" style="color:rgb(0,0,204);text-decoration:none;border-bottom-style:none"><img border="0" src="/avr-guide/pwm-atmega8/PWM%20-%2016%20Bit%20-%20ATmega8.JPG" style="border-width:1px;padding:7px;border-style:solid;background-color:rgb(255,255,255)" /></a></div><i>Figure 3: ATmega328 Timer1 (16bit)</i>
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><span>    Timer/Counter1 has 2 outputs, OC1A and OC1B.  Since both of these outputs run off the same timer and waveform generators both OC1A and OC1B are synchronized, this make the timer perfect for making tank robots (I love tank robots).</span><br /></div>
+                                <div><br /></div>
+                                <div><span>    </span>Timer/Counter1 is capable of running in 3 modes the Fast PWM mode, the Phase Corrected PWM mode and, Phase and Frequency Corrected mode.  Each of these modes can be inverted or none-inverted.  Just like Timer/Counter0 Timer/Counter1 has several options for controlling the TOP value of the PWM unlike Timer/Counter0 however, the TOP value can be fixed, stored in the OCR1A register or the ICR1 register (see table below).</div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <div>
+                                    <div><span>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"><b>TCCR1A</b></td>
+                                              <td style="vertical-align:top;text-align:center">COM1A1</td>
+                                              <td style="vertical-align:top;text-align:center">COM1A0</td>
+                                              <td style="vertical-align:top;text-align:center">COM1B1</td>
+                                              <td style="vertical-align:top;text-align:center">COM1B0</td>
+                                              <td style="vertical-align:top;text-align:center">-</td>
+                                              <td style="vertical-align:top;text-align:center"> -</td>
+                                              <td style="vertical-align:top;text-align:center"> WGM11</td>
+                                              <td style="vertical-align:top;text-align:center">WGM10 </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left"><i>Timer/Counter Control Register 1 A</i></div>
+                                      </span></div>
+                                    <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                      <div><br /></div>
+                                    </blockquote>
+                                  </div>
+                                  <div>
+                                    <div><br /></div>
+                                    <div>
+                                      <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                        <div>
+                                          <div>
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="vertical-align:top;width:50px;height:15px"><b>COM1A1<br />COM1B1</b></td>
+                                                  <td style="vertical-align:top;width:50px;height:15px"><b>COM1A0<br />COM1B0</b></td>
+                                                  <td style="vertical-align:top;width:431px;height:15px"><b> <br /> DESCRIPTION</b></td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">0</td>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">0 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:431px;height:15px"> Normal port operation, OC1A/OC1B disconnected.</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">0</td>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">1 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:431px;height:15px"> Mode 9,11,14,15 only: Enable OCR1A only (OC1B disconnected)</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">1</td>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">0 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:431px;height:15px"> None-inverted mode (HIGH at bottom, LOW on Match)</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">1</td>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">1 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:431px;height:15px"> Inverted mode (LOW at bottom, HIGH on Match)</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                      </blockquote>
+                                      <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                        <div>
+                                          <div><i>Applies only to PWM modes</i></div>
+                                        </div>
+                                      </blockquote>
+                                    </div>
+                                    <div><br /></div>
+                                    <div><br /></div>
+                                    <div>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"><b>TCCR1B</b></td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">ICNC1</font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">ICES1</font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">-</td>
+                                            <td style="vertical-align:top;text-align:center">WGM13</td>
+                                            <td style="vertical-align:top;text-align:center">WGM12</td>
+                                            <td style="vertical-align:top;text-align:center"> CS12</td>
+                                            <td style="vertical-align:top;text-align:center"> CS11</td>
+                                            <td style="vertical-align:top;text-align:center">CS10 </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left"><i>Timer/Counter Control Register 1 B</i></div>
+                                    </div>
+                                    <div><br /></div>
+                                    <div><br /></div>
+                                    <div>
+                                      <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                        <div>
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                            <tbody>
+                                              <tr>
+                                                <td style="vertical-align:top;width:54px;height:15px"><b> CS12</b></td>
+                                                <td style="vertical-align:top;width:54px;height:15px"><b> CS11 </b></td>
+                                                <td style="vertical-align:top;width:54px;height:15px"><b> CS10 </b></td>
+                                                <td style="vertical-align:top;width:365px;height:15px"><b> DESCRIPTION</b></td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">0</td>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">0 </td>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">0 </td>
+                                                <td style="vertical-align:top;text-align:left;width:365px;height:15px"> Timer/Counter2 Disabled </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">0</td>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">0 </td>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">1 </td>
+                                                <td style="vertical-align:top;text-align:left;width:365px;height:15px"> No Prescaling</td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center">0</td>
+                                                <td style="vertical-align:top;text-align:center">1 </td>
+                                                <td style="vertical-align:top;text-align:center">0 </td>
+                                                <td style="vertical-align:top"> Clock / 8</td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center">0</td>
+                                                <td style="vertical-align:top;text-align:center">1 </td>
+                                                <td style="vertical-align:top;text-align:center">1 </td>
+                                                <td style="vertical-align:top"> Clock / 64</td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center">1</td>
+                                                <td style="vertical-align:top;text-align:center">0 </td>
+                                                <td style="vertical-align:top;text-align:center">0 </td>
+                                                <td style="vertical-align:top"> Clock / 256</td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center">1</td>
+                                                <td style="vertical-align:top;text-align:center">0 </td>
+                                                <td style="vertical-align:top;text-align:center">1 </td>
+                                                <td style="vertical-align:top"> Clock / 1024</td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">
+                                                  <font color="#999999">1</font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">
+                                                  <font color="#999999">1 </font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">
+                                                  <font color="#999999">0 </font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:left;width:365px;height:15px">
+                                                  <font color="#999999"> External clock source on T1 pin, Clock on Falling edge</font>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">
+                                                  <font color="#999999">1</font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">
+                                                  <font color="#999999">1 </font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center;width:54px;height:15px">
+                                                  <font color="#999999">1 </font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:left;width:365px;height:15px">
+                                                  <font color="#999999"> External clock source on T1 pin, Clock on rising edge</font>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table><i>CS bits</i>
+                                        </div>
+                                        <div><i><br /></i></div>
+                                      </blockquote>
+                                    </div>
+                                    <div><br /></div>
+                                    <div>
+                                      <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                        <div>
+                                          <div>
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="vertical-align:top;width:50px;height:15px"><b> MODE</b></td>
+                                                  <td style="vertical-align:top;width:58px;height:15px"><b>WGM13</b></td>
+                                                  <td style="vertical-align:top;width:56px;height:15px"><b>WGM12</b></td>
+                                                  <td style="vertical-align:top;width:53px;height:15px"><b>WGM11</b></td>
+                                                  <td style="vertical-align:top;width:53px;height:15px"><b>WGM10</b></td>
+                                                  <td style="vertical-align:top;width:267px;height:15px"><b> DESCRIPTION</b></td>
+                                                  <td style="vertical-align:top;width:60px"> <b>TOP</b></td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">
+                                                    <font color="#999999">0</font>
+                                                  </td>
+                                                  <td style="vertical-align:top;text-align:center;width:58px;height:15px">
+                                                    <font color="#999999">0</font>
+                                                  </td>
+                                                  <td style="vertical-align:top;text-align:center;width:56px;height:15px">
+                                                    <font color="#999999">0 </font>
+                                                  </td>
+                                                  <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                                    <font color="#999999">0 </font>
+                                                  </td>
+                                                  <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                                    <font color="#999999">0 </font>
+                                                  </td>
+                                                  <td style="vertical-align:top;text-align:left;width:267px;height:15px">
+                                                    <font color="#999999"> Normal </font>
+                                                  </td>
+                                                  <td style="vertical-align:top;width:60px"> <font color="#666666">0xFFFF</font>
+                                                  </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">1</td>
+                                                  <td style="vertical-align:top;text-align:center;width:58px;height:15px">0</td>
+                                                  <td style="vertical-align:top;text-align:center;width:56px;height:15px">0 </td>
+                                                  <td style="vertical-align:top;text-align:center;width:53px;height:15px">0 </td>
+                                                  <td style="vertical-align:top;text-align:center;width:53px;height:15px">1 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:267px;height:15px"> PWM, Phase Corrected, 8bit</td>
+                                                  <td style="vertical-align:top;width:60px"> 0x00FF</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">2</td>
+                                                  <td style="vertical-align:top;text-align:center;width:58px;height:15px">0</td>
+                                                  <td style="vertical-align:top;text-align:center;width:56px;height:15px">0 </td>
+                                                  <td style="vertical-align:top;text-align:center;width:53px;height:15px">1 </td>
+                                                  <td style="vertical-align:top;text-align:center;width:53px;height:15px">0 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:267px;height:15px"> PWM, Phase Corrected, 9bit</td>
+                                                  <td style="vertical-align:top;width:60px"> 0x01FF</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center;width:50px;height:15px">3</td>
+                                                  <td style="vertical-align:top;text-align:center;width:58px;height:15px">0</td>
+                                                  <td style="vertical-align:top;text-align:center;width:56px;height:15px">0</td>
+                                                  <td style="vertical-align:top;text-align:center;width:53px;height:15px">1 </td>
+                                                  <td style="vertical-align:top;text-align:center;width:53px;height:15px">1 </td>
+                                                  <td style="vertical-align:top;text-align:left;width:267px;height:15px"> PWM, Phase Corrected, 10bit </td>
+                                                  <td style="vertical-align:top;text-align:center;width:60px">0x03FF </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center">5</td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:left"> Fast PWM, 8bit </td>
+                                                  <td style="vertical-align:top;text-align:center">0x00FF </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center">6</td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:left"> Fast PWM, 9bit </td>
+                                                  <td style="vertical-align:top;text-align:center">0x01FF </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center">7</td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">1</td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:left"> Fast PWM, 10bit </td>
+                                                  <td style="vertical-align:top;text-align:center">0x03FF </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center">8</td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:left"> PWM, Phase and Frequency Corrected </td>
+                                                  <td style="vertical-align:top;text-align:center">ICR1 </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center">9</td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:left"> PWM, Phase and Frequency Corrected </td>
+                                                  <td style="vertical-align:top;text-align:center">OCR1A </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center">10</td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:left"> PWM, Phase Correct </td>
+                                                  <td style="vertical-align:top;text-align:center">ICR1 </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center">11</td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:left"> PWM, Phase Correct </td>
+                                                  <td style="vertical-align:top;text-align:center"> OCR1A</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center">14</td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">0 </td>
+                                                  <td style="vertical-align:top;text-align:left"> Fast PWM </td>
+                                                  <td style="vertical-align:top;text-align:center">ICR1 </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="vertical-align:top;text-align:center">15</td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">1 </td>
+                                                  <td style="vertical-align:top;text-align:center">1</td>
+                                                  <td style="vertical-align:top"> Fast PWM</td>
+                                                  <td style="vertical-align:top;text-align:center">OCR1A </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                      </blockquote>
+                                      <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                        <div>
+                                          <div><i>Waveform Generator Mode bits (Abbreviated)</i></div>
+                                        </div>
+                                      </blockquote>
+                                    </div>
+                                    <div><br /></div>
+                                    <div><br /></div>
+                                    <div>
+                                      <div>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"><b>TCCR1C</b></td>
+                                              <td style="vertical-align:top;text-align:center"> <font color="#666666">FOC1A</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">FOC1B </font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">-</td>
+                                              <td style="vertical-align:top;text-align:center">-</td>
+                                              <td style="vertical-align:top;text-align:center">-</td>
+                                              <td style="vertical-align:top;text-align:center">-</td>
+                                              <td style="vertical-align:top;text-align:center">-</td>
+                                              <td style="vertical-align:top;text-align:center"> </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left"><i>Timer/Counter Control Register C</i></div>
+                                      </div>
+                                    </div>
+                                    <div><i><br /></i></div>
+                                    <div><br /></div>
+                                    <div>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"> <b>TIMSK1</b></td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">-</font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">- </font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">ICIE1 </font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">- </font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">- </font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center"> OCIE1B</td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666"> </font>OCIE1A
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">TOIE1 </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left"><i>Timer/Counter Interrupt Mask Register</i></div>
+                                    </div>
+                                    <div style="text-align:left"><i><br /></i></div>
+                                    <div style="text-align:left"><i><br /></i></div>
+                                    <div style="text-align:left"><i><span style="font-style:normal">
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                            <tbody>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;height:15px"> <b>TIFR</b></td>
+                                                <td style="vertical-align:top;text-align:center"> <font color="#666666">OCF2</font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center">
+                                                  <font color="#666666">TOV2</font>
+                                                  <font color="#666666"> </font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center">ICF1 </td>
+                                                <td style="vertical-align:top;text-align:center">OCF1A </td>
+                                                <td style="vertical-align:top;text-align:center">OCF1B </td>
+                                                <td style="vertical-align:top;text-align:center">
+                                                  <font color="#666666"> </font>TOV1
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center">
+                                                  <font color="#666666"> -</font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center">
+                                                  <font color="#999999">TOV0</font> 
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          <div style="text-align:left"><i>Timer/Counter Interrupt Flag Register</i></div>
+                                        </span></i></div>
+                                    <div><br /></div>
+                                    <div><br /></div>
+                                    <div><i><span style="font-style:normal">
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                            <tbody>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;height:15px"><b>TCNT1H</b></td>
+                                                <td style="vertical-align:top;text-align:center"> </td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top"> <b>TCNT1L</b></td>
+                                                <td style="vertical-align:top"> </td>
+                                                <td style="vertical-align:top"> </td>
+                                                <td style="vertical-align:top"> </td>
+                                                <td style="vertical-align:top"> </td>
+                                                <td style="vertical-align:top"> </td>
+                                                <td style="vertical-align:top"> </td>
+                                                <td style="vertical-align:top"> </td>
+                                                <td style="vertical-align:top"> </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          <div style="text-align:left"><i>Timer/Counter Register (stores the counter value, 16 bit)</i></div>
+                                          <div><i><br /></i></div>
+                                          <div><i><br /></i></div>
+                                        </span></i></div>
+                                  </div>
+                                  <div><i><span style="font-style:normal">
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"><b>OCR1AH</b></td>
+                                              <td style="vertical-align:top;text-align:center"> </td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top"><b>OCR1AL</b></td>
+                                              <td style="vertical-align:top"> </td>
+                                              <td style="vertical-align:top"> </td>
+                                              <td style="vertical-align:top"> </td>
+                                              <td style="vertical-align:top"> </td>
+                                              <td style="vertical-align:top"> </td>
+                                              <td style="vertical-align:top"> </td>
+                                              <td style="vertical-align:top"> </td>
+                                              <td style="vertical-align:top"> </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left"><i>Output Compare Register A (stores the compare value, 16 bit)</i></div>
+                                      </span></i></div>
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><i><span style="font-style:normal">
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"><b>OCR1BH</b></td>
+                                            <td style="vertical-align:top;text-align:center"> </td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"><br /></td>
+                                            <td style="vertical-align:top;text-align:center"> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top"><b>OCR1BL</b></td>
+                                            <td style="vertical-align:top"> </td>
+                                            <td style="vertical-align:top"> </td>
+                                            <td style="vertical-align:top"> </td>
+                                            <td style="vertical-align:top"> </td>
+                                            <td style="vertical-align:top"> </td>
+                                            <td style="vertical-align:top"> </td>
+                                            <td style="vertical-align:top"> </td>
+                                            <td style="vertical-align:top"> </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left"><i>Output Compare Register B (stores the compare value, 16 bit)</i></div>
+                                    </span></i></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <div><i>ATmega168/328 Code:</i><br /></div>
+                                  <div class="sites-codeblock sites-codesnippet-block" style="background-color:rgb(239,239,239);border:1px solid rgb(211,211,211);display:block;padding:0.5em 0px 0.5em 1em;line-height:13px">
+                                    <div><code style="color:rgb(0,96,0)">// this code sets up counter1 A output at 25% and B output at 75% </code></div>
+                                    <div><code style="color:rgb(0,96,0)">// using ICR1 as top (16bit), Fast PWM.</code><br /><br /><br /><code style="color:rgb(0,96,0)">#include &lt;avr/io.h&gt;</code><br /><br /><br /><code style="color:rgb(0,96,0)">int main(void)</code><br /><code style="color:rgb(0,96,0)">{</code><br /><code style="color:rgb(0,96,0)"><span>    </span>DDRB |= (1 &lt;&lt; DDB1)|(1 &lt;&lt; DDB2);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PB1 and PB2 is now an output</code></div>
+                                    <div><code style="color:rgb(0,96,0)"><br /></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span>    ICR1 = 0xFFFF;</span><br /></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span>    // set TOP to 16bit</span><br /></span></code></div>
+                                    <div>
+                                      <font color="#006000" face="monospace"><br /></font>
+                                    </div>
+                                    <div>
+                                      <font color="#006000" face="monospace"><span>    OCR1A = 0x3FFF;</span></font>
+                                    </div>
+                                    <div><span style="color:rgb(0,96,0);font-family:monospace">    // set PWM for 25% duty cycle @ 16bit</span></div>
+                                    <div>
+                                      <font color="#006000" face="monospace"><br /></font>
+                                    </div>
+                                    <div>
+                                      <font color="#006000" face="monospace"><span>    OCR1B = 0xBFFF;</span></font>
+                                    </div>
+                                    <div><span style="color:rgb(0,96,0);font-family:monospace">    // set PWM for 75% duty cycle @ 16bit</span><br /><br /></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span>    TCCR1A |= (1 &lt;&lt; COM1A1)|(1 &lt;&lt; COM1B1);</span></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span>    // set none-inverting mode</span></span><br /></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><br /></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span>    TCCR1A |= (1 &lt;&lt; WGM11);</span></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span><span><span>    TCCR1B |= (1 &lt;&lt; WGM12)|(1 &lt;&lt; WGM13);</span></span></span></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span><span><span>    // set Fast PWM</span> mode using ICR1 as TOP</span><br /></span></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span><span><span>    </span><br /></span></span></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span><span><span><span>    TCCR1B |= (1 &lt;&lt; CS10);</span></span></span></span></span></code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span><span><span><span><span><span>    // START the timer with no prescaler</span><br /></span></span></span></span></span></code></div>
+                                    <div><span><br /></span></div>
+                                    <div><span>    </span><br /></div>
+                                    <div><br /><code style="color:rgb(0,96,0)"><span>    </span>while (1);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>{</code><br /><code style="color:rgb(0,96,0)"><span>    <span>    </span></span>// we have a working Fast PWM</code></div>
+                                    <div><code style="color:rgb(0,96,0)"><span>    </span>}</code><br /><code style="color:rgb(0,96,0)">}</code></div>
+                                  </div>
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <hr />
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <div>
+                                    <div><b>
+                                        <font face="'courier new', monospace" size="3">TIMER2 (8BIT PWM):</font>
+                                      </b></div>
+                                  </div>
+                                  <div><br /></div>
+                                  <div>
+                                    <div style="display:block;text-align:left"></div>
+                                    <div style="display:block;text-align:left"><a href="/avr-guide/pwm-on-the-atmega328/PWM%20-%20ATmega328.JPG?attredirects=0" imageanchor="1" style="color:rgb(0,0,204);text-decoration:none;border-bottom-style:none"><img border="0" src="/avr-guide/pwm-on-the-atmega328/PWM%20-%20ATmega328.JPG" style="border-width:1px;padding:7px;border-style:solid;background-color:rgb(255,255,255)" /></a></div><i>Figure 2: ATmega328 Timer2 (8bit)</i>
+                                  </div>
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <div>    Timer/Counter2 is pretty cool because it has 2 outputs, OC2A and OC2B.  Since both of these outputs run off the same timer and waveform generators both OC2A and OC2B are synchronized, this make the timer perfect for making tank robots (I love tank robots).</div>
+                                  <div><br /></div>
+                                  <div><span>    As stated under Timer/Counter2, Timer/Counter2 has all of its prescaler values, this makes it capable of producing a lot more frequencies then its 8 bit brother.</span><br /></div>
+                                  <div><br /></div>
+                                  <div><span><span>    Timer/Counter2 is capable of running on 4 modes the Fast PWM with a max TOP (0xFF), a Fast PWM mode with a variable TOP (OCR2A), a Phase Corrected PWM mode with a max TOP (0xFF) and a Phase Corrected PWM mode with a variable TOP (OCR2A).  Each of these modes can be inverted or none-inverted.  </span></span></div>
+                                  <div><span><span><br /></span></span></div>
+                                  <div><br /></div>
+                                  <div>
+                                    <div><span>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"><b>TCCR2A</b></td>
+                                              <td style="vertical-align:top;text-align:center">COM2A1</td>
+                                              <td style="vertical-align:top;text-align:center">COM2A0 </td>
+                                              <td style="vertical-align:top;text-align:center">COM2B1</td>
+                                              <td style="vertical-align:top;text-align:center">COM2B0</td>
+                                              <td style="vertical-align:top;text-align:center">-</td>
+                                              <td style="vertical-align:top;text-align:center"> -</td>
+                                              <td style="vertical-align:top;text-align:center"> WGM21</td>
+                                              <td style="vertical-align:top;text-align:center">WGM20 </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left"><i>Timer/Counter Control Register 2 A</i></div>
+                                      </span></div>
+                                    <div><span><br /></span></div>
+                                    <div><span><br /></span></div>
+                                    <div><span>
+                                        <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                          <div>
+                                            <div>
+                                              <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                                <tbody>
+                                                  <tr>
+                                                    <td style="vertical-align:top;width:62px;height:15px"><b>COM2A1</b></td>
+                                                    <td style="vertical-align:top;width:63px;height:15px"><b>COM2A0</b></td>
+                                                    <td style="vertical-align:top;width:395px;height:15px"><b> DESCRIPTION</b></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="vertical-align:top;text-align:center;width:62px;height:15px">0</td>
+                                                    <td style="vertical-align:top;text-align:center;width:63px;height:15px">0 </td>
+                                                    <td style="vertical-align:top;text-align:left;width:395px;height:15px"> OC2A disabled</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="vertical-align:top;text-align:center;width:62px;height:31px">0 </td>
+                                                    <td style="vertical-align:top;text-align:center;width:63px;height:31px">1 </td>
+                                                    <td style="vertical-align:top;text-align:left;width:395px;height:31px"> WGM22 = 0: Normal Port Operation, OC2A Disconnected<br /> WGM22 = 1: Toggle OC2A on Compare Match</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="vertical-align:top;text-align:center;width:62px;height:15px">1</td>
+                                                    <td style="vertical-align:top;text-align:center;width:63px;height:15px">0 </td>
+                                                    <td style="vertical-align:top;text-align:left;width:395px;height:15px"> None-inverted mode (HIGH at bottom, LOW on Match)</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="vertical-align:top;text-align:center;width:62px;height:15px">1</td>
+                                                    <td style="vertical-align:top;text-align:center;width:63px;height:15px">1 </td>
+                                                    <td style="vertical-align:top;text-align:left;width:395px;height:15px"> Inverted mode (LOW at bottom, HIGH on Match)</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </blockquote>
+                                        <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                          <div>
+                                            <div><i>Applies only to PWM modes</i></div>
+                                          </div>
+                                        </blockquote>
+                                      </span></div>
+                                    <div><span><br /></span></div>
+                                    <div><span><br /></span></div>
+                                    <div><span>
+                                        <div><span>
+                                            <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                              <div>
+                                                <div>
+                                                  <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                                    <tbody>
+                                                      <tr>
+                                                        <td style="vertical-align:top;width:60px;height:15px"><b>COM2B1</b></td>
+                                                        <td style="vertical-align:top;width:60px;height:15px"><b>COM2B0</b></td>
+                                                        <td style="vertical-align:top;width:393px;height:15px"><b> DESCRIPTION</b></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="vertical-align:top;text-align:center;width:60px;height:15px">0</td>
+                                                        <td style="vertical-align:top;text-align:center;width:60px;height:15px">0 </td>
+                                                        <td style="vertical-align:top;text-align:left;width:393px;height:15px"> OC2B disabled</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="vertical-align:top;text-align:center;width:60px;height:17px">0</td>
+                                                        <td style="vertical-align:top;text-align:center;width:60px;height:17px">1 </td>
+                                                        <td style="vertical-align:top;text-align:left;width:393px;height:17px"> Reserved</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="vertical-align:top;text-align:center;width:60px;height:15px">1</td>
+                                                        <td style="vertical-align:top;text-align:center;width:60px;height:15px">0 </td>
+                                                        <td style="vertical-align:top;text-align:left;width:393px;height:15px"> None-inverted mode (HIGH at bottom, LOW on Match)</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="vertical-align:top;text-align:center;width:60px;height:15px">1</td>
+                                                        <td style="vertical-align:top;text-align:center;width:60px;height:15px">1 </td>
+                                                        <td style="vertical-align:top;text-align:left;width:393px;height:15px"> Inverted mode (LOW at bottom, HIGH on Match)</td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </blockquote>
+                                            <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                              <div>
+                                                <div><i>Applies only to PWM modes</i></div>
+                                              </div>
+                                              <div><i><br /></i></div>
+                                              <div><i><br /></i></div>
+                                            </blockquote>
+                                          </span></div>
+                                      </span></div>
+                                    <div><span>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"><b>TCCR2B</b></td>
+                                              <td style="vertical-align:top;text-align:center">FOC2A</td>
+                                              <td style="vertical-align:top;text-align:center">FOC2B</td>
+                                              <td style="vertical-align:top;text-align:center">-</td>
+                                              <td style="vertical-align:top;text-align:center">-</td>
+                                              <td style="vertical-align:top;text-align:center">WGM22</td>
+                                              <td style="vertical-align:top;text-align:center"> CS22</td>
+                                              <td style="vertical-align:top;text-align:center"> CS21</td>
+                                              <td style="vertical-align:top;text-align:center">CS20 </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left"><i>Timer/Counter Control Register 2 A</i></div>
+                                      </span></div>
+                                    <div><span><br /></span></div>
+                                    <div><span><br /></span></div>
+                                    <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                      <div>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;width:52px;height:15px"><b> CS22</b></td>
+                                              <td style="vertical-align:top;width:52px;height:15px"><b> CS21 </b></td>
+                                              <td style="vertical-align:top;width:52px;height:15px"><b> CS20 </b></td>
+                                              <td style="vertical-align:top;width:362px;height:15px"><b> DESCRIPTION</b></td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0</td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                              <td style="vertical-align:top;text-align:left;width:362px;height:15px"> Timer/Counter2 Disabled </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0</td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                              <td style="vertical-align:top;text-align:left;width:362px;height:15px"> No Prescaling</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0</td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                              <td style="vertical-align:top;width:362px;height:15px"> Clock / 8</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0</td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                              <td style="vertical-align:top;width:362px;height:15px"> Clock / 32</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">1</td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">0 </td>
+                                              <td style="vertical-align:top;width:362px;height:15px"> Clock / 64</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="text-align:center">1</td>
+                                              <td style="text-align:center">0 </td>
+                                              <td style="text-align:center">1 </td>
+                                              <td> Clock / 128</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="text-align:center">1</td>
+                                              <td style="text-align:center">1 </td>
+                                              <td style="text-align:center">0 </td>
+                                              <td> Clock / 256</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">1</td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                              <td style="vertical-align:top;text-align:center;width:52px;height:15px">1 </td>
+                                              <td style="vertical-align:top;width:362px;height:15px"> Clock / 1024</td>
+                                            </tr>
+                                          </tbody>
+                                        </table><i>CS bits</i>
+                                      </div>
+                                    </blockquote>
+                                    <div><br /></div>
+                                    <div><br /></div>
+                                  </div>
+                                  <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                    <div>
+                                      <div>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;width:46px;height:15px"><b> MODE</b></td>
+                                              <td style="vertical-align:top;width:53px;height:15px"><b>WGM22</b></td>
+                                              <td style="vertical-align:top;width:53px;height:15px"><b>WGM21</b></td>
+                                              <td style="vertical-align:top;width:53px;height:15px"><b>WGM20</b></td>
+                                              <td style="vertical-align:top;width:58px;height:15px"> <b>TOP</b></td>
+                                              <td style="vertical-align:top;width:248px;height:15px"><b> DESCRIPTION</b></td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:46px;height:15px">
+                                                <font color="#666666">0</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                                <font color="#666666">0</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                                <font color="#666666">0</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                                <font color="#666666">0</font>
+                                              </td>
+                                              <td style="vertical-align:top;width:58px;height:15px"> <font color="#666666">0xFF</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:left;width:248px;height:15px">
+                                                <font color="#666666"> Normal </font>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:46px;height:15px">1</td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">0</td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">0</td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">1</td>
+                                              <td style="vertical-align:top;width:58px;height:15px"> 0xFF</td>
+                                              <td style="vertical-align:top;text-align:left;width:248px;height:15px"> PWM Phase Corrected</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:46px;height:15px">
+                                                <font color="#666666">2</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                                <font color="#666666">0</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                                <font color="#666666">1</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">
+                                                <font color="#666666">0</font>
+                                              </td>
+                                              <td style="vertical-align:top;width:58px;height:15px">
+                                                <font color="#666666"> OCRA</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:left;width:248px;height:15px">
+                                                <font color="#666666"> CTC</font>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:46px;height:15px">3</td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">0</td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">1</td>
+                                              <td style="vertical-align:top;text-align:center;width:53px;height:15px">1</td>
+                                              <td style="vertical-align:top;width:58px;height:15px"> 0xFF</td>
+                                              <td style="vertical-align:top;text-align:left;width:248px;height:15px"> Fast PWM </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">4</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">1</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">0</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">0</font>
+                                              </td>
+                                              <td style="vertical-align:top">
+                                                <font color="#666666"> -</font>
+                                              </td>
+                                              <td style="vertical-align:top">
+                                                <font color="#666666"> Reserved </font>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center">5</td>
+                                              <td style="vertical-align:top;text-align:center"> 1 </td>
+                                              <td style="vertical-align:top;text-align:center">0</td>
+                                              <td style="vertical-align:top;text-align:center">1</td>
+                                              <td style="vertical-align:top"> OCR0A </td>
+                                              <td style="vertical-align:top"> PWM Phase Corrected </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">6</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666"> 1 </font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">1</font>
+                                              </td>
+                                              <td style="vertical-align:top;text-align:center">
+                                                <font color="#666666">0</font>
+                                              </td>
+                                              <td style="vertical-align:top">
+                                                <font color="#666666"> - </font>
+                                              </td>
+                                              <td style="vertical-align:top">
+                                                <font color="#666666"> Reserved</font>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center">7</td>
+                                              <td style="vertical-align:top;text-align:center"> 1 </td>
+                                              <td style="vertical-align:top;text-align:center">1</td>
+                                              <td style="vertical-align:top;text-align:center">1</td>
+                                              <td style="vertical-align:top"> OCR0A </td>
+                                              <td style="vertical-align:top"> Fast PWM </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </blockquote>
+                                  <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                    <div>
+                                      <div><i>Waveform Generator Mode bits</i></div>
+                                    </div>
+                                  </blockquote>
+                                  <blockquote style="margin:0px 0px 0px 40px;border-style:none;padding:0px">
+                                    <div>
+                                      <div><br /></div>
+                                    </div>
+                                  </blockquote>
+                                  <div>
+                                    <div><br /></div>
+                                    <div><br /></div>
+                                    <div>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                            <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;text-align:center;height:15px"> <b>TIMSK2</b></td>
+                                            <td style="vertical-align:top;text-align:center"> -</td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">- </font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">- </font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">- </font>
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666">-</font> 
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center">
+                                              <font color="#666666"> </font>OCIE2B
+                                            </td>
+                                            <td style="vertical-align:top;text-align:center"> OIE2A</td>
+                                            <td style="vertical-align:top;text-align:center">TOIE2 </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="text-align:left"><i>Timer/Counter Interrupt Mask Register</i></div>
+                                    </div>
+                                    <div style="text-align:left"><i><br /></i></div>
+                                    <div style="text-align:left"><i><br /></i></div>
+                                    <div style="text-align:left"><i><span style="font-style:normal">
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                            <tbody>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;height:15px"> <b>TIFR2</b></td>
+                                                <td style="vertical-align:top;text-align:center"> -</td>
+                                                <td style="vertical-align:top;text-align:center">-<font color="#666666"> </font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center">
+                                                  <font color="#666666">- </font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center">
+                                                  <font color="#666666">- </font>
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center">
+                                                  <font color="#666666">-</font> 
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center">
+                                                  <font color="#666666"> </font>OCF2B
+                                                </td>
+                                                <td style="vertical-align:top;text-align:center"> OCF2A</td>
+                                                <td style="vertical-align:top;text-align:center">TOV2 </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          <div style="text-align:left"><i>Timer/Counter Interrupt Flag Register</i></div>
+                                        </span></i></div>
+                                    <div><br /></div>
+                                    <div><br /></div>
+                                    <div><i><span style="font-style:normal">
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                            <tbody>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                                <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="vertical-align:top;text-align:center;height:15px"> <b>TCNT2</b></td>
+                                                <td style="vertical-align:top;text-align:center"> </td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"><br /></td>
+                                                <td style="vertical-align:top;text-align:center"> </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          <div style="text-align:left"><i>Timer/Counter Register (stores the counter value)</i></div>
+                                          <div><i><br /></i></div>
+                                          <div><i><br /></i></div>
+                                        </span></i></div>
+                                  </div>
+                                  <div><i><span style="font-style:normal">
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"> <b>OCR2A</b></td>
+                                              <td style="vertical-align:top;text-align:center"> </td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"> </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left"><i>Output Compare Register A (stores the compare value)</i></div>
+                                      </span></i></div>
+                                  <div><br /></div>
+                                  <div><br /></div>
+                                  <div><i><span style="font-style:normal">
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 7 bit</b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 6 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 5 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 4 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 3 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 2 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 1 bit </b></td>
+                                              <td style="vertical-align:top;text-align:center;width:59px"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;text-align:center;height:15px"> <b>OCR2B</b></td>
+                                              <td style="vertical-align:top;text-align:center"> </td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"><br /></td>
+                                              <td style="vertical-align:top;text-align:center"> </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="text-align:left"><i>Output Compare Register B (stores the compare value)</i></div>
+                                      </span></i></div>
+                                  <div><br /></div>
+                                  <div><br /></div>
+                                  <div>
+                                    <div><i>ATmega168/328 Code:</i><br /></div>
+                                    <div class="sites-codeblock sites-codesnippet-block" style="background-color:rgb(239,239,239);border:1px solid rgb(211,211,211);display:block;padding:0.5em 0px 0.5em 1em;line-height:13px">
+                                      <div><code style="color:rgb(0,96,0)">// this code sets up counter2 for an 8kHz Fast PWM wave @ 16Mhz Clock</code><br /><br /><br /><code style="color:rgb(0,96,0)">#include &lt;avr/io.h&gt;</code><br /><br /><br /><code style="color:rgb(0,96,0)">int main(void)</code><br /><code style="color:rgb(0,96,0)">{</code><br /><code style="color:rgb(0,96,0)"><span>    </span>DDRD |= (1 &lt;&lt; DDD6);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD6 is now an output</code></div>
+                                      <div>
+                                        <font color="#006000" face="monospace"><br /></font>
+                                      </div>
+                                      <div>
+                                        <font color="#006000" face="monospace"><span>    OCR2A = 128;</span></font>
+                                      </div>
+                                      <div>
+                                        <font color="#006000" face="monospace"><span>    // set PWM for 50% duty cycle</span><br /></font><br />
+                                      </div>
+                                      <div><br /></div>
+                                      <div><code style="color:rgb(0,96,0)"><span><span>    TCCR2A |= (1 &lt;&lt; COM2A1);</span></span></code></div>
+                                      <div><code style="color:rgb(0,96,0)"><span><span>    // set none-inverting mode</span></span><br /></code></div>
+                                      <div><code style="color:rgb(0,96,0)"><span><br /></span></code></div>
+                                      <div><code style="color:rgb(0,96,0)"><span><span>    TCCR2A |= (1 &lt;&lt; WGM21) | (1 &lt;&lt; WGM20);</span><br /></span></code></div>
+                                      <div><code style="color:rgb(0,96,0)"><span><span><span>    // set fast PWM Mode</span><br /></span></span></code></div>
+                                      <div><br /></div>
+                                      <div><code style="color:rgb(0,96,0)"><span>    </span>TCCR2B |= (1 &lt;&lt; CS21);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// set prescaler to 8 and starts PWM</code></div>
+                                      <div><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>while (1);</code><br /><code style="color:rgb(0,96,0)"><span>    </span>{</code><br /><code style="color:rgb(0,96,0)"><span>    <span>    </span></span>// we have a working Fast PWM</code></div>
+                                      <div><code style="color:rgb(0,96,0)"><span>    </span>}</code><br /><code style="color:rgb(0,96,0)">}</code></div>
+                                    </div>
+                                  </div>
+                                  <div><br /></div>
+                                </div>
+                                <div><br />
+                                  <hr size="2" width="100%" /><br />
+                                  <font size="3"><b style="font-family:courier new,monospace">OTHER RESOURCES:</b></font><br />
+                                  <br />
+                                  <br />
+                                  <a href="http://ww1.microchip.com/downloads/en/AppNotes/Atmel-2542-Using-the-AVR-High-speed-PWM_ApplicationNote_AVR131.pdf" target="_blank" rel="nofollow">AVR131: Using the AVR's High Speed PWM</a><br />
+                                  <br />
+                                  <hr size="2" width="100%" /><br />
+                                </div>
+                                <div><br /></div>
+                                <div><span>    Wow, there is a lot more differences between the ATmega8 and the ATmega328 PWM systems then I thought.</span><br /></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span>Cheers.</span></div>
+                                <div><span>Q</span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="sites-chrome-footer-wrapper">
+            <div id="sites-chrome-footer-wrapper-inside">
+              <div id="sites-chrome-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

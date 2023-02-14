@@ -1,0 +1,1092 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/3168fb/system/app/images/apple-touch-icon.png" type="image/png" />
+
+  <meta name="title" content="ANALOG INPUTS (ANALOG TO DIGITAL CONVERTER) - QEEWiki" />
+  <meta itemprop="name" content="ANALOG INPUTS (ANALOG TO DIGITAL CONVERTER) - QEEWiki" />
+  <meta property="og:title" content="ANALOG INPUTS (ANALOG TO DIGITAL CONVERTER) - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/3168fb/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1619893815000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1619893815000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>ANALOG INPUTS (ANALOG TO DIGITAL CONVERTER) - QEEWiki</title>
+  <meta itemprop="image" content="/avr-guide/analog-input/ATmega8%20-%20ADC%20.JPG" />
+  <meta property="og:image" content="/avr-guide/analog-input/ATmega8%20-%20ADC%20.JPG" />
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt;
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">ANALOG INPUTS (ANALOG TO DIGITAL CONVERTER)</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr"><b>
+                                  <font face="'courier new', monospace"><span style="font-size:medium">INTRODUCTION:</span></font>
+                                </b>
+                                <div><br /></div>
+                                <div><span>    Digital inputs are great, but sometimes devices output an analog signal.  An analog signal is a signal of varying voltage levels.  Temperature sensors, light sensors, potentiometers and flex sensors are just some of the devices that output analog voltages that the AVR could read.  Analog sensors are generally a resistor that changes its value when a given condition is met (light level, temperature, flexibility, stretching ... etc.).</span></div>
+                                <div><span><br /></span></div>
+                                <div><span><span>    </span>This is by far my favorite part of the AVR because you could find so many uses for it.</span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span>
+                                    <div><span>
+                                        <hr style="border-width:0px;background-color:rgb(204,204,204);height:1px" />
+                                      </span></div>
+                                    <div><span><br /></span></div>
+                                    <div><span><br /></span></div>
+                                    <div><span><b>
+                                          <font face="'courier new', monospace"><span style="font-size:medium">HARDWARE:</span></font>
+                                        </b></span></div>
+                                  </span></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><span>
+                                    <div style="display:block;text-align:left"><a href="/avr-guide/analog-input/ATmega8%20-%20ADC%20.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/analog-input/ATmega8%20-%20ADC%20.JPG" /></a></div>
+                                </div><i style="font-family:courier new,monospace">Figure 1: ATmega8 - ADC Pins </i>
+                                </span><br />
+                              </div>
+                              <div><br /></div>
+                              <div><br /></div>
+                              <div><span><span>    Different AVRs have a different number of analog Inputs the ATmega8 and the ATmega168/328 has 6 different device pins but only 1 ADC (Analog to Digital Converter) converter.  The 6 input pins are connected to a multiplexer which basically allows a single input to be connected to the ADC in order to get a reading.  So we have to be smart about how to use our ADC and how to prioritize our readings.</span><br /></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><span>    The data sheet on the ADC can be a bit overwhelming, it talks about timing, noise cancellation, filters, uses inductors and is 10 bit ... 10 bit! I mean come on.  The truth is that it is not as complicated as it may seem.  Most of us hobbyists do not need a NASA level of precision.  Lets do some quick math, 90% of the time we will use 5V, the ADC is a 10bit ADC so this means it can do 1024 bits of resolution.  5V / 1024 ~= 0.005V.   We will never need that kind of accuracy.  All we really need is a small capacitor or 2 and we are good to go.</span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div>
+                                <div style="display:block;text-align:left"><a href="/avr-guide/analog-input/ADC%20-%20Power%20Hookup.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/analog-input/ADC%20-%20Power%20Hookup.JPG" /></a></div><i style="font-family:courier new,monospace">Figure 2: Recommended ADC Power Hookup</i>
+                              </div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><span>    If you want to be fancy you can add a 10uH inductor for extra filtering between the AVCC pin and Vcc (5V on the schematic).  Most hobbyist's however, don't bother.  Lastly, most hobbyist's don't bother with with C2 and simply leave AREF disconnected.  I however, have had a lot of luck with a nice stable ADC using the schematic above. </span><br /></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span>
+                                        <div style="display:block;text-align:left"><a href="/avr-guide/analog-input/ADC%20-%20Sensor%20Hookup%201.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/analog-input/ADC%20-%20Sensor%20Hookup%201.JPG" /></a></div><i style="font-family:courier new,monospace">Figure 3: 3-pin Analog Sensor Hookup</i>
+                                      </span></span></span></span></div>
+                              <div><br /></div>
+                              <div><br /></div>
+                              <div><span>    </span>In order for an analog sensor to work, it must create some sort of voltage divider.  3 pin type sensors that have a GND, VCC and Output connection have a voltage divider build in and can be connected to an ADC pin directly as per Figure 3.  </div>
+                              <div><br /></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span>
+                                        <div style="display:block;text-align:left"><a href="/avr-guide/analog-input/ADC%20-%20Sensor%20Hookup%202.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/analog-input/ADC%20-%20Sensor%20Hookup%202.JPG" /></a></div>
+                                      </span></span></span></span></div>
+                              <div style="font-family:courier new,monospace"><i>Figure 4: 2-pin Analog Sensor Hookup</i></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><span>    2 pin type sensors on the other hand work by changing their resistance and will not work without the use of a resistor (because you need a minimum of 2 resistors to build a voltage divider network.  You could use any value for R1 but you have to make sure that you do not cause a short circuit and/or that it doesn't snuff out (for a lack of a better term) your sensor.  </span></span></span></span></span></div>
+                              <div><span><span><span><span><span><br /></span></span></span></span></span></div>
+                              <div><span><span><span><span><span><br /></span></span></span></span></span></div>
+                              <div><span><span><span><span><span><br /></span></span></span></span></span></div>
+                              <div><span><span><span><span><span><i>2 Pin Resistive Type Sensor Calculations:</i></span></span></span></span></span></div>
+                              <div><span><span><span><span><span><br /></span></span></span></span></span></div>
+                              <div><span>    Ok this section has a bit of math, so if your not interested here is a short hand rule.  Make R1 the same value as the highest value of the sensor.  This gives you the best power to sensor voltage range ratio.  The rest of this subsection just proves that statement.</span><br /></div>
+                              <div><span><span><span><span><span><br /></span></span></span></span></span></div>
+                              <div><span><span><span><span><span><span>    </span>I use 2 calculations to make sure the Resistor value will work out well.  Max current draw and the Difference in voltage between sensor min and max.</span></span></span></span></span></div>
+                              <div><span><span><span><span><span><br /></span></span></span></span></span></div>
+                              <div><span>    If you think back to V=IR, dropping the resistance will cause your current to rise if your voltage stays the same.  So if we add the value of R1 and the lowest value of our sensor together we will find the highest current draw for our sensor.   We also have to figure out the difference in voltage between the highest and lowest sensor resistance value to figure to figure out your window,  the bigger the window the more data the higher your resolution.    </span></div>
+                              <div><span><br /></span></div>
+                              <div><span><span>    </span>So lets use the <a href="http://www.sparkfun.com/products/9088" target="_blank" rel="nofollow">Mini Photocell</a> from <a href="http://www.sparkfun.com" target="_blank" rel="nofollow">Sparkfun</a> as our sensor. It ranges form 1k - 10k Ohms:</span></div>
+                              <div><span><br /></span></div>
+                              <div><br /></div>
+                              <div><span>
+                                  <table border="1" bordercolor="#888888" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                    <tbody>
+                                      <tr>
+                                        <td style="width:198px;height:15px"><b> Using 1k Resistor</b></td>
+                                        <td style="width:196px;height:15px"><b> Using 10k Resistor</b></td>
+                                        <td style="width:207px;height:15px"><b> Using 1 Resisotor</b></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:198px;height:110px">
+                                          <font color="#0000ff"> V = I * R<br /> I = V / R<br /> I = V / (R1 + R_sensorlow)<br /> I = 5 / (1k + 1k)<br /> I = 5 / 2k<br /> I = 2.5 mA</font>
+                                        </td>
+                                        <td style="width:196px;height:110px">
+                                          <font color="#0000ff"> V = I * R<br /> I = V / R<br /> I = V / (R1 + R_sensorlow)<br /> I = 5 / (10k + 1k)<br /> I = 5 / 11k<br /> I = 0.45 mA</font>
+                                        </td>
+                                        <td style="width:207px;height:110px">
+                                          <font color="#0000ff"> V = I * R<br /> I = V / R<br /> I = V / (R1 + R_sensorlow)<br /> I = 5 / 1 + 1k<br /> I = 5 / 1001<br /> I = 4.5mA</font>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table> 
+                                </span></div>
+                              <div><span><span><span><span><span>    Notice how we use 5 times less power if we use the 10k resistor over the 1k, and the 1 Ohm uses 10 times more power then the 10k.  Another thing to note, is that if your using 1/8th watt resistors you will be limited to 25mA @ 5V so knowing how much current your sensors draw isn't a stupid idea.</span></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><span>    Now for the resolution calculation.  We do some hard math or we could just create 2 voltage divider networks, 1 using the min value of the sensor and the other using the max values, and then subtract the difference to get our working voltage range.</span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div>
+                                <table border="1" bordercolor="#888888" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                  <tbody>
+                                    <tr>
+                                      <td style="width:213px;height:15px"> 1k Resistor Min Sens R</td>
+                                      <td style="width:222px;height:15px"> 1k Resistor Max Sens R</td>
+                                      <td style="width:258px;height:15px"> Conclusion</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:213px;height:79px">
+                                        <font color="#0000ff">Vout = R2 / (R1 + R2) * Vcc<br />Vout = 1k / (1k+1k) *5V<br />Vout = 1k / 2k * 5V<br />Vout = 2.5V<br /></font>
+                                      </td>
+                                      <td style="width:222px;height:79px">
+                                        <font color="#0000ff">Vout = R2 / (R1 + R2) * Vcc<br />Vout = 10k / (1k + 10k) * 5V<br />Vout = 10k / 11k * 5V<br />Vout = 4.5V</font>
+                                      </td>
+                                      <td style="width:258px;height:79px">
+                                        <font color="#0000ff">Using a 1k Resistor the Photocell has a 2V difference between Min and Max.<br /><br />Min 2.5V sensed<br />Max 4.5V sensed </font>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table><br />
+                              </div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                          <tbody>
+                                            <tr>
+                                              <td style="vertical-align:top;width:214px;height:15px"> 10k Resistor Min Sens R</td>
+                                              <td style="vertical-align:top;width:222px;height:15px"> 10k Resistor Max Sens R</td>
+                                              <td style="vertical-align:top;width:257px;height:15px"> Conclusion</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align:top;width:214px;height:78px">
+                                                <font color="#0000ff">Vout = R2 / (R1 + R2) * Vcc<br />Vout = 1k / (10k+1k) *5V<br />Vout = 1k / 11k * 5V<br />Vout = 0.45V</font>
+                                              </td>
+                                              <td style="vertical-align:top;width:222px;height:78px">
+                                                <font color="#0000ff">Vout = R2 / (R1 + R2) * Vcc<br />Vout = 10k / (10k + 10k) * 5V<br />Vout = 10k / 20k * 5V<br />Vout = 2.5V</font>
+                                              </td>
+                                              <td style="vertical-align:top;width:257px;height:78px">
+                                                <font color="#0000ff">Using a 10k Resistor the Photocell has a 2V difference between Min and Max.<br /><br />Min 0.45V sensed<br />Max 2.5V sensed </font>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><span>    Finally lets do something crazy, lets use a 1M resistor with the sensor and see what we get.</span></span></span></span></span></div>
+                              <div><span><span><span><span><span><br /></span></span></span></span></span></div>
+                              <div>
+                                <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                  <tbody>
+                                    <tr>
+                                      <td style="vertical-align:top;width:214px;height:15px"> 1M Resistor Min Sens R</td>
+                                      <td style="vertical-align:top;width:222px;height:15px"> 1M Resistor Max Sens R</td>
+                                      <td style="vertical-align:top;width:257px;height:15px"> Conclusion</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="vertical-align:top;width:214px;height:78px">
+                                        <font color="#0000ff">Vout = R2 / (R1 + R2) * Vcc<br />Vout = 1k / (1M+1k) *5V<br />Vout = 1k / 1001k * 5V<br />Vout = 0.0049V</font>
+                                      </td>
+                                      <td style="vertical-align:top;width:222px;height:78px">
+                                        <font color="#0000ff">Vout = R2 / (R1 + R2) * Vcc<br />Vout = 10k / (1M + 10k) * 5V<br />Vout = 10k / 1010k * 5V<br />Vout = 0.049</font>
+                                      </td>
+                                      <td style="vertical-align:top;width:257px;height:78px">
+                                        <font color="#0000ff">Using a 1M Resistor the Photocell has a 0.04V difference between Min and Max.<br /><br />So our resolution has really shrunk<br /><br /></font>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><span>    I was alway thought in school to have a conclusion for complicated or long example, so here it is, If your resistor is too low, you risk an overload and use more power, if its too high you will loose resolution.  Using the min value of your resistive sensor will come up to the same resolution as using your max value, so use the max value (since higher R means less I).  </span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><i>Signal Noise:</i></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><span>    Our air filled with Electra-Magnetic noise;  Radio waves, wireless networks power lines all emit electro-magnetic noise.  This noise can be picked up by the ADC because the traces </span></span></span></span></span>on the circuit board and any  wires between the board and sensor will act like an antenna and pickup this noise.  The longer the antenna the greater the noise.  So when your designing your circuit board make sure to keep the traces from the ADC as short as possible to reduce noise.  But what if your sensor needs to be far away from your board? Well you could use some fancy programming to try to "guesstimate" the true signal of you could use a shielded cable.  </div>
+                              <div><br /></div>
+                              <div><span>    </span>Shielded cables have a ... well shield around the conductors that will keep the noise from being felt by the conductors.  The shield is a metal braid (or foil) material that surrounds the wires. Any magnetic noise that comes from the air will be captured by the shield.</div>
+                              <div><br /></div>
+                              <div><br /></div>
+                              <div><br /></div>
+                              <div>
+                                <div style="display:block;text-align:left"><a href="/avr-guide/analog-input/shielded%20Wire.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/analog-input/shielded%20Wire.JPG" /></a></div>
+                              </div>
+                              <div style="font-family:courier new,monospace"><span><span><span><span><i>Figure 5: Shielded Cable</i></span></span></span></span></div>
+                              <div><br /></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><span>    In order to make this work, you have to connect the shield to the ground BUT only one 1 end.  Connecting both ends of a shield to ground could cause ground loop faults.   If you ever hooked up a high end stereo system and have heard hum coming from the speakers, you have heard a ground fault loop in action.</span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><i>Using the ADC For Extra Buttons:</i></div>
+                              <div><br /></div>
+                              <div><span>    This is a really cool trick, Say you want to build something, but you don't have enough Digital Inputs.  If you build a voltage divider network and use the buttons to short out the resistors you could read use the ADC to figure out what button was pressed.  The downsides to doing this is that it takes a lot more time to read an ADC then it does to read a Digital Input and that you could not read multiple keys being pressed at the same time.</span></div>
+                              <div><span><br /></span></div>
+                              <div>
+                                <div style="display:block;text-align:left"><a href="/avr-guide/analog-input/ADC%20-%20Multi%20Button.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/analog-input/ADC%20-%20Multi%20Button.JPG" /></a></div><i style="font-family:courier new,monospace">Figure 6:  Multiple Buttons On the ADC</i>
+                              </div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span>
+                                        <hr />
+                                      </span></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><b>
+                                  <font face="'courier new', monospace"><span style="font-size:medium">THEORY OF OPERATION:</span></font>
+                                </b></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                      <tbody>
+                                        <tr>
+                                          <td style="text-align:center;width:59px;height:15px"> </td>
+                                          <td style="text-align:center;width:59px"><b>7 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>6 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>5 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>4 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>3 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>2 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>1 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>0 bit </b></td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;height:15px"><b>ADMUX</b></td>
+                                          <td style="text-align:center">REFS1</td>
+                                          <td style="text-align:center">REFS0 </td>
+                                          <td style="text-align:center">ADLAR </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center">MUX3 </td>
+                                          <td style="text-align:center">MUX2 </td>
+                                          <td style="text-align:center">MUX1 </td>
+                                          <td style="text-align:center">MUX0 </td>
+                                        </tr>
+                                      </tbody>
+                                    </table><i style="font-family:courier new,monospace">ADC Multiplexer Selection Register</i>
+                                  </span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                <div><span><span>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                        <tbody>
+                                          <tr>
+                                            <td style="text-align:center;width:77px;height:15px"><b> REFS1</b></td>
+                                            <td style="text-align:center;width:77px"><b>REFS0 </b></td>
+                                            <td style="text-align:center;width:402px"><b>Voltage Reference Selection </b></td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 0</td>
+                                            <td style="text-align:center">0 </td>
+                                            <td>AREF, Internal Vref turned off </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 0</td>
+                                            <td style="text-align:center">1 </td>
+                                            <td>AVcc with external capacitor on AREF pin </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 1</td>
+                                            <td style="text-align:center">0 </td>
+                                            <td>Reserved </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 1</td>
+                                            <td style="text-align:center">1 </td>
+                                            <td>Internal 1.1V (ATmega168/328) or  2.56V on (ATmega8)</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </span></span></div>
+                                <div style="font-family:courier new,monospace"><span><span><i>REF Bits</i></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;margin:0px;border-collapse:collapse">
+                                        <tbody>
+                                          <tr>
+                                            <td style="vertical-align:top;width:111px;height:15px"><b>MUX 3...0</b></td>
+                                            <td style="vertical-align:top;width:307px"><b>Single Ended Input</b></td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 0000</td>
+                                            <td style="vertical-align:top">ADC0 </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 0001</td>
+                                            <td style="vertical-align:top">ADC1 </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 0010</td>
+                                            <td style="vertical-align:top">ADC2 </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 0011</td>
+                                            <td style="vertical-align:top">ADC3 </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 0100</td>
+                                            <td style="vertical-align:top">ADC4 </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 0101</td>
+                                            <td style="vertical-align:top">ADC5 </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 0110</td>
+                                            <td style="vertical-align:top">ADC6 </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 0111</td>
+                                            <td style="vertical-align:top">ADC7 </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 1000</td>
+                                            <td style="vertical-align:top">Temp Sensor (ATmega168/328 only) </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 1001 - 1101<span>    </span></td>
+                                            <td style="vertical-align:top"> (reserved)</td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 1110</td>
+                                            <td style="vertical-align:top">1.1V (ATmega168/328) 1.30V (ATmega8)</td>
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align:top;height:15px"> 1111</td>
+                                            <td style="vertical-align:top">0V (GND) </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </span></span></div>
+                                <div style="font-family:courier new,monospace"><span><span><i>MUX Bits</i></span></span></div>
+                              </blockquote>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><b><span style="background-color:rgb(255,255,0)">If ADLAR in the ADMUX Register is LOW (0)</span></b></div>
+                              <div><span><span>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                      <tbody>
+                                        <tr>
+                                          <td style="text-align:center;width:59px;height:15px"> </td>
+                                          <td style="text-align:center;width:59px"><b>7 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>6 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>5 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>4 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>3 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>2 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>1 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>0 bit </b></td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;height:15px"> <b>ADCH</b></td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center">ADC9 </td>
+                                          <td style="text-align:center">ADC8 </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;height:15px"> <b>ADCL</b></td>
+                                          <td style="text-align:center"> ADC7</td>
+                                          <td style="text-align:center">ADC6 </td>
+                                          <td style="text-align:center">ADC5 </td>
+                                          <td style="text-align:center">ADC4 </td>
+                                          <td style="text-align:center">ADC3 </td>
+                                          <td style="text-align:center">ADC2 </td>
+                                          <td style="text-align:center">ADC1 </td>
+                                          <td style="text-align:center">ADC0 </td>
+                                        </tr>
+                                      </tbody>
+                                    </table><i style="font-family:courier new,monospace">ADC Data Register</i>
+                                  </span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><b><span style="background-color:rgb(255,255,0)">ADLAR in the ADMUX Register is HIGH (1)</span></b></span></span></div>
+                              <div><span><span>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;text-align:center;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                      <tbody>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;width:59px;height:15px"> </td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b>7 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b>6 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b>5 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b>4 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b>3 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b>2 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b>1 bit </b></td>
+                                          <td style="vertical-align:top;text-align:center;width:59px"><b>0 bit </b></td>
+                                        </tr>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;height:15px"> <b>ADCH</b></td>
+                                          <td style="vertical-align:top;text-align:center">ADC9 </td>
+                                          <td style="vertical-align:top;text-align:center">ADC8 </td>
+                                          <td style="vertical-align:top;text-align:center">ADC7 </td>
+                                          <td style="vertical-align:top;text-align:center">ADC6 </td>
+                                          <td style="vertical-align:top;text-align:center">ADC5 </td>
+                                          <td style="vertical-align:top;text-align:center">ADC4 </td>
+                                          <td style="vertical-align:top;text-align:center">ADC3 </td>
+                                          <td style="vertical-align:top;text-align:center">ADC2 </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="vertical-align:top;text-align:center;height:15px"> <b>ADCL</b></td>
+                                          <td style="vertical-align:top;text-align:center"> ADC1</td>
+                                          <td style="vertical-align:top;text-align:center">ADC0 </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="vertical-align:top;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </span></span></div>
+                              <div style="font-family:courier new,monospace"><span><span><i>ADC Data Register</i></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                      <tbody>
+                                        <tr>
+                                          <td style="text-align:center;width:59px;height:15px"> </td>
+                                          <td style="text-align:center;width:59px"> <b>7 bit</b></td>
+                                          <td style="text-align:center;width:59px"><b>6 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>5 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>4 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>3 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>2 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>1 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>0 bit </b></td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;height:16px"><b> <span style="font-size:x-small">ADCSRA</span></b></td>
+                                          <td style="text-align:center">ADEN </td>
+                                          <td style="text-align:center">ADSC </td>
+                                          <td style="text-align:center">ADFR* </td>
+                                          <td style="text-align:center">ADIF </td>
+                                          <td style="text-align:center">ADIE </td>
+                                          <td style="text-align:center">ADPS2 </td>
+                                          <td style="text-align:center">ADPS1 </td>
+                                          <td style="text-align:center">ADPS0 </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <font color="#990000">NOTE * ADATE in ATmega168/328, ADFR in ATmega8</font>
+                                  </span></span></div>
+                              <div style="font-family:courier new,monospace"><span><span><i>ADC Control and Status Register A</i></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                <div><span><span><span style="border-collapse:collapse"><b>
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                            <tbody>
+                                              <tr>
+                                                <td style="text-align:center;width:55px;height:15px"> ADPS2</td>
+                                                <td style="text-align:center;width:55px">ADPS1 </td>
+                                                <td style="text-align:center;width:55px">ADPS0 </td>
+                                                <td style="text-align:center;width:130px">Division Factor </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="text-align:center;height:15px"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">2 *</span></td>
+                                              </tr>
+                                              <tr>
+                                                <td style="text-align:center;height:15px"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">2 </span></td>
+                                              </tr>
+                                              <tr>
+                                                <td style="text-align:center;height:15px"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">4 </span></td>
+                                              </tr>
+                                              <tr>
+                                                <td style="text-align:center;height:15px"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">8 </span></td>
+                                              </tr>
+                                              <tr>
+                                                <td style="text-align:center;height:15px"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">16 </span></td>
+                                              </tr>
+                                              <tr>
+                                                <td style="text-align:center;height:15px"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">32 </span></td>
+                                              </tr>
+                                              <tr>
+                                                <td style="text-align:center;height:15px"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">0</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">64 </span></td>
+                                              </tr>
+                                              <tr>
+                                                <td style="text-align:center;height:15px"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">1</span></td>
+                                                <td style="text-align:center"><span style="font-weight:normal">128 </span></td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </b></span></span></span></div>
+                                <div style="font-family:courier new,monospace"><span><span style="border-collapse:collapse"><i>ADPS Bits</i></span></span></div>
+                              </blockquote>
+                              <div><span><span><span style="border-collapse:collapse"><span style="font-weight:bold">    </span><span style="font-weight:bold">    </span><b>    <font face="courier new, monospace">* </font></b><i>
+                                        <font face="courier new, monospace">not a typo, check datasheet if you don't believe me :P</font>
+                                      </i><br /></span></span></span></div>
+                              <div><span><span><span style="border-collapse:collapse"><b><br /></b></span></span></span></div>
+                              <div><span><span><span style="border-collapse:collapse"><i>Reference Voltage Sources:</i></span></span></span></div>
+                              <div><span><span><span style="border-collapse:collapse"><b><br /></b></span></span></span></div>
+                              <div><span><span><b style="border-collapse:collapse">    </b><span style="border-collapse:collapse">The first thing we need to do is select a reference source (this is the high voltage) using the REFS1 and REFS0 bits in the ADMUX register. We could chose to use the voltage on the AREF pin, this voltage has to be a minimum of 2.0V on the ATmega8 or 1.0V on the ATmega168/328 and a max of VCC.  So when would you use this?  Say your using a 5V to power your AVR.  And you're sensors are on a 3.3V power supply.  If you want to use the full range you could hook up the 2nd power supply to the AREF pin.  How do I know that the min/max on the AREF pin?  It's buried in the datasheet under the "ADC Characteristics" table in the "Electrical Characteristics" section of the Datasheet.</span></span></span><span style="border-collapse:collapse">  The other References are AVcc or an internal test voltage.  Most of the time you will find yourself using the voltage on AVcc for two reasons.  First of all most analog devices are low power consumption devices (so you really don't need to run them off of another power supply for any reason) and secondly because using a reference on VREF prevents us from using the interior sources.</span></div>
+                              <div><span style="border-collapse:collapse"><br /></span></div>
+                              <div><span style="border-collapse:collapse"><span><br /></span></span></div>
+                              <div><span style="border-collapse:collapse"><span><i>ADC Multiplexer Source:</i></span></span></div>
+                              <div><span style="border-collapse:collapse"><span><br /></span></span></div>
+                              <div><span style="border-collapse:collapse"><span><span>    Because we only have a single ADC but 6 ADC pins to choose from we need to feed the signal into the ADC using the built in multiplexer.  To do this by setting the MUXn bits in the ADMUX register.  </span>The neat thing is that if you change these values while the conversion is running, the conversion will finish before the change takes (so if you ever find yourself having problems with bad data you might be switching before the ADC finishes).</span></span></div>
+                              <div><span style="border-collapse:collapse"><span><br /></span></span></div>
+                              <div><span style="border-collapse:collapse"><span><br /></span></span></div>
+                              <div><span style="border-collapse:collapse"><i>ADC Data Register Control:</i></span></div>
+                              <div><span style="border-collapse:collapse"><br /></span></div>
+                              <div><span style="border-collapse:collapse">    This really got me when I first started playing with micro controllers.  Here is the deal.  The ADC has 10bit of resolution. However, the AVR is an 8 bit micro controller, so we are always working with 8 bit registers.  So in order to get 10bit data we have to split it into 2 registers ADCH and ADCL.  We can use a 16 bit register or we could use an 8 bit register and dump the bottom 2 bits (which are the least significant bits anyways).  If you choose to use the full 10 bits resolution you should leave ADLAR LOW(0) and make sure you </span><span style="border-collapse:collapse;background-color:rgb(255,255,0)">read the ADCL register first </span><span style="background-color:rgb(255,255,255)">b</span><span style="border-collapse:collapse">ecause </span><span style="background-color:rgb(255,255,0);border-collapse:collapse">reading the ADCH causes to ADC to update</span><span style="border-collapse:collapse">.  If you only want to use 8 bit resolution you will want to set the ADLAR to HIGH(1), this way you only have to read ADCH.  I guess I could have said, the ADLAR bit lets you control how the AVR is going to output the data.  Set ADLAR HIGH(1) if you only want to 8 bit of resolution. </span><br /></div>
+                              <div><span style="border-collapse:collapse"><span><br /></span></span></div>
+                              <div><span style="border-collapse:collapse"><span><br /></span></span></div>
+                              <div><span style="border-collapse:collapse"><i>ADC Conversion Timing:</i></span></div>
+                              <div><span style="border-collapse:collapse"><span><br /></span></span></div>
+                              <div><span style="border-collapse:collapse"><span><span>    The next thing requires a bit of math (and for once its not bit math).  In order to get the best conversion results the ADC clock needs to be between 50k - 100k on the ATmega8 and 50K-200k on the ATmega168/328.  So take your processor clock frequency divide by 100k on the ATmega8 (or 200k on the ATmega168/328).  When you get the result move the the next highest Division Factor.</span></span></span></div>
+                              <div><span style="border-collapse:collapse"><span><span><br /></span></span></span></div>
+                              <div><span style="border-collapse:collapse"><span><span><br /></span></span></span></div>
+                              <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                <div><span style="border-collapse:collapse"><span><span><i>ATmega8:</i></span></span></span></div>
+                                <div><span style="border-collapse:collapse"><span><span><br /></span></span></span></div>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <font face="'courier new', monospace">
+                                    <font color="#0000ff">Processor Clock Speed / 100k = x</font>
+                                  </font><span style="font-family:courier new,monospace;color:rgb(0,0,255)">(round up to next division factor)</span>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <font face="'courier new', monospace">
+                                    <font color="#0000ff"><br /></font>
+                                  </font>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <font face="'courier new', monospace">
+                                    <font color="#0000ff">eg.  Using a 8Mhz Clock</font>
+                                  </font>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <font face="'courier new', monospace">
+                                    <font color="#0000ff">8MHrz / 100k = </font>
+                                  </font>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <font face="'courier new', monospace">
+                                    <font color="#0000ff">8,000,000 / 100,000 = 80</font>
+                                  </font>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <font face="'courier new', monospace">
+                                    <font color="#0000ff">next highest = 128</font>
+                                  </font>
+                                </blockquote>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span><i>ATmega168/328</i></span></span>:</div>
+                                <div><span><span><br /></span></span></div>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <div><span><span>
+                                        <div style="line-height:13px"><span style="border-collapse:collapse"><code><font color="#0000ff">Processor Clock Speed / 200k = x  (round up to next division factor)</font></code></span></div>
+                                      </span></span></div>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <div><span><span>
+                                        <div style="line-height:13px"><span style="border-collapse:collapse"><br /></span></div>
+                                      </span></span></div>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <div><span><span>
+                                        <div style="line-height:13px"><span style="border-collapse:collapse"><code style="color:rgb(0,96,0)"><font color="#0000ff">eg.  Using a 1Mhz Clock</font></code></span></div>
+                                      </span></span></div>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <div><span><span>
+                                        <div style="line-height:13px"><span style="border-collapse:collapse"><code style="color:rgb(0,96,0)"><font color="#0000ff">1MHrz / 200k = </font></code></span></div>
+                                      </span></span></div>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <div><span><span>
+                                        <div style="line-height:13px"><span style="border-collapse:collapse"><code style="color:rgb(0,96,0)"><font color="#0000ff">1,000,000 / 200,000 = 5</font></code></span></div>
+                                      </span></span></div>
+                                </blockquote>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <div><span><span>
+                                        <div style="line-height:13px">
+                                          <font color="#0000ff" face="monospace"><span style="border-collapse:collapse">next highest = 8</span></font>
+                                        </div>
+                                      </span></span></div>
+                                </blockquote>
+                              </blockquote>
+                              <div></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><i>Modes of Operation:</i></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><b style="border-collapse:collapse">    </b><span style="border-collapse:collapse">Now we need to figure out what kind of mode we want to run our ADC in.  We can choose to do a single conversion or free running mode.  In single mode we do 1 conversion and we are done.  In free running mode we run continually, when one conversion finishes we automatically start the next.  </span></span></span><span style="border-collapse:collapse">The default is single conversion mode so we don't have to do a thing.  </span><span style="border-collapse:collapse">To use Free running mode set the ADFR bit HIGH (1) in the ADCSRA register on the ATmega8 or set the ADATE bit in the ADCSRA register on the ATmega168/328 and leave the ADSTn bits LOW (0) in the ADCSRB register (more on this register later on).</span></div>
+                              <div><span style="border-collapse:collapse"><br /></span></div>
+                              <div><span style="border-collapse:collapse">    There are advantages and disadvantages of both modes.  In single scan mode, we tie up the processor while the ADC is doing its conversion, but its simple to use with multiple Analog Inputs because we trigger one at a time.  In free running mode, we have to have a bit of extra code to figure out what Analog input just finished and have to make sure we switch the MUX at the right time,  it's not too bad but it is not as simple as single scan mode.</span><br /></div>
+                              <div><span><span><span style="border-collapse:collapse"><br /></span></span></span></div>
+                              <div><span><span><span style="border-collapse:collapse"><br /></span></span></span></div>
+                              <div><span style="border-collapse:collapse"><i>ADC Interrupt:</i> </span></div>
+                              <div><span style="border-collapse:collapse"><br /></span></div>
+                              <div><span><span><span style="border-collapse:collapse"><span>    </span>Whatever mode you choose to use can be used with, or without interrupts, which will trigger the ADC vector.</span><br /></span></span></div>
+                              <div><span><span><span style="border-collapse:collapse"><br /></span></span></span></div>
+                              <div><span style="border-collapse:collapse"><br /></span></div>
+                              <div><span><span style="border-collapse:collapse"><i>Special Modes of Operation for the ATmega168/328:</i></span></span></div>
+                              <div><span style="border-collapse:collapse"><br /></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                      <tbody>
+                                        <tr>
+                                          <td style="text-align:center;width:60px"> </td>
+                                          <td style="text-align:center;width:60px"><b>7 bit </b></td>
+                                          <td style="text-align:center;width:60px"><b>6 bit </b></td>
+                                          <td style="text-align:center;width:60px"><b>5 bit </b></td>
+                                          <td style="text-align:center;width:60px"><b>4 bit </b></td>
+                                          <td style="text-align:center;width:60px"><b>3 bit </b></td>
+                                          <td style="text-align:center;width:60px"><b>2 bit </b></td>
+                                          <td style="text-align:center;width:60px"><b>1 bit </b></td>
+                                          <td style="text-align:center;width:60px"><b>0 bit </b></td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;width:60px"> <b><span style="font-size:x-small">ADCSRB</span></b></td>
+                                          <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;width:60px">ACME </td>
+                                          <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;width:60px">ADTS2 </td>
+                                          <td style="text-align:center;width:60px">ADTS1 </td>
+                                          <td style="text-align:center;width:60px">ADTS0 </td>
+                                        </tr>
+                                      </tbody>
+                                    </table><i><span style="font-family:courier new,monospace">ADC Control and Status Register B</span></i>
+                                  </span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                <div><span><span>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                        <tbody>
+                                          <tr>
+                                            <td style="width:57px;height:15px"><b> ADTS2</b></td>
+                                            <td style="width:57px"><b>ADTS1 </b></td>
+                                            <td style="width:57px"><b>ADTS0 </b></td>
+                                            <td style="width:250px"><b>Trigger Source</b></td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 0</td>
+                                            <td style="text-align:center">0 </td>
+                                            <td style="text-align:center">0 </td>
+                                            <td>Free Running </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 0</td>
+                                            <td style="text-align:center">0 </td>
+                                            <td style="text-align:center">1 </td>
+                                            <td>Analog Comparator </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 0</td>
+                                            <td style="text-align:center">1 </td>
+                                            <td style="text-align:center">0 </td>
+                                            <td>External Interrupt Request 0 </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 0</td>
+                                            <td style="text-align:center">1 </td>
+                                            <td style="text-align:center">1 </td>
+                                            <td>Timer/Counter0 Compare Match A </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 1</td>
+                                            <td style="text-align:center">0 </td>
+                                            <td style="text-align:center">0 </td>
+                                            <td>Timer/Counter0 Overflow </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 1</td>
+                                            <td style="text-align:center">0 </td>
+                                            <td style="text-align:center">1 </td>
+                                            <td>Timer/Counter1 Compare Match B </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 1</td>
+                                            <td style="text-align:center">1 </td>
+                                            <td style="text-align:center">0 </td>
+                                            <td>Timer/Counter1 Overflow </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;height:15px"> 1</td>
+                                            <td style="text-align:center">1 </td>
+                                            <td style="text-align:center">1 </td>
+                                            <td>Timer/Counter1 Capture Event </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </span></span></div>
+                                <div style="font-family:courier new,monospace"><i><span><span>ADTS bits</span></span></i></div>
+                              </blockquote>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><span>    Isn't this cool, on the ATmega168/328 we can use the Timer/Counters and the Analog Comparator as a trigger source to start the ADC conversions.  Man does this ever cut down on the coding.  Set the ADATE bit in the ADSCRA register to HIGH (1) and set the ADTSn bits in the ADCSRB register the the values in the Table and we are good to go.</span></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span>
+                                    <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                      <tbody>
+                                        <tr>
+                                          <td style="text-align:center;width:59px;height:15px"><b> </b></td>
+                                          <td style="text-align:center;width:59px"><b>7 bit</b></td>
+                                          <td style="text-align:center;width:59px"><b>6 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>5 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>4 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>3 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>2 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>1 bit </b></td>
+                                          <td style="text-align:center;width:59px"><b>0 bit </b></td>
+                                        </tr>
+                                        <tr>
+                                          <td style="text-align:center;height:15px"><b>DIDR0</b></td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
+                                          <td style="text-align:center">ADS5D </td>
+                                          <td style="text-align:center">ADC4D </td>
+                                          <td style="text-align:center">ADC3D </td>
+                                          <td style="text-align:center">ADC2D </td>
+                                          <td style="text-align:center">ADC1D </td>
+                                          <td style="text-align:center">ADC0D </td>
+                                        </tr>
+                                      </tbody>
+                                    </table><i><span style="font-family:courier new,monospace">Digital Input Disable Register 0</span></i>
+                                  </span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><br /></span></span></div>
+                              <div><span><span><span>    This register is designed to reduce power consumption of the AVR by giving you the ability to turn of the Digital Input circuitry on the 6 ADC pins while your using the ADC.  If power consumption is a problem set the bits to HIGH (1) if not leave them at LOW (0).</span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span>
+                                      <hr />
+                                    </span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><b>
+                                        <font face="'courier new', monospace"><span style="font-size:medium">SOFTWARE:</span></font>
+                                      </b></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><br /></div>
+                              <div><i>ADC on The ATmega8:</i></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><span>    Lets write a bit of code.  The two most common ways you will use the ADC is to do a single conversion at a given time in the program and/or to do continues scanning and have it trigger a an interrupt when its done.   I'll demonstrate both for each AVR type.</span><br /></span></span></span></div>
+                              <div><br /></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><i>ATmega8 &amp; ATmega168/328 Code:</i></span></span></span></span></div>
+                              <div></div>
+                              <div class="sites-codeblock sites-codesnippet-block">
+                                <div><span><span><span><code>// this code scans ADC1 for an analog signal upon request, using 8Mhz processor clock</code></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><code>#include &lt;avr/io.h&gt;</code></span></span></span></div>
+                                <div><span><span><span><code>#include &lt;stdint.h&gt;</code><span><code>    </code><span><code>   // needed for uint8_t</code></span></span></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><code>int ADCsingleREAD(uint8_t adctouse)</code></div>
+                                <div><span><code>{</code></span></div>
+                                <div><span><span><span><span><code><span>    int ADCval;</span><br /></code></span></span></span></span></div>
+                                <div><span><span><span><span><code><br /></code></span></span></span></span></div>
+                                <div><span><span><span><span><code>    ADMUX = adctouse;</code><span><code>    </code><span><code>    </code><span><code> </code><span><span><code>// use #1 ADC</code></span></span></span></span></span></span><br /></span></span></span></div>
+                                <div><span><span><span><span><span><span><span><span><span><span><code>    ADMUX |= (1 &lt;&lt; REFS0);</code><span><code>    // use AVcc as the reference</code></span></span><br /></span></span></span></span></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><span><span><span><span><span><span><span><code>    ADMUX &amp;= ~(1 &lt;&lt; ADLAR);</code><span><code>   // clear for 10 bit resolution</code></span></span><br /></span></span></span></span></span></span></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code>    </code></span><br /></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code>    ADCSRA |= (1 &lt;&lt; ADPS2) | (1 &lt;&lt; ADPS1) | (1 &lt;&lt; ADPS0);</code><span><code>    // 128 prescale for 8Mhz</code></span></span><br /></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                <div><code>    ADCSRA |= (1 &lt;&lt; ADEN);</code><span><code>    // Enable the ADC</code></span></div>
+                                <div><span>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code><br /></code></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code>    ADCSRA |= (1 &lt;&lt; ADSC);</code><span><code>    // Start the ADC conversion</code></span></span></span><br /></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code><br /></code></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code><span>    while(ADCSRA &amp; (1 &lt;&lt; ADSC));<span>    <span>  // Thanks T, this line waits for the ADC to finish </span></span></span><br /></code></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code><br /></code></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code><br /></code></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code><span>    ADCval = ADCL;</span><br /></code></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code><span><span>    ADCval = (ADCH &lt;&lt; 8) + ADCval;<span>    // ADCH is read so ADC can be updated again</span></span><br /></span></code></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code><br /></code></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code>    return ADCval;</code></span><br /></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                    <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code>}</code></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                  </span></div>
+                                <div><span><br /></span></div>
+                                <div><span><code>    </code></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><code>int main(void)</code></span></span></span></div>
+                                <div><span><span><span><code>{</code></span></span></span></div>
+                                <div><code>    int ADCvalue;</code></div>
+                                <div><code><br /></code></div>
+                                <div><span><code>    </code></span><code>while (1)</code></div>
+                                <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code>    {</code></span><br /></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                <div><code>    </code><span><code>    </code></span><span><code>    ADCvalue = ADCsingleREAD(1);</code></span></div>
+                                <div><span><span><code>    </code><span><code>    </code><span><code>    // ADCvalue now contains an 10bit ADC read</code></span></span></span><br /></span></div>
+                                <div><span><span><span><span><code>    </code></span><code>}</code></span></span></span></div>
+                                <div><span><span><span><code>}</code></span></span></span></div>
+                              </div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span>
+                                      <div><span><span><span><span><i>ATmega8 Code:</i></span></span></span></span></div>
+                                      <div></div>
+                                    </span></span></span></div>
+                              <div class="sites-codeblock sites-codesnippet-block">
+                                <div><span><span><span><code>// this code continually scans ADC0 for an analog signal, using 8Mhz processor clock</code><br /><br /><br /><code>#include &lt;avr/io.h&gt;</code><br /><code>#include &lt;stdint.h&gt; <span>    <span>  </span></span>// needed for uint8_t</code><br /><br /><code>#include &lt;avr/interrupt.h&gt;</code><br /><br /></span></span></span></div>
+                                <div><span><span><span><br /><code>volatile uint8_t ADCvalue;</code><span><code>    // Global variable, set to volatile if used with ISR</code></span><br /><br /></span></span></span></div>
+                                <div><span><span><span><br /><code>int main(void)</code><br /><code>{</code><br /><br /><span><code>    </code></span><code>ADMUX = 0; </code><span><code>   </code><span><code>    </code><span><code>    </code><span><code>    </code></span></span></span></span><code>// use ADC0</code><br /><span><code>    </code></span><code>ADMUX |= (1 &lt;&lt; REFS0); </code><span><code>   </code></span><code>// use AVcc as the reference</code><br /><span><code>    </code></span><code>ADMUX |= (1 &lt;&lt; ADLAR); </code><span><code>   </code></span><code>// Right adjust for 8 bit resolution</code><br /><br /><span><code>    </code></span><code>ADCSRA |= (1 &lt;&lt; ADPS2) | (1 &lt;&lt; ADPS1) | (1 &lt;&lt; ADPS0); // 128 prescale for 8Mhz</code><br /><span><code>    ADCSRA |= (1 &lt;&lt; ADFR);</code><span><code>    // Set free running mode</code></span></span></span></span></span></div>
+                                <div><span><code>    </code></span><code>ADCSRA |= (1 &lt;&lt; ADEN); </code><span><code>   </code></span><code>// Enable the ADC</code></div>
+                                <div>
+                                  <div><span><span><span><span><span><span><code>    ADCSRA |= (1 &lt;&lt; ADIE);</code><span><code>    // Enable Interrupts </code></span></span><br /></span></span></span></span></span></div>
+                                  <div><span><br /></span></div>
+                                  <div><span><code>    </code></span><code>ADCSRA |= (1 &lt;&lt; ADSC); <span>   </span>// Start the ADC conversion</code></div>
+                                </div>
+                                <div><span><span><span><br /><br /></span></span></span></div>
+                                <div><span><span><span><span><code>    </code></span><code>while (1)</code><br /><span><code>    </code></span><code>{</code><br /><span><code>    </code><span><code>    // main loop</code></span></span><br /><span><code>    </code><span><code>    </code></span></span><br /><span><code>    </code></span><code>}</code><br /><code>}</code></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><code>ISR(ADC_vect)</code></span></span></span></div>
+                                <div><span><span><span><code>{</code></span></span></span></div>
+                                <div><span><span><span><span><code>    ADCvalue = ADCH;</code><span><code>    </code><span><code>    <span>  </span>// only need to read the high value for 8 bit</code></span></span></span><br /></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><code>}</code></span></span></span></div>
+                              </div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><i>ADC on the ATmega168/328:</i></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><span>    The ATmega168/328 code isn't much different then the ATmega8 code.  If you remember the only difference is that we have a ADATE (ADC Auto Trigger Enable) bit in the ADCSRA register that we use in order that we could then use to set different trigger types (such as Free running mode).  For single conversion the code is exactly the same so please read above.</span><br /></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span>
+                                        <div><span><span><span>
+                                                <div><span><span><span><span><i>ATmega168/328 Code:</i></span></span></span></span></div>
+                                                <div></div>
+                                              </span></span></span></div>
+                                        <div class="sites-codeblock sites-codesnippet-block" style="background-color:rgb(239,239,239);border:1px solid rgb(211,211,211);display:block;padding:0.5em 0px 0.5em 1em;line-height:13px">
+                                          <div><span><span><span><code style="color:rgb(0,96,0)">// this code continually scans ADC0 for an analog signal, using 16Mhz processor clock</code><br /><br /><br /><code style="color:rgb(0,96,0)">#include &lt;avr/io.h&gt;</code><br /><code style="color:rgb(0,96,0)">#include &lt;stdint.h&gt; <span>    <span>  </span></span>// needed for uint8_t</code><br /><br /><code style="color:rgb(0,96,0)">#include &lt;avr/interrupt.h&gt;</code><br /><br /></span></span></span></div>
+                                          <div><span><span><span><br /><code style="color:rgb(0,96,0)">volatile uint8_t ADCvalue;</code><span><code style="color:rgb(0,96,0)">    // Global variable, set to volatile if used with ISR</code></span><br /><br /></span></span></span></div>
+                                          <div><span><span><span><br /><code style="color:rgb(0,96,0)">int main(void)</code><br /><code style="color:rgb(0,96,0)">{</code><br /><br /><span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">ADMUX = 0; </code><span><code style="color:rgb(0,96,0)">   </code><span><code style="color:rgb(0,96,0)">    </code><span><code style="color:rgb(0,96,0)">    </code><span><code style="color:rgb(0,96,0)">    </code></span></span></span></span><code style="color:rgb(0,96,0)">// use ADC0</code><br /><span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">ADMUX |= (1 &lt;&lt; REFS0); </code><span><code style="color:rgb(0,96,0)">   </code></span><code style="color:rgb(0,96,0)">// use AVcc as the reference</code><br /><span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">ADMUX |= (1 &lt;&lt; ADLAR); </code><span><code style="color:rgb(0,96,0)">   </code></span><code style="color:rgb(0,96,0)">// Right adjust for 8 bit resolution</code><br /><br /><span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">ADCSRA |= (1 &lt;&lt; ADPS2) | (1 &lt;&lt; ADPS1) | (1 &lt;&lt; ADPS0); // 128 prescale for 16Mhz</code><br /><span><code style="color:rgb(0,96,0)">    ADCSRA |= (1 &lt;&lt; ADATE);</code><span><code style="color:rgb(0,96,0)">   // Set ADC Auto Trigger Enable</code></span></span></span></span></span></div>
+                                          <div><span><span><span><span><span><code style="color:rgb(0,96,0)"><span>    </span></code></span></span></span></span></span></div>
+                                          <div><span><span><span><span><span><code style="color:rgb(0,96,0)"><span>    ADCSRB = 0;<span>    <span>    <span>    <span>   // 0 for free running mode</span></span></span></span></span></code></span></span></span></span></span></div>
+                                          <div><span><code style="color:rgb(0,96,0)"><br /></code></span></div>
+                                          <div><span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">ADCSRA |= (1 &lt;&lt; ADEN); </code><span><code style="color:rgb(0,96,0)">   </code></span><code style="color:rgb(0,96,0)">// Enable the ADC</code></div>
+                                          <div>
+                                            <div><span><span><span><span><span><span><code style="color:rgb(0,96,0)">    ADCSRA |= (1 &lt;&lt; ADIE);</code><span><code style="color:rgb(0,96,0)">    // Enable Interrupts </code></span></span></span></span></span></span></span></div>
+                                            <div><span><br /></span></div>
+                                            <div><span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">ADCSRA |= (1 &lt;&lt; ADSC); <span>   </span>// Start the ADC conversion</code></div>
+                                            <div><code style="color:rgb(0,96,0)"><br /></code></div>
+                                            <div><code style="color:rgb(0,96,0)"><span>    sei();<span>    // Thanks N, forgot this the first time =P</span></span></code></div>
+                                          </div>
+                                          <div><br /></div>
+                                          <div><span><span><span><br /></span></span></span></div>
+                                          <div><span><span><span><span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">while (1)</code><br /><span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">{</code><br /><span><code style="color:rgb(0,96,0)">    </code><span><code style="color:rgb(0,96,0)">    // main loop</code></span></span><br /><span><code style="color:rgb(0,96,0)">    </code><span><code style="color:rgb(0,96,0)">    </code></span></span><br /><span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">}</code><br /><code style="color:rgb(0,96,0)">}</code></span></span></span></div>
+                                          <div><span><span><span><br /></span></span></span></div>
+                                          <div><span><span><span><br /></span></span></span></div>
+                                          <div><span><span><span><code style="color:rgb(0,96,0)">ISR(ADC_vect)</code></span></span></span></div>
+                                          <div><span><span><span><code style="color:rgb(0,96,0)">{</code></span></span></span></div>
+                                          <div><span><span><span><span><code style="color:rgb(0,96,0)">    ADCvalue = ADCH;</code><span><code style="color:rgb(0,96,0)">    </code><span><code style="color:rgb(0,96,0)">    <span>  </span>// only need to read the high value for 8 bit</code></span></span></span></span></span></span></div>
+                                          <div><span><span><span><span><span><span><code style="color:rgb(0,96,0)"><span>    // REMEMBER: once ADCH is read the ADC will update</span></code></span></span></span><br /></span></span></span></div>
+                                          <div><span><span><span><span><span><span><code style="color:rgb(0,96,0)"><span><span>    </span></span></code></span></span></span></span></span></span></div>
+                                          <div><span><span><span><span><span><span><code style="color:rgb(0,96,0)"><span><span><span>    </span>// if you need the value of ADCH in multiple spots, read it into a register</span><br /></span></code></span></span></span></span></span></span></div>
+                                          <div><span><span><span><span><span><span><code style="color:rgb(0,96,0)"><span><span><span>    // and use the register and not the ADCH</span><br /></span></span></code></span></span></span></span></span></span></div>
+                                          <div><span><span><span><br /></span></span></span></div>
+                                          <div><span><span><span><code style="color:rgb(0,96,0)">}</code></span></span></span></div>
+                                        </div>
+                                      </span></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><span><i>Changing MUX While In Free Running Mode With Interrupts:</i></span><br /></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><span><span>    The last thing I want to cover is what if you have sensors on ADC0, ADC1 and ADC2 and you want to run in free running mode.  The problem is that you only have 1 ADC and only 1 Interrupt vector. So when a interrupt triggers you need to know what sensor is being read AND you need to switch to the next sensor.  This could all be done in the ISR routine, so I will just post below.   And don't forget to make the Sensor Data Registers volatile.</span></span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><span><span><br /></span></span></span></span></span></span></div>
+                              <div><span><span><span><span><span><span><br /></span></span></span></span></span></span></div>
+                              <div><span><span><span><span><span><span><i>ATmega8 &amp; ATmega168/328 Code:</i></span></span></span></span></span></span></div>
+                              <div></div>
+                              <div class="sites-codeblock sites-codesnippet-block">
+                                <div><span><span><span><span><span><span><code>ISR(ADC_vect)</code></span></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><span><code>{</code></span></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><span><span><code>    uint8_t tmp;</code><span><code>    </code><span><code>    </code><span><code>    </code><span><code>// temp register for storage of misc data</code></span></span></span></span></span></span></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><span><span><br /></span></span></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><span><span>
+                                                <div><span><span><span><span><span><span><span><span><span><span><code>    tmp = ADMUX;</code><span><code>    </code><span><code>    </code><span><code>    // read the value of ADMUX register</code></span></span></span></span><br /></span></span></span></span></span></span></span></span></span></div>
+                                                <div><span><span><span><span><span><span><span><span><span><span><span><span><span><span><code>    tmp &amp;= 0x0F;</code><span><code>    </code><span><code>    </code><span><code>    // AND the first 4 bits (value of ADC pin being used) </code></span></span></span></span><br /></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+                                                <div><br /></div>
+                                              </span></span></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><span><span><span><code>    </code></span><code>ADCvalue = ADCH;</code><span><code>    </code><span><code>    // read the sensor value</code></span></span></span><br /></span></span></span></span></span></span></div>
+                                <div><br /></div>
+                                <div><span><code>    if (tmp == 0)</code></span><br /></div>
+                                <div><span><span><code>    {</code></span><br /></span></div>
+                                <div><span><span><span><code>    </code><span><code>    // put ADCvalue into whatever register you use for ADC0 sensor</code></span></span><br /></span></span></div>
+                                <div><span><span><span><span><span><span><code>    </code><span><code>    ADMUX++;</code><span><code>    </code><span><code>    <span>    </span>// add 1 to ADMUX to go to the next sensor</code></span></span></span></span><br /></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><code>    }</code></span><br /></span></span></span></span></div>
+                                <div><span><code>    </code></span></div>
+                                <div><span><span><code>    </code></span><code>else if (tmp == 1)</code></span><br /></div>
+                                <div><span><span><code>    {</code></span><br /></span></div>
+                                <div><span><span><code>    </code><span><code>    // put ADCvalue into whatever register you use for ADC1 sensor</code></span></span><br /></span></div>
+                                <div><span><span><span><span><span><code>    </code><span><code>    ADMUX++;</code><span><code>    </code><span><code>    <span>    </span>// add 1 to ADMUX to go to the next sensor</code></span></span></span></span><br /></span></span></span></span></div>
+                                <div><span><span><span><span><code>    }</code></span><br /></span></span></span></div>
+                                <div><span><span><code>    else if (tmp == 2)</code></span><br /></span></div>
+                                <div><span><span><span><code>    </code><span><code>    // put ADCvalue into whatever register you use for ADC2 sensor</code></span></span><br /></span></span></div>
+                                <div><span><span><span><span><span><code>    </code><span><code>    ADMUX &amp;= 0xF8; <span>     </span>// clear the last 4 bits to reset the mux to ADC0</code></span></span></span></span></span></span></div>
+                                <div><span><span><span><span><span><span><span><code>    }</code></span><code> </code></span></span></span></span></span></span></div>
+                                <div><code>}</code></div>
+                              </div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><br /></span></span></span></div>
+                              <div><span><span><span><span>    That's it, its over man, that's all I know about ADCs.  It's bed time.</span><br /></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span><br /></span></span></span></span></div>
+                              <div><span><span><span><span>Cheers</span></span></span></span></div>
+                              <div><span><span><span><span>Q</span></span></span></span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            </td>
+            </tr>
+            </table>
+          </div>
+        </div>
+        <div id="sites-chrome-footer-wrapper">
+          <div id="sites-chrome-footer-wrapper-inside">
+            <div id="sites-chrome-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

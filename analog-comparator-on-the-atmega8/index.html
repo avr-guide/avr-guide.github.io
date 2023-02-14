@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/images/apple-touch-icon.png" type="image/png" />
+
+  <meta name="google-site-verification" content="orvQ4DFSfx4CAZweO0v6wepgC6eoAdNyEYQgR82As_0" />
+  <meta name="title" content="Analog Comparator on the ATmega8 - QEEWiki" />
+  <meta itemprop="name" content="Analog Comparator on the ATmega8 - QEEWiki" />
+  <meta property="og:title" content="Analog Comparator on the ATmega8 - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>Analog Comparator on the ATmega8 - QEEWiki</title>
+  <meta itemprop="image" content="/avr-guide/analog-comparator-on-the-atmega8/ATmega8%20-%20Analog%20Comparator.JPG" />
+  <meta property="og:image" content="/avr-guide/analog-comparator-on-the-atmega8/ATmega8%20-%20Analog%20Comparator.JPG" />
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en ">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt; 
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">Analog Comparator on the ATmega8</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr">
+                                <font size="3"><b style="font-family:courier new,monospace">INTRODUCTION:</b></font><br /><br /><span>    </span>The Analog Comparator is a crazy little thing. It compares the value between the AIN0 (Positive) pin and the AIN1 (Negative) pin.  If the voltage on the positive pin is higher then the voltage on the negative pin the ACO bit is set.  The Analog Comparator can also be set to fire the Input Capture Unit.<br /><br /><span>    </span>Personally, I don't really see the point in using the Analog Comparator when you could use the <a href="/avr-guide/analog-input">ADC</a> ... well aside from the fact that the Analog Comparator is much faster then the ADC.<br /><br /><br />
+                                <hr size="2" width="100%" /><br /><br />
+                                <font size="3"><b style="font-family:courier new,monospace">HARDWARE:</b></font><br /><br /><br />
+                                <div style="display:block;text-align:left"><a href="/avr-guide/analog-comparator-on-the-atmega8/ATmega8%20-%20Analog%20Comparator.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/analog-comparator-on-the-atmega8/ATmega8%20-%20Analog%20Comparator.JPG" /></a></div><i><span style="font-family:courier new,monospace">Figure 1: Analog Comparator</span></i><br /><br /><br /><span>    </span>Not really much to say hardware wise, According to the datasheet the maximum current between the 2 pins is 40mA.  The voltage is also limited to to Vcc +0.5 and Vcc - 0.5 like any other pin on the AVR and the difference between the AIN0 and AIN1 pins is Vcc.<br /><br /><br />
+                                <hr size="2" width="100%" /><br /><br />
+                                <font size="3"><b style="font-family:courier new,monospace">THEORY OF OPERATION:</b></font><br /><br /><br />
+                                <div style="display:block;text-align:left"><a href="/avr-guide/analog-comparator-on-the-atmega8/Analog%20Comparator%20ATmega8.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/analog-comparator-on-the-atmega8/Analog%20Comparator%20ATmega8.JPG" /></a></div><i>Figure 2: Analog Comparator Functional Block Diagram</i><br /><br /><br /><span><span>    </span>Remember when I said that the Analog Comparator can be used in order to sense the difference between the positive AIN0 pin and the negative AIN1 pin?  Well we could also use the ADC0-ADC7 pins as the negative inputs.</span>  AIN0 can also be tied to the bandgap reference voltage.  This voltage is typically 1.30 volts and can be used in order to test the Analog Comparator.<br /><br /><br />
+                                <table border="1" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                  <tbody>
+                                    <tr>
+                                      <td style="width:60px;text-align:center"><b> </b></td>
+                                      <td style="width:60px;text-align:center"><b> 7 bit<br /></b></td>
+                                      <td style="width:60px;text-align:center"><b> 6 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>5 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>4 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>3 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>2 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>1 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>0 bit <br /></b></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:60px;text-align:center"><b>SFIOR</b></td>
+                                      <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(238,238,238)">-</td>
+                                      <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(238,238,238)">- <br /></td>
+                                      <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(238,238,238)">- <br /></td>
+                                      <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(238,238,238)">- <br /></td>
+                                      <td style="width:60px;text-align:center">ACME <br /></td>
+                                      <td style="width:60px;text-align:center;background-color:rgb(238,238,238);color:rgb(153,153,153)">PUD <br /></td>
+                                      <td style="width:60px;text-align:center;background-color:rgb(238,238,238);color:rgb(153,153,153)">PSR2 <br /></td>
+                                      <td style="width:60px;text-align:center;background-color:rgb(238,238,238);color:rgb(153,153,153)">PSR10 <br /></td>
+                                    </tr>
+                                  </tbody>
+                                </table><i><span style="font-family:courier new,monospace">Special Function IO Register</span></i><br /><br /><br />
+                                <table border="1" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                  <tbody>
+                                    <tr>
+                                      <td style="width:60px;text-align:center"><b> </b></td>
+                                      <td style="width:60px;text-align:center"><b> 7 bit<br /></b></td>
+                                      <td style="width:60px;text-align:center"><b> 6 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>5 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>4 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>3 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>2 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>1 bit <br /></b></td>
+                                      <td style="width:60px;text-align:center"><b>0 bit <br /></b></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:60px;text-align:center"><b>ACSR</b></td>
+                                      <td style="width:60px;text-align:center;color:rgb(0,0,0);background-color:rgb(255,255,255)">ACD</td>
+                                      <td style="width:60px;text-align:center;color:rgb(0,0,0);background-color:rgb(255,255,255)">ACBG <br /></td>
+                                      <td style="width:60px;text-align:center;color:rgb(0,0,0);background-color:rgb(255,255,255)">ACO <br /></td>
+                                      <td style="width:60px;text-align:center;color:rgb(0,0,0);background-color:rgb(255,255,255)">ACI <br /></td>
+                                      <td style="width:60px;text-align:center;color:rgb(0,0,0);background-color:rgb(255,255,255)">ACIE <br /></td>
+                                      <td style="width:60px;text-align:center;background-color:rgb(255,255,255);color:rgb(0,0,0)">ACIC <br /></td>
+                                      <td style="width:60px;text-align:center;background-color:rgb(255,255,255);color:rgb(0,0,0)">ACIS1 <br /></td>
+                                      <td style="width:60px;text-align:center;background-color:rgb(255,255,255);color:rgb(0,0,0)">ACIS0 <br /></td>
+                                    </tr>
+                                  </tbody>
+                                </table><i><span style="font-family:courier new,monospace">Analog Comparator Control and Status Register</span></i><br /><br /><br />
+                                <div style="margin-left:40px">
+                                  <table border="1" bordercolor="#888888" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                    <tbody>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"><b> ACME</b></td>
+                                        <td style="width:60px;height:16px;text-align:center"><b> ADEN</b></td>
+                                        <td style="width:60px;height:16px;text-align:center"><b> MUX2-0</b></td>
+                                        <td style="width:322px;height:16px;text-align:left"><b> Analog Comparator Negative Input <br /></b></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 0</td>
+                                        <td style="width:60px;height:16px;text-align:center">x</td>
+                                        <td style="width:60px;height:16px;text-align:center">xxx<br /></td>
+                                        <td style="width:322px;height:16px"> AIN1<br /></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 1</td>
+                                        <td style="width:60px;height:16px;text-align:center">1</td>
+                                        <td style="width:60px;height:16px;text-align:center">xxx</td>
+                                        <td style="width:322px;height:16px"> AIN1</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 1</td>
+                                        <td style="width:60px;height:16px;text-align:center">0<br /></td>
+                                        <td style="width:60px;height:16px;text-align:center">000</td>
+                                        <td style="width:322px;height:16px"> ADC0</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 1</td>
+                                        <td style="width:60px;height:16px;text-align:center">0<br /></td>
+                                        <td style="width:60px;height:16px;text-align:center">001</td>
+                                        <td style="width:322px;height:16px"> ADC1</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 1</td>
+                                        <td style="width:60px;height:16px;text-align:center">0<br /></td>
+                                        <td style="width:60px;height:16px;text-align:center">010</td>
+                                        <td style="width:322px;height:16px"> ADC2</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 1</td>
+                                        <td style="width:60px;height:16px;text-align:center">0<br /></td>
+                                        <td style="width:60px;height:16px;text-align:center">011</td>
+                                        <td style="width:322px;height:16px"> ADC3</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 1</td>
+                                        <td style="width:60px;height:16px;text-align:center">0<br /></td>
+                                        <td style="width:60px;height:16px;text-align:center">100</td>
+                                        <td style="width:322px;height:16px"> ADC4</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 1</td>
+                                        <td style="width:60px;height:16px;text-align:center">0<br /></td>
+                                        <td style="width:60px;height:16px;text-align:center">101</td>
+                                        <td style="width:322px;height:16px"> ADC5</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 1</td>
+                                        <td style="width:60px;height:16px;text-align:center">0<br /></td>
+                                        <td style="width:60px;height:16px;text-align:center">110</td>
+                                        <td style="width:322px;height:16px"> ADC6</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="width:60px;height:16px;text-align:center"> 1</td>
+                                        <td style="width:60px;height:16px;text-align:center">0<br /></td>
+                                        <td style="width:60px;height:16px;text-align:center">111</td>
+                                        <td style="width:322px;height:16px"> ADC7</td>
+                                      </tr>
+                                    </tbody>
+                                  </table><i style="font-family:courier new,monospace">Analog Comparator Multiplexed Input</i><br />
+                                </div><br /><br />
+                                <div style="margin-left:40px">
+                                  <table border="1" bordercolor="#888888" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                    <tbody>
+                                      <tr>
+                                        <td style="width:60px;height:16px"><b> ACIS1</b></td>
+                                        <td style="width:60px;height:16px"><b> ACIS0 <br /></b></td>
+                                        <td style="width:387px;height:16px"><b> Interrupt Mode<br /></b></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="text-align:center;width:60px;height:16px">0</td>
+                                        <td style="text-align:center;width:60px;height:16px">0</td>
+                                        <td style="width:387px;height:16px"> Comparator Interrupt on Output Toggle<br /></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="text-align:center;width:60px;height:16px">0</td>
+                                        <td style="text-align:center;width:60px;height:16px">1</td>
+                                        <td style="width:387px;height:16px"> Reserved</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="text-align:center;width:60px;height:16px">1</td>
+                                        <td style="text-align:center;width:60px;height:16px">0</td>
+                                        <td style="width:387px;height:16px"> Comparator Interrupt on Falling Output Edge<br /></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="text-align:center;width:60px;height:16px">1</td>
+                                        <td style="text-align:center;width:60px;height:16px">1</td>
+                                        <td style="width:387px;height:16px"> Comparator Interrupt on Rising Output Edge<br /></td>
+                                      </tr>
+                                    </tbody>
+                                  </table><i><span style="font-family:courier new,monospace">ACIS1/ACIS0 Settings</span></i><br />
+                                </div><br /><span><br /><span>    </span>The ACME bit within the SFIOR register is used<br /></span><br /><br /><br /><br />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="sites-chrome-footer-wrapper">
+            <div id="sites-chrome-footer-wrapper-inside">
+              <div id="sites-chrome-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,1377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+
+  <meta name="google-site-verification" content="orvQ4DFSfx4CAZweO0v6wepgC6eoAdNyEYQgR82As_0" />
+  <meta name="title" content="Timers on the ATmega8 - QEEWiki" />
+  <meta itemprop="name" content="Timers on the ATmega8 - QEEWiki" />
+  <meta property="og:title" content="Timers on the ATmega8 - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/4a6475/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1619893518000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1619893518000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>Timers on the ATmega8 - QEEWiki</title>
+  <meta itemprop="image" content="/avr-guide/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?height=254&amp;width=400" />
+  <meta property="og:image" content="/avr-guide/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?height=254&amp;width=400" />
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt;
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">Timers on the ATmega8</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr">
+                                <div><b style="FONT-WEIGHT:bold;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <font face="'courier new', monospace" size="3">INTRODUCTION:</font>
+                                  </b>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div>
+                                    <font face="Verdana, Helvetica, Arial, sans-serif" size="2" style="FONT-SIZE:medium;FONT-FAMILY:courier new,monospace">   </font>
+                                    <font face="Verdana, Helvetica, Arial, sans-serif"> The timers are the heart of automation. We have seen in previous chapters how we could take in an input, perform mathematical functions on the data and, perform an action. Timers give us an extra level of control by giving us not only control over what happens but when it happens. We can put a time delay on a self destruct in our evil lair, we can control the flash rate of our seizure causing robot and, we could ensure that our death-ray isn't fired before its fully charged.  We have control of time MUA HAHAHAHAHA !!!!</font>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <hr style="BORDER-TOP-WIDTH:0px;BORDER-LEFT-WIDTH:0px;BORDER-BOTTOM-WIDTH:0px;HEIGHT:1px;BACKGROUND-COLOR:rgb(204,204,204);BORDER-RIGHT-WIDTH:0px" />
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span style="FONT-SIZE:medium;FONT-FAMILY:courier new,monospace"><b>THEORY OF OPERATION:</b></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div>
+                                    <div style="DISPLAY:block;FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;TEXT-ALIGN:left"><span>    A quick review of the previous tutorial (<a href="/avr-guide/common-timer-theory">COMMON TIMER/COUNTER THEORY</a>).  The clock source (from the internal clock or an external source) sends pulses to the prescaler which divides the pulses by a determined amount.  This input is sent to the control circuit which increments the TCNTn register.  When the register hits its TOP value it resets to 0 and sends a <span style="COLOR:rgb(0,0,0)">TOVn</span> (timer overflow) signal which could be used to trigger an interrupt. </span><br /></div>
+                                    <div style="DISPLAY:block;FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;TEXT-ALIGN:left"><br /></div>
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left">    Unfortunately, the AVR timer does process time in hours, minutes or seconds (what we are use to).  However, being evil masterminds we have the solution, it just requires a bit of math and our old friend, the prescaler.  <br /></div><br /><br />
+                                    <div style="MARGIN-LEFT:40px"><span style="COLOR:rgb(0,0,255)">OCRn =</span>  <font color="#0000ff">[ (clock_speed / Prescaler_value) * Desired_time_in_Seconds ] - 1<br /></font>
+                                    </div>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><br /><br /></span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><span>    </span>Now for the bad news OCRn has to be a whole number.  If you end up with a decimal number it means that your desired timer will not be exact.  The other thing is that your number has to be able to fit into the register.  So 255 for an 8bit timers and 65535 for the 16bit timer.<br /><br /><br /></span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><br /></span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span>Normal Mode:</span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><br /></span></span></span></div>
+                                  <div>
+                                    <div><span style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">    When t</span>he prescaler receives a pulse from a clock cycle and passes it onto the Control Logic.  The Control Logic increments the TCNTn register by 1.  When TCNTn hits the TOP (0xFF in the 8 bit timers and 0xFFFF in the 16 bit timer) it overflows to 0 and sets the TOVn bit in the TIFR register.  <br /><br /><span>    </span>The problem with Normal Mode is that it is very hard to use for an exact interval, because of this Normal Mode is only useful if you need a none-specific time interval (say you don't care if it happens every 1 or 2 ms as long as it happens at the same time each time) its nice and easy option.  Because, of this limitation many programmers choose to use CTC mode for their timers.<br /></div>
+                                    <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span>CTC Mode:</span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><br /></span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><span style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">    CTC stands for "Clear Timer on Compare" and it does the following.  When t</span>he prescaler receives a pulse from a clock cycle and passes it onto the Control Logic.  The Control Logic increments the TCTn register by 1.  The TCNTn register is compared to the OCRn register, when a compare match occurs the TOVn bit is set in the TIFR register.</span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?attredirects=0" imageanchor="1"><img border="0" height="254" src="/avr-guide/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?height=254&amp;width=400" width="400" /></a></div>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px"><i>
+                                      <font face="'courier new', monospace">Flow 1:  Activating The Timer</font>
+                                    </i></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><br /></span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><br /></span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><span>    The flow diagram above describes how to activate the timer.  More details below.</span><br /></span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><span><br /></span></span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><br />
+                                          <hr style="BORDER-TOP-WIDTH:0px;BORDER-LEFT-WIDTH:0px;BORDER-BOTTOM-WIDTH:0px;HEIGHT:1px;BACKGROUND-COLOR:rgb(204,204,204);BORDER-RIGHT-WIDTH:0px" />
+                                        </span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><br /></span></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span>    </span><br /></span></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div><b>
+                                        <font face="'courier new', monospace" size="3">TIMER0 (8BIT PWM):</font>
+                                      </b></div>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/timer-on-the-atmega8/Timer%20-%20Timer0%20ATmega8.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/timer-on-the-atmega8/Timer%20-%20Timer0%20ATmega8.JPG" /></a></div><i>Figure 1: Timer0 on the ATmega8</i>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div>    Timer0 is fairly neutered counter, it does not have a OCR0 register therefore it is only capable of running in normal mode.  Because of this limitations Timer/Counter0 is rarely used as a timer (it is also why you rarely see tutorials on Timer0 on the internet).<br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span>    TOV0 can generate a Timer Overflow interrupt.  In order to activate the timer0 interrupts you need to SET(1) the TOIE0 bit within the TIMSK register.</span><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div><span>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                          <tbody>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TCCR0</b></td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">FOC0</td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">- </td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">-</td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">-</td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">-</td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> CS02</td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> CS01</td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">CS00 </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="TEXT-ALIGN:left"><i>Timer/Counter Control Register 0</i></div>
+                                      </span></div>
+                                    <div><span><br /></span></div>
+                                    <div><span><br /></span></div>
+                                    <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                      <div>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                          <tbody>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px"><b> CS02</b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px"><b> CS01 </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px"><b> CS00 </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"><b> DESCRIPTION</b></td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px;TEXT-ALIGN:left"> Timer/Counter0 Disabled </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px;TEXT-ALIGN:left"> No Prescaling</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"> Clock / 8</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"> Clock / 64</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1</td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"> Clock / 256</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1</td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"> Clock / 1024</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:362px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> External clock source on T0 pin, Clock on Falling edge</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:52px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1 </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:362px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> External clock source on T0 pin, Clock on rising edge</td>
+                                            </tr>
+                                          </tbody>
+                                        </table><i>CS bits</i>
+                                      </div>
+                                    </blockquote>
+                                  </div>
+                                  <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;FONT-WEIGHT:normal;FONT-SIZE:13px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                    <div>
+                                      <div><br /></div>
+                                    </div>
+                                  </blockquote>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div><br /></div>
+                                    <div>
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                        <tbody>
+                                          <tr>
+                                            <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                            <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                            <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                            <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                            <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                            <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                            <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                            <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                            <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                          </tr>
+                                          <tr>
+                                            <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TIMSK</b></td>
+                                            <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> OCIE2</td>
+                                            <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">TOIE2 </td>
+                                            <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">TICIE1 </td>
+                                            <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCIE1A </td>
+                                            <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCIE1B </td>
+                                            <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> TOIE1</td>
+                                            <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> -</td>
+                                            <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">TOIE0 </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div style="TEXT-ALIGN:left"><i>Timer/Counter Interrupt Mask Register</i></div>
+                                    </div>
+                                    <div style="TEXT-ALIGN:left"><i><br /></i></div>
+                                    <div style="TEXT-ALIGN:left"><i><br /></i></div>
+                                    <div style="TEXT-ALIGN:left"><i><span style="FONT-STYLE:normal">
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                            <tbody>
+                                              <tr>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TIFR</b></td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> OCF2</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">TOV2 </td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">ICF1 </td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCF1A </td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCF1B </td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> TOV1</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> -</td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">TOV0 </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          <div style="TEXT-ALIGN:left"><i>Timer/Counter Interrupt Flag Register</i></div>
+                                        </span></i></div>
+                                    <div><br /></div>
+                                    <div><br /></div>
+                                    <div><i>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);FONT-STYLE:normal;BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                          <tbody>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TCNT0</b></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="FONT-STYLE:normal;TEXT-ALIGN:left"><i>Timer/Counter Register (stores the counter value)</i></div>
+                                        <div><br /><span>    </span><br /><br />Software:<br /></div>
+                                        <div><br /></div>
+                                      </i></div>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div><i>ATmega8 Code:</i><br /></div>
+                                    <div class="sites-codeblock sites-codesnippet-block" style="BORDER-RIGHT:rgb(211,211,211) 1px solid;PADDING-RIGHT:0px;BORDER-TOP:rgb(211,211,211) 1px solid;DISPLAY:block;PADDING-LEFT:1em;PADDING-BOTTOM:0.5em;BORDER-LEFT:rgb(211,211,211) 1px solid;LINE-HEIGHT:13px;PADDING-TOP:0.5em;BORDER-BOTTOM:rgb(211,211,211) 1px solid;BACKGROUND-COLOR:rgb(239,239,239)">
+                                      <div><code style="COLOR:rgb(0,96,0)">// this code sets up a timer0 for 1ms @ 16Mhz clock cycle<br />// in order to function as a time delay at the begining of the main loop<br />// NOTE:<span>    </span>1ms = 0xF9 but we are going 0xFF, so we are actually creating a<br />// <span>    </span><span>    </span> 1.024ms timer.<br /></code><br /><br /><code style="COLOR:rgb(0,96,0)">#include &lt;avr/io.h&gt;</code><br /><br /><br /><code style="COLOR:rgb(0,96,0)">int main(void)</code><br /><code style="COLOR:rgb(0,96,0)">{</code><br /><br /></div>
+                                      <div></div>
+                                      <div><code style="COLOR:rgb(0,96,0)"><span>    </span>while (1)</code><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>{</code><br /><code style="COLOR:rgb(0,96,0)"><span><br /><span><span>    </span><span>    </span>// start the timer</span><span><br /></span></span></code>
+                                        <div><code style="COLOR:rgb(0,96,0)"><span><span>    </span>    </span>TCCR0 |= (1 &lt;&lt; CS01) | (1 &lt;&lt; CS00);</code><br /><code style="COLOR:rgb(0,96,0)"><span>    <span>    </span></span>// set prescaler to 64 and start the timer<br /><br /></code></div><code style="COLOR:rgb(0,96,0)"><span><span><span><span>    </span><span>    </span>while</span></span></span> ( (TIFR &amp; (1 &lt;&lt; TOV0) ) &gt; 0)<span>    </span><span>    </span>// wait for the overflow event<br /><span>    </span><span>    </span>{<span><br /><span>    </span><span>    </span>}<br /><span>    </span><span>    </span><br /><span>    </span><span>    </span>TIFR |= (1 &lt;&lt; TOV0);<br /><span>    </span><span>    </span>// reset the overflow flag</span><span><br /></span></code>
+                                      </div>
+                                      <div><code style="COLOR:rgb(0,96,0)"><span><br />    </span>}</code><br /><code style="COLOR:rgb(0,96,0)">}</code></div>
+                                    </div>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br />
+                                    <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                      <div><i>ATmega8 Code:</i><br /></div>
+                                      <div class="sites-codeblock sites-codesnippet-block" style="BORDER-RIGHT:rgb(211,211,211) 1px solid;PADDING-RIGHT:0px;BORDER-TOP:rgb(211,211,211) 1px solid;DISPLAY:block;PADDING-LEFT:1em;PADDING-BOTTOM:0.5em;BORDER-LEFT:rgb(211,211,211) 1px solid;LINE-HEIGHT:13px;PADDING-TOP:0.5em;BORDER-BOTTOM:rgb(211,211,211) 1px solid;BACKGROUND-COLOR:rgb(239,239,239)">
+                                        <div><code style="COLOR:rgb(0,96,0)">// this code sets up a timer0 for 4ms @ 16Mhz clock cycle<br />// an interrupt is triggered each time the interval occurs.<br /><br /></code><br /><br /><code style="COLOR:rgb(0,96,0)">#include &lt;avr/io.h&gt; <br /></code><span><span><code>#include &lt;avr/interrupt.h&gt;</code></span></span><br /><br /><br /><code style="COLOR:rgb(0,96,0)">int main(void)</code><br /><code style="COLOR:rgb(0,96,0)">{<span><span><br /><span><span>    </span>TIMSK |= (1 &lt;&lt; TOIE0);<br /><br />    </span></span></span></code><span><span><code>sei();</code><span><code>    </code></span><span><code>     </code></span><code>//enable interrupts</code></span></span><br /><code style="COLOR:rgb(0,96,0)"><span><span><br /><br />    </span></span>TCCR0 |= (1 &lt;&lt; CS02);</code><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>// set prescaler to 256 and start the timer<br /></code><br /><br /></div>
+                                        <div><code style="COLOR:rgb(0,96,0)"><span>    </span>while (1)</code><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>{<br /><span>    </span><span>    </span>//main loop</code><code style="COLOR:rgb(0,96,0)"><br /></code></div>
+                                        <div><code style="COLOR:rgb(0,96,0)"><span>    </span>}</code><br /><code style="COLOR:rgb(0,96,0)">}<br /><br /><br /></code><code>ISR (TIMER0_OVF_vect)</code><span><code>  </code></span><code>// timer0 overflow interrupt</code><br /><code>{</code><br /><span><code>    // </code></span><code>event to be exicuted every 4ms here</code><br /><code>}</code><br /></div>
+                                      </div>
+                                    </div><span><br /><br /><br /><i>Normal Mode to CTC Mode Work Around:</i><br /><br /><span>    </span>There is an interesting work around for timer/counter0 limitations.  Say we want to counter to count to 1ms, in the first example we just lived with the fact that our 1ms timer was actually a 1.024ms timer.</span>  In order to get a true 1ms we need to count to 0xF9, which is only 6 lower then the max.  So what we need to do is add 6 to the register when it overflows to 0.  Of course this isn't needed if we have a timer with a CTC mode.<br /><br /><br />
+                                    <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                      <div><i>ATmega8 Code:</i><br /></div>
+                                      <div class="sites-codeblock sites-codesnippet-block" style="BORDER-RIGHT:rgb(211,211,211) 1px solid;PADDING-RIGHT:0px;BORDER-TOP:rgb(211,211,211) 1px solid;DISPLAY:block;PADDING-LEFT:1em;PADDING-BOTTOM:0.5em;BORDER-LEFT:rgb(211,211,211) 1px solid;LINE-HEIGHT:13px;PADDING-TOP:0.5em;BORDER-BOTTOM:rgb(211,211,211) 1px solid;BACKGROUND-COLOR:rgb(239,239,239)">
+                                        <div><code style="COLOR:rgb(0,96,0)">// this code sets up a timer1 for a TRUE 1ms @ 16Mhz clock cycle<br />// an interrupt is triggered each time the interval occurs.<br /><br /></code><br /><br /><code style="COLOR:rgb(0,96,0)">#include &lt;avr/io.h&gt; <br /></code><span><span><code>#include &lt;avr/interrupt.h&gt;</code></span></span><br /><br /><br /><code style="COLOR:rgb(0,96,0)">int main(void)</code><br /><code style="COLOR:rgb(0,96,0)">{<span><span><br /><span><span>    </span>TIMSK |= (1 &lt;&lt; TOIE0);<br /><br />    </span></span></span></code><span><span><code>sei();</code><span><code>    </code></span><span><code>     </code></span><code><br /><span>    </span>//enable interrupts</code></span></span><br /><code style="COLOR:rgb(0,96,0)"><span><span><br /><br /></span></span></code><code style="COLOR:rgb(0,96,0)"><span><span>   </span> </span>TCCR0 |= (1 &lt;&lt; CS01) | (1 &lt;&lt; CS00);</code><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>// set prescaler to 64 and start the timer</code><code style="COLOR:rgb(0,96,0)"><br /></code><br /><br /></div>
+                                        <div><code style="COLOR:rgb(0,96,0)"><span>    </span>while (1)</code><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>{<br /><span>    </span><span>    </span>//main loop</code><code style="COLOR:rgb(0,96,0)"><br /></code></div>
+                                        <div><code style="COLOR:rgb(0,96,0)"><span>    </span>}</code><br /><code style="COLOR:rgb(0,96,0)">}<br /><br /><br /></code><code>ISR (TIMER0_OVF_vect)</code><span><code>  </code></span><code>// timer0 overflow interrupt</code><br /><code>{</code><br /><span><code>    TCNT0 += 6;<br /><span>    </span>// add 6 to the register (our work around)</code></span><br /><code>}</code><br /></div>
+                                      </div>
+                                    </div><span><br /></span><br /><br />
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <hr style="BORDER-TOP-WIDTH:0px;BORDER-LEFT-WIDTH:0px;BORDER-BOTTOM-WIDTH:0px;HEIGHT:1px;BACKGROUND-COLOR:rgb(204,204,204);BORDER-RIGHT-WIDTH:0px" />
+                                    <br />
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><b>
+                                      <font face="'courier new', monospace" size="3"><br /></font>
+                                    </b></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><b>
+                                      <font face="'courier new', monospace" size="3">TIMER1 (16BIT PWM):</font>
+                                    </b></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/timer-on-the-atmega8/ATmega8%20-%20Timer1.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/timer-on-the-atmega8/ATmega8%20-%20Timer1.JPG" /></a></div><i>Figure 2: Timer1 on the ATmega8</i>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><br /></div>
+                                  </div>
+                                  <div style="DISPLAY:block;FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;TEXT-ALIGN:left"><span>    </span>Timer/Counter1 is the big daddy of timers.  It can run in Normal mode (0xFFFF) and 2 CTC modes.  The difference between the 2 CTC modes that mode 4 uses the OCR1A register for its compare value and mode 12 uses the ICR1 register.<br /><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span>    In normal mode TOV1 can generate a Overflow interrupt.  In order to activate the timer1 overflow interrupts you need to SET(1) the TOIE1 bit within the TIMSK register.<br /><br /><span>    </span>In CTC (mode 4) mode OCIF1A can generate an interrupt when it detects a compare match.  In order to activate the timer1 CTC interrupt SET(1) the OCF1A bit within the TIMSK register.</span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><br /></span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span>    </span>In CTC (mode 12) mode TICIE1 can generate an interrupt when it detects a compare match.  In order to activate the timer1 CTC interrupt SET(1) the TICIE1 bit within the TIMSK register.</span></div>
+                                      <div><span><br /></span></div><br />
+                                    </span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div>
+                                      <div><span>
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                            <tbody>
+                                              <tr>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"><b>TCCR1A</b></td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">COM1A1</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">COM1A0</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">COM1B1</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">COM1B0</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">FOC1A</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center"> FOC1B</td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> WGM11</td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">WGM10 </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          <div style="TEXT-ALIGN:left"><i>Timer/Counter Control Register 1 A</i></div>
+                                        </span></div>
+                                      <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                        <div><br /></div>
+                                      </blockquote>
+                                    </div>
+                                    <div>
+                                      <div><br /></div>
+                                      <div>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                          <tbody>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"><b>TCCR1B</b></td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">ICNC1</td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">ICES1</td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">-</td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">WGM13</td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">WGM12</td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> CS12</td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> CS11</td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">CS10 </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="TEXT-ALIGN:left"><i>Timer/Counter Control Register 1 B</i></div>
+                                      </div>
+                                      <div><br /></div>
+                                      <div><br /></div>
+                                      <div>
+                                        <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                          <div>
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:15px"><b> CS12</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:15px"><b> CS11 </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:15px"><b> CS10 </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:365px;HEIGHT:15px"><b> DESCRIPTION</b></td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:365px;HEIGHT:15px;TEXT-ALIGN:left"> Timer/Counter1 Disabled </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:365px;HEIGHT:15px;TEXT-ALIGN:left"> No Prescaling</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top"> Clock / 8</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top"> Clock / 64</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top"> Clock / 256</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top"> Clock / 1024</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:365px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> External clock source on T1 pin, Clock on Falling edge</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:365px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> External clock source on T1 pin, Clock on rising edge</td>
+                                                </tr>
+                                              </tbody>
+                                            </table><i>CS bits</i>
+                                          </div>
+                                          <div><i><br /></i></div>
+                                        </blockquote>
+                                      </div>
+                                      <div><br /></div>
+                                      <div>
+                                        <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                          <div>
+                                            <div>
+                                              <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                                <tbody>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:50px;HEIGHT:15px"><b> MODE</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:58px;HEIGHT:15px"><b>WGM13</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:56px;HEIGHT:15px"><b>WGM12</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;HEIGHT:15px"><b>WGM11</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;HEIGHT:15px"><b>WGM10</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:267px;HEIGHT:15px"><b> DESCRIPTION</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:60px"> <b>TOP</b></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:50px;COLOR:rgb(0,0,0);HEIGHT:15px;BACKGROUND-COLOR:rgb(255,255,255);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:58px;COLOR:rgb(0,0,0);HEIGHT:15px;BACKGROUND-COLOR:rgb(255,255,255);TEXT-ALIGN:center"> 0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:56px;COLOR:rgb(0,0,0);HEIGHT:15px;BACKGROUND-COLOR:rgb(255,255,255);TEXT-ALIGN:center"> 0 </td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;COLOR:rgb(0,0,0);HEIGHT:15px;BACKGROUND-COLOR:rgb(255,255,255);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;COLOR:rgb(0,0,0);HEIGHT:15px;BACKGROUND-COLOR:rgb(255,255,255);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:267px;COLOR:rgb(0,0,0);HEIGHT:15px;BACKGROUND-COLOR:rgb(255,255,255);TEXT-ALIGN:left"> Normal </td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:60px;COLOR:rgb(0,0,0);BACKGROUND-COLOR:rgb(255,255,255)"> 0xFFFF</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:50px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:58px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:56px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:267px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> PWM, Phase Corrected, 8bit</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:60px;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243)"> 0x00FF</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:50px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">2</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:58px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:56px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:267px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> PWM, Phase Corrected, 9bit</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:60px;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243)"> 0x01FF</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:50px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">3</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:58px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:56px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:53px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:267px;COLOR:rgb(153,153,153);HEIGHT:15px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> PWM, Phase Corrected, 10bit </td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:60px;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0x03FF </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="TEXT-ALIGN:center">4</td>
+                                                    <td style="TEXT-ALIGN:center">0</td>
+                                                    <td style="TEXT-ALIGN:center">1<br /></td>
+                                                    <td style="TEXT-ALIGN:center">0<br /></td>
+                                                    <td style="TEXT-ALIGN:center">0<br /></td>
+                                                    <td> CTC</td>
+                                                    <td style="TEXT-ALIGN:center"> OCR1A <br /></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">5</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> Fast PWM, 8bit </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0x00FF </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">6</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> Fast PWM, 9bit </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0x01FF </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">7</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> Fast PWM, 10bit </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0x03FF </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">8</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> PWM, Phase and Frequency Corrected </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">ICR1 </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">9</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> PWM, Phase and Frequency Corrected </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCR1A </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">10</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> PWM, Phase Correct </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">ICR1 </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">11</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> PWM, Phase Correct </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> OCR1A</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="TEXT-ALIGN:center">12</td>
+                                                    <td style="TEXT-ALIGN:center">1</td>
+                                                    <td style="TEXT-ALIGN:center">1<br /></td>
+                                                    <td style="TEXT-ALIGN:center">0<br /></td>
+                                                    <td style="TEXT-ALIGN:center">0<br /></td>
+                                                    <td style="TEXT-ALIGN:left"> CTC</td>
+                                                    <td style="TEXT-ALIGN:center"> ICR1</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">13</td>
+                                                    <td style="COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">1</td>
+                                                    <td style="COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">1</td>
+                                                    <td style="COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">0</td>
+                                                    <td style="COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">1</td>
+                                                    <td style="COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238)"> RESERVED</td>
+                                                    <td style="COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238)"> </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">14</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:left"> Fast PWM </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">ICR1 </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">15</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243)"> Fast PWM</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCR1A </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </blockquote>
+                                        <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                          <div>
+                                            <div><i>Waveform Generator Mode bits</i></div>
+                                          </div>
+                                        </blockquote>
+                                      </div>
+                                      <div><br /></div>
+                                      <div><br /></div>
+                                      <div><br /></div>
+                                      <div>
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                          <tbody>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TIMSK</b></td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> OCIE2</td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">TOIE2 </td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">TICIE1</td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">OCIE1A</td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">
+                                                <font style="BACKGROUND-COLOR:rgb(238,238,238)">OCIE1B</font>
+                                              </td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> TOIE1</td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> -</td>
+                                              <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">TOIE0 </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="TEXT-ALIGN:left"><i>Timer/Counter Interrupt Mask Register</i></div>
+                                      </div>
+                                      <div style="TEXT-ALIGN:left"><i><br /></i></div>
+                                      <div style="TEXT-ALIGN:left"><i><br /></i></div>
+                                      <div style="TEXT-ALIGN:left"><i><span style="FONT-STYLE:normal">
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TIFR</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> OCF2</td>
+                                                  <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">TOV2 </td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><span style="BACKGROUND-COLOR:rgb(255,255,255)">ICF1</span></td>
+                                                  <td style="VERTICAL-ALIGN:top;COLOR:rgb(0,0,0);BACKGROUND-COLOR:rgb(255,255,255);TEXT-ALIGN:center">OCF1A</td>
+                                                  <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:center">OCF1B</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">
+                                                    <font color="#666666"> </font>TOV1
+                                                  </td>
+                                                  <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> -</td>
+                                                  <td style="VERTICAL-ALIGN:top;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">
+                                                    <font color="#999999">TOV0</font> 
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <div style="TEXT-ALIGN:left"><i>Timer/Counter Interrupt Flag Register</i></div>
+                                          </span></i></div>
+                                      <div><br /></div>
+                                      <div><br /></div>
+                                      <div><i><span style="FONT-STYLE:normal">
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"><b>TCNT1H</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top"><b>TCNT1L</b></td>
+                                                  <td style="VERTICAL-ALIGN:top"> </td>
+                                                  <td style="VERTICAL-ALIGN:top"> </td>
+                                                  <td style="VERTICAL-ALIGN:top"> </td>
+                                                  <td style="VERTICAL-ALIGN:top"> </td>
+                                                  <td style="VERTICAL-ALIGN:top"> </td>
+                                                  <td style="VERTICAL-ALIGN:top"> </td>
+                                                  <td style="VERTICAL-ALIGN:top"> </td>
+                                                  <td style="VERTICAL-ALIGN:top"> </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <div style="TEXT-ALIGN:left"><i>Timer/Counter Register (stores the counter value, 16 bit)</i></div>
+                                            <div><i><br /></i></div>
+                                            <div><i><br /></i></div>
+                                          </span></i></div>
+                                    </div>
+                                    <div><i><span style="FONT-STYLE:normal">
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                            <tbody>
+                                              <tr>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"><b>OCR1AH</b></td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="VERTICAL-ALIGN:top"><b>OCR1AL</b></td>
+                                                <td style="VERTICAL-ALIGN:top"> </td>
+                                                <td style="VERTICAL-ALIGN:top"> </td>
+                                                <td style="VERTICAL-ALIGN:top"> </td>
+                                                <td style="VERTICAL-ALIGN:top"> </td>
+                                                <td style="VERTICAL-ALIGN:top"> </td>
+                                                <td style="VERTICAL-ALIGN:top"> </td>
+                                                <td style="VERTICAL-ALIGN:top"> </td>
+                                                <td style="VERTICAL-ALIGN:top"> </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          <div style="TEXT-ALIGN:left"><i>Output Compare Register A (stores the compare value, 16 bit)</i></div>
+                                        </span></i></div>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><i><span style="FONT-STYLE:normal">
+                                        <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                          <tbody>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                              <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"><b>ICR1</b></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                              <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="VERTICAL-ALIGN:top"><b>ICR1</b></td>
+                                              <td style="VERTICAL-ALIGN:top"> </td>
+                                              <td style="VERTICAL-ALIGN:top"> </td>
+                                              <td style="VERTICAL-ALIGN:top"> </td>
+                                              <td style="VERTICAL-ALIGN:top"> </td>
+                                              <td style="VERTICAL-ALIGN:top"> </td>
+                                              <td style="VERTICAL-ALIGN:top"> </td>
+                                              <td style="VERTICAL-ALIGN:top"> </td>
+                                              <td style="VERTICAL-ALIGN:top"> </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <div style="TEXT-ALIGN:left"><i>Input Compare Register (can be used to stores the compare value, 16 bit)</i></div>
+                                      </span></i></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /><i><i>Software:</i></i><br /><br /><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px">
+                                    <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><i>ATmega8 Code:</i><br /></div>
+                                    <div class="sites-codeblock sites-codesnippet-block" style="BORDER-RIGHT:rgb(211,211,211) 1px solid;PADDING-RIGHT:0px;BORDER-TOP:rgb(211,211,211) 1px solid;DISPLAY:block;PADDING-LEFT:1em;PADDING-BOTTOM:0.5em;BORDER-LEFT:rgb(211,211,211) 1px solid;LINE-HEIGHT:13px;PADDING-TOP:0.5em;BORDER-BOTTOM:rgb(211,211,211) 1px solid;BACKGROUND-COLOR:rgb(239,239,239)">
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)">// this code sets up timer1 for a 1s  @ 16Mhz Clock (mode 4)</code><br /><br /><br /><code style="COLOR:rgb(0,96,0)">#include &lt;avr/io.h&gt;</code><br /><span style="COLOR:rgb(0,96,0);FONT-FAMILY:monospace">#include &lt;avr/interrupt.h&gt;</span></div>
+                                      <div>
+                                        <font color="#006000" face="monospace"><br /></font><br /><code style="COLOR:rgb(0,96,0);FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">int main(void)</code><br /><code style="COLOR:rgb(0,96,0);FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">{</code>
+                                      </div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                        <font color="#006000" face="monospace"><span>    OCR1A = 15624;</span></font>
+                                      </div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                        <font color="#006000" face="monospace"><span><br /></span></font>
+                                      </div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)"><span><span>    TCCR1B |= (1 &lt;&lt; WGM12);</span><br /></span></code></div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)"><span><span><span>    // Mode 4, CTC on OCR1A</span><br /></span></span></code></div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br />
+                                        <font color="#006000" face="monospace"><span><span>    </span>TIMSK |= (1 &lt;&lt;</span> OCIE1A);<br /><span>    </span>//Set interrupt on compare match</font><br /><br />
+                                      </div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)"><span>    </span>TCCR1B |= (1 &lt;&lt; CS12) | (1 &lt;&lt; CS10);</code><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>// set prescaler to 1024 and start the timer<br /><br /></code><code style="COLOR:rgb(0,96,0)"><br /><span>    </span>sei();<br /><span>    </span>// enable interrupts<br /></code></div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>while (1);</code><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>{</code><br /><code style="COLOR:rgb(0,96,0)"><span>    <span>    </span></span>// we have a working Timer</code></div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)"><span>    </span>}</code><br /><code style="COLOR:rgb(0,96,0)">}<br /><br />ISR (TIMER1_COMPA_vect)<br />{<br /><span>    // action to be done every 1 sec</span><br />}<br /></code></div>
+                                    </div>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                    <div style="FONT-WEIGHT:normal;FONT-SIZE:13px">
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><i>ATmega8 Code:</i><br /></div>
+                                      <div class="sites-codeblock sites-codesnippet-block" style="BORDER-RIGHT:rgb(211,211,211) 1px solid;PADDING-RIGHT:0px;BORDER-TOP:rgb(211,211,211) 1px solid;DISPLAY:block;PADDING-LEFT:1em;PADDING-BOTTOM:0.5em;BORDER-LEFT:rgb(211,211,211) 1px solid;LINE-HEIGHT:13px;PADDING-TOP:0.5em;BORDER-BOTTOM:rgb(211,211,211) 1px solid;BACKGROUND-COLOR:rgb(239,239,239)">
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)">// this code sets up timer1 for a 200ms  @ 16Mhz Clock (Mode 12)</code><br /><br /><br /><code style="COLOR:rgb(0,96,0)">#include &lt;avr/io.h&gt;</code><br /><span style="COLOR:rgb(0,96,0);FONT-FAMILY:monospace">#include &lt;avr/interrupt.h&gt;</span></div>
+                                        <div>
+                                          <font color="#006000" face="monospace"><br /></font><br /><code style="COLOR:rgb(0,96,0);FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">int main(void)</code><br /><code style="COLOR:rgb(0,96,0);FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">{</code>
+                                        </div>
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                          <font color="#006000" face="monospace"><span>    ICR1 = 12499;</span></font>
+                                        </div>
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                          <font color="#006000" face="monospace"><span><br /></span></font>
+                                        </div>
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)"><span><span>    TCCR1B |= (1 &lt;&lt; WGM13)| (1 &lt;&lt; WGM12);</span><br /></span></code></div>
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)"><span><span><span>    // Mode 12, CTC on ICR1</span><br /></span></span></code></div>
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br />
+                                          <font color="#006000" face="monospace"><span><span>    </span>TIMSK |= (1 &lt;&lt;</span> TICIE1);<br /><span>    </span>//Set interrupt on compare match</font><br /><br />
+                                        </div>
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)"><span>    </span>TCCR1B |= (1 &lt;&lt; CS12);</code><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>// set prescaler to 256 and starts the timer<br /><br /></code><code style="COLOR:rgb(0,96,0)"><br /><span>    </span>sei();<br /><span>    </span>// enable interrupts<br /></code></div>
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>while (1)</code><br /><code style="COLOR:rgb(0,96,0)"><span>    </span>{</code><br /><code style="COLOR:rgb(0,96,0)"><span>    <span>    </span></span>// we have a working Timer</code></div>
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)"><span>    </span>}</code><br /><code style="COLOR:rgb(0,96,0)">}<br /><br />ISR (</code><span style="COLOR:rgb(0,96,0);FONT-FAMILY:monospace">TIMER1_COMPA_vect</span><span style="COLOR:rgb(0,96,0);FONT-FAMILY:monospace">)</span></div>
+                                        <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code style="COLOR:rgb(0,96,0)">{<br /><span>    // action to be done every 200ms</span><br />}<br /></code></div>
+                                        <div><code style="COLOR:rgb(0,96,0)"><br /></code></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br />
+                                    <hr />
+                                  </div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                  <div style="FONT-WEIGHT:bold;FONT-SIZE:medium;FONT-FAMILY:courier new,monospace"><b>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span style="FONT-SIZE:medium;FONT-FAMILY:courier new,monospace"><b><span style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                              <div style="DISPLAY:inline!important"><span style="FONT-SIZE:medium;FONT-FAMILY:courier new,monospace"><b><span style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                                      <div style="DISPLAY:inline!important">
+                                                        <div style="DISPLAY:inline!important"><b>
+                                                            <font face="'courier new', monospace" size="3">TIMER2 (8BIT PWM):</font>
+                                                          </b></div>
+                                                      </div>
+                                                    </span></b></span></div>
+                                            </span></b></span></div>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                        <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/timer-on-the-atmega8/ATmega8%20-%20Timer2.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/timer-on-the-atmega8/ATmega8%20-%20Timer2.JPG" /></a></div><i>Figure 3: Timer2 on the ATmega8</i>
+                                      </div>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                        <div style="DISPLAY:block;FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;TEXT-ALIGN:left"><span>    </span>Timer/Counter2 is the preferred timer among programmers for short time delays.  It can run in Normal mode (0xFF) or CTC modes.<br /><br /></div><span>    In normal mode TOV2 can generate a Overflow interrupt.  In order to activate the timer1 overflow interrupts you need to SET(1) the TOIE2 bit within the TIMSK register.<br /><br /><span>    </span>In CTC mode OCIF2 can generate an interrupt when it detects a compare match.  In order to activate the timer1 CTC interrupt SET(1) the OCF2 bit within the TIMSK register.<br /></span><br />
+                                      </div>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                        <div><span>
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TCCR2</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">FOC2</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">WGM21</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">COM21</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">COM20</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">WGM20</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> CS22</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> CS21</td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">CS20 </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <div style="TEXT-ALIGN:left"><i>Timer/Counter Control Register 2</i></div>
+                                          </span></div>
+                                        <div><span><br /></span></div>
+                                        <div><span><br /></span></div>
+                                        <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                          <div>
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px"><b> CS22</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px"><b> CS21 </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px"><b> CS20 </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"><b> DESCRIPTION</b></td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px;TEXT-ALIGN:left"> Timer/Counter2 Disabled </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px;TEXT-ALIGN:left"> No Prescaling</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"> Clock / 8</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"> Clock / 32</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"> Clock / 64</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px"> Clock / 128</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:15px;TEXT-ALIGN:center">0 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:15px;TEXT-ALIGN:left"> Clock / 256</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:16px;TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:16px;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:16px;TEXT-ALIGN:center">1 </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:362px;HEIGHT:16px;TEXT-ALIGN:left"> Clock / 1024 </td>
+                                                </tr>
+                                              </tbody>
+                                            </table><i>CS bits</i>
+                                          </div>
+                                        </blockquote>
+                                        <div><br /></div>
+                                        <div><br /></div>
+                                      </div>
+                                      <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;FONT-WEIGHT:normal;FONT-SIZE:13px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                        <div>
+                                          <div>
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:16px"><b> MODE</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:16px"><b>WGM21</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:16px"><b>WGM20</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:296px;HEIGHT:16px"><b> DESCRIPTION</b></td>
+                                                  <td style="WIDTH:60px;HEIGHT:16px;TEXT-ALIGN:center">TOP</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:16px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:16px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:16px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:296px;HEIGHT:16px;TEXT-ALIGN:left"> Normal </td>
+                                                  <td style="WIDTH:60px;HEIGHT:16px;TEXT-ALIGN:center"> 0xFF</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:296px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:left"> PWM Phase Corrected</td>
+                                                  <td style="WIDTH:60px;HEIGHT:16px;BACKGROUND-COLOR:rgb(238,238,238)"> </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;HEIGHT:16px;TEXT-ALIGN:center">2</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:16px;TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;HEIGHT:16px;TEXT-ALIGN:center">0</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:296px;HEIGHT:16px;TEXT-ALIGN:left"> CTC</td>
+                                                  <td style="WIDTH:60px;HEIGHT:16px;TEXT-ALIGN:center">OCR2</td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:52px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">3</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:54px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:296px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(238,238,238);TEXT-ALIGN:left"> Fast PWM </td>
+                                                  <td style="WIDTH:60px;HEIGHT:16px;BACKGROUND-COLOR:rgb(238,238,238)"> </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                      </blockquote>
+                                      <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;FONT-WEIGHT:normal;FONT-SIZE:13px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                        <div>
+                                          <div><i>Waveform Generator Mode bits</i></div>
+                                        </div>
+                                      </blockquote>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                        <div><br /></div>
+                                      </div>
+                                      <blockquote style="PADDING-RIGHT:0px;PADDING-LEFT:0px;FONT-WEIGHT:normal;FONT-SIZE:13px;PADDING-BOTTOM:0px;MARGIN:0px 0px 0px 40px;BORDER-TOP-STYLE:none;PADDING-TOP:0px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;BORDER-RIGHT-STYLE:none;BORDER-LEFT-STYLE:none;BORDER-BOTTOM-STYLE:none">
+                                        <div>
+                                          <div></div>
+                                        </div>
+                                      </blockquote>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                        <div><br /></div>
+                                        <div>
+                                          <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                            <tbody>
+                                              <tr>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TIMSK</b></td>
+                                                <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> OCIE2</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(0,0,0);TEXT-ALIGN:center">TOIE2 </td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">TICIE1 </td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCIE1A </td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCIE1B </td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> TOIE1</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> -</td>
+                                                <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">TOIE0 </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          <div style="TEXT-ALIGN:left"><i>Timer/Counter Interrupt Mask Register</i></div>
+                                        </div>
+                                        <div style="TEXT-ALIGN:left"><i><br /></i></div>
+                                        <div style="TEXT-ALIGN:left"><i><br /></i></div>
+                                        <div style="TEXT-ALIGN:left"><i><span style="FONT-STYLE:normal">
+                                              <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                                <tbody>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TIFR</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(255,255,255);TEXT-ALIGN:center"> <span style="COLOR:rgb(0,0,0)">OCF2</span></td>
+                                                    <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center">TOV2<font color="#666666"> </font>
+                                                    </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">ICF1 </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCF1A </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">OCF1B </td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> TOV1</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center"> -</td>
+                                                    <td style="VERTICAL-ALIGN:top;COLOR:rgb(153,153,153);BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">TOV0 </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                              <div style="TEXT-ALIGN:left"><i>Timer/Counter Interrupt Flag Register</i></div>
+                                            </span></i></div>
+                                        <div><br /></div>
+                                        <div><br /></div>
+                                        <div><i><span style="FONT-STYLE:normal">
+                                              <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                                <tbody>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                    <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>TCNT2</b></td>
+                                                    <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                                    <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                    <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                    <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                    <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                    <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                    <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                    <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                              <div style="TEXT-ALIGN:left"><i>Timer/Counter Register (stores the counter value)</i></div>
+                                              <div><i><br /></i></div>
+                                              <div><i><br /></i></div>
+                                            </span></i></div>
+                                      </div>
+                                      <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><i><span style="FONT-STYLE:normal">
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);MARGIN:0px;BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;TEXT-ALIGN:center;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;HEIGHT:15px;TEXT-ALIGN:center"> </td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 7 bit</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 6 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 5 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 4 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 3 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 2 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 1 bit </b></td>
+                                                  <td style="VERTICAL-ALIGN:top;WIDTH:59px;TEXT-ALIGN:center"><b> 0 bit</b> </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="VERTICAL-ALIGN:top;HEIGHT:15px;TEXT-ALIGN:center"> <b>OCR2</b></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"><br /></td>
+                                                  <td style="VERTICAL-ALIGN:top;TEXT-ALIGN:center"> </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <div style="TEXT-ALIGN:left"><i>Output Compare Register (stores the compare value)</i></div>
+                                            <div><i><br /><br /></i><i><i>Software:</i></i><br /></div>
+                                          </span></i></div>
+                                    </b></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><br /></span>
+                                    <div></div>
+                                  </div>
+                                  <div class="sites-codeblock sites-codesnippet-block">
+                                    <div style="FONT-WEIGHT:normal;FONT-SIZE:13px">
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code>// this code sets up timer2 for a 250us  @ 16Mhz Clock</code><br /><br /><br /><code>#include &lt;avr/io.h&gt;</code></div>
+                                      <div>
+                                        <font color="#006000" face="monospace">#include &lt;avr/interrupt.h&gt;<br /></font><br /><br /><code style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">int main(void)</code><br /><code style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">{</code>
+                                      </div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                        <font color="#006000" face="monospace"><span><code>    OCR2 = 62;</code></span></font>
+                                      </div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                        <font color="#006000" face="monospace"><span><br /></span></font>
+                                      </div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><code>    TCCR2 |= (1 &lt;&lt; WGM21);</code></span><br /></span></div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><span><span><code>    // Set to CTC Mode</code></span><br /></span></span></div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br />
+                                        <font color="#006000" face="monospace"><span><span><code>    </code></span><code>TIMSK |= (1 &lt;&lt;</code></span><code> OCIE2);</code><br /><span><code>    </code></span><code>//Set interrupt on compare match</code></font><br /><br />
+                                      </div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><code>    </code></span><code>TCCR2 |= (1 &lt;&lt; CS21);</code><br /><span><code>    </code></span><code>// set prescaler to 64 and starts PWM</code><br /><br /><span><code>    </code></span><code>sei();<br /><span>    </span>// enable interrupts<br /></code></div>
+                                      <div style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /><br /><span><code>    </code></span><code>while (1)</code><br /><span><code>    </code></span><code>{</code><br /><span><code>    </code><span><code>    </code></span></span><code>// we have a working timer<br /></code></div><span style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code>    </code></span><code style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">}</code><br /><code style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">}</code><br /><br /><code style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">ISR (TIMER2_COMP_vect)</code><br /><code style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">{</code><br /><span style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><code>    // action to be done every 250us </code></span><br /><code style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">}</code><br /><span style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></span>
+                                    </div>
+                                    <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"></div>
+                                  </div><br /><br /><br /><span>    </span>Can't type playing Psyconauts.<br /><br />
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span>Cheers.</span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span>Q</span></div>
+                                  <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><br /></span></div>
+                                </div>
+                                <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span><br /></span></div>
+                                <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="sites-chrome-footer-wrapper">
+            <div id="sites-chrome-footer-wrapper-inside">
+              <div id="sites-chrome-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

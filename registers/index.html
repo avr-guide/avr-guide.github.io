@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/images/apple-touch-icon.png" type="image/png" />
+
+  <meta name="title" content="WORKING WITH BINARY NUMBERS - QEEWiki" />
+  <meta itemprop="name" content="WORKING WITH BINARY NUMBERS - QEEWiki" />
+  <meta property="og:title" content="WORKING WITH BINARY NUMBERS - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>WORKING WITH BINARY NUMBERS - QEEWiki</title>
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt;
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">WORKING WITH BINARY NUMBERS</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr">
+                                <table border="1" cellspacing="0">
+                                  <tbody>
+                                    <tr></tr>
+                                    <tr>
+                                      <td style="width:74px;height:22px"><b> Name</b></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">7 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"><span>
+                                          <font>
+                                            <font size="4">6 bit</font>
+                                          </font>
+                                        </span> <br /></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">5 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">4 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">3 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">2 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">1 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">0 bit</font>
+                                          </font>
+                                        </span></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:74px;height:39px"><b> 2 to the power of<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^7<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^6<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^5<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^4<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^3<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b> 2^2</b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b> 2^1</b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b> 2^0</b></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:74px;height:16px"><b> Value<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b> 128</b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>64 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>32 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>16 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>8 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>4 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>2 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>1 <br /></b></td>
+                                    </tr>
+                                  </tbody>
+                                </table><span>
+                                  <font>
+                                    <font face="'courier new', monospace">Table 1:  An 8bit Register</font><br /><br /><br /><span>    </span>Computers
+                                    are stupid, they could only understand 2 basic states, on and off. 
+                                    Humans however, are clever creatures and as such have figured out how
+                                    to represent anything with 1s and 0s.  This tutorial will discuss how to
+                                    represent data using the binary number system.<br /><br /><span>    </span>The
+                                    most common micro controllers on the market store data in 8 bit
+                                    registers (and thus are called 8 bit micro controllers), Some of us have
+                                    64 bit computers, this means that the processor uses 64 bit registers,
+                                    thus being able to process numbers 8 times bigger then an 8
+                                    bit micro controller.<br /><br /><span>    Ok but what is a register? A
+                                      register is a set number of 1s and 0s that are used to represent
+                                      data.  From now on we will be working with 8 bit registers unless stated
+                                      otherwise.  </span>An 8 bit register is a chunk of data that can house 8 1s and 0s.  <br /><br /><span>    </span>Every
+                                    register follows the same rules, the minimum number that they can store
+                                    is 0, and the maximum number they could store is <span style="color:rgb(0,0,255)">2^register_size</span>.  We use an 8 bit register so we can
+                                    store 2^8 values which is 256, since 0 is considered a number that
+                                    limits our maximum number to 255 (255 is our 256th value).<br /><br /><span>    </span>So
+                                    lets count in binary, 0, 1, 10, 11, 100, 101, 110, 111 .... get the
+                                    pattern?  Basically, if you have a 1, then the next step is to change
+                                    that 1 to a 0 and put a 1 in front of it, much like how when we hit 9 we
+                                    turn that 9 to a 0 and put a 1 in front of it.<br /><br /><br />
+                                  </font>
+                                </span>
+                                <hr size="2" width="100%" /><span>
+                                  <font><br /><br /><b><span style="font-family:courier new,monospace"><span style="font-size:medium">BINARY TO DECIMAL:</span></span></b><br /><br /><span>    </span>Now
+                                    that we know how to count in binary, how do we convert this system into a numbers that we could understand (decimal)? say we
+                                    have 10010 in binary?  Well, look at the table above, and lets
+                                    throw 10010 into the table we would get:<br /><br /></font>
+                                </span>
+                                <table border="1" cellspacing="0">
+                                  <tbody>
+                                    <tr></tr>
+                                    <tr>
+                                      <td style="width:74px;height:22px"><b> Name</b></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">7 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"><span>
+                                          <font>
+                                            <font size="4">6 bit</font>
+                                          </font>
+                                        </span> <br />
+                                      </td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">5 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">4 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">3 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">2 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">1 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">0 bit</font>
+                                          </font>
+                                        </span></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:74px;height:64px;text-align:center"><b><br />
+                                          <br />\</b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />1</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />1</font><br />
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:74px;height:39px"><b> 2 to the power of<br />
+                                        </b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^7<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^6<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^5<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^4<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^3<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b> 2^2</b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b> 2^1</b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b> 2^0</b></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:74px;height:16px"><b> Value<br />
+                                        </b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b> 128</b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>64 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>32 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>16 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>8 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>4 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>2 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>1 <br /></b></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <font face="'courier new', monospace">Table 2: 10010 within an 8bit Register</font><br /><br /><br /><span>
+                                  <font><span>    </span>Notice how the each bit has a value associated to it.  The value of each bit is calculated by using 2 to the power of the bit location, <span style="color:rgb(0,0,255)">2^0</span> for the 0 bit, <span style="color:rgb(0,0,255)">2^1</span> for the 1 bit .... etc.  An easier way to calculate this is to start at 1 for the 0 bit and multiply by 2 to get the next number.<br /><br /><span>    </span>Lets get back to our example, take the values of all the bits that have a 1 in them and add them together, so <span style="color:rgb(0,0,255)">16 + 2 = 18</span>, so 10010 in binary is 18 in decimal.<br /><br /><span>    </span>I have studied computer science and electrical engineering for years, and I still use the above chart to convert numbers (when a calculator is not available) so don't be afraid to use it, every computer science and electrical engineering test that I have taken that require conversion has that table drawn on it somewhere.<br /><br /></font>
+                                </span>
+                                <div style="margin-left:40px"><span>
+                                    <font><span style="color:rgb(255,0,0)">NOTE:</span> From now on I will always show decimal values in groups of 8 (because that is the way they appear in the 8 bit register). I will include the leading 0s and I will put a space every 4 sets in order to make it easier to read.  So I will write "10010" as "0001 0010".</font>
+                                  </span><br /></div>
+                                <div style="margin-left:40px"></div><span>
+                                  <font><br /><span><span><br /></span></span></font>
+                                </span>
+                                <hr size="2" width="100%" /><span>
+                                  <font><span><span><br /><br /><b>
+                                          <font face="'courier new', monospace"><span style="font-size:medium">BINARY TO HEXADECIMAL:</span></font>
+                                        </b><br /></span></span></font>
+                                </span><br /><span>    </span>Hopefully you could see the same problem with binary as I can. It's hard to understand what number you're dealing with when you just see a long series of 1's and 0's.  Well, again, people are clever, we find solutions to problems. For this one, we invented a numbering system that is much easier to understand called hexadecimal or HEX for short.<br /><br /><span>    </span>Conversion from binary to Hex is simple, split the binary number into groups of 4 and treat each group as its own number and perform the same conversion as we did with binary.  So if we us the same numbers as in our previous example (0001 0010) we get 12 in hex:<br /><br />
+                                <table border="1" cellspacing="0">
+                                  <tbody>
+                                    <tr></tr>
+                                    <tr>
+                                      <td style="width:74px;height:22px"><b> Name</b></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">3 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"><span>
+                                          <font>
+                                            <font size="4">2 bit</font>
+                                          </font>
+                                        </span> <br />
+                                      </td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">1 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">0 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">3 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">2 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">1 bit</font>
+                                          </font>
+                                        </span></td>
+                                      <td style="text-align:center;width:60px;height:22px"> <span>
+                                          <font>
+                                            <font size="4">0 bit</font>
+                                          </font>
+                                        </span></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:74px;height:64px;text-align:center"><b><br />
+                                          <br />\</b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />1</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />1</font><br />
+                                        </b></td>
+                                      <td style="width:60px;height:64px;text-align:center;font-family:courier new,monospace"><b>
+                                          <font size="6"><br />0</font>
+                                        </b></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:74px;height:39px"><b> 2 to the power of<br />
+                                        </b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^3<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^2<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^1<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^0<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b>2^3<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b> 2^2</b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b> 2^1</b></td>
+                                      <td style="text-align:center;width:60px;height:39px"><b> 2^0</b></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:74px;height:16px"><b> Value<br />
+                                        </b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b> 8</b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>4 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>2 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>1<br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>8 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>4 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>2 <br /></b></td>
+                                      <td style="text-align:center;width:60px;height:16px"><b>1 <br /></b></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <font face="'courier new', monospace">Table 3: 8bit Register to Hex Conversion</font><br /><br /><span>    </span>But there is a problem because each set of 4 bits can represent 16 values ( <span style="color:rgb(0,0,255)">2^4 = 16</span>). So now we need to make up a single digit symbol for 10,11, ... well in hex once we run out of numbers we start using letters, so in hex the number system runs from 0 to F (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F).  The best thing about HEX is that it works for all sizes of registers.  Take a 16 bit register with the value of 0001 0010 0100 1000, in hex that would be 1248.<br /><br />
+                                <div><span><br /></span>
+                                  <hr size="2" width="100%" /><span><br /><br /><b><span style="font-size:medium">
+                                        <font face="'courier new', monospace">DECIMAL, BINARY, HEX AND C:</font>
+                                      </span></b><br /></span>
+                                  <div><span><br /><span>    Now we have 3 systems, so when we see 1000 what is the actual number? The answer is that 1000 decimal, unless stated otherwise </span></span>numbers always default to decimal. A binary number would be followed by a "b" and a hex number would be followed by a "h" ie. 1000b, 1000h.<br />The same is true when we program but in C but we use "0b" in front of the binary number and "0x" in front of a hex number.<br /><br />
+                                    <div class="sites-codeblock sites-codesnippet-block"><code>i = 100;</code><span><code>    </code></span><code><span>  </span>// 100 is stored in i</code><br /><code>i = 0b100;</code><span><code>    </code></span><code>// 100b is stored in i which is 4 in decimal</code><br /><code>i = 0x100;</code><span><code>    </code></span><code>// 100h is stored in i which is also 4 in decimal</code><br /></div><br /><span>    </span>A lot of programmers tend to think in hex, so hopefully this will not be a surprise for you when you see it used in a program in the future.<br /><br />
+                                    <div>
+                                      <div><br />Cheers<br />Q<br /></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="sites-chrome-footer-wrapper">
+            <div id="sites-chrome-footer-wrapper-inside">
+              <div id="sites-chrome-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

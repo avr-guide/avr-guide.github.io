@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/images/apple-touch-icon.png" type="image/png" />
+
+  <meta name="title" content="WORKING WITH AVR REGISTERS - QEEWiki" />
+  <meta itemprop="name" content="WORKING WITH AVR REGISTERS - QEEWiki" />
+  <meta property="og:title" content="WORKING WITH AVR REGISTERS - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>WORKING WITH AVR REGISTERS - QEEWiki</title>
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt;
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">WORKING WITH AVR REGISTERS</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr"><span style="color:rgb(0,0,255)">
+                                  <div></div>
+                                  <div><span style="color:rgb(0,0,0)">    The "Register Summary" section of the AVR datasheet contains a huge table of all the Special Register names and Special Bit names.  Lets take a quick look at the table and talk a bit about it.</span></div>
+                                  <div><span style="color:rgb(0,0,0)"><br /></span></div>
+                                  <div><span style="color:rgb(0,0,0)">
+                                      <table border="1" bordercolor="#888888" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                        <tbody>
+                                          <tr>
+                                            <td style="text-align:center;width:71px;height:30px"> <b>Address</b></td>
+                                            <td style="text-align:center;width:59px;height:30px"><b> Name</b><span><b>    </b></span></td>
+                                            <td style="text-align:center;width:45px;height:30px"><b>Bit 7 </b></td>
+                                            <td style="text-align:center;width:40px;height:30px"><b>Bit 6 </b></td>
+                                            <td style="text-align:center;width:40px;height:30px"><b>Bit 5 </b></td>
+                                            <td style="text-align:center;width:40px;height:30px"><b>Bit 4 </b></td>
+                                            <td style="text-align:center;width:40px;height:30px"><b>Bit 3 </b></td>
+                                            <td style="text-align:center;width:40px;height:30px"><b>Bit 2 </b></td>
+                                            <td style="text-align:center;width:40px;height:30px"><b>Bit 1 </b></td>
+                                            <td style="text-align:center;width:40px;height:30px"><b>Bit 0 </b></td>
+                                            <td style="text-align:center;width:40px;height:30px"><b>Page </b></td>
+                                          </tr>
+                                          <tr>
+                                            <td style="text-align:center;width:71px;height:26px"> $3F ($5F)</td>
+                                            <td style="text-align:center;width:59px;height:26px"> SREG<span>    </span></td>
+                                            <td style="text-align:center;width:45px;height:26px">I </td>
+                                            <td style="text-align:center;width:40px;height:26px">T </td>
+                                            <td style="text-align:center;width:40px;height:26px">H </td>
+                                            <td style="text-align:center;width:40px;height:26px">S</td>
+                                            <td style="text-align:center;width:40px;height:26px">V </td>
+                                            <td style="text-align:center;width:40px;height:26px">N </td>
+                                            <td style="text-align:center;width:40px;height:26px">Z </td>
+                                            <td style="text-align:center;width:40px;height:26px">C </td>
+                                            <td style="text-align:center;width:40px;height:26px">10 </td>
+                                          </tr>
+                                        </tbody>
+                                      </table><br />
+                                    </span></div>
+                                  <div><span style="color:rgb(0,0,0)"><span>    The address field is the address within system memory in hex.  The number within the brackets is the actual physical number within the AVR memory, the first number is the address renumbered to start at 0.</span><br /></span></div>
+                                  <div><span style="color:rgb(0,0,0)"><span><br /></span></span></div>
+                                  <div><span style="color:rgb(0,0,0)"><span><span>    The Name field is the name of the register itself, in our case SREG which is short for the Status Register. All AVR register names are 1 to 8 characters in length and consist of capital letters and numbers.</span><br /></span></span></div>
+                                  <div><span style="color:rgb(0,0,0)"><span><span><br /></span></span></span></div>
+                                  <div><span style="color:rgb(0,0,0)"><span><span><span>    Bit 7 - 0 is the name of the individual bits.</span><br /></span></span></span></div>
+                                  <div><span style="color:rgb(0,0,0)"><span><span><span><br /></span></span></span></span></div>
+                                  <div><span style="color:rgb(0,0,0)"><span><span><span><span>    Page shows you the page number which gives you detailed information on the register.</span><br /></span></span></span></span></div>
+                                  <div><span style="color:rgb(0,0,0)"><span><span><span><span><br /></span></span></span></span></span></div>
+                                  <div>
+                                    <font color="#000000"><span>    In order to use names you have to define the "avr/io.h" file at the top of your program:</span><br /></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><br /></span></font>
+                                  </div>
+                                  <div><span>
+                                      <font color="#000000">
+                                        <div class="sites-codeblock sites-codesnippet-block"><code>#include &lt;avr/io.h&gt;</code></div>
+                                      </font>
+                                    </span></div>
+                                  <div><span style="color:rgb(0,0,0)"><span><span><span><span><br /></span></span></span></span></span></div>
+                                  <div>
+                                    <font color="#000000"><br /></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span>    </span>Now, lets say we want to set the I bit (interrupt bit) we simply have to:</font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><br /></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000">
+                                      <div class="sites-codeblock sites-codesnippet-block"><code>SREG |= (1 &lt;&lt; I);</code></div>
+                                    </font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><br /><br /><span>    </span>If you look above, you can see that the I bit is located 7th bit, we could just as easily set it by doing the following:<br /><br /></font>
+                                    <div class="sites-codeblock sites-codesnippet-block"><span style="color:rgb(0,0,255)">
+                                        <font>
+                                          <font color="#000000"><code>SREG |= (1 &lt;&lt; 7);</code></font>
+                                        </font>
+                                      </span></div>
+                                    <font color="#000000"><br /><br /></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span>    If we want to see if the status of the N bit (Negative Flag bit) is set we can simply:</span><br /></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><br /></font>
+                                  </div>
+                                  <div></div>
+                                  <div></div>
+                                  <div class="sites-codeblock sites-codesnippet-block">
+                                    <div>
+                                      <font color="#000000"><code>if (SREG &amp; (1 &lt;&lt; N) &gt; 0)</code></font>
+                                    </div>
+                                    <div>
+                                      <font color="#000000"><code>{</code></font>
+                                    </div>
+                                    <div>
+                                      <font color="#000000"><span><code>    // some code here</code></span><br /></font>
+                                    </div>
+                                    <div>
+                                      <font color="#000000"><code>}</code></font>
+                                    </div>
+                                    <div></div>
+                                  </div><span><span><br /></span></span>
+                                  <div>
+                                    <font color="#000000"><span><span><br /></span></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span><span>    You will never have to do anything but read or write an entire register or read or write an individual bite to/from a register.  So if you understand binary and hex numbers, bit math and this lesson, you got the hard programming stuff down.</span><br /></span></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span><span><br /></span></span></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span><span><br /></span></span></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span><span><br /></span></span></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span><span>Cheers</span></span></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span><span>Q</span></span></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span><br /></span></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span><br /></span></span></font>
+                                  </div>
+                                  <div>
+                                    <font color="#000000"><span><span><br /></span></span></font>
+                                  </div>
+                                </span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="sites-chrome-footer-wrapper">
+            <div id="sites-chrome-footer-wrapper-inside">
+              <div id="sites-chrome-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

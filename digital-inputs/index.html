@@ -1,0 +1,521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/images/apple-touch-icon.png" type="image/png" />
+
+  <meta name="title" content="DIGITAL INPUTS - QEEWiki" />
+  <meta itemprop="name" content="DIGITAL INPUTS - QEEWiki" />
+  <meta property="og:title" content="DIGITAL INPUTS - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>DIGITAL INPUTS - QEEWiki</title>
+  <meta itemprop="image" content="/avr-guide/digital-inputs/ATmega8%20-%20IO.JPG" />
+  <meta property="og:image" content="/avr-guide/digital-inputs/ATmega8%20-%20IO.JPG" />
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class=" en ">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://chayanforyou.github.io" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt; 
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">DIGITAL INPUTS</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr">
+                                <div style="FONT-WEIGHT:bold;FONT-SIZE:medium;FONT-FAMILY:courier new,monospace"><span style="FONT-WEIGHT:normal"><b>
+                                      <div style="DISPLAY:inline!important"><span style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span style="FONT-SIZE:medium">
+                                            <font face="'courier new', monospace"><b>INTRODUCTION:</b></font>
+                                          </span></span></div>
+                                    </b></span></div>
+                                <div>
+                                  <div style="DISPLAY:inline!important">
+                                    <div style="DISPLAY:inline!important"><br /></div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div style="DISPLAY:inline!important">
+                                    <div style="DISPLAY:inline!important">
+                                      <div><span>
+                                          <font face="'courier new', monospace"> <span style="FONT-FAMILY:verdana,sans-serif">   </span></font>
+                                        </span>
+                                        <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif">Digital input hardware is a bit harder then outputs but nothing too crazy. The AVR digital input pins look for a HIGH (Vcc) signal or a LOW (GND) signal.  Once again it is important to note that this is not an ON or OFF.  Once again, ON and OFF would imply that a physical break takes place in the wire that prevents current flow.</span></font>
+                                      </div>
+                                      <div>
+                                        <font face="verdana, sans-serif"><br /></font>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div style="DISPLAY:inline!important">
+                                    <div style="DISPLAY:inline!important"><br /></div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div style="DISPLAY:inline!important">
+                                    <div style="DISPLAY:inline!important">
+                                      <hr />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div style="DISPLAY:inline!important">
+                                    <div style="DISPLAY:inline!important"><br /><br />
+                                      <font face="'courier new', monospace"><span style="FONT-SIZE:medium"><b>HARDWARE:</b></span></font> 
+                                    </div>
+                                  </div>
+                                </div>
+                                <div><br /></div>
+                                <div><span><br /></span></div>
+                                <div>
+                                  <div style="DISPLAY:block;TEXT-ALIGN:left"></div>
+                                </div>
+                                <div><i>
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/digital-inputs/ATmega8%20-%20IO.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/digital-inputs/ATmega8%20-%20IO.JPG" /></a></div>
+                                  </i></div>
+                                <div><i>
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"></div>
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"></div>
+                                  </i></div>
+                                <div style="FONT-FAMILY:courier new,monospace"><i>Figure 1: ATmega8 - Input Pins<br /></i></div>
+                                <div><br /></div>
+                                <div><br /><span>    </span>If you look at the AVR data sheet, the second page shows the pin configuration of the AVR chip.  All of the PA#, PB#, PC# and PD# could be configured as a digital input.<br /><br /></div>
+                                <div>
+                                  <font face="verdana, sans-serif">    In the AVR world, the value of less then 0.2V is read as a LOW and the value of greater then 0.6V as a HIGH.  However, theoretically we will always receive GND (LOW) or Vcc (HIGH) on the input pin, so from now on this documentation will refer to HIGH/LOW as GND/Vcc.</font><br />
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><br /></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><br /></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><br /></span></font>
+                                </div>
+                                <div><i>
+                                    <font face="'courier new', monospace">Digital Inputs from Digital Devices:</font>
+                                  </i></div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><br /></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span>    We don't have to do any work if we want to connect a AVR to a digital device because most digital devices outputs send out a HIGH (Vcc) or LOW (GND) signal, which is exactly the signals that the AVR digital input pins are looking for. </span></span></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><br /></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span style="FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
+                                          <div>
+                                            <font face="verdana, sans-serif"><br /></font>
+                                          </div>
+                                          <div>
+                                            <font face="verdana, sans-serif"><br /></font>
+                                          </div>
+                                        </span></span></span></font>
+                                </div>
+                                <div><i>
+                                    <font face="'courier new', monospace">Pull-up Resistors:</font>
+                                  </i></div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><br /></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span>    Now we have a problem the AVR looks for a HIGH (Vcc) or LOW (GND) but the most common digital input is a button, which provides us with an ON or OFF state.  If we hook up one side of the switch to the GND and the other to the AVR, we will get LOW (GND) when the button is pressed and OFF (no signal) when the button is not pressed.  If we connect one side of the button to Vcc and the other side of the button to the AVR, we will get a HIGH (Vcc) signal when the button is pressed and OFF (no signal) when the button is not pressed.  If you have a button connected to the AVR in ether of these ways, you will see all kinds of strange things.  The most common things include nothing happening or things working intermittently.</span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><br /></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span>    So lets solve the problem. Using a pull-up resistor.</span></span><br /></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><br /></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><br /></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif">
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/digital-inputs/2.1%20-%20Figure%204.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/digital-inputs/2.1%20-%20Figure%204.JPG" /></a></div>
+                                  </font>
+                                </div>
+                                <div style="FONT-FAMILY:courier new,monospace"><i>Figure 2: Pull-up Resistor</i></div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><br /></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><br /></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><span>    R1 is the star of the show, when the button is not pressed current will flow from Vcc, through R1(which reduces the current because it is in series with the pin) and into the digital input pin. When the button is pressed current will flow through R1 into the button and down into ground.  Because the input pin is on the low side (GND side) of R1 the digital input pin and the AVR will think it is connected to ground when the switch is pressed.  At this time R1 acts like a load, and since it has a high value it will only draw a small current (I = V/R).</span><br /></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><span><br /></span></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><span><span>    The best news is that the AVR has a built in pull-up resistor that can be activated whenever we need it, so we do not have to use an external pull-up resistor.</span><br /></span></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><span><span><br /></span></span></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><span><span><br /><a href="https://sites.google.com/" rel="nofollow"></a>
+                                              <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/digital-inputs/2.1%20-%20Figure%202.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/digital-inputs/2.1%20-%20Figure%202.JPG" /></a></div><i style="FONT-FAMILY:courier new,monospace">Figure 3: Suggested Way To Hook Up A Switch With a Pull-up Activated<br /></i>
+                                            </span></span></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><span><span><br /></span></span></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><span><span><br /></span></span></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-FAMILY:verdana,sans-serif"><span><span><span><span><br /></span></span></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><i>De-bounce in Hardware:</i></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><br /></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span>    Another issue that one might have with ON/OFF type devices is that they are prone to contact bounce.  Contact bounce occurs because current tends to arc (or jump) between both contacts when they are brought close enough to each other.  So just before the contacts meet or just as their are separated the contacts will arc and the micro controller will see several rapid on/off states.  This often leads to a single button press as been seen by the AVR as several presses.</span><br /></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><br /></span></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><span>    This problem can be solved in hardware or in software.  These days however, most engineers opt to solve this in software because it is what schools teach (for 2 reasons: it lowers costs by reducing components and it is the easier to teach programming then it is teach hardware).<br /><br /><span>    </span>The previous generation of engineers used an RC circuit, this basically create a filter that will clean up the ripples in the voltage spikes caused by the arcs.  The problem is that this filtering effect causes inputs to lag slightly, so its not a good solution for a high speed applications but, for push buttons on remotes, keyboards and even game controllers, this works out quite well.</span><br /></span></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><span><br /></span></span></font>
+                                </div>
+                                <div><span style="FONT-FAMILY:verdana,sans-serif"><br /></span></div>
+                                <div><span style="FONT-FAMILY:verdana,sans-serif">
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/digital-inputs/2.1%20-%20Figure%205.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/digital-inputs/2.1%20-%20Figure%205.JPG" /></a></div>
+                                  </span></div>
+                                <div style="FONT-FAMILY:courier new,monospace"><i>Figure 4: RC Debounce Circuit</i></div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><span><br /></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><span><br /></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><span><span><span>    For those of you who wish to </span></span>know the math and theory behind this please read <a href="ftp://www.inc.eng.kmutt.ac.th/pornpoj/LabINC254%282-51%29/swdebounce.pdf">AnalogAngle By Ron Mancini</a>.  But I found that the values above work really well on most tactile switches, if you find that you are still getting multiple hits every time you press the button just use a bigger capacitor.<br /></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><span><span><br /></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><span><span><br /></span></span></span></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><span><span><br /></span></span></span></font>
+                                </div>
+                                <div><span><span><span><span style="FONT-SIZE:small"><i>
+                                            <font face="'courier new', monospace">Maximum Input Capabilities:</font>
+                                          </i></span></span></span></span></div>
+                                <div><span style="FONT-FAMILY:verdana,sans-serif">    </span></div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span>    The most important thing to note is that digital inputs are limited to GND - 0.5V and Vcc + 0.5V this means that on a standard 5V device we could go as high as 5.5V and as low as -0.5V.  Anything outside those values will result in damages to the AVR.   So take extra care when the input comes from a different power supply. </span></font><span style="FONT-FAMILY:verdana,sans-serif">These values are shown in the "Absolute Maximum Ratings" chart at the beginning of the </span><span style="FONT-FAMILY:verdana,sans-serif">"Electrical Characteristics" chapter of the data sheet.</span>
+                                </div>
+                                <div><span style="FONT-FAMILY:verdana,sans-serif"><br /></span></div>
+                                <div>
+                                  <font face="verdana, sans-serif"><br /></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif">
+                                    <hr />
+                                  </font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><br /></font>
+                                </div>
+                                <div>
+                                  <font face="verdana, sans-serif"><span><span><br /></span></span></font><b style="FONT-FAMILY:courier new,monospace"><span style="FONT-SIZE:medium">THEORY OF OPERATION:</span></b><br /><br /><span>    </span>The one thing that I don't understand is why input/output section in the Atmega8 and Atmega168/328 is so poor.  Every other part of the data sheet has a really nice description of each register at the end of each section that describes everything.<br /><br /><span>    </span>Under the I/O section of the data sheet you will find the following table:<br /><br />
+                                  <table border="1" cellspacing="0">
+                                    <tbody>
+                                      <tr></tr>
+                                      <tr>
+                                        <td style="WIDTH:60px;HEIGHT:16px"> DDxn</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px"> PORTxn</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px"> PUD</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px"> I / O<br /></td>
+                                        <td style="WIDTH:60px;HEIGHT:16px">Pull-up <br /></td>
+                                        <td style="WIDTH:243px;HEIGHT:16px"> Comments</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="WIDTH:60px;HEIGHT:16px;TEXT-ALIGN:center">0</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px;TEXT-ALIGN:center">0</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px;TEXT-ALIGN:center">x</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px"> input</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px"> No</td>
+                                        <td style="WIDTH:243px;HEIGHT:16px"> Tri-state (Hi-Z)</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="WIDTH:60px;HEIGHT:45px;TEXT-ALIGN:center">0</td>
+                                        <td style="WIDTH:60px;HEIGHT:45px;TEXT-ALIGN:center">1</td>
+                                        <td style="WIDTH:60px;HEIGHT:45px;TEXT-ALIGN:center">0</td>
+                                        <td style="WIDTH:60px;HEIGHT:45px"> input</td>
+                                        <td style="WIDTH:60px;HEIGHT:45px"> Yes</td>
+                                        <td style="WIDTH:243px;HEIGHT:45px"> Pxn will source current if external<br />pulled low.</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="WIDTH:60px;HEIGHT:16px;TEXT-ALIGN:center">0</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px;TEXT-ALIGN:center">1</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px;TEXT-ALIGN:center">1</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px"> input</td>
+                                        <td style="WIDTH:60px;HEIGHT:16px"> No</td>
+                                        <td style="WIDTH:243px;HEIGHT:16px"> Tri-state (Hi-Z)</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">0</td>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">x</td>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243)"> output</td>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243)"> No</td>
+                                        <td style="WIDTH:243px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243)"> Output Low (Sink)</td>
+                                      </tr>
+                                      <tr>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">1</td>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243);TEXT-ALIGN:center">x</td>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243)"> output</td>
+                                        <td style="WIDTH:60px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243)"> No</td>
+                                        <td style="WIDTH:243px;COLOR:rgb(153,153,153);HEIGHT:16px;BACKGROUND-COLOR:rgb(243,243,243)"> Output High (Source)</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>Table 1<br /><br /><br /><span>    </span>Since we are talking about inputs, we will only use the first 3 rows.  Notice that the difference between an input and an output is that the DDxn register (Data Direction Register), leaving the pin LOW (0) will make it an input but setting it to HIGH(1) will make it an output.  When dealing with inputs we have an extra bite the PUD (Pull Up Disable) and it is a pin located within the SFIOR (Special Function IO Register).  When this bit is set to HIGH(1) it will disable the pull-up on all inputs, so be very careful whenever you use this option.<br /><br /><span>    </span>The 1st row sets the pin with no pull-up. What is important to note is that this method ignores the state of the PUD bit.  This is the preferred way to set an input with no pull-up because it does not disable the pull-up on all pins, simply the the pin you want.  Simply leave DDxn and PORTxn LOW(0).<br /><br /><span>    </span>The 2nd row sets the pin to an input with pull-up, simply set the PORTxn HIGH(1) and leave the DDxn LOW(0). <br /><br /><span>    </span>The 3rd row sets the pin to an input and disables the pull-up on all pins.  This is not commonly used because setting the PUD pin HIGH(1) will disable the pull-up on ALL input pins.<br /><br /><span><span>   So what's with the xn? "x" defines which Port we are using B, C or D (there is no A port on the ATmega328, but some like the Atmega32 do have them).  The "n" defines the pin number.</span></span>  So this chart is telling us that if we want to make the PD0 pin an input we have to turn on DDD0 LOW(0) and after that when we change PORTD0 LOW(0) or HIGH(1) depending on if we want to use the pull-up on or off.<br /><br /><span>    </span>Up to this point we have talked about how to set the input but how do we get the value of the input? well, we have to read the values of a new type of register. The PINx register:<br /><br /><br />
+                                  <table border="1" bordercolor="#888888" cellspacing="0" style="BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-LEFT-COLOR:rgb(136,136,136);BORDER-BOTTOM-WIDTH:1px;BORDER-BOTTOM-COLOR:rgb(136,136,136);BORDER-TOP-COLOR:rgb(136,136,136);BORDER-COLLAPSE:collapse;BORDER-RIGHT-WIDTH:1px;BORDER-RIGHT-COLOR:rgb(136,136,136)">
+                                    <tbody>
+                                      <tr>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b> </b></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b> 7 bit<br /></b></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b> 6 bit <br /></b></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b>5 bit <br /></b></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b>4 bit <br /></b></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b>3 bit <br /></b></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b>2 bit <br /></b></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b>1 bit <br /></b></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b>0 bit <br /></b></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"><b> PINx</b></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center"> PINx7</td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center">PINx6 <br /></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center">PINx5 <br /></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center">PINx4 <br /></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center">PINx3 <br /></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center">PINx2 <br /></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center">PINx1 <br /></td>
+                                        <td style="WIDTH:60px;TEXT-ALIGN:center">PINx0 <br /></td>
+                                      </tr>
+                                    </tbody>
+                                  </table><span style="FONT-FAMILY:courier new,monospace">Port x Input Pins Address Register</span>
+                                </div>
+                                <div><br /></div>
+                                <div><br /><span>    </span>So if we wanted to read the value of PD0 for example, we would have to read the value of PIND0 within the PIND register.  <br /><br /></div>
+                                <div><br /></div>
+                                <blockquote style="BORDER-RIGHT:medium none;PADDING-RIGHT:0px;BORDER-TOP:medium none;PADDING-LEFT:0px;PADDING-BOTTOM:0px;MARGIN:0pt 0pt 0pt 40px;BORDER-LEFT:medium none;PADDING-TOP:0px;BORDER-BOTTOM:medium none">
+                                  <div><span style="COLOR:rgb(255,0,0)">NOTE:</span> A lot of programmers will simply use 0-7 instead of PINx0-PINx7, so don't be surprised if you see that if your going though peoples code.</div>
+                                </blockquote>
+                                <div><br /><br /></div>
+                                <div>
+                                  <hr />
+                                  <br />
+                                </div>
+                                <div><br /></div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="FONT-SIZE:medium"><b>SOFTWARE:</b></span></font>
+                                </div>
+                                <div><br /><span>    </span><br /></div>
+                                <div>
+                                  <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/digital-inputs/Flow-DigitalInputs.jpg?attredirects=0" imageanchor="1"><img border="0" height="400" src="/avr-guide/digital-inputs/Flow-DigitalInputs.jpg?height=400&amp;width=159" width="159" /></a></div>
+                                </div>
+                                <div>
+                                  <font face="'courier new', monospace"><i>Flow 1:  Digital Inputs Software Flow Diagram</i></font>
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><span>    </span>Finally some code, but please note, that since we use a pull-up resistor inside the AVR we tend to hook up the buttons to ground, this means that the register will read HIGH (1) when the button is not pressed, and LOW (0) when it is pressed:</div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><i>ATmega8 &amp; ATmega168/328 Code:</i><br />
+                                  <div class="sites-codeblock sites-codesnippet-block"><code>// this code sets PB5 to an input with a pull-up enable</code><br /><br /><br /><code>#include &lt;avr/io.h&gt;</code><br /><br /><br /><code>int main(void)</code><br /><code>{</code><br /><span><code>    </code></span><code>DDRB &amp;= ~(1 &lt;&lt; DDB5); // Clear the PB5 pin</code><br /><span><code>    </code></span><code>/</code><code>/ PB5 is now an input</code><br /><br /><span><code>    </code></span><code>PORTB |= (1 &lt;&lt; PORTB5); // turn On the Pull-up</code><br /><span><code>    </code></span><code>// PB5 is now an input with pull-up enabled</code><br /><br /><br /><span><code>    </code></span><code>while (1)</code><br /><span><code>    </code></span><code>{</code><br /><span><code>    </code><span><code>    </code></span></span><code>i</code><code>f( (PINB &amp; (1&lt;&lt;PINB5)) == 0)</code><br /><span><code>    </code><span><code>    </code></span></span><code>{ </code><br /><span><code>    </code><span><code>    </code><span><code>    </code></span></span></span><code>// do something when PD5 is on</code><br /><span><code>    </code><span><code>    </code></span></span><code>}</code><br /><span><code>    </code></span><code>}</code><br /><code>}</code><br /></div>
+                                  <div><br /></div><br /><i>ATmega8 &amp; ATmega168/328 Code:</i><br />
+                                </div>
+                                <div class="sites-codeblock sites-codesnippet-block">
+                                  <div><code>// this code sets PD0 to an input with a pull-up disabled</code><br /><br /><br /><code>#include &lt;avr/io.h&gt;</code><br /><br /><br /><code>int main(void)</code><br /><code>{</code><br /><span><code>    </code></span><code>DDRD &amp;= ~(1 &lt;&lt; DDD0); // Clear the PD0 pin</code><br /><span><code>    </code></span><code>// PD0 is now an input</code><br /><br /><span><code>    </code></span><code>PORTD |= (1 &lt;&lt; PORTD0); // turn On the Pull-up</code><br /><span><code>    </code></span><code>// PDO is now an input with pull-up enabled</code><br /><br /><span><code>    while(1)</code></span><br /></div>
+                                  <div><span><span><code>    {</code></span><br /></span></div>
+                                  <div><span><code>    </code><span><code>    </code></span></span><code>if( (PIND &amp; (1&lt;&lt;PIND0)) &gt; 0)</code><br /><span><code>    </code><span><code>    </code></span></span><code>{</code><br /><span><code>    </code><span><code>    </code><span><code>    </code></span></span></span><code>// do something if PD0 is off</code><br /><span><code>    </code><span><code>    </code></span></span><code>}</code></div>
+                                  <div><span><code>    }</code></span><br /></div>
+                                  <div><code>}</code></div>
+                                </div>
+                                <div><br /></div>
+                                <div><br /><span>    </span>So a final question; When do we use the pull-up and when do we not use the pull-up?  Whenever, the input is coming from a digital device (a device that outputs GND or Vcc) you do not need a pull-up.  If you are using an ON/OFF device (sends a signal or breaks a signal) you need to use the pull-up.<br /><br /><br /></div>
+                                <div><br /></div>
+                                <div><i>
+                                    <font face="'courier new', monospace">De-bounce in Software:</font>
+                                  </i></div>
+                                <div><br /></div>
+                                <div><span>    There are a lot of ways to do a software de-bounce, but the theory is always the same, look for an input to change, after it changes the first time ignore all the changes on that input for a short time (10-100ms or so).</span><br /></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span><i>ATmega8 &amp; ATmega168/328 Code:</i><br /></span></div>
+                                <div class="sites-codeblock sites-codesnippet-block">
+                                  <div><span><code>// this code sets PD0 to an input with a pull-up enable</code><br /><br /><br /><code>#include &lt;avr/io.h&gt;</code>
+                                      <font color="#006000" face="monospace"><br /></font><code>#include &lt;util/delay.h&gt;</code><br /><br /><code>int main(void)</code><br /><code>{</code><br /><code>DDRD &amp;= ~(1 &lt;&lt; DDD0); </code><span><code>    </code><span><code>     </code><span><code>    </code></span></span></span><code>// Clear the PD0 pin</code><br /><code>// PD0 is now an input</code><br /><br /><code>PORTD |= (1 &lt;&lt; PORTD0); </code><span><code>    </code><span><code>    </code><span><code>    </code></span></span></span><code>// turn On the Pull-up enabled</code><br /><code>// PDO is now an input with pull-up enabled</code><br /><br /><code>while (1)</code><br /><code>{</code><br /><span><code>    </code></span><code>if( (PIND &amp; (1&lt;&lt;PIND0)) == 0)</code><span><code>    </code></span><span><span><code>//is the pin set</code></span></span>
+                                    </span></div>
+                                  <div><span><span><span><code>    </code></span><code>{ </code><br /></span></span><span><code>    </code><span><code>    </code></span></span><code>_delay_ms(25); //wait a 25ms</code><br /><span><code>    </code><span><code>    </code></span></span><code>if( (PIND &amp; (1&lt;&lt;PIND0)) == 0) // is the pin still set</code><br /><span><code>    </code><span><code>    </code></span></span><code>{</code><br /><span><code>    </code><span><code>    </code><span><code>    </code></span></span></span><code>// do something because its a valid input</code><br /><span><code>    </code><span><code>    </code></span></span><code>}</code><br /><span><code>    </code><span><code>    else</code></span></span><br /></div>
+                                  <div><span><span><span><code>    </code><span><code>    {</code></span></span><br /></span></span></div>
+                                  <div><span><span><span><span><span><code>    </code><span><code>    </code><span><code>    // do nothing because the input is invalid</code></span></span></span></span></span></span></span></div>
+                                  <div><span><span><code>    </code><span><code>    </code></span></span><code>}</code><br /><span><code>    </code></span><code>}</code><br /><code>}</code></span></div>
+                                </div>
+                                <div><br /></div>
+                                <div><span>    Now there is plenty of different ways to de-bounce feel free to experiment, and if you come up with any really neat way to do it feel free to let the rest of us know.</span></div>
+                                <div><span><br /></span></div>
+                                <div>The time has come, the song is over, thought I'd something more to say.</div>
+                                <div><span><br /></span></div>
+                                <div><span>Cheers</span></div>
+                                <div><span>Q </span><br /></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div><br /></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="sites-chrome-footer-wrapper">
+            <div id="sites-chrome-footer-wrapper-inside">
+              <div id="sites-chrome-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

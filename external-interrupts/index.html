@@ -1,0 +1,413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/images/apple-touch-icon.png" type="image/png" />
+
+  <meta name="title" content="EXTERNAL INTERRUPTS ON THE ATmega8 - QEEWiki" />
+  <meta itemprop="name" content="EXTERNAL INTERRUPTS ON THE ATmega8 - QEEWiki" />
+  <meta property="og:title" content="EXTERNAL INTERRUPTS ON THE ATmega8 - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>EXTERNAL INTERRUPTS ON THE ATmega8 - QEEWiki</title>
+  <meta itemprop="image" content="/avr-guide/external-interrupts/ATmega8%20-%20INTx%20.JPG" />
+  <meta property="og:image" content="/avr-guide/external-interrupts/ATmega8%20-%20INTx%20.JPG" />
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt; 
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">EXTERNAL INTERRUPTS ON THE ATmega8</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr"><span><b style="font-family:courier new,monospace"><span style="font-size:medium">INTRODUCTION:</span></b><br /><br />    </span>In the previous section I talked about the basics of interrupts. In this section, we will talk about the first type of device interrupts called external interrupts.  These interrupts are basically called on a given status change on the INTn pin. This is essentially an input interrupt and is great to use for applications when you might need to react quickly to an outside source, such as a bumper of your robot hitting the wall or to detect a blown fuse.<br /><br />
+                                <div><br /></div>
+                                <div>
+                                  <hr />
+                                </div>
+                                <div><br /></div>
+                                <div><br /></div>
+                                <div>
+                                  <font face="'courier new', monospace"><span style="font-size:medium"><b>HARDWARE:</b></span></font>
+                                </div>
+                                <div><br />
+                                  <div style="display:block;text-align:left"><a href="/avr-guide/external-interrupts/ATmega8%20-%20INTx%20.JPG?attredirects=0"><img border="0" src="/avr-guide/external-interrupts/ATmega8%20-%20INTx%20.JPG" /></a></div>
+                                  <div><i style="font-family:courier new,monospace">Figure 1: ATmega8 - External Interrupt Pins<br /></i></div>
+                                  <div><br /></div><span>    </span>Hardware wise there is not difference between External Interrupts and Inputs so don't be afraid to reread the <a href="/avr-guide/digital-inputs">Digital Input Tutorial</a> if you need a refresher.<br /><br />
+                                  <div><span>    If you look at the AVR pinout diagram you will see the INTx which are used for External Interrupts.</span><br /></div>
+                                  <div><br /></div>
+                                  <div><br /></div>
+                                  <div>
+                                    <hr />
+                                  </div>
+                                  <div><br /></div>
+                                  <div><br /></div>
+                                  <div>
+                                    <div>
+                                      <div><b style="font-family:courier new,monospace"><span style="font-size:medium">THEORY OF OPERATION:</span></b><br /></div>
+                                      <div><br /><br /><span><span>    External interrupts are fairly powerful, they can be
+                                            configured to trigger on one of 4 states.  Low level will trigger
+                                            whenever the pin senses a LOW (GND) signal.  Any Logic Change trigger at
+                                            the moment the pin changes from HIGH (Vcc) to LOW (GND) or from LOW
+                                            (GND) to HIGH(Vcc). On Falling Edge will trigger at the moment the pin
+                                            goes from HIGH (Vcc) to LOW (GND). On Rising Edge will trigger at the
+                                            moment the pin goes from LOW (GND) to HIGH (Vcc).  The best part is that
+                                            you can configure each INTx independently.</span></span><br /><br />
+                                        <div>    External interrupts use the below 3 registers.  Which you could find under the "External Interrupts section of the datasheet.</div>
+                                        <div><br />
+                                          <div>
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="vertical-align:top;width:60px"> </td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px"> <b>7 bit</b></td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px"><b>6 bit </b></td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px"><b>5 bit </b></td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px"><b>4 bit </b></td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px"><b>3 bit </b></td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px"><b>2 bit </b></td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px"><b>1 bit </b></td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px"><b> 0 bit</b></td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="text-align:center;vertical-align:top;width:60px"><b> MCUCR</b></td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">SE </td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">SM2 </td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">SM1 </td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">SM0 </td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px">ISC11 </td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px">ISC10 </td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px">ISC01 </td>
+                                                  <td style="text-align:center;vertical-align:top;width:60px">ISC00 </td>
+                                                </tr>
+                                              </tbody>
+                                            </table><i style="font-family:courier new,monospace">MCU Control Register</i>
+                                          </div>
+                                          <div><span><br /></span></div>
+                                          <div><span><br /></span></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
+                                  <div>
+                                    <div>
+                                      <div>
+                                        <div>
+                                          <div>
+                                            <div>
+                                              <table border="1" bordercolor="#888888" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
+                                                <tbody>
+                                                  <tr>
+                                                    <td style="width:54px;height:15px"> <b>ISCx1</b></td>
+                                                    <td style="width:54px;height:15px"><b> ISCx0 </b></td>
+                                                    <td style="width:392px;height:15px"><b>DESCRIPTION </b></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="text-align:center;width:54px;height:15px">0</td>
+                                                    <td style="text-align:center;width:54px;height:15px">0</td>
+                                                    <td style="width:392px;height:15px"> Low level of INTx generates an interrupt request</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="text-align:center;width:54px;height:15px">0</td>
+                                                    <td style="text-align:center;width:54px;height:15px">1</td>
+                                                    <td style="width:392px;height:15px"> Any logic change on INTx generates an interrupt request </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="text-align:center;width:54px;height:15px">1</td>
+                                                    <td style="text-align:center;width:54px;height:15px">0</td>
+                                                    <td style="width:392px;height:15px"> The falling edge of INTx generates an interrupt request </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="text-align:center;width:54px;height:15px">1</td>
+                                                    <td style="text-align:center;width:54px;height:15px">1</td>
+                                                    <td style="width:392px;height:15px"> The rising edge of INTx generates an interrupt request </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div style="font-family:courier new,monospace">
+                                    <div>
+                                      <div>
+                                        <div>
+                                          <div>
+                                            <div><i>ISC Bits Settings</i></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </blockquote>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div>
+                                        <div>
+                                          <div><br /></div>
+                                          <div><br />
+                                            <table border="1" bordercolor="#888888" cellspacing="0" style="border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="width:60px;text-align:center"> </td>
+                                                  <td style="width:60px;text-align:center"><b> 7 bit<br /></b></td>
+                                                  <td style="width:60px;text-align:center"><b>6 bit <br /></b></td>
+                                                  <td style="width:60px;text-align:center"><b>5 bit <br /></b></td>
+                                                  <td style="width:60px;text-align:center"><b>4 bit <br /></b></td>
+                                                  <td style="width:60px;text-align:center"><b>3 bit <br /></b></td>
+                                                  <td style="width:60px;text-align:center"><b>2 bit <br /></b></td>
+                                                  <td style="width:60px;text-align:center"><b>1 bit <br /></b></td>
+                                                  <td style="width:60px;text-align:center"><b>0 bit <br /></b></td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="width:60px;text-align:center"><b>GICR</b></td>
+                                                  <td style="width:60px;text-align:center"> INT1</td>
+                                                  <td style="width:60px;text-align:center">INT0 <br /></td>
+                                                  <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
+                                                  <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
+                                                  <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
+                                                  <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
+                                                  <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">IVSEL <br /></td>
+                                                  <td style="width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">IVCE <br /></td>
+                                                </tr>
+                                              </tbody>
+                                            </table><i style="font-family:courier new,monospace">General Interrupt Control Register</i><br /><br />
+                                          </div>
+                                          <div><br />
+                                            <div>
+                                              <table border="1" bordercolor="#888888" cellspacing="0" style="margin:0px;border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
+                                                <tbody>
+                                                  <tr>
+                                                    <td style="vertical-align:top;width:60px"> </td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center"><b> 7 bit<br /></b></td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>6 bit <br /></b></td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>5 bit <br /></b></td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>4 bit <br /></b></td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>3 bit <br /></b></td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>2 bit <br /></b></td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>1 bit <br /></b></td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>0 bit <br /></b></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>GIFR</b></td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center">INTF1 <br /></td>
+                                                    <td style="vertical-align:top;width:60px;text-align:center">INTF0 <br /></td>
+                                                    <td style="vertical-align:top;width:60px;color:rgb(153,153,153);text-align:center;background-color:rgb(243,243,243)">- <br /></td>
+                                                    <td style="vertical-align:top;width:60px;color:rgb(153,153,153);text-align:center;background-color:rgb(243,243,243)">- <br /></td>
+                                                    <td style="vertical-align:top;width:60px;color:rgb(153,153,153);text-align:center;background-color:rgb(243,243,243)">- <br /></td>
+                                                    <td style="vertical-align:top;width:60px;color:rgb(153,153,153);text-align:center;background-color:rgb(243,243,243)">- <br /></td>
+                                                    <td style="vertical-align:top;width:60px;color:rgb(153,153,153);text-align:center;background-color:rgb(243,243,243)">- <br /></td>
+                                                    <td style="vertical-align:top;width:60px;color:rgb(153,153,153);text-align:center;background-color:rgb(243,243,243)">-<br /></td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                            <div style="font-family:courier new,monospace"><i>General Interrupt Flag Register</i></div>
+                                            <div><br /></div>
+                                            <div><br /></div>
+                                            <div><span>    </span>When the event specified by the Interrupt Sense Control (ISCxy) bits in the MCU Control Register (MCUCR) is sensed on the INTx pin, the External Interrupt Flag x (INTFx) in the General Interrupt Flag Register (GIFR) is set HIGH (1).  If the I-bit in SREG and the INT1 bit in the GICR are both HIGH(1) the MCU will jump to the corresponding vector.  The Flag is set to LOW (0) when the INTx_vect routine is executed.  </div>
+                                            <div><br /><br />
+                                              <hr size="2" width="100%" /><br /><br /><b>
+                                                <font size="3">
+                                                  <font face="courier new,monospace">SOFTWARE:</font>
+                                                </font>
+                                              </b><br /><br /><br /><span>    </span>The external interrupt code is fairly simple, just declare your INTx pins as inputs, set the inputs as interrupts, turn on the interrupts, and finally don't forget your ISR routines.<br /><br /><br />
+                                            </div>
+                                            <div><i>ATmega8 Code:</i></div>
+                                            <div></div>
+                                            <div class="sites-codeblock sites-codesnippet-block">
+                                              <div><code>#include &lt;avr/io.h&gt;</code></div>
+                                              <div><code>#include &lt;avr/interrupt.h&gt;</code></div>
+                                              <div><br /></div>
+                                              <div><br /></div>
+                                              <div>
+                                                <font color="#006000" face="monospace"><br /></font>
+                                              </div>
+                                              <div><code>int main(void)</code></div>
+                                              <div><code>{</code></div>
+                                              <div><span><code><span style="font-family:Verdana,Helvetica,Arial,sans-serif;color:rgb(0,0,0)"><div><font><font color="#000000"><code style="color:rgb(0,96,0)"><span>    </span>DDRD &amp;= ~(1 &lt;&lt; DDD2</code></font>
+                                                  </font><code style="color:rgb(0,96,0)">);</code><span> <span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">// Clear the PD2 pin</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD2 (INT0 pin) is now an input</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>PORTD |= (1 &lt;&lt; PORTD2); </code><span><code style="color:rgb(0,96,0)">   </code></span><code style="color:rgb(0,96,0)">// turn On the </code><code style="color:rgb(0,96,0)">Pull-up</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD0 is now an input with pull-up enabled</code></span></div>
+                                              <div><span><code style="color:rgb(0,96,0)"><br /></code></span></div></span></code></span>
+                                            </div>
+                                            <div><span><code>    </code></span><br /></div>
+                                            <div><span><span><code>    MCUCR |= (1 &lt;&lt; ISC00);</code><span><code>    // set INT0 to trigger on ANY logic change</code></span></span><br /></span></div>
+                                            <div><span><span><span><span><code>    GICR |= (1 &lt;&lt; INT0);</code><span><code>    </code><span><code>  // Turns on INT0</code></span></span></span><br /></span></span></span></div>
+                                            <div><span><br /></span></div>
+                                            <div><span><span><code>    sei();</code><span><code>    </code><span><code>    </code><span><code>    <span>    <span>    </span></span>// turn on interrupts</code></span></span></span></span><br /></span></div>
+                                            <div><span><br /></span></div>
+                                            <div><span><code>    while(1)</code></span><br /></div>
+                                            <div><span><span><code>    {</code></span><br /></span></div>
+                                            <div><span><span><span><code>    </code><span><code>    /*main program loop here */</code></span></span><br /></span></span></div>
+                                            <div><span><span><span><code>    }</code></span></span></span></div>
+                                            <div><code>}</code></div>
+                                            <div><br /></div>
+                                            <div><br /></div>
+                                            <div><br /></div>
+                                            <div><code>ISR (INT0_vect)</code></div>
+                                            <div><code>{</code></div>
+                                            <div><span><code>    /* interrupt code here */</code></span><br /></div>
+                                            <div><code>}</code></div>
+                                          </div>
+                                          <div><br /></div>
+                                          <div><br /></div>
+                                          <div><span>    </span>I like big bots and I can not lie.<br /></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div>
+                                <div>
+                                  <div>
+                                    <div><br />
+                                      <div><span><span>Cheers</span></span></div>
+                                      <div>Q</div>
+                                      <div><span><br /></span></div>
+                                      <div><span><br /></span></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div><span><br /></span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            </td>
+            </tr>
+            </table>
+          </div>
+        </div>
+        <div id="sites-chrome-footer-wrapper">
+          <div id="sites-chrome-footer-wrapper-inside">
+            <div id="sites-chrome-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

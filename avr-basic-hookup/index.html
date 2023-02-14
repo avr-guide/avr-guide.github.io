@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
+  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/images/apple-touch-icon.png" type="image/png" />
+  
+  <meta name="title" content="AVR Basic Hookup - QEEWiki" />
+  <meta itemprop="name" content="AVR Basic Hookup - QEEWiki" />
+  <meta property="og:title" content="AVR Basic Hookup - QEEWiki" />
+  <meta name="description" content="Q's Electrical Engineering Wiki" />
+  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
+  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
+  <style type="text/css">
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
+  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
+
+  <title>AVR Basic Hookup - QEEWiki</title>
+  <meta itemprop="image" content="/avr-guide/avr-basic-hookup/ATmega%20-%20Power.JPG" />
+  <meta property="og:image" content="/avr-guide/avr-basic-hookup/ATmega%20-%20Power.JPG" />
+</head>
+
+<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
+  <div id="sites-page-toolbar" class="sites-header-divider">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
+      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
+    </div>
+  </div>
+  <div id="sites-chrome-everything-scrollbar">
+    <div id="sites-chrome-everything" class="">
+      <div id="sites-chrome-page-wrapper" style="direction: ltr">
+        <div id="sites-chrome-page-wrapper-inside">
+          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
+            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
+              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
+                <td id="sites-header-title" class="" role="banner" style="height: 70px">
+                  <div class="sites-header-cell-buffer-wrapper">
+                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                  </div>
+                </td>
+              </tr>
+              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
+                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="sites-chrome-main-wrapper">
+            <div id="sites-chrome-main-wrapper-inside">
+              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
+                <tr>
+                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Navigation</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
+                          </li>
+                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
+                      <h4 class="sites-embed-title">Resources</h4>
+                      <div class="sites-embed-content sites-sidebar-nav">
+                        <ul role="navigation" jotId="navList" class="has-expander">
+                          <li class="topLevel nav-first ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
+                          </li>
+                          <li class="topLevel ">
+                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
+                          </li>
+                          <li class="topLevel parent ">
+                            <div dir="ltr" style="padding-left: 0px;">
+                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
+                            </div>
+                            <ul role="navigation" class="has-expander">
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
+                              </li>
+                              <li class="">
+                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="sites-canvas-wrapper">
+                    <div id="sites-canvas" role="main">
+                      <div id="goog-ws-editor-toolbar-container"> </div>
+                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
+                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt; 
+                      </div>
+                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
+                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">AVR Basic Hookup</span>
+                      </h3>
+                      <div id="sites-canvas-main" class="sites-canvas-main">
+                        <div id="sites-canvas-main-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
+                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
+                              <div dir="ltr"><br /></div>
+                            </div>
+                            <div class="sites-layout-tile sites-tile-name-content-1">
+                              <div dir="ltr"><span>
+                                  <div><span><b>
+                                        <font face="'courier new', monospace" size="3">BASIC POWER HOOKUPS:</font>
+                                      </b></span></div>
+                                  <div><span><br /><br />
+                                      <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ATmega%20-%20Power.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/ATmega%20-%20Power.JPG" /></a></div>
+                                    </span></div>
+                                  <div>
+                                    <div style="display:block;text-align:left"></div>
+                                  </div>
+                                  <div><span style="font-family:courier new,monospace">Figure 1: AVR Power Pins</span> <span style="font-family:courier new,monospace">(Same on ATmega8/88/168/328)</span></div>
+                                  <div><br /></div>
+                                  <div><span><br /></span></div>    The AVR is not difficult to hook up.  All you really need is to hook power up to 4 pins and the AVR is ready to run.
+                                </span>  While VCC and GND are obvious you might be asking yourself about AVCC.  The answer like most is in the datasheet (page 5 or so under "Pin Description") which states:<br /><span><br /></span>
+                                <div style="margin-left:40px">"AVCC is the supply voltage pin for the A/D Converter, Port C (3..0), and ADC (7..6). It should be<br />externally connected to VCC, even if the ADC is not used. If the ADC is used, it should be connected<br />to VCC through a low-pass filter"<br /></div>
+                                <div><span><br /><span>    </span>The part about that low-pass filter might have you confused, it basically a capacitor, C1 in figure 2.  So while C1 is not really needed it you can see that it is recommended in the event that you decide to use the <a href="/avr-guide/analog-input">ADC</a>.<br /><br /></span></div>
+                                <div><span><span>    If you are using the Arduino you simply have to plug a 7-12V power adapter into it and your ready to roll.  If however you are using just the AVR chip itself you need to provide the chip with a 2.7-5.5V DC voltage source.  The 2 most common voltages are 3.3V and 5V.</span><br /></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span>
+                                      <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/Power%20Hookup.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/Power%20Hookup.JPG" /></a></div>
+                                    </span></span></div>
+                                <div><span><span>
+                                      <font face="'courier new', monospace">Figure 2: Basic AVR Power Hookup</font>
+                                    </span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span><span>    The best way to get a stable 3.3V or 5V voltage is to use a Voltage Regulator.  This is a component that basically takes a voltage source of 7-12V and converts it down to 5V (or 3.3V) for you.  You will need to use 2 small capacitors (0.01pf) in order to stabilize the voltage regulator, but I'll cover that in a later tutorial. </span><br /></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span>
+                                      <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/Basic%20Hookup.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/Basic%20Hookup.JPG" /></a></div>
+                                    </span></span></div>
+                                <div><span><span>
+                                      <font face="'courier new', monospace">Figure 3: Basic AVR</font>
+                                    </span></span></div>
+                                <div><span><span><br /><br /></span></span></div>
+                                <div><span>    Figure 3 shows the basic power wires.  Red wires are Vcc, Green wires are GND, and the black wire is the source (+) of the battery.</span></div>
+                                <div><span><br /></span></div>
+                                <div><span><span>    Now that we have the power hooked up we could get the chip to actually do something.  However, before we do that we need to figure out how to get power into the AVR</span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span>
+                                    <hr />
+                                  </span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span>
+                                    <font face="'courier new', monospace" size="3"><b>ISP HOOKUP:</b></font>
+                                  </span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span>
+                                    <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ATmega%20-%20ISP.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/ATmega%20-%20ISP.JPG" /></a></div>
+                                  </span></div>
+                                <div style="font-family:courier new,monospace"><span>Figure 4: AVR ISP Pins (Same on ATmega8/88/168/328)<br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span><br /></span></div>
+                                <div><span><span>    The ISP (In System Programmer) Port lets us do this.  However, you will need some sort of programmer in order to interface between your PC and the AVR. </span><br /></span></div>
+                                <div><span><span><br /></span></span></div>
+                                <div><span><span><span>    If you have an Arduino you will not need to the ISP port because it is already programmed with a program called a bootloader which allows it to be programmed via the serial using the USB wire.</span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><span>    But if you decide to use the raw AVR itself you will need to use the ISP.  <span style="background-color:rgb(255,229,153)">One important thing to tell is is that the ISP port can provides power to the chip, therefore it is important to unhook the power supply from the AVR before you try to program it</span>.  The second thing to note is that <span style="background-color:rgb(249,203,156)">most programmers are setup for a 5V Vcc by default but, if your micro is setup on any other voltage you will have to configure your programmer for that voltage.</span>  There are many programmers out there so read your manual.  Last thing you want is to put a 5V signal into a 3.3V circuit and see the mystic blue smoke.</span></span></span></span></div>
+                                <div><br /></div>
+                                <div><span><span><span><span><span>    The ISP port can be found in 2 configurations, a 6 pin and a 10 pin and they are setup as follows:</span></span></span></span></span></div>
+                                <div><span><span><span><span><br /></span></span></span></span></div>
+                                <div><span><span><span><span><br /></span></span></span></span></div>
+                                <div><span><span><span><span>
+                                          <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ISP%206%20PIN.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/ISP%206%20PIN.JPG" /></a></div>
+                                        </span></span></span></span></div>
+                                <div><span><span><span><span>
+                                          <font face="'courier new', monospace">Figure 5: 6 pin ISP</font>
+                                        </span></span></span></span></div>
+                                <div><span><span><span><span><br /><br /></span></span></span></span></div>
+                                <div><span><span><span><span><span>    The 6 pin ISP is the most commonly used ISP header, but the 10 pin still exists so lets go over it shall we?</span><br /></span></span></span></span></div>
+                                <div><span><span><span><span><br /></span></span></span></span></div>
+                                <div><span><span><span><span><br /></span></span></span></span></div>
+                                <div><span><span><span><span>
+                                          <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ISP%2010%20PIN.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/ISP%2010%20PIN.JPG" /></a></div>
+                                        </span></span></span></span></div>
+                                <div><span><span><span><span>
+                                          <font face="'courier new', monospace">Figure 6: 10 pin ISP</font>
+                                        </span></span></span></span></div>
+                                <div><span><span><span><span><br /></span></span></span></span></div>
+                                <div><span><span><span><span><span>    Notice the N/C (not connected) line in the 10 pin ISP?  Well some sites will tell you to connect this to GND, this is a BAD BAD BAD idea.  This pin is actually used by some programmers for alternate functionality (such as pulsing an LED).  So leaving this pin not connected will make your project more universally friendly.</span><br /></span></span></span></span></div>
+                                <div><br /></div>
+                                <div><span><span><span>
+                                        <div><span><span><span><span><span><span>    </span>One very important thing to note is that connecting some loads to the ISP pins can cause problems, a few years ago I connected a pizo buzzer between MISO and MOSI and it caused connection faults.  Since then I put a jumper on each line (so that I could disconnect the loads by removing the jumper) as shown in Figure 7. </span><br /></span></span></span></span></div>
+                                        <div><span><span><span><span><br /></span></span></span></span></div>
+                                        <div><span><span><span><span><br /></span></span></span></span></div>
+                                        <div><span><span><span><span>
+                                                  <div style="display:block;text-align:left"></div>
+                                                  <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ISP-Jumper.JPG?attredirects=0" imageanchor="1" style="color:rgb(0,0,204);text-decoration:none;border-bottom-style:none"><img border="0" src="/avr-guide/avr-basic-hookup/ISP-Jumper.JPG" style="border-width:1px;padding:7px;border-style:solid;background-color:rgb(255,255,255)" /></a></div>
+                                                </span></span></span></span></div>
+                                        <div>
+                                          <font face="'courier new', monospace" size="2">Figure 7: Jumpers on the ISP lines</font>
+                                        </div>
+                                        <div>
+                                          <font face="'courier new', monospace" size="2"><br /></font>
+                                        </div>
+                                      </span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><span>    Hope that helps.  Back to Killzone 3 multiplayer for me.</span><br /></span></span></span></div>
+                                <div><span><span><span><span><br /></span></span></span></span></div>
+                                <div><span><span><span><span>Cheers</span></span></span></span></div>
+                                <div><span><span><span><span>Q</span></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                                <div><span><span><span><br /></span></span></span></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="sites-chrome-footer-wrapper">
+            <div id="sites-chrome-footer-wrapper-inside">
+              <div id="sites-chrome-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
