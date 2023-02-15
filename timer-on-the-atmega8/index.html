@@ -20,8 +20,8 @@
   <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1619893518000/system/app/css/camelot/allthemes-view.css" />
 
   <title>Timers on the ATmega8 - QEEWiki</title>
-  <meta itemprop="image" content="/avr-guide/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?height=254&amp;width=400" />
-  <meta property="og:image" content="/avr-guide/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?height=254&amp;width=400" />
+  <meta itemprop="image" content="/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?height=254&amp;width=400" />
+  <meta property="og:image" content="/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?height=254&amp;width=400" />
 </head>
 
 <body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
@@ -39,7 +39,7 @@
               <tr class="sites-header-primary-row" id="sites-chrome-userheader">
                 <td id="sites-header-title" class="" role="banner" style="height: 70px">
                   <div class="sites-header-cell-buffer-wrapper">
-                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                    <h2><a href="/" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
                   </div>
                 </td>
               </tr>
@@ -63,16 +63,16 @@
                           </li>
                           <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
                             <div dir="ltr" style="padding-left: 0px;">
-                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                              <div class="expander"></div><a href="/" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
                             </div>
                             <ul role="navigation" class="has-expander">
                               <li class="">
-                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
                               </li>
                             </ul>
                           </li>
                           <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
                           </li>
                         </ul>
                       </div>
@@ -120,7 +120,7 @@
                     <div id="sites-canvas" role="main">
                       <div id="goog-ws-editor-toolbar-container"> </div>
                       <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
-                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt;
+                        <A href="/" dir="ltr">My Books</A> &gt; <A href="/" dir="ltr">AVR GUIDE</A> &gt;
                       </div>
                       <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
                         <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">Timers on the ATmega8</span>
@@ -150,7 +150,7 @@
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><span style="FONT-SIZE:medium;FONT-FAMILY:courier new,monospace"><b>THEORY OF OPERATION:</b></span></div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                   <div>
-                                    <div style="DISPLAY:block;FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;TEXT-ALIGN:left"><span>    A quick review of the previous tutorial (<a href="/avr-guide/common-timer-theory">COMMON TIMER/COUNTER THEORY</a>).  The clock source (from the internal clock or an external source) sends pulses to the prescaler which divides the pulses by a determined amount.  This input is sent to the control circuit which increments the TCNTn register.  When the register hits its TOP value it resets to 0 and sends a <span style="COLOR:rgb(0,0,0)">TOVn</span> (timer overflow) signal which could be used to trigger an interrupt. </span><br /></div>
+                                    <div style="DISPLAY:block;FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;TEXT-ALIGN:left"><span>    A quick review of the previous tutorial (<a href="/common-timer-theory">COMMON TIMER/COUNTER THEORY</a>).  The clock source (from the internal clock or an external source) sends pulses to the prescaler which divides the pulses by a determined amount.  This input is sent to the control circuit which increments the TCNTn register.  When the register hits its TOP value it resets to 0 and sends a <span style="COLOR:rgb(0,0,0)">TOVn</span> (timer overflow) signal which could be used to trigger an interrupt. </span><br /></div>
                                     <div style="DISPLAY:block;FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif;TEXT-ALIGN:left"><br /></div>
                                     <div style="DISPLAY:block;TEXT-ALIGN:left">    Unfortunately, the AVR timer does process time in hours, minutes or seconds (what we are use to).  However, being evil masterminds we have the solution, it just requires a bit of math and our old friend, the prescaler.  <br /></div><br /><br />
                                     <div style="MARGIN-LEFT:40px"><span style="COLOR:rgb(0,0,255)">OCRn =</span>  <font color="#0000ff">[ (clock_speed / Prescaler_value) * Desired_time_in_Seconds ] - 1<br /></font>
@@ -172,7 +172,7 @@
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
-                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?attredirects=0" imageanchor="1"><img border="0" height="254" src="/avr-guide/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?height=254&amp;width=400" width="400" /></a></div>
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?attredirects=0" imageanchor="1"><img border="0" height="254" src="/timer-on-the-atmega8/Flow-Timer-ATmega8.jpg?height=254&amp;width=400" width="400" /></a></div>
                                   </div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px"><i>
                                       <font face="'courier new', monospace">Flow 1:  Activating The Timer</font>
@@ -193,7 +193,7 @@
                                   </div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
-                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/timer-on-the-atmega8/Timer%20-%20Timer0%20ATmega8.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/timer-on-the-atmega8/Timer%20-%20Timer0%20ATmega8.JPG" /></a></div><i>Figure 1: Timer0 on the ATmega8</i>
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/timer-on-the-atmega8/Timer%20-%20Timer0%20ATmega8.JPG?attredirects=0" imageanchor="1"><img border="0" src="/timer-on-the-atmega8/Timer%20-%20Timer0%20ATmega8.JPG" /></a></div><i>Figure 1: Timer0 on the ATmega8</i>
                                   </div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
@@ -441,7 +441,7 @@
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
-                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/timer-on-the-atmega8/ATmega8%20-%20Timer1.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/timer-on-the-atmega8/ATmega8%20-%20Timer1.JPG" /></a></div><i>Figure 2: Timer1 on the ATmega8</i>
+                                    <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/timer-on-the-atmega8/ATmega8%20-%20Timer1.JPG?attredirects=0" imageanchor="1"><img border="0" src="/timer-on-the-atmega8/ATmega8%20-%20Timer1.JPG" /></a></div><i>Figure 2: Timer1 on the ATmega8</i>
                                   </div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                   <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
@@ -1029,7 +1029,7 @@
                                       <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                       <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                       <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif">
-                                        <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/avr-guide/timer-on-the-atmega8/ATmega8%20-%20Timer2.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/timer-on-the-atmega8/ATmega8%20-%20Timer2.JPG" /></a></div><i>Figure 3: Timer2 on the ATmega8</i>
+                                        <div style="DISPLAY:block;TEXT-ALIGN:left"><a href="/timer-on-the-atmega8/ATmega8%20-%20Timer2.JPG?attredirects=0" imageanchor="1"><img border="0" src="/timer-on-the-atmega8/ATmega8%20-%20Timer2.JPG" /></a></div><i>Figure 3: Timer2 on the ATmega8</i>
                                       </div>
                                       <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>
                                       <div style="FONT-WEIGHT:normal;FONT-SIZE:13px;FONT-FAMILY:Verdana,Helvetica,Arial,sans-serif"><br /></div>

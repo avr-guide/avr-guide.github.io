@@ -20,8 +20,8 @@
   <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
 
   <title>AVR Basic Hookup - QEEWiki</title>
-  <meta itemprop="image" content="/avr-guide/avr-basic-hookup/ATmega%20-%20Power.JPG" />
-  <meta property="og:image" content="/avr-guide/avr-basic-hookup/ATmega%20-%20Power.JPG" />
+  <meta itemprop="image" content="/avr-basic-hookup/ATmega%20-%20Power.JPG" />
+  <meta property="og:image" content="/avr-basic-hookup/ATmega%20-%20Power.JPG" />
 </head>
 
 <body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
@@ -39,7 +39,7 @@
               <tr class="sites-header-primary-row" id="sites-chrome-userheader">
                 <td id="sites-header-title" class="" role="banner" style="height: 70px">
                   <div class="sites-header-cell-buffer-wrapper">
-                    <h2><a href="/avr-guide" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
+                    <h2><a href="/" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
                   </div>
                 </td>
               </tr>
@@ -63,16 +63,16 @@
                           </li>
                           <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
                             <div dir="ltr" style="padding-left: 0px;">
-                              <div class="expander"></div><a href="/avr-guide" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
+                              <div class="expander"></div><a href="/" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
                             </div>
                             <ul role="navigation" class="has-expander">
                               <li class="">
-                                <div dir="ltr" style="padding-left: 38px;"><a href="/avr-guide" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
+                                <div dir="ltr" style="padding-left: 38px;"><a href="/" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
                               </li>
                             </ul>
                           </li>
                           <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="/avr-guide" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
+                            <div dir="ltr" style="padding-left: 19px;"><a href="/" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
                           </li>
                         </ul>
                       </div>
@@ -120,7 +120,7 @@
                     <div id="sites-canvas" role="main">
                       <div id="goog-ws-editor-toolbar-container"> </div>
                       <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
-                        <A href="/avr-guide" dir="ltr">My Books</A> &gt; <A href="/avr-guide" dir="ltr">AVR GUIDE</A> &gt; 
+                        <A href="/" dir="ltr">My Books</A> &gt; <A href="/" dir="ltr">AVR GUIDE</A> &gt; 
                       </div>
                       <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
                         <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">AVR Basic Hookup</span>
@@ -137,7 +137,7 @@
                                         <font face="'courier new', monospace" size="3">BASIC POWER HOOKUPS:</font>
                                       </b></span></div>
                                   <div><span><br /><br />
-                                      <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ATmega%20-%20Power.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/ATmega%20-%20Power.JPG" /></a></div>
+                                      <div style="display:block;text-align:left"><a href="/avr-basic-hookup/ATmega%20-%20Power.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-basic-hookup/ATmega%20-%20Power.JPG" /></a></div>
                                     </span></div>
                                   <div>
                                     <div style="display:block;text-align:left"></div>
@@ -147,12 +147,12 @@
                                   <div><span><br /></span></div>    The AVR is not difficult to hook up.  All you really need is to hook power up to 4 pins and the AVR is ready to run.
                                 </span>  While VCC and GND are obvious you might be asking yourself about AVCC.  The answer like most is in the datasheet (page 5 or so under "Pin Description") which states:<br /><span><br /></span>
                                 <div style="margin-left:40px">"AVCC is the supply voltage pin for the A/D Converter, Port C (3..0), and ADC (7..6). It should be<br />externally connected to VCC, even if the ADC is not used. If the ADC is used, it should be connected<br />to VCC through a low-pass filter"<br /></div>
-                                <div><span><br /><span>    </span>The part about that low-pass filter might have you confused, it basically a capacitor, C1 in figure 2.  So while C1 is not really needed it you can see that it is recommended in the event that you decide to use the <a href="/avr-guide/analog-input">ADC</a>.<br /><br /></span></div>
+                                <div><span><br /><span>    </span>The part about that low-pass filter might have you confused, it basically a capacitor, C1 in figure 2.  So while C1 is not really needed it you can see that it is recommended in the event that you decide to use the <a href="/analog-input">ADC</a>.<br /><br /></span></div>
                                 <div><span><span>    If you are using the Arduino you simply have to plug a 7-12V power adapter into it and your ready to roll.  If however you are using just the AVR chip itself you need to provide the chip with a 2.7-5.5V DC voltage source.  The 2 most common voltages are 3.3V and 5V.</span><br /></span></div>
                                 <div><span><span><br /></span></span></div>
                                 <div><span><span><br /></span></span></div>
                                 <div><span><span>
-                                      <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/Power%20Hookup.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/Power%20Hookup.JPG" /></a></div>
+                                      <div style="display:block;text-align:left"><a href="/avr-basic-hookup/Power%20Hookup.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-basic-hookup/Power%20Hookup.JPG" /></a></div>
                                     </span></span></div>
                                 <div><span><span>
                                       <font face="'courier new', monospace">Figure 2: Basic AVR Power Hookup</font>
@@ -163,7 +163,7 @@
                                 <div><span><span><br /></span></span></div>
                                 <div><span><span><br /></span></span></div>
                                 <div><span><span>
-                                      <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/Basic%20Hookup.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/Basic%20Hookup.JPG" /></a></div>
+                                      <div style="display:block;text-align:left"><a href="/avr-basic-hookup/Basic%20Hookup.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-basic-hookup/Basic%20Hookup.JPG" /></a></div>
                                     </span></span></div>
                                 <div><span><span>
                                       <font face="'courier new', monospace">Figure 3: Basic AVR</font>
@@ -185,7 +185,7 @@
                                 <div><span><br /></span></div>
                                 <div><span><br /></span></div>
                                 <div><span>
-                                    <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ATmega%20-%20ISP.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/ATmega%20-%20ISP.JPG" /></a></div>
+                                    <div style="display:block;text-align:left"><a href="/avr-basic-hookup/ATmega%20-%20ISP.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-basic-hookup/ATmega%20-%20ISP.JPG" /></a></div>
                                   </span></div>
                                 <div style="font-family:courier new,monospace"><span>Figure 4: AVR ISP Pins (Same on ATmega8/88/168/328)<br /></span></div>
                                 <div><span><br /></span></div>
@@ -200,7 +200,7 @@
                                 <div><span><span><span><span><br /></span></span></span></span></div>
                                 <div><span><span><span><span><br /></span></span></span></span></div>
                                 <div><span><span><span><span>
-                                          <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ISP%206%20PIN.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/ISP%206%20PIN.JPG" /></a></div>
+                                          <div style="display:block;text-align:left"><a href="/avr-basic-hookup/ISP%206%20PIN.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-basic-hookup/ISP%206%20PIN.JPG" /></a></div>
                                         </span></span></span></span></div>
                                 <div><span><span><span><span>
                                           <font face="'courier new', monospace">Figure 5: 6 pin ISP</font>
@@ -210,7 +210,7 @@
                                 <div><span><span><span><span><br /></span></span></span></span></div>
                                 <div><span><span><span><span><br /></span></span></span></span></div>
                                 <div><span><span><span><span>
-                                          <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ISP%2010%20PIN.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-guide/avr-basic-hookup/ISP%2010%20PIN.JPG" /></a></div>
+                                          <div style="display:block;text-align:left"><a href="/avr-basic-hookup/ISP%2010%20PIN.JPG?attredirects=0" imageanchor="1"><img border="0" src="/avr-basic-hookup/ISP%2010%20PIN.JPG" /></a></div>
                                         </span></span></span></span></div>
                                 <div><span><span><span><span>
                                           <font face="'courier new', monospace">Figure 6: 10 pin ISP</font>
@@ -224,7 +224,7 @@
                                         <div><span><span><span><span><br /></span></span></span></span></div>
                                         <div><span><span><span><span>
                                                   <div style="display:block;text-align:left"></div>
-                                                  <div style="display:block;text-align:left"><a href="/avr-guide/avr-basic-hookup/ISP-Jumper.JPG?attredirects=0" imageanchor="1" style="color:rgb(0,0,204);text-decoration:none;border-bottom-style:none"><img border="0" src="/avr-guide/avr-basic-hookup/ISP-Jumper.JPG" style="border-width:1px;padding:7px;border-style:solid;background-color:rgb(255,255,255)" /></a></div>
+                                                  <div style="display:block;text-align:left"><a href="/avr-basic-hookup/ISP-Jumper.JPG?attredirects=0" imageanchor="1" style="color:rgb(0,0,204);text-decoration:none;border-bottom-style:none"><img border="0" src="/avr-basic-hookup/ISP-Jumper.JPG" style="border-width:1px;padding:7px;border-style:solid;background-color:rgb(255,255,255)" /></a></div>
                                                 </span></span></span></span></div>
                                         <div>
                                           <font face="'courier new', monospace" size="2">Figure 7: Jumpers on the ISP lines</font>
