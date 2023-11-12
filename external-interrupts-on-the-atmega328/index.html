@@ -1,801 +1,722 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
-
+<!Doctype html>
+<html class="no-js" lang="en">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
-  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/23f135/system/app/images/apple-touch-icon.png" type="image/png" />
-  
-  <meta name="title" content="EXTERNAL INTERRUPTS ON THE ATmega168/328 - QEEWiki" />
-  <meta itemprop="name" content="EXTERNAL INTERRUPTS ON THE ATmega168/328 - QEEWiki" />
-  <meta property="og:title" content="EXTERNAL INTERRUPTS ON THE ATmega168/328 - QEEWiki" />
-  <meta name="description" content="Q's Electrical Engineering Wiki" />
-  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
-  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
-  <style type="text/css">
-  </style>
-  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/23f135/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
-  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1604334291000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
-  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1604334291000/system/app/css/camelot/allthemes-view.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>EXTERNAL INTERRUPTS ON THE ATmega168/328 - QEEWiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-  <title>EXTERNAL INTERRUPTS ON THE ATmega168/328 - QEEWiki</title>
-  <meta itemprop="image" content="/external-interrupts-on-the-atmega328/ATmega328%20-%20INTx.JPG" />
-  <meta property="og:image" content="/external-interrupts-on-the-atmega328/ATmega328%20-%20INTx.JPG" />
+    <meta name="description" content="Guide For Working With AVR Microcontrollers"/>
+    <meta name="keywords"
+          content="atmega8, atmega168, atmega328, atmega328p, interrupt, timer, adc, analog comparator, pwm, fast pwm, phase correct pwm, spi, uart, i2c, eeprom, tutorial, datasheet"/>
+    <meta name="author" content="Chayan Mistry">
+
+    <meta property="og:url" content="https://avr-guide.github.io"/>
+    <meta property="og:site_name" content="AVR GUIDE - QEEWiki"/>
+    <link rel="icon" href="../assets/img/favicon.ico">
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/prettify.css">
 </head>
+<body>
 
-<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
-  <div id="sites-page-toolbar" class="sites-header-divider">
-    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
-      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
-    </div>
-  </div>
-  <div id="sites-chrome-everything-scrollbar">
-    <div id="sites-chrome-everything" class="">
-      <div id="sites-chrome-page-wrapper" style="direction: ltr">
-        <div id="sites-chrome-page-wrapper-inside">
-          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
-            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
-              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
-                <td id="sites-header-title" class="" role="banner" style="height: 70px">
-                  <div class="sites-header-cell-buffer-wrapper">
-                    <h2><a href="/" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
-                  </div>
-                </td>
-              </tr>
-              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
-                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div id="sites-chrome-main-wrapper">
-            <div id="sites-chrome-main-wrapper-inside">
-              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
-                <tr>
-                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
-                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
-                      <h4 class="sites-embed-title">Navigation</h4>
-                      <div class="sites-embed-content sites-sidebar-nav">
-                        <ul role="navigation" jotId="navList" class="has-expander">
-                          <li class="topLevel nav-first ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="https://github.com/chayanforyou" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
-                          </li>
-                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
-                            <div dir="ltr" style="padding-left: 0px;">
-                              <div class="expander"></div><a href="/" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
-                            </div>
-                            <ul role="navigation" class="has-expander">
-                              <li class="">
-                                <div dir="ltr" style="padding-left: 38px;"><a href="/" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="/" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
-                      <h4 class="sites-embed-title">Resources</h4>
-                      <div class="sites-embed-content sites-sidebar-nav">
-                        <ul role="navigation" jotId="navList" class="has-expander">
-                          <li class="topLevel nav-first ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
-                          </li>
-                          <li class="topLevel parent ">
-                            <div dir="ltr" style="padding-left: 0px;">
-                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
-                            </div>
-                            <ul role="navigation" class="has-expander">
-                              <li class="">
-                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
-                              </li>
-                              <li class="">
-                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </td>
-                  <td id="sites-canvas-wrapper">
-                    <div id="sites-canvas" role="main">
-                      <div id="goog-ws-editor-toolbar-container"> </div>
-                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs" >
-                        <A href="/" dir="ltr">My Books</A> &gt; <A href="/" dir="ltr">AVR GUIDE</A> &gt; 
-                      </div>
-                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
-                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">EXTERNAL INTERRUPTS ON THE ATmega168/328</span>
-                      </h3>
-                      <div id="sites-canvas-main" class="sites-canvas-main">
-                        <div id="sites-canvas-main-content">
-                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
-                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
-                              <div dir="ltr"><br /></div>
-                            </div>
-                            <div class="sites-layout-tile sites-tile-name-content-1">
-                              <div dir="ltr"><span><b style="font-family:courier new,monospace"><span style="font-size:medium">INTRODUCTION:</span></b><br /><br />    </span>In
-                                the previous section I talked about the basics of interrupts. In this
-                                section, we will talk about the first type of device interrupts called
-                                external interrupts.  These interrupts are basically called on a given
-                                status change on the INTn pin. This is essentially an input interrupt
-                                and is great to use for applications when you might need to react
-                                quickly to an outside source, such as a bumper of your robot hitting the
-                                wall or to detect a blown fuse.<br /><br />
-                                <div><br /></div>
-                                <div>
-                                  <hr />
-                                </div>
-                                <div><br /></div>
-                                <div><br /></div>
-                                <div>
-                                  <font face="'courier new', monospace"><span style="font-size:medium"><b>HARDWARE:</b></span></font>
-                                </div>
-                                <div><br /><span>    </span>Hardware wise there is not difference between External Interrupts and Inputs so don't be afraid to reread the <a href="/digital-inputs">Digital Input Tutorial</a> if you need a refresher.<br /><br />
-                                  <div><span>  
-                                       If you look at the AVR pinout diagram you will see the INTx which are
-                                      used for External Interrupts and PCINTx pins that are used for Pin
-                                      Change Interrupts.</span><br /></div>
-                                  <div><br /></div>
-                                  <div><br /></div>
-                                  <div>
-                                    <hr />
-                                  </div>
-                                  <div><br /></div>
-                                  <div><br /></div>
-                                  <div>
-                                    <div>
-                                      <div><b style="font-family:courier new,monospace"><span style="font-size:medium">EXTERNAL INTERRUPTS:</span></b><br /><br />
-                                        <div style="display:block;text-align:left"><br />
-                                          <div style="display:block;text-align:left"><a href="/external-interrupts-on-the-atmega328/ATmega328%20-%20INTx.JPG?attredirects=0" imageanchor="1"><img border="0" src="/external-interrupts-on-the-atmega328/ATmega328%20-%20INTx.JPG" /></a></div>
-                                        </div>
-                                      </div>
-                                      <div><i style="font-family:courier new,monospace">Figure 1: ATmega168/328 - External Interrupt Pins<br /></i></div>
-                                      <div><br /></div>
-                                      <div><br /><span>    </span>The
-                                        ATmega8 and the ATmega88/168/328 are backwards compatible when it comes
-                                        to the pinouts however, they are programmed slightly different and
-                                        while external interrupts work the same way on both types of micro
-                                        controllers they do require different code to run.<br /><br /><span><span>    External interrupts are fairly powerful, they can be configured to trigger on one of 4 states.  Low level will trigger whenever the pin senses a LOW (GND) signal.  Any Logic Change trigger at the moment the pin changes from HIGH (Vcc) to LOW (GND) or from LOW (GND) to HIGH(Vcc). On Falling Edge will trigger at the moment the pin goes from HIGH (Vcc) to LOW (GND). On Rising Edge will trigger at the moment the pin goes from LOW (GND) to HIGH (Vcc).  The best part is that you can configure each INTx independently.</span></span><br /><br /></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>
-                                        <div>
-                                          <div>    External interrupts use the below 3 registers.  Which you could find
-                                            under the "External Interrupts section of the datasheet.<br /><br />
-                                            <div><br /></div>
-                                            <div>
-                                              <table border="1" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
-                                                <tbody>
-                                                  <tr>
-                                                    <td style="text-align:center;width:60px"> </td>
-                                                    <td style="text-align:center;width:60px"><b>7 bit </b></td>
-                                                    <td style="text-align:center;width:60px"><b>6 bit </b></td>
-                                                    <td style="text-align:center;width:60px"><b>5 bit </b></td>
-                                                    <td style="text-align:center;width:60px"><b>4 bit </b></td>
-                                                    <td style="text-align:center;width:60px"><b>3 bit </b></td>
-                                                    <td style="text-align:center;width:60px"><b>2 bit </b></td>
-                                                    <td style="text-align:center;width:60px"><b>1 bit </b></td>
-                                                    <td style="text-align:center;width:60px"><b>0 bit </b></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="text-align:center;width:60px"><b>EICRA</b></td>
-                                                    <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                                    <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                                    <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                                    <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                                    <td style="text-align:center;width:60px">ISC11 </td>
-                                                    <td style="text-align:center;width:60px">ISC10 </td>
-                                                    <td style="text-align:center;width:60px">ISC01 </td>
-                                                    <td style="text-align:center;width:60px">ISC00 </td>
-                                                  </tr>
-                                                </tbody>
-                                              </table><i style="font-family:courier new,monospace">External Interrupt Control Register A</i>
-                                            </div>
-                                            <div><br /></div>
-                                            <div><br /></div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
-                                  <div>
-                                    <div>
-                                      <div>
-                                        <div>
-                                          <div>
-                                            <div>
-                                              <div>
-                                                <div>
-                                                  <table border="1" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
-                                                    <tbody>
-                                                      <tr>
-                                                        <td style="vertical-align:top;width:54px;height:15px"> <b>ISCx1</b></td>
-                                                        <td style="vertical-align:top;width:54px;height:15px"><b> ISCx0 </b></td>
-                                                        <td style="vertical-align:top;width:399px;height:15px"><b>DESCRIPTION </b></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td style="text-align:center;vertical-align:top;width:54px;height:15px">0</td>
-                                                        <td style="text-align:center;vertical-align:top;width:54px;height:15px">0</td>
-                                                        <td style="vertical-align:top;width:399px;height:15px"> Low level of INTx generates an interrupt request</td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td style="text-align:center;vertical-align:top;width:54px;height:15px">0</td>
-                                                        <td style="text-align:center;vertical-align:top;width:54px;height:15px">1</td>
-                                                        <td style="vertical-align:top;width:399px;height:15px"> Any logic change on INTx generates an interrupt request </td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td style="text-align:center;vertical-align:top;width:54px;height:15px">1</td>
-                                                        <td style="text-align:center;vertical-align:top;width:54px;height:15px">0</td>
-                                                        <td style="vertical-align:top;width:399px;height:15px"> The falling edge of INTx generates an interrupt request </td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td style="text-align:center;vertical-align:top;width:54px;height:15px">1</td>
-                                                        <td style="text-align:center;vertical-align:top;width:54px;height:15px">1</td>
-                                                        <td style="vertical-align:top;width:399px;height:15px"> The rising edge of INTx generates an interrupt request <br /></td>
-                                                      </tr>
-                                                    </tbody>
-                                                  </table>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div style="font-family:courier new,monospace">
-                                    <div>
-                                      <div>
-                                        <div>
-                                          <div>
-                                            <div>
-                                              <div><i>ISC Bit Settings</i></div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </blockquote>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>
-                                        <div>
-                                          <div>
-                                            <div><br /></div>
-                                            <div><br /></div>
-                                            <div>
-                                              <table border="1" cellspacing="0" style="margin:0px;border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
-                                                <tbody>
-                                                  <tr>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"> </td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b> 7 bit<br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>6 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>5 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>4 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>3 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>2 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>1 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>0 bit <br /></b></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>EIMSK</b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> -</td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center">INT1 <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center">INT0<font color="#666666"> </font>
-                                                    </td>
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                            <div style="font-family:courier new,monospace"><i>External Interrupt Mask Register</i></div>
-                                            <div><br /></div>
-                                            <div><br /></div>
-                                            <div>
-                                              <table border="1" cellspacing="0" style="margin:0px;border-color:rgb(136,136,136);border-width:1px;border-collapse:collapse">
-                                                <tbody>
-                                                  <tr>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"> </td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b> 7 bit<br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>6 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>5 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>4 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>3 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>2 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>1 bit <br /></b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>0 bit <br /></b></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="vertical-align:top;width:60px;text-align:center"><b>EIFR</b></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)"> -</td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center;color:rgb(153,153,153);background-color:rgb(243,243,243)">- <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center">INTF1 <br /></td>
-                                                    <td style="vertical-align:top;width:60px;text-align:center">INTF0 </td>
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                            <div style="font-family:courier new,monospace"><i>External Interrupt Flag Register</i></div>
-                                            <div><br /></div>
-                                            <div><br /></div>
-                                            <div><i>ATmega168/328 Code:</i></div>
-                                            <div><span style="line-height:13px">
-                                                <div class="sites-codeblock sites-codesnippet-block">
-                                                  <div><code>#include &lt;avr/io.h&gt;</code></div>
-                                                  <div><code>#include &lt;avr/interrupt.h&gt;</code></div>
-                                                  <div><br /></div>
-                                                  <div><br /></div>
-                                                  <div><code>int main(void)</code></div>
-                                                  <div><code>{</code></div>
-                                                  <div><span><code><span style="font-family:Verdana,Helvetica,Arial,sans-serif;color:rgb(0,0,0)"><div><font><font color="#000000"><code style="color:rgb(0,96,0)"><span>    </span>DDRD &amp;= ~(1 &lt;&lt; DDD2</code></font>
-                                                      </font><code style="color:rgb(0,96,0)">);</code><span> <span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">// Clear the PD2 pin</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD2 (PCINT0 pin) is now an input</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>PORTD |= (1 &lt;&lt; PORTD2); </code><span><code style="color:rgb(0,96,0)">   </code></span><code style="color:rgb(0,96,0)">// turn On the </code><code style="color:rgb(0,96,0)">Pull-up</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PD2 is now an input with pull-up enabled</code></span></div>
-                                                  <div><span><code style="color:rgb(0,96,0)"><br /></code></span></div>
-                                              </span></code></span></div>
-                                            <div><span><code><br /></code></span></div>
-                                            <div><span><code><br /></code></span></div>
-                                            <div><span><span><code>    EICRA |= (1 &lt;&lt; ISC00);</code><span><code>    // set INT0 to trigger on ANY logic change</code></span></span><br /></span></div>
-                                            <div><span><span><span><span><code>    EIMSK |= (1 &lt;&lt; INT0);</code><span><code>    </code><span><code> // Turns on INT0</code></span></span></span><br /></span></span></span></div>
-                                            <div><span><br /></span></div>
-                                            <div><span><span><code>    sei();</code><span><code>    </code><span><code>    </code><span><code>    <span>    <span>    </span></span>// turn on interrupts</code></span></span></span></span><br /></span></div>
-                                            <div><span><br /></span></div>
-                                            <div><span><code>    while(1)</code></span><br /></div>
-                                            <div><span><span><code>    {</code></span><br /></span></div>
-                                            <div><span><span><span><code>    </code><span><code>    /*main program loop here */</code></span></span><br /></span></span></div>
-                                            <div><span><span><span><code>    }</code></span></span></span></div>
-                                            <div><code>}</code></div>
-                                            <div><br /></div>
-                                            <div><br /></div>
-                                            <div><br /></div>
-                                            <div><code>ISR (INT0_vect)</code></div>
-                                            <div><code>{</code></div>
-                                            <div><span><code>    /* interrupt code here */</code></span><br /></div>
-                                            <div><code>}</code></div>
-                                          </div></span>
-                                        </div>
-                                        <div><br /></div>
-                                        <div><br /></div>
-                                        <div>
-                                          <hr />
-                                        </div>
-                                        <div><br /></div>
-                                        <div><br /><b><span style="font-family:courier new,monospace"><span style="font-size:medium">PIN CHANGE INTERRUPTS:</span></span></b><br /><br />
-                                          <div style="display:block;text-align:left"><a href="/external-interrupts-on-the-atmega328/ATmega328%20-%20PCINTx.JPG?attredirects=0"><img border="0" src="/external-interrupts-on-the-atmega328/ATmega328%20-%20PCINTx.JPG" /></a></div>
-                                        </div>
-                                        <div><i style="font-family:courier new,monospace">Figure 2: ATmega168/328 - Pin Change Interrupt Pins<br /></i></div>
-                                        <div><br /></div>
-                                        <div><br /><span>    </span>One
-                                          important thing to note, on the older ATmega8 does not have any PCINT
-                                          pints, therefore, this section of the tutorial only applies to ATmega88
-                                          through ATmega328.<br /></div>
-                                      </div>
-                                    </div>
-                                    <div><br /></div>
-                                    <div>
-                                      <table border="1" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
-                                        <tbody>
-                                          <tr>
-                                            <td style="text-align:center;width:60px"> </td>
-                                            <td style="text-align:center;width:60px"> <b>7 bit</b></td>
-                                            <td style="text-align:center;width:60px"><b>6 bit </b></td>
-                                            <td style="text-align:center;width:60px"><b>5 bit </b></td>
-                                            <td style="text-align:center;width:60px"><b>4 bit </b></td>
-                                            <td style="text-align:center;width:60px"><b>3 bit </b></td>
-                                            <td style="text-align:center;width:60px"><b>2 bit </b></td>
-                                            <td style="text-align:center;width:60px"><b>1 bit </b></td>
-                                            <td style="text-align:center;width:60px"><b>0 bit </b></td>
-                                          </tr>
-                                          <tr>
-                                            <td style="text-align:center;width:60px"><b> PCICR</b></td>
-                                            <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="text-align:center;width:60px">PCIE2 </td>
-                                            <td style="text-align:center;width:60px">PCIE1 </td>
-                                            <td style="text-align:center;width:60px">PCIE0 </td>
-                                          </tr>
-                                        </tbody>
-                                      </table><i style="font-family:courier new,monospace">Pin Change Interrupt Control Register</i>
-                                    </div>
-                                    <div><br /></div>
-                                    <div><br /></div>
-                                    <div>
-                                      <table border="1" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
-                                        <tbody>
-                                          <tr>
-                                            <td style="vertical-align:top;text-align:center;width:60px"> </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"> <b>7 bit</b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>6 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>5 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>4 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>3 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>2 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>1 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>0 bit </b></td>
-                                          </tr>
-                                          <tr>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b> PCIFR</b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">- </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCIF2 </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCIF1 </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCIF0 </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                    <div style="font-family:courier new,monospace"><i>Pin Change Interrupt Flag Register</i></div>
-                                    <div><br /></div>
-                                    <div><br />
-                                      <table border="1" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
-                                        <tbody>
-                                          <tr>
-                                            <td style="vertical-align:top;text-align:center;width:60px"> </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"> <b>7 bit</b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>6 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>5 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>4 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>3 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>2 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>1 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>0 bit </b></td>
-                                          </tr>
-                                          <tr>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>PCMSK0</b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT7</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT6</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT5</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT4</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT3</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT2</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT1</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT0</td>
-                                          </tr>
-                                        </tbody>
-                                      </table><i>Pin Change Mask Register 0</i><br /><br /><br />
-                                    </div>
-                                    <div>
-                                      <table border="1" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
-                                        <tbody>
-                                          <tr>
-                                            <td style="vertical-align:top;text-align:center;width:60px"> </td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"> <b>7 bit</b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>6 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>5 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>4 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>3 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>2 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>1 bit </b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>0 bit </b></td>
-                                          </tr>
-                                          <tr>
-                                            <td style="vertical-align:top;text-align:center;width:60px"><b>PCMSK2</b></td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT23</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT22</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT21</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT20</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT19</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT18</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT17</td>
-                                            <td style="vertical-align:top;text-align:center;width:60px">PCINT16</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                    <div style="font-family:courier new,monospace"><i>Pin Change Mask Register 2</i></div>
-                                    <div><br /></div>
-                                    <div><br /></div>
-                                    <div>
-                                      <div>
-                                        <table border="1" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
-                                          <tbody>
-                                            <tr>
-                                              <td style="vertical-align:top;text-align:center;width:60px"> </td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"> <b>7 bit</b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>6 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>5 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>4 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>3 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>2 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>1 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>0 bit </b></td>
-                                            </tr>
-                                            <tr>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>PCMSK1</b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px;color:rgb(153,153,153);background-color:rgb(243,243,243)">-</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT14</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT13</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT12</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT11</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT10</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT9</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT8</td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </div>
-                                      <div style="font-family:courier new,monospace"><i>Pin Change Mask Register 1</i></div>
-                                    </div>
-                                    <div><br /></div>
-                                    <div><br /></div>
-                                    <div>
-                                      <div>
-                                        <table border="1" cellspacing="0" style="margin:0px;border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
-                                          <tbody>
-                                            <tr>
-                                              <td style="vertical-align:top;text-align:center;width:60px"> </td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"> <b>7 bit</b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>6 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>5 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>4 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>3 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>2 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>1 bit </b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>0 bit </b></td>
-                                            </tr>
-                                            <tr>
-                                              <td style="vertical-align:top;text-align:center;width:60px"><b>PCMSK0</b></td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT7</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT6</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT5</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT4</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT3</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT2</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT1</td>
-                                              <td style="vertical-align:top;text-align:center;width:60px">PCINT0</td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </div>
-                                      <div style="font-family:courier new,monospace"><i>Pin Change Mask Register 0<br /></i></div>
-                                    </div>
-                                    <div><br /></div>
-                                    <div><br /></div>
-                                    <div><span>  
-                                         The PCIEx bits in the PCICR registers enable External Interrupts and
-                                        tells the MCU to check PCMSKx on a pin change state. When a pin changes
-                                        states (HIGH to LOW, or LOW to HIGH) and the corresponding PCINTx bit in
-                                        the PCMSKx register is HIGH the corresponding PCIFx bit in the PCIFR
-                                        register is set to HIGH and the MCU jumps to the corresponding Interrupt
-                                        vector.</span><br /></div>
-                                    <div><span><br /></span></div>
-                                    <div><br /></div>
-                                    <div><i>ATmega168/328 Code:</i></div>
-                                    <div class="sites-codeblock sites-codesnippet-block">
-                                      <div><span><span style="line-height:13px">
-                                            <div><code>#include &lt;avr/io.h&gt;</code></div>
-                                            <div><code>#include &lt;avr/interrupt.h&gt;</code></div>
-                                            <div><br /></div>
-                                            <div><br /></div>
-                                            <div><code>int main(void)</code></div>
-                                            <div><code>{</code><span style="color:rgb(0,96,0);font-family:monospace">  </span></div>
-                                            <div><span><code><span style="font-family:Verdana,Helvetica,Arial,sans-serif;color:rgb(0,0,0)"><div><font><font color="#000000"><code style="color:rgb(0,96,0)"><span>    </span>DDRB &amp;= ~(1 &lt;&lt; DDB0</code></font>
-                                                </font><code style="color:rgb(0,96,0)">);</code><span> <span><code style="color:rgb(0,96,0)">    </code></span><code style="color:rgb(0,96,0)">// Clear the PB0 pin</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PB0 (PCINT0 pin) is now an input</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>PORTB |= (1 &lt;&lt; PORTB0); </code><span><code style="color:rgb(0,96,0)">   </code></span><code style="color:rgb(0,96,0)">// turn On the </code><code style="color:rgb(0,96,0)">Pull-up</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PB0 is now an input with pull-up enabled</code></span></div>
-                                            <div><span><code style="color:rgb(0,96,0)"><br /></code></span></div>
-                                          </span></code></span></div>
-                                      <div><span><code><br /></code></span></div>
-                                      <div><span><span><code>    PCICR |= (1 &lt;&lt; PCIE0);</code><span><code>    // set PCIE0 to enable PCMSK0 scan</code></span></span><br /></span></div>
-                                      <div><span><span><span><span><code>    PCMSK0 |= (1 &lt;&lt; PCINT0);</code><span><code>  </code><span><code>// set PCINT0 to trigger an interrupt on state change </code></span></span></span><br /></span></span></span></div>
-                                      <div><span><br /></span></div>
-                                      <div><span><span><code>    sei();</code><span><code>    </code><span><code>    </code><span><code>    </code><span><code>    </code><span><code>    </code></span></span><code>// turn on interrupts</code></span></span></span></span><br /></span></div>
-                                      <div><span><br /></span></div>
-                                      <div><span><code>    while(1)</code></span><br /></div>
-                                      <div><span><span><code>    {</code></span><br /></span></div>
-                                      <div><span><span><span><code>    </code><span><code>    /*main program loop here */</code></span></span><br /></span></span></div>
-                                      <div><span><span><span><code>    }</code></span></span></span></div>
-                                      <div><code>}</code></div>
-                                      <div><br /></div>
-                                      <div><br /></div>
-                                      <div><br /></div>
-                                      <div><code>ISR (PCINT0_vect)</code></div>
-                                      <div><code>{</code></div>
-                                      <div><span><code>    /* interrupt code here */</code></span><br /></div>
-                                      <div><code>}</code></div></span></span>
-                                    </div>
-                                  </div><span><br /></span>
-                                  <div><span><br /></span></div>
-                                  <div><span><span>    Now there are 2 limits to the PCINTx interrupt.  The first is </span></span>that
-                                    ANY change to the pin state will trigger in interrupt, if you remember
-                                    you can control what state change triggers an INTx interrupt (rising
-                                    pulse, falling pulse, Low level or any level change).  Since a pin has
-                                    to change states in order to trigger the interrupt we can read the state
-                                    of the pin and if it's currently HIGH(Vcc) we know that a rising edge event
-                                    triggered the interrupt,  like wise if the pin state is currently LOW(GND) we
-                                    know that a falling edge interrupt triggered the interrupt.  </div>
-                                  <div><br /></div>
-                                  <div><br /></div>
-                                  <div><i>ATmega168/328 Code:</i></div>
-                                  <div class="sites-codeblock sites-codesnippet-block">
-                                    <div>
-                                      <div style="line-height:13px"><code>#include &lt;avr/io.h&gt;</code></div>
-                                      <div style="line-height:13px"><span style="color:rgb(0,96,0);font-family:monospace">#include &lt;avr/interrupt.h&gt;<span>    // Needed to use interrupts<span>    </span></span></span></div>
-                                      <div style="line-height:13px"><br /></div>
-                                      <div style="line-height:13px"><br /></div>
-                                      <div style="line-height:13px"><code>int main(void)</code></div>
-                                      <div style="line-height:13px"><code>{</code></div>
-                                      <div style="line-height:13px"><span><code><div style="color:rgb(0,0,0);font-family:Verdana,Helvetica,Arial,sans-serif;line-height:13px"><font><font color="#000000"><code style="color:rgb(0,96,0)"><span>    </span>DDRB &amp;= ~(1 &lt;&lt; DDB0</code></font>
-                                          </font><code style="color:rgb(0,96,0)">);</code><span><code style="color:rgb(0,96,0)"> </code><span><code style="color:rgb(0,96,0)">    <span>    </span></code></span><code style="color:rgb(0,96,0)">// Clear the PB0 pin</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PB0 (PCINT0 pin) is now an input</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>PORTB |= (1 &lt;&lt; PORTB0); </code><span><code style="color:rgb(0,96,0)">   <span>    </span></code></span><code style="color:rgb(0,96,0)">// turn On the </code><code style="color:rgb(0,96,0)">Pull-up</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PB0 is now an input with pull-up enabled</code></span></div>
-                                      <div><br /></div></code></span>
-                                    </div>
-                                    <div style="line-height:13px"><span><span><code>    PCICR |= (1 &lt;&lt; PCIE0);</code><span><code>     // set PCIE0 to enable PCMSK0 scan</code></span></span><br /></span></div>
-                                    <div style="line-height:13px"><span><span><span><span><code>    PCMSK0 |= (1 &lt;&lt; PCINT0);</code><span><code>   </code><span><code>// set PCINT0 to trigger an interrupt on state change </code></span></span></span><br /></span></span></span></div>
-                                    <div style="line-height:13px"><span><br /></span></div>
-                                    <div style="line-height:13px"><span><span><code>    sei();</code><span><code>    </code><span><code>    </code><span><code>    </code><span><code>    </code><span><code>     </code></span></span><code>// turn on interrupts</code></span></span></span></span><br /></span></div>
-                                    <div style="line-height:13px"><span><br /></span></div>
-                                    <div style="line-height:13px"><span><code>    while(1)</code></span><br /></div>
-                                    <div style="line-height:13px"><span><span><code>    {</code></span><br /></span></div>
-                                    <div style="line-height:13px"><span><span><span><code>    </code><span><code>    /*main program loop here */</code></span></span><br /></span></span></div>
-                                    <div style="line-height:13px"><span><span><span><code>    }</code></span></span></span></div>
-                                    <div style="line-height:13px"><code>}</code></div>
-                                    <div style="line-height:13px"><br /></div>
-                                    <div style="line-height:13px"><br /></div>
-                                    <div style="line-height:13px"><br /></div>
-                                    <div style="line-height:13px"><code>ISR (PCINT0_vect)</code></div>
-                                    <div style="line-height:13px"><code>{</code></div>
-                                    <div style="line-height:13px"><span><code><span>    if( (PINB &amp; (1 &lt;&lt; PINB0)) == 1 )</span><br /></code></span></div>
-                                    <div style="line-height:13px"><span><code><span><span>    {</span></span></code></span></div>
-                                    <div style="line-height:13px"><span><code><span><span><span><span><span>    <span>    </span></span>/* LOW to HIGH pin change */</span></span><br /></span></span></code></span></div>
-                                    <div style="line-height:13px"><span><code><span><span><span><span><span>    }</span><br /></span></span></span></span></code></span></div>
-                                    <div style="line-height:13px"><span><code><span><span><span><span><span><span>    else</span><br /></span></span></span></span></span></code></span></div>
-                                    <div style="line-height:13px"><span><code><span><span><span><span><span><span>    {</span><br /></span></span></span></span></span></code></span></div>
-                                    <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)">    <span>    /* HIGH to LOW pin change */</span></span></div>
-                                    <div style="line-height:13px"><span><code><span><span><span><span><span><span><span><span><span><span><span>    }</span></span></span></span></span></span></span></span></span></span></span></code></span></div>
-                                    <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)">}</span></div>
-                                  </div>
-                                </div><br />
-                                <div><br /></div>
-                                <div><span>  
-                                     Now for the 2nd problem is that up to 8 pins share the same PCINTx
-                                    vector.  So when the interrupt fires you will have detect what event
-                                    triggered the change.  So what we might need to do is take a snapshot of
-                                    the Input states and compare them to the state from the previous time
-                                    the interrupt triggered.  If you take a look at the datasheet pinouts
-                                    PCMSK0 matches up with PORTB, PCMSK1 with PORTC and PCMSK2 with PORTD.</span></div>
-                                <div><span><br /></span></div>
-                                <div><span><br /></span></div>
-                                <div><span><i>ATmega168/328 Code:</i></span></div>
-                                <div><span>
-                                    <div class="sites-codeblock sites-codesnippet-block" style="line-height:13px">
-                                      <div style="line-height:13px"><code>#include &lt;avr/io.h&gt;</code></div>
-                                      <div style="line-height:13px"><code>#include &lt;stdint.h&gt;</code><span><code>    </code><span><code>    </code><span><code>    </code></span></span></span><span style="font-family:monospace;color:rgb(0,96,0)"><code>// has to be added to use uint8_t</code></span></div>
-                                      <div style="line-height:13px"><br /></div>
-                                      <div style="line-height:13px"><code>#include &lt;avr/interrupt.h&gt;</code><span><code>    // Needed to use interrupts</code><span><code>    </code></span></span></div>
-                                      <div style="line-height:13px"><br /></div>
-                                      <div style="line-height:13px"><br /></div>
-                                      <div><code>volatile uint8_t portbhistory = 0xFF;</code><span style="line-height:13px"><code>     // default is high because the pull-up</code></span></div>
-                                      <div style="line-height:13px"><br /></div>
-                                      <div style="line-height:13px"><br /></div>
-                                      <div style="line-height:13px"><code>int main(void)</code></div>
-                                      <div style="line-height:13px"><code>{</code></div>
-                                      <div style="line-height:13px"><span><code><div style="color:rgb(0,0,0);font-family:Verdana,Helvetica,Arial,sans-serif;line-height:13px"><font><font color="#000000"><code style="color:rgb(0,96,0)"><span>    </span>DDRB &amp;= ~((1 &lt;&lt; DDB0) | (1 &lt;&lt; DDB1) | (1 &lt;&lt; DDB2))</code></font>
-                                          </font><code style="color:rgb(0,96,0)">;</code><span><code style="color:rgb(0,96,0)"> </code><code style="color:rgb(0,96,0)">// Clear the PB0, PB1, PB2 pin</code><br /><code style="color:rgb(0,96,0)"><span>    </span>// PB0,PB1,PB2 (PCINT0, PCINT1, PCINT2 pin) are now inputs</code><br /><br /><code style="color:rgb(0,96,0)"><span>    </span>PORTB |= ((1 &lt;&lt; PORTB0) | (1 &lt;&lt; PORTB1) | (1 &lt;&lt; PORTB2))</code></span><code style="color:rgb(0,96,0)">; </code><code style="color:rgb(0,96,0)">// turn On the </code><code style="color:rgb(0,96,0)">Pull-up</code></div>
-                                      <div style="color:rgb(0,0,0);font-family:Verdana,Helvetica,Arial,sans-serif;line-height:13px"><span><code style="color:rgb(0,96,0)"><span>    </span>// PB0, PB1 and PB2 are now inputs with pull-up enabled</code></span></div></code>
-                                  </span></div>
-                                <div style="line-height:13px"><span><code>    </code></span><br /></div>
-                                <div style="line-height:13px"><span><span><code>    PCICR |= (1 &lt;&lt; PCIE0);</code><span><code>     // set PCIE0 to enable PCMSK0 scan</code></span></span><br /></span></div>
-                                <div style="line-height:13px"><span><span><span><span><code>    PCMSK0 |= (1 &lt;&lt; PCINT0);</code><span><code>   </code><span><code>// set PCINT0 to trigger an interrupt on state change </code></span></span></span><br /></span></span></span></div>
-                                <div style="line-height:13px"><span><br /></span></div>
-                                <div style="line-height:13px"><span><span><code>    sei();</code><span><code>    </code><span><code>    </code><span><code>    </code><span><code>    </code><span><code>     </code></span></span><code>// turn on interrupts</code></span></span></span></span><br /></span></div>
-                                <div style="line-height:13px"><span><br /></span></div>
-                                <div style="line-height:13px"><span><code>    while(1)</code></span><br /></div>
-                                <div style="line-height:13px"><span><span><code>    {</code></span><br /></span></div>
-                                <div style="line-height:13px"><span><span><span><code>    </code><span><code>    /*main program loop here */</code></span></span><br /></span></span></div>
-                                <div style="line-height:13px"><span><span><span><code>    }</code></span></span></span></div>
-                                <div style="line-height:13px"><code>}</code></div>
-                                <div style="line-height:13px"><br /></div>
-                                <div style="line-height:13px"><br /></div>
-                                <div style="line-height:13px"><br /></div>
-                                <div style="line-height:13px"><code>ISR (PCINT0_vect)</code></div>
-                                <div style="line-height:13px"><code>{</code></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><code>    uint8_t changedbits;</code></span><br /></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><code><br /></code></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><code><br /></code></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)">    changedbits = PINB ^ portbhistory;</span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><code><span>    portbhistory = PINB;</span><br /></code></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><code><br /></code></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><code>    </code></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><code>    if(changedbits &amp; (1 &lt;&lt; PINB0))</code></span><br /></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><code>    {</code></span><br /></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><code>    </code><span><code>    /* PCINT0 changed */</code></span></span><br /></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><code>    }</code></span><br /></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><span><code>    </code></span><br /></span></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><span><span><code>    if(changedbits &amp; (1 &lt;&lt; PINB1))</code></span><br /></span></span></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><span><span><span><code>    {</code></span><br /></span></span></span></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><span><span><span><span><code>    </code><span><code>    /* PCINT1 changed */</code></span></span><br /></span></span></span></span></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><span><span><span><span><span><span><code>    }</code></span><br /></span></span></span></span></span></span></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><span><span><span><span><span><span><br /></span></span></span></span></span></span></span></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><span><span><span><span><span><span><span><code>    if(changedbits &amp; (1 &lt;&lt; PINB2))</code></span><br /></span></span></span></span></span></span></span></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><span><span><span><span><span><span><span><span><code>    {</code></span><br /></span></span></span></span></span></span></span></span></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><span><span><span><span><span><span><span><span><span><span><span><code>    </code><span><code>    /* PCINT2 changed */</code></span></span><br /></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><span><span><code>    }</code></span><br /></span></span></div>
-                                <div style="line-height:13px">
-                                  <font color="#006000" face="monospace"><br /></font>
-                                </div>
-                                <div style="line-height:13px"><span style="font-family:monospace;color:rgb(0,96,0)"><code>}</code></span></div>
-                              </div><br /><br /><span>    </span>Ok
-                              ok, I know, the bit math is a bit funny.  So I'll be nice and explain
-                              it.  When we XOR ( ^ ) the PORTB register with the portbhistory register
-                              we will get a 0's on the bits that are the same, and 1's in the bits
-                              that are different (yes a practical use for the XOR operation).  In the IF statements we AND ( &amp; ) the operation with a bitmask that we
-                              created using the bit shift register (1 &lt;&lt; PBx) in order to
-                              isolate specific bit.  Lastly, notice how I defined porthistory as
-                              volatile? Like I said before, if you want to pass a global variable to
-                              an Interrupt make it volatile so that it doesn't cause obsolete data
-                              due to compiler optimization.</span>
-                            </div>
-                            <div><span><br /></span></div>
-                            <div><span><span>    Now finally, what if you wanted to put both together?  Well I got to leave a bit of fun for you guys.</span><br /></span></div>
-                            <div><span><span><br /></span></span></div>
-                            <div><span><span><br /></span></span></div>
-                            <div><span><span>Cheers</span></span></div>
-                            <div>Q</div>
-                          </div>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check2" viewBox="0 0 16 16">
+        <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+        <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path
+                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+    </symbol>
+</svg>
+
+<div id="wrapper">
+    <div class="wrap-container ">
+        <header class="navbar">
+            <h4>
+                <a href="/">QEEWiki</a>
+                <button class="navbar-toggler d-block d-md-none" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </h4>
+        </header>
+        <div class="d-flex">
+            <nav class="navbar" id="sidebar">
+                <div class="container-fluid px-md-0">
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                         aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header border-bottom d-flex d-md-none">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">QEEWiki</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
                         </div>
-                      </div>
+                        <div class="offcanvas-body px-md-0 pt-0">
+                            <ul class="navbar-nav justify-content-end flex-grow-1">
+                                <li class="nav-item">
+                                    <b>Navigation</b>
+                                    <ul>
+                                        <li><a href="https://chayanforyou.github.io/">Home</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button"
+                                               data-bs-toggle="dropdown"
+                                               aria-expanded="true">
+                                                AVR Guide
+                                            </a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="#">AVR Basics</a></li>
+                                                <li><a class="dropdown-item" href="#">Digital I/O</a></li>
+                                                <li><a class="dropdown-item" href="/#interrupts">Interrupts</a></li>
+                                                <li><a class="dropdown-item" href="#">Timers</a></li>
+                                                <li><a class="dropdown-item" href="#">Analog I/O</a></li>
+                                                <li><a class="dropdown-item" href="#">Communication</a></li>
+                                                <li><a class="dropdown-item" href="#">Other</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Usefull Engineering Stuff</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <b>Resources</b>
+                                    <ul>
+                                        <li><a href="https://www.sparkfun.com/">Sparkfun</a></li>
+                                        <li><a href="https://arduino.cc/en/Reference/HomePage">Arduino Reference</a>
+                                        </li>
+                                        <li><a href="https://www.eevblog.com/">EEVBlog</a></li>
+                                        <li><a href="https://tahmidmc.blogspot.com/">Tahmid's Blog</a></li>
+                                        <li><a href="https://labprojectsbd.com/">Lab Projects BD</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button" aria-expanded="true">Atmel</a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="/assets/docs/ATmega8A.pdf"
+                                                       target="_blank" rel="nofollow">Atmega8 Datasheet</a></li>
+                                                <li><a class="dropdown-item"
+                                                       href="/assets/docs/ATmega48A-PA-88A-PA-168A-PA-328-P.pdf"
+                                                       target="_blank" rel="nofollow">ATMega168/328 Datasheet</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div><br /></div>
-                    <div><br /></div>
-                    <div><br /></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </td>
-  </tr>
-  </table>
-  </div>
-  </div>
-  <div id="sites-chrome-footer-wrapper">
-    <div id="sites-chrome-footer-wrapper-inside">
-      <div id="sites-chrome-footer">
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-</body>
+                </div>
+            </nav>
+            <main id="contentBox">
 
+                <nav aria-label="breadcrumb" id="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">AVR Guide</a></li>
+                        <li class="breadcrumb-item"><a href="#">Interrupts</a></li>
+                    </ol>
+                </nav>
+
+                <div class="main-content">
+                    <h3>EXTERNAL INTERRUPTS ON THE ATmega168/328</h3>
+                    <br/>
+                    <h5 class="fw-semibold">INTRODUCTION:</h5>
+                    <div class="chapter ms-4 pt-2">
+                        <p>
+                            In the previous section I talked about the basics of interrupts. In this section, we will
+                            talk about the first type of device interrupts called external interrupts. These interrupts
+                            are basically called on a given status change on the INTn pin. This is essentially an input
+                            interrupt and is great to use for applications when you might need to react quickly to an
+                            outside source, such as a bumper of your robot hitting the wall or to detect a blown fuse.
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">HARDWARE:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <p>
+                            Hardware wise there is not difference between External Interrupts and Inputs so don't be
+                            afraid to reread the <a href="/digital-inputs">Digital Input Tutorial</a> if you need a
+                            refresher.
+                        </p>
+                        <p>
+                            If you look at the AVR pinout diagram you will see the INTx which are used for External
+                            Interrupts and PCINTx pins that are used for Pin Change Interrupts.
+                        </p>
+                    </div>
+
+                    <hr class="mb-4"/>
+                    <h5 class="fw-semibold">EXTERNAL INTERRUPTS:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <img class="img-fluid mt-3" src="/external-interrupts-on-the-atmega328/ATmega328 - INTx.JPG"
+                             alt="ATmega328 - INTx">
+                        <p class="fw-light">Figure 1: ATmega168/328 - External Interrupt Pins</p>
+                        <p>
+                            The ATmega8 and the ATmega88/168/328 are backwards compatible when it comes to the pinouts
+                            however, they are programmed slightly different and while external interrupts work the same
+                            way on both types of microcontrollers they do require different code to run.
+                        </p>
+                        <p>
+                            External interrupts are fairly powerful, they can be configured to trigger on one of 4
+                            states. Low level will trigger whenever the pin senses a LOW (GND) signal. Any Logic Change
+                            trigger at the moment the pin changes from HIGH (Vcc) to LOW (GND) or from LOW (GND) to
+                            HIGH(Vcc). On Falling Edge will trigger at the moment the pin goes from HIGH (Vcc) to LOW
+                            (GND). On Rising Edge will trigger at the moment the pin goes from LOW (GND) to HIGH (Vcc).
+                            The best part is that you can configure each INTx independently.
+                        </p>
+                        <p>
+                            External interrupts use the below 3 registers. Which you could find under the "External
+                            Interrupts section of the datasheet.
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>EICRA</th>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td>ISC11</td>
+                                    <td>ISC10</td>
+                                    <td>ISC01</td>
+                                    <td>ISC00</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">External Interrupt Control Register A</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered max-width-600">
+                                <tbody>
+                                <tr>
+                                    <th>ISCx1</th>
+                                    <th>ISCx0</th>
+                                    <th>DESCRIPTION</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Low level of INTx generates an interrupt request</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Any logic change on INTx generates an interrupt request</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>The falling edge of INTx generates an interrupt request</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>The rising edge of INTx generates an interrupt request</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">ISC Bits Settings</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>EIMSK</th>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td>INT1</td>
+                                    <td>INT0</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">External Interrupt Mask Register</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>EIFR</th>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td>INTF1</td>
+                                    <td>INTF0</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">External Interrupt Flag Register</p>
+                        <p class="fst-italic mt-4">ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    #include &lt;avr/io.h&gt;
+    #include &lt;avr/interrupt.h&gt;
+
+    int main(void)
+    {
+        DDRD &= ~(1 << DDD2 );     // Clear the PD2 pin
+        // PD2 (PCINT0 pin) is now an input
+
+        PORTD |= (1 << PORTD2);    // turn On the Pull-up
+        // PD2 is now an input with pull-up enabled
+
+        EICRA |= (1 << ISC00);    // set INT0 to trigger on ANY logic change
+        EIMSK |= (1 << INT0);     // Turns on INT0
+
+        sei();                    // turn on interrupts
+
+        while(1)
+        {
+            /* main program loop here */
+        }
+    }
+
+    ISR (INT0_vect)
+    {
+        /* interrupt code here */
+    }</pre>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">PIN CHANGE INTERRUPTS:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <img class="img-fluid mt-3" src="/external-interrupts-on-the-atmega328/ATmega328 - PCINTx.JPG"
+                             alt="ATmega328 - PCINTx">
+                        <p class="fw-light">Figure 2: ATmega168/328 - Pin Change Interrupt Pins</p>
+                        <p>
+                            One important thing to note, on the older ATmega8 does not have any PCINT pints, therefore,
+                            this section of the tutorial only applies to ATmega88 through ATmega328.
+                        </p>
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>PCICR</th>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td>PCIE2</td>
+                                    <td>PCIE1</td>
+                                    <td>PCIE0</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">Pin Change Interrupt Control Register</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>PCIFR</th>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td>PCIF2</td>
+                                    <td>PCIF1</td>
+                                    <td>PCIF0</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">Pin Change Interrupt Flag Register</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-650">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>PCMSK2</th>
+                                    <td>PCINT23</td>
+                                    <td>PCINT22</td>
+                                    <td>PCINT21</td>
+                                    <td>PCINT20</td>
+                                    <td>PCINT19</td>
+                                    <td>PCINT18</td>
+                                    <td>PCINT17</td>
+                                    <td>PCINT16</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">Pin Change Mask Register 2</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-650">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>PCMSK1</th>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">-</td>
+                                    <td>PCINT14</td>
+                                    <td>PCINT13</td>
+                                    <td>PCINT12</td>
+                                    <td>PCINT11</td>
+                                    <td>PCINT10</td>
+                                    <td>PCINT09</td>
+                                    <td>PCINT08</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">Pin Change Mask Register 1</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-650">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>PCMSK0</th>
+                                    <td>PCINT7</td>
+                                    <td>PCINT6</td>
+                                    <td>PCINT5</td>
+                                    <td>PCINT4</td>
+                                    <td>PCINT3</td>
+                                    <td>PCINT2</td>
+                                    <td>PCINT1</td>
+                                    <td>PCINT0</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">Pin Change Mask Register 0</p>
+
+                        <p>
+                            The PCIEx bits in the PCICR registers enable External Interrupts and tells the MCU to check
+                            PCMSKx on a pin change state. When a pin changes states (HIGH to LOW, or LOW to HIGH) and
+                            the corresponding PCINTx bit in the PCMSKx register is HIGH the corresponding PCIFx bit in
+                            the PCIFR register is set to HIGH and the MCU jumps to the corresponding Interrupt vector.
+                        </p>
+                        <p class="fst-italic mt-4">ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    #include &lt;avr/io.h&gt;
+    #include &lt;avr/interrupt.h&gt;
+
+    int main(void)
+    {
+        DDRB &= ~(1 << DDB0 );     // Clear the PB0 pin
+        // PB0 (PCINT0 pin) is now an input
+
+        PORTB |= (1 << PORTB0);    // turn On the Pull-up
+        // PB0 is now an input with pull-up enabled
+
+        PCICR |= (1 << PCIE0);    // set PCIE0 to enable PCMSK0 scan
+        PCMSK0 |= (1 << PCINT0);  // set PCINT0 to trigger an interrupt on state change
+
+        sei();                    // turn on interrupts
+
+        while(1)
+        {
+            /* main program loop here */
+        }
+    }
+
+    ISR (PCINT0_vect)
+    {
+        /* interrupt code here */
+    }</pre>
+                        <p>
+                            Now there are 2 limits to the PCINTx interrupt. The first is that ANY change to the pin
+                            state will trigger in interrupt, if you remember you can control what state change triggers
+                            an INTx interrupt (rising pulse, falling pulse, Low level or any level change). Since a pin
+                            has to change states in order to trigger the interrupt we can read the state of the pin and
+                            if it's currently HIGH(Vcc) we know that a rising edge event triggered the interrupt, like
+                            wise if the pin state is currently LOW(GND) we know that a falling edge interrupt triggered
+                            the interrupt.
+                        </p>
+                        <p class="fst-italic mt-4">ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    #include &lt;avr/io.h&gt;
+    #include &lt;avr/interrupt.h&gt;
+
+    int main(void)
+    {
+        DDRB &= ~(1 << DDB0 );         // Clear the PB0 pin
+        // PB0 (PCINT0 pin) is now an input
+
+        PORTB |= (1 << PORTB0);        // turn On the Pull-up
+        // PB0 is now an input with pull-up enabled
+
+        PCICR |= (1 << PCIE0);     // set PCIE0 to enable PCMSK0 scan
+        PCMSK0 |= (1 << PCINT0);   // set PCINT0 to trigger an interrupt on state change
+
+        sei();                     // turn on interrupts
+
+        while(1)
+        {
+            /* main program loop here */
+        }
+    }
+
+    ISR (PCINT0_vect)
+    {
+        if( (PINB & (1 << PINB0)) == 1 )
+        {
+            /* LOW to HIGH pin change */
+        }
+        else
+        {
+            /* HIGH to LOW pin change */
+        }
+    }</pre>
+                        <p>
+                            Now for the 2nd problem is that up to 8 pins share the same PCINTx vector. So when the
+                            interrupt fires you will have detect what event triggered the change. So what we might need
+                            to do is take a snapshot of the Input states and compare them to the state from the previous
+                            time the interrupt triggered. If you take a look at the datasheet pinouts PCMSK0 matches up
+                            with PORTB, PCMSK1 with PORTC and PCMSK2 with PORTD.
+                        </p>
+                        <p class="fst-italic mt-4">ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    #include &lt;avr/io.h&gt;
+    #include &lt;stdint.h&gt;            // has to be added to use uint8_t
+    #include &lt;avr/interrupt.h&gt;     // Needed to use interrupts
+
+    volatile uint8_t portbhistory = 0xFF;     // default is high because the pull-up
+
+    int main(void)
+    {
+        DDRB &= ~((1 << DDB0) | (1 << DDB1) | (1 << DDB2)) ; // Clear the PB0, PB1, PB2 pin
+        // PB0,PB1,PB2 (PCINT0, PCINT1, PCINT2 pin) are now inputs
+
+        PORTB |= ((1 << PORTB0) | (1 << PORTB1) | (1 << PORTB2)); // turn On the Pull-up
+        // PB0, PB1 and PB2 are now inputs with pull-up enabled
+
+        PCICR |= (1 << PCIE0);     // set PCIE0 to enable PCMSK0 scan
+        PCMSK0 |= (1 << PCINT0);   // set PCINT0 to trigger an interrupt on state change
+
+        sei();                     // turn on interrupts
+
+        while(1)
+        {
+            /* main program loop here */
+        }
+    }
+
+    ISR (PCINT0_vect)
+    {
+        uint8_t changedbits;
+
+        changedbits = PINB ^ portbhistory;
+        portbhistory = PINB;
+
+        if (changedbits & (1 << PINB0))
+        {
+            /* PCINT0 changed */
+        }
+
+        if (changedbits & (1 << PINB1))
+        {
+            /* PCINT1 changed */
+        }
+
+        if (changedbits & (1 << PINB2))
+        {
+            /* PCINT2 changed */
+        }
+    }</pre>
+                        <p>
+                            Ok ok, I know, the bit math is a bit funny. So I'll be nice and explain it. When we XOR ( ^
+                            ) the PORTB register with the portbhistory register we will get a 0's on the bits that are
+                            the same, and 1's in the bits that are different (yes a practical use for the XOR
+                            operation). In the IF statements we AND ( & ) the operation with a bitmask that we created
+                            using the bit shift register (1 << PBx) in order to isolate specific bit. Lastly, notice how
+                            I defined porthistory as volatile? Like I said before, if you want to pass a global variable
+                            to an Interrupt make it volatile so that it doesn't cause obsolete data due to compiler
+                            optimization.
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <p>
+                        Now finally, what if you wanted to put both together? Well I got to leave a bit of fun for you
+                        guys.
+                    </p>
+                    <br/>Cheers<br/>Q
+                    <div><br/></div>
+                    <br/>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 mode-toggle" id="darkMoodDropdown">
+    <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center" id="theme" type="button"
+            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+            <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="theme-text">Toggle theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="theme-text" id="darkMoodDropdownMenu">
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="light"
+                    aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#sun-fill"></use>
+                </svg>
+                Light
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="dark" aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#moon-stars-fill"></use>
+                </svg>
+                Dark
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-mode="auto"
+                    aria-pressed="true">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#circle-half"></use>
+                </svg>
+                Auto
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+    </ul>
+</div>
+
+<script src="../assets/js/jquery-3.5.1.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/prettify.js"></script>
+
+</body>
 </html>
