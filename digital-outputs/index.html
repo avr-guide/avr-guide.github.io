@@ -1,338 +1,423 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
-
+<!Doctype html>
+<html class="no-js" lang="en">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-  <link rel="shortcut icon" type="image/x-icon" href="//www.google.com/images/icons/product/sites-16.ico" />
-  <link rel="apple-touch-icon" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/images/apple-touch-icon.png" type="image/png" />
-  
-  <meta name="title" content="DIGITAL OUTPUTS - QEEWiki" />
-  <meta itemprop="name" content="DIGITAL OUTPUTS - QEEWiki" />
-  <meta property="og:title" content="DIGITAL OUTPUTS - QEEWiki" />
-  <meta name="description" content="Q's Electrical Engineering Wiki" />
-  <meta itemprop="description" content="Q's Electrical Engineering Wiki" />
-  <meta id="meta-tag-description" property="og:description" content="Q's Electrical Engineering Wiki" />
-  <style type="text/css"></style>
-  <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/sites/p/5acb68/system/app/themes/simple/standard-css-simple-ltr-ltr.css" />
-  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/overlay.css?cb=simple960px70175goog-ws-leftnonethemedefaultstandard" />
-  <link rel="stylesheet" type="text/css" href="/site/qeewiki/_/rsrc/1601537872000/system/app/css/camelot/allthemes-view.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>DIGITAL OUTPUTS - QEEWiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-  <title>DIGITAL OUTPUTS - QEEWiki</title>
-  <meta itemprop="image" content="/digital-outputs/ATmega8%20-%20IO.JPG" />
-  <meta property="og:image" content="/digital-outputs/ATmega8%20-%20IO.JPG" />
+    <meta name="description" content="Guide For Working With AVR Microcontrollers"/>
+    <meta name="keywords"
+          content="atmega8, atmega168, atmega328, atmega328p, interrupt, timer, adc, analog comparator, pwm, fast pwm, phase correct pwm, spi, uart, i2c, eeprom, tutorial, datasheet"/>
+    <meta name="author" content="Chayan Mistry">
+
+    <meta property="og:url" content="https://avr-guide.github.io"/>
+    <meta property="og:site_name" content="AVR GUIDE - QEEWiki"/>
+    <link rel="icon" href="../assets/img/favicon.ico">
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/prettify.css">
 </head>
+<body>
 
-<body xmlns="http://www.google.com/ns/jotspot" id="body" class="en">
-  <div id="sites-page-toolbar" class="sites-header-divider">
-    <div xmlns="http://www.w3.org/1999/xhtml" id="sites-status" class="sites-status" style="display:none;">
-      <div id="sites-notice" class="sites-notice" role="status" aria-live="assertive"> </div>
-    </div>
-  </div>
-  <div id="sites-chrome-everything-scrollbar">
-    <div id="sites-chrome-everything" class="">
-      <div id="sites-chrome-page-wrapper" style="direction: ltr">
-        <div id="sites-chrome-page-wrapper-inside">
-          <div xmlns="http://www.w3.org/1999/xhtml" id="sites-chrome-header-wrapper">
-            <table id="sites-chrome-header" class="sites-layout-hbox" cellspacing="0">
-              <tr class="sites-header-primary-row" id="sites-chrome-userheader">
-                <td id="sites-header-title" class="" role="banner" style="height: 70px">
-                  <div class="sites-header-cell-buffer-wrapper">
-                    <h2><a href="/" dir="ltr" id="sites-chrome-userheader-title">QEEWiki</a></h2>
-                  </div>
-                </td>
-              </tr>
-              <tr class="sites-header-secondary-row" id="sites-chrome-horizontal-nav">
-                <td colspan="2" id="sites-chrome-header-horizontal-nav-container" role="navigation">
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div id="sites-chrome-main-wrapper">
-            <div id="sites-chrome-main-wrapper-inside">
-              <table id="sites-chrome-main" class="sites-layout-hbox" cellspacing="0" cellpadding="{scmCellpadding}" border="0">
-                <tr>
-                  <td id="sites-chrome-sidebar-left" class="sites-layout-sidebar-left initial" style="width:175px">
-                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_2bd" class="sites-embed" role="navigation">
-                      <h4 class="sites-embed-title">Navigation</h4>
-                      <div class="sites-embed-content sites-sidebar-nav">
-                        <ul role="navigation" jotId="navList" class="has-expander">
-                          <li class="topLevel nav-first ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="https://chayanforyou.github.io" jotId="wuid:gx:3b2a480be041e60" class="sites-navigation-link topLevel">Home</a></div>
-                          </li>
-                          <li class="topLevel parent " wuid="gx:535b3f3a2562e7ad">
-                            <div dir="ltr" style="padding-left: 0px;">
-                              <div class="expander"></div><a href="/" jotId="wuid:gx:535b3f3a2562e7ad" class="sites-navigation-link topLevel">My Books</a>
-                            </div>
-                            <ul role="navigation" class="has-expander">
-                              <li class="">
-                                <div dir="ltr" style="padding-left: 38px;"><a href="/" jotId="wuid:gx:5233ae16d3813d0e" class="sites-navigation-link">AVR GUIDE</a></div>
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="/" jotId="wuid:gx:9d929f8c6b8e7ca" class="sites-navigation-link topLevel">Usefull Engineering Stuff</a></div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div xmlns="http://www.w3.org/1999/xhtml" id="COMP_5818525579565211" class="sites-embed" role="navigation">
-                      <h4 class="sites-embed-title">Resources</h4>
-                      <div class="sites-embed-content sites-sidebar-nav">
-                        <ul role="navigation" jotId="navList" class="has-expander">
-                          <li class="topLevel nav-first ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.sparkfun.com" class="sites-navigation-link topLevel">Sparkfun</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://arduino.cc/en/Reference/HomePage" class="sites-navigation-link topLevel">Arduino Reference</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.eevblog.com/" class="sites-navigation-link topLevel">EEVBlog</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://fritzing.org/download/" class="sites-navigation-link topLevel">Fritzing Projects</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.adafruit.com/" class="sites-navigation-link topLevel">Ada Fruit</a></div>
-                          </li>
-                          <li class="topLevel ">
-                            <div dir="ltr" style="padding-left: 19px;"><a href="http://www.pololu.com/" class="sites-navigation-link topLevel">Pololu</a></div>
-                          </li>
-                          <li class="topLevel parent ">
-                            <div dir="ltr" style="padding-left: 0px;">
-                              <div class="expander"></div><a href="http://www.atmel.com" class="sites-navigation-link topLevel">Atmel</a>
-                            </div>
-                            <ul role="navigation" class="has-expander">
-                              <li class="">
-                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/ATmega8A-Data-Sheet-DS40001974B.pdf" class="sites-navigation-link">Atmega8 Datasheet</a></div>
-                              </li>
-                              <li class="">
-                                <div dir="ltr" style="padding-left: 38px;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf" class="sites-navigation-link">ATMega168/328 Datasheet</a></div>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </td>
-                  <td id="sites-canvas-wrapper">
-                    <div id="sites-canvas" role="main">
-                      <div id="goog-ws-editor-toolbar-container"> </div>
-                      <div xmlns="http://www.w3.org/1999/xhtml" id="title-crumbs">
-                        <A href="/" dir="ltr">My Books</A> &gt; <A href="/" dir="ltr">AVR GUIDE</A> &gt; 
-                      </div>
-                      <h3 xmlns="http://www.w3.org/1999/xhtml" id="sites-page-title-header" align="left">
-                        <span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">DIGITAL OUTPUTS</span>
-                      </h3>
-                      <div id="sites-canvas-main" class="sites-canvas-main">
-                        <div id="sites-canvas-main-content">
-                          <div xmlns="http://www.w3.org/1999/xhtml" class="sites-layout-name-one-column-hf sites-layout-vbox">
-                            <div class="sites-layout-tile sites-tile-name-header sites-layout-empty-tile">
-                              <div dir="ltr"><br /></div>
-                            </div>
-                            <div class="sites-layout-tile sites-tile-name-content-1">
-                              <div dir="ltr">
-                                <div style="font-weight:bold"><b>
-                                    <div style="display:inline!important"><b>
-                                        <font face="'courier new', monospace"><span style="font-size:medium">INTRODUCTION</span><span style="font-weight:normal;font-size:medium">:</span></font>
-                                      </b></div>
-                                  </b></div>
-                                <div>
-                                  <div style="display:inline!important">
-                                    <div style="display:inline!important"><br /></div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <div style="display:inline!important">
-                                    <div style="display:inline!important"><span>    Digital outputs are the most basic (and often use) from of outputs. </span><span style="font-family:verdana,sans-serif">The AVR pin will send out a  LOW (GND) or HIGH (Vcc) signal. It is important to note that the pin goes from 0V to Vcc and not from OFF to ON. The difference is not simply semantics because, hardware that turns devices OFF tends to provide a physical break in the wire stopping current flow (devices such as relays, switches, contactors), while a pin configured as a digital output will change from 0V to Vcc. This is important to keep in mind because it allows us to do some interesting things with our hardware design.</span><br /><br /></div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <div style="display:inline!important">
-                                    <div style="display:inline!important"><br />
-                                      <hr /><br />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <div style="display:inline!important">
-                                    <div style="display:inline!important"><br />
-                                      <font face="'courier new', monospace"><span style="font-size:medium"><b>HARDWARE:</b></span></font> 
-                                    </div>
-                                  </div>
-                                </div><br />
-                                <div><span>    If you look at the AVR data sheet, the second page shows the pin configuration of the AVR chip.  All of the PA#, PB#, PC# and PD# could be configured as an outputs.</span><br /></div>
-                                <div><span><br /></span></div>
-                                <div><span><br /><i>
-                                      <div style="display:block;text-align:left"><a href="/digital-outputs/ATmega8%20-%20IO.JPG?attredirects=0" imageanchor="1"><img border="0" src="/digital-outputs/ATmega8%20-%20IO.JPG" /></a></div><span style="font-family:courier new,monospace">Figure 1: ATmega8 - Outputs</span><br />
-                                    </i></span></div>
-                                <div><br /></div>
-                                <div><br /><span>
-                                    <font face="'courier new', monospace"> <span style="font-family:verdana,sans-serif">   </span></font>
-                                  </span>
-                                  <font face="'courier new', monospace"><span style="font-family:verdana,sans-serif">We can design a circuit in 2 ways, the pin can SINK the output (put it down to ground) or SOURCE the output (bring it up to Vcc). Confused? Well lets clear things up in the following 3 examples. </span><br style="font-family:arial,sans-serif" /><br /></font>
-                                </div>
-                                <div>
-                                  <font face="'courier new', monospace"><br />
-                                    <div style="display:block;margin-right:auto;text-align:left"><a href="/digital-outputs/Digital%20Out%20Fig%201.JPG?attredirects=0" imageanchor="1"><img border="0" src="/digital-outputs/Digital%20Out%20Fig%201.JPG" /></a></div><i>Figure 2: Sinking Output</i> <br /><br />
-                                  </font>
-                                </div>
-                                <div>
-                                  <font face="'courier new', monospace"><br /><span> <span style="font-family:verdana,sans-serif">   </span></span><span style="font-family:verdana,sans-serif">In figure 2 we are sinking the output. Notice how the LED is hooked up to Vcc on one side and to the digital output pin on the other side. When the digital output is set to HIGH(Vcc) and the other side is at Vcc (say 5V) there is no potential difference ie 5V – 5V = 0 (no difference) so the LED will not light-up. However, if we set the digital output to LOW (GND or 0V) we have a 5V difference between the pin and the common side (0V – 5V = 5V difference) hence the LED will come on. </span><br style="font-family:verdana,sans-serif" /><br /></font>
-                                </div>
-                                <div>
-                                  <font face="'courier new', monospace"><br /></font>
-                                </div>
-                                <div>
-                                  <font face="'courier new', monospace">
-                                    <div style="display:block;text-align:left"><a href="/digital-outputs/Digital%20Out%20Fig%202.JPG?attredirects=0" imageanchor="1"><img border="0" src="/digital-outputs/Digital%20Out%20Fig%202.JPG" /></a></div><i>Figure 3: Sourcing Output</i> <br /><br />
-                                  </font>
-                                </div>
-                                <div>
-                                  <font face="'courier new', monospace"><br /><span> <span style="font-family:verdana,sans-serif">   </span></span><span style="font-family:verdana,sans-serif">In figure 3 we are sourcing the output. One side of the LED is hooked up to the digital output and the other side is connected to ground. When the digital output is set to HIGH(Vcc) the LED will turn on (Because we have a 5V difference between the digital pin and the common of the LED). When we set the digital pin to LOW(GND) the LED will turn off because,the digital output pin is at 0V and the common side of the LED is at 0V which means we have no potential difference between both sides of the LED.</span><br /><br /></font>
-                                </div>
-                                <div>
-                                  <font face="'courier new', monospace"><br />
-                                    <div style="display:block;text-align:left"><a href="/digital-outputs/Digital%20Out%20Fig%203.JPG?attredirects=0" imageanchor="1"><img border="0" src="/digital-outputs/Digital%20Out%20Fig%203.JPG" /></a></div><i>Figure 4: Sinking and Sourcing On The Same Output</i> <br /><br />
-                                  </font>
-                                </div>
-                                <div><br /><span style="font-family:verdana,sans-serif">    Figure 4 is a neat little circuit we have 2 LEDs hooked up to the same digital output. LED 1 is hooked up for sinking (like in figure 2) , and LED 2 is hooked up for sourcing (like in figure 3). When we set the digital pin to LOW(GND or 0V) LED 1 will turn on and LED 2 will stay off, if we change the pin to HIGH(Vcc) LED 1 will stay off and LED 2 will turn on. </span><br style="font-family:verdana,sans-serif" /><br /></div>
-                                <div><br style="font-family:verdana,sans-serif" /></div>
-                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
-                                  <div>
-                                    <font color="#ff0000" style="font-family:verdana,sans-serif"><b>NOTE</b></font><span style="font-family:verdana,sans-serif">: </span><u style="font-family:verdana,sans-serif">
-                                      <font color="#ff0000">LEDs are polarity specific</font>
-                                    </u><span style="font-family:verdana,sans-serif"> which means that they have to be hooked in the right way in order to work, if you decide build any of these circuits and you can’t get things to work, turn the LED around and try again. </span>
-                                  </div>
-                                </blockquote>
-                                <div>
-                                  <font face="verdana, sans-serif"><br /></font>
-                                </div>
-                                <div>
-                                  <font face="verdana, sans-serif"><br /></font>
-                                </div>
-                                <div><span style="font-family:verdana,sans-serif">    So, you might wonder to yourself, which is preferred, sinking (figure 2) or sourcing (figure 3)? The answer is sinking, most electrical components have an easier time with sinking, some can even sink more current then they could source. So keep your eyes open for this in the future. </span><br /><br /><br /><br />
-                                  <font face="'courier new', monospace"><span style="font-size:small"><i>Maximum Output Capabilities:</i></span></font>
-                                  <font face="'courier new', monospace"> </font><br /><br /><span style="font-family:verdana,sans-serif">    This leads us to our final topic. Outputs on most AVR's are limited in how much current they can output. If you download the ATmega datasheet(link on side) the information is located in the “Electrical Characteristics” section. So lets take a look at the Electrical Characteristics (top of section) of the Atmega168/328 datasheet. Notice that under the "Absolute Maximum Ratings" it lists that the DC Current per I/O pin is 40mA’s. That’s pretty good since it means we can safely drive any LED with each pin (most LEDs run at 10-20mA). However, notice that the DC Current Vcc to GND Pins is 200mA, that is the absolute maximum that the processor can drive at once. So, whenever you design a circuit make sure you look at these 2 values, going beyond those values will result in damage to your micro controller. So that seems fairly simple, make sure that every single load (or device your driving) does not exceed the Absolute Maximum Rating Per pin, and that every output added up does not exceed the Maximum DC from Vcc to GND, this is all that you have to look at if your just playing around however, running your AVR at these values for prolonged periods of time will cause damage over time. </span><br style="font-family:verdana,sans-serif" />
-                                  <font face="verdana, sans-serif"><br /></font><span style="font-family:verdana,sans-serif">    So if you look at the DC Characteristics Table you will notice that Ioh (voltage of output high) and Iol (volrage of output low) you will notice that each output is limited to 20mA @5V or 10mA @ 3.3V, the voltage is the voltage of Vcc (or the voltage that we are running our AVR at. So that is the Max per pin done, do we have a rule for Maximum DC from Vcc to GND? You bet we do. Look at the notes under the table, they list a lot of restrictions such as not exceeding 150mA if we add the values of the pins on C0-C5, D0-D4, ADC7 and the RESET pins. Although it seems like a pain, following these rules will keep your project running for a lifetime. </span><br /><br />
-                                </div>
-                                <div><span>    So I guess you wondering, what do I do if I want to run a load higher then 20mA?  Well you will have to use an extra component between the micro controller and the load.  A transistor, FET or my personal favorite a Darlington Array will do the trick.  But that is a chapter on its own.</span><br /><br /></div>
-                                <div><br /></div>
-                                <div>
-                                  <hr />
-                                </div>
-                                <div><br /><br /><b>
-                                    <font face="'courier new', monospace"><span style="font-size:medium">THEORY OF OPERATION:</span></font>
-                                  </b><br /><br /><span>    </span>The one thing that I don't understand is why input/output section in the Atmega8 and Atmega328 is so poor.  Every other part of the data sheet has a really nice description of each register at the end of each section that describes everything.<br /><br /><span>    </span>Under the I/O section of the data sheet you will find the following table:<br /><br />
-                                  <table border="1" bordercolor="#888888" cellspacing="0" style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px">
-                                    <tbody>
-                                      <tr>
-                                        <td style="width:60px;height:16px"> DDxn</td>
-                                        <td style="width:60px;height:16px"> PORTxn</td>
-                                        <td style="width:60px;height:16px"> PUD</td>
-                                        <td style="width:60px;height:16px"> I / O<br /></td>
-                                        <td style="width:60px;height:16px">Pull-up <br /></td>
-                                        <td style="width:243px;height:16px"> Comments</td>
-                                      </tr>
-                                      <tr>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243);text-align:center">0</td>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243);text-align:center">0</td>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243);text-align:center">x</td>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> input</td>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> No</td>
-                                        <td style="width:243px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> Tri-state (Hi-Z)</td>
-                                      </tr>
-                                      <tr>
-                                        <td style="width:60px;height:45px;color:rgb(153,153,153);background-color:rgb(243,243,243);text-align:center">0</td>
-                                        <td style="width:60px;height:45px;color:rgb(153,153,153);background-color:rgb(243,243,243);text-align:center">1</td>
-                                        <td style="width:60px;height:45px;color:rgb(153,153,153);background-color:rgb(243,243,243);text-align:center">0</td>
-                                        <td style="width:60px;height:45px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> input</td>
-                                        <td style="width:60px;height:45px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> Yes</td>
-                                        <td style="width:243px;height:45px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> Pxn will source current if external<br /> pulled low.</td>
-                                      </tr>
-                                      <tr>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243);text-align:center">0</td>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243);text-align:center">1</td>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243);text-align:center">1</td>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> input</td>
-                                        <td style="width:60px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> No</td>
-                                        <td style="width:243px;height:16px;color:rgb(153,153,153);background-color:rgb(243,243,243)"> Tri-state (Hi-Z)</td>
-                                      </tr>
-                                      <tr>
-                                        <td style="width:60px;height:16px;text-align:center">1</td>
-                                        <td style="width:60px;height:16px;text-align:center">0</td>
-                                        <td style="width:60px;height:16px;text-align:center">x</td>
-                                        <td style="width:60px;height:16px"> output</td>
-                                        <td style="width:60px;height:16px"> No</td>
-                                        <td style="width:243px;height:16px"> Output Low (Sink)</td>
-                                      </tr>
-                                      <tr>
-                                        <td style="width:60px;height:16px;text-align:center">1</td>
-                                        <td style="width:60px;height:16px;text-align:center">1</td>
-                                        <td style="width:60px;height:16px;text-align:center">x</td>
-                                        <td style="width:60px;height:16px"> output</td>
-                                        <td style="width:60px;height:16px"> No</td>
-                                        <td style="width:243px;height:16px"> Output High (Source)</td>
-                                      </tr>
-                                    </tbody>
-                                  </table><span style="font-family:courier new,monospace">Table 1</span><br /><br /><span>    </span>This table tells us everything we need to know, we just have to know how to read it.  Since we are talking about outputs only the last 2 rows apply.  What they state is that we have a common register that we have to set to 1 for output named DDxn (Data Direction Register), leaving the pin LOW(0) will make it an input but setting it to HIGH(1) will make it an output.  Once DDxn is HIGH(1) we can set PORTxn to LOW(0) in order to provide us with a GND signal a.k.a. "output low (sink)". Or we could set it to HIGH(1) or provide us with a Vcc signal a.k.a. "Output High (Source)".  The PUD(Pull Up Disable) register doesn't matter so we are done.
-                                </div>
-                                <div><br /><span><span>    The only mystery that remains is whats with the xn?  "x" defines which Port we are using B, C or D (there is no A port on the ATmega328, but some like the Atmega32 do have them).  The "n" defines the pin number.</span></span>  So this chart is telling us that if we want to make the PD0 pin an output we have to turn on DDD0 to HIGH(1) and after that when we change PORTD0 to a HIGH(1) we will output 5V and if we leave it LOW(0) we will get GND(or 0V).<br /><br /><span>    </span>We are almost done, there is just one thing left to do. We need to find what register where DDD0 and PORTD0 live in.  So if you go to the "Register Summary" section, you can see that DDD0 is a bit within the  DDRD register and the PORTD0 is a bit within the PORTD register.<br /><br /></div>
-                                <div><br /></div>
-                                <blockquote style="margin:0pt 0pt 0pt 40px;border:medium none;padding:0px">
-                                  <div><span style="color:rgb(255,0,0)">NOTE:</span> A lot
-                                    of programmers will simply use 0-7 instead of PORTx0-PORTx7 and DDx0-DDx7, so don't be
-                                    surprised if you see that if your going though peoples code.</div>
-                                </blockquote>
-                                <div><br /></div>
-                                <div><br /></div>
-                                <div>
-                                  <hr />
-                                </div>
-                                <div><br /></div>
-                                <div><br /></div>
-                                <div><b>
-                                    <font face="'courier new', monospace"><span style="font-size:medium">SOFTWARE:</span></font>
-                                  </b><br /><br /></div>
-                                <div><i>ATmega8 &amp; ATmega168/328 Code:</i><br /></div>
-                                <div class="sites-codeblock sites-codesnippet-block">
-                                  <div><code>#include &lt;avr/io.h&gt;</code><br /><br /><br /></div>
-                                  <div><code>int main(void)</code></div>
-                                  <div><code>{</code><br /><span><code>    </code></span><code>DDRD |= (1 &lt;&lt; DDD0); </code><span><code>    </code><span><code>   </code></span></span><code>// sets bit DDD0 to 1 within register DDRD</code><br /><span><code>    </code></span><code>// PD0 is now an output WOOT !!!</code><br /><br /><span><code>    </code></span><code>PORTD |= (1 &lt;&lt; PORTD0); </code><span><code>    </code></span><code>// turn on PD0</code><br /><span><code>    </code></span><code>// PD0 is now an output and is sourcing VCC</code><br /><br /><span><code>    </code></span><code>PORTD &amp;= ~(1 &lt;&lt; PORTD0); </code><span><code>    </code></span><code>// turn off PD0</code><br /><span><code>    </code></span><code>// PDO is still an output and is now sinking 0V</code><br /><span><br /></span></div>
-                                  <div><span><span><code>    while(1)</code></span><br /></span></div>
-                                  <div><span><span><span><code>    {</code></span></span></span></div>
-                                  <div><span><span><span><code><span>    <span>    // main loop</span></span></code></span></span></span><span style="font-family:monospace;color:rgb(0,96,0)">   </span></div>
-                                  <div><span><span><span><span><code>    }</code></span><br /></span></span></span></div>
-                                  <div><span><span><span><span><code>}</code></span></span></span></span></div>
-                                </div>
-                                <div><span><br /></span></div>
-                                <div><span>    </span>Behold the mystery of the output revealed<br /><br /></div>
-                                <div>Cheers</div>
-                                <div>Q<br /><br /></div>
-                                <div><br /></div>
-                                <div><br /></div>
-                              </div>
-                            </div>
-                          </div>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check2" viewBox="0 0 16 16">
+        <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+        <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path
+                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+    </symbol>
+</svg>
+
+<div id="wrapper">
+    <div class="wrap-container ">
+        <header class="navbar">
+            <h4>
+                <a href="/">QEEWiki</a>
+                <button class="navbar-toggler d-block d-md-none" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </h4>
+        </header>
+        <div class="d-flex">
+            <nav class="navbar" id="sidebar">
+                <div class="container-fluid px-md-0">
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                         aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header border-bottom d-flex d-md-none">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">QEEWiki</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
                         </div>
-                      </div>
+                        <div class="offcanvas-body px-md-0 pt-0">
+                            <ul class="navbar-nav justify-content-end flex-grow-1">
+                                <li class="nav-item">
+                                    <b>Navigation</b>
+                                    <ul>
+                                        <li><a href="https://chayanforyou.github.io/">Home</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button"
+                                               data-bs-toggle="dropdown"
+                                               aria-expanded="true">
+                                                AVR Guide
+                                            </a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="#">AVR Basics</a></li>
+                                                <li><a class="dropdown-item" href="#">Digital I/O</a></li>
+                                                <li><a class="dropdown-item" href="/#interrupts">Interrupts</a></li>
+                                                <li><a class="dropdown-item" href="#">Timers</a></li>
+                                                <li><a class="dropdown-item" href="#">Analog I/O</a></li>
+                                                <li><a class="dropdown-item" href="#">Communication</a></li>
+                                                <li><a class="dropdown-item" href="#">Other</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Usefull Engineering Stuff</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <b>Resources</b>
+                                    <ul>
+                                        <li><a href="https://www.sparkfun.com/">Sparkfun</a></li>
+                                        <li><a href="https://arduino.cc/en/Reference/HomePage">Arduino Reference</a>
+                                        </li>
+                                        <li><a href="https://www.eevblog.com/">EEVBlog</a></li>
+                                        <li><a href="https://tahmidmc.blogspot.com/">Tahmid's Blog</a></li>
+                                        <li><a href="https://labprojectsbd.com/">Lab Projects BD</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button" aria-expanded="true">Atmel</a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="/assets/docs/ATmega8A.pdf"
+                                                       target="_blank" rel="nofollow">Atmega8 Datasheet</a></li>
+                                                <li><a class="dropdown-item"
+                                                       href="/assets/docs/ATmega48A-PA-88A-PA-168A-PA-328-P.pdf"
+                                                       target="_blank" rel="nofollow">ATMega168/328 Datasheet</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div id="sites-chrome-footer-wrapper">
-            <div id="sites-chrome-footer-wrapper-inside">
-              <div id="sites-chrome-footer">
-              </div>
-            </div>
-          </div>
+                </div>
+            </nav>
+            <main id="contentBox">
+
+                <nav aria-label="breadcrumb" id="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">AVR Guide</a></li>
+                        <li class="breadcrumb-item"><a href="#">Digital I/O</a></li>
+                    </ol>
+                </nav>
+
+                <div class="main-content">
+                    <h3>DIGITAL OUTPUTS</h3>
+                    <br/>
+                    <h5 class="fw-semibold">INTRODUCTION:</h5>
+                    <div class="chapter ms-4 pt-2">
+                        <p>
+                            Digital outputs are the most basic (and often use) from of outputs. The AVR pin will send
+                            out a LOW (GND) or HIGH (Vcc) signal. It is important to note that the pin goes from 0V to
+                            Vcc and not from OFF to ON. The difference is not simply semantics because, hardware that
+                            turns devices OFF tends to provide a physical break in the wire stopping current flow
+                            (devices such as relays, switches, contactors), while a pin configured as a digital output
+                            will change from 0V to Vcc. This is important to keep in mind because it allows us to do
+                            some interesting things with our hardware design.
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">HARDWARE:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <p>
+                            If you look at the AVR data sheet, the second page shows the pin configuration of the AVR
+                            chip. All the PA#, PB#, PC# and PD# could be configured as an outputs.
+                        </p>
+                        <img class="img-fluid mt-3" src="/digital-outputs/ATmega8 - IO.JPG" alt="ATmega8 - IO">
+                        <p class="fw-light">Figure 1: ATmega8 - Outputs</p>
+                        <p>
+                            We can design a circuit in 2 ways, the pin can SINK the output (put it down to ground) or
+                            SOURCE the output (bring it up to Vcc). Confused? Well lets clear things up in the following
+                            3 examples.
+                        </p>
+                        <img class="img-fluid mt-3" src="/digital-outputs/Digital Out Fig 1.JPG" alt="Digital Out Fig 1">
+                        <p class="fw-light">Figure 2: Sinking Output</p>
+                        <p>
+                            In figure 2 we are sinking the output. Notice how the LED is hooked up to Vcc on one side
+                            and to the digital output pin on the other side. When the digital output is set to HIGH(Vcc)
+                            and the other side is at Vcc (say 5V) there is no potential difference ie 5V – 5V = 0 (no
+                            difference) so the LED will not light-up. However, if we set the digital output to LOW (GND
+                            or 0V) we have a 5V difference between the pin and the common side (0V – 5V = 5V difference)
+                            hence the LED will come on.
+                        </p>
+                        <img class="img-fluid mt-3" src="/digital-outputs/Digital Out Fig 2.JPG" alt="Digital Out Fig 2">
+                        <p class="fw-light">Figure 3: Sourcing Output</p>
+                        <p>
+                            In figure 3 we are sourcing the output. One side of the LED is hooked up to the digital
+                            output and the other side is connected to ground. When the digital output is set to
+                            HIGH(Vcc) the LED will turn on (Because we have a 5V difference between the digital pin and
+                            the common of the LED). When we set the digital pin to LOW(GND) the LED will turn off
+                            because,the digital output pin is at 0V and the common side of the LED is at 0V which means
+                            we have no potential difference between both sides of the LED.
+                        </p>
+                        <img class="img-fluid mt-3" src="/digital-outputs/Digital Out Fig 3.JPG" alt="Digital Out Fig 3">
+                        <p class="fw-light">Figure 4: Sinking and Sourcing On The Same Output</p>
+                        <p>
+                            Figure 4 is a neat little circuit we have 2 LEDs hooked up to the same digital output. LED 1
+                            is hooked up for sinking (like in figure 2) , and LED 2 is hooked up for sourcing (like in
+                            figure 3). When we set the digital pin to LOW(GND or 0V) LED 1 will turn on and LED 2 will
+                            stay off, if we change the pin to HIGH(Vcc) LED 1 will stay off and LED 2 will turn on.
+                        </p>
+
+                        <p class="ms-4">
+                            <span style="color: red;"><b>NOTE: </b></span><u><span style="color: red;">LEDs are polarity specific</span></u>
+                            which means that they have to be hooked in the right way in order to work, if you decide
+                            build any of these circuits, and you can’t get things to work, turn the LED around and try
+                            again.
+                        </p>
+                        <p>
+                            So, you might wonder to yourself, which is preferred, sinking (figure 2) or sourcing (figure
+                            3)? The answer is sinking, most electrical components have an easier time with sinking, some
+                            can even sink more current than they could source. So keep your eyes open for this in the
+                            future.
+                        </p>
+                        <p class="fw-light fst-italic mt-5">Maximum Output Capabilities:</p>
+                        <p>
+                            This leads us to our final topic. Outputs on most AVR's are limited in how much current they
+                            can output. If you download the ATmega datasheet(link on side) the information is located in
+                            the “Electrical Characteristics” section. So lets take a look at the Electrical
+                            Characteristics (top of section) of the Atmega168/328 datasheet. Notice that under the
+                            "Absolute Maximum Ratings" it lists that the DC Current per I/O pin is 40mA’s. That’s pretty
+                            good since it means we can safely drive any LED with each pin (most LEDs run at 10-20mA).
+                            However, notice that the DC Current Vcc to GND Pins is 200mA, that is the absolute maximum
+                            that the processor can drive at once. So, whenever you design a circuit make sure you look
+                            at these 2 values, going beyond those values will result in damage to your microcontroller.
+                            So that seems fairly simple, make sure that every single load (or device your driving) does
+                            not exceed the Absolute Maximum Rating Per pin, and that every output added up does not
+                            exceed the Maximum DC from Vcc to GND, this is all that you have to look at if you're just
+                            playing around however, running your AVR at these values for prolonged periods of time will
+                            cause damage over time.
+                        </p>
+                        <p>
+                            So if you look at the DC Characteristics Table you will notice that Ioh (voltage of output
+                            high) and Iol (voltage of output low) you will notice that each output is limited to 20mA
+                            @5V or 10mA @ 3.3V, the voltage is the voltage of Vcc (or the voltage that we are running
+                            our AVR at. So that is the Max per pin done, do we have a rule for Maximum DC from Vcc to
+                            GND? You bet we do. Look at the notes under the table, they list a lot of restrictions such
+                            as not exceeding 150mA if we add the values of the pins on C0-C5, D0-D4, ADC7 and the RESET
+                            pins. Although it seems like a pain, following these rules will keep your project running
+                            for a lifetime.
+                        </p>
+                        <p>
+                            So I guess you wondering, what do I do if I want to run a load higher than 20mA? Well you
+                            will have to use an extra component between the microcontroller and the load. A transistor,
+                            FET or my personal favorite a Darlington Array will do the trick. But that is a chapter on
+                            its own.
+                        </p>
+                    </div>
+
+                    <hr class="mb-4"/>
+                    <h5 class="fw-semibold">THEORY OF OPERATION:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <p>
+                            The one thing that I don't understand is why input/output section in the Atmega8 and
+                            Atmega328 is so poor. Every other part of the data sheet has a really nice description of
+                            each register at the end of each section that describes everything.
+                        </p>
+                        <p>
+                            Under the I/O section of the data sheet you will find the following table:
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered max-width-600">
+                                <tbody>
+                                <tr>
+                                    <td>DDxn</td>
+                                    <td>PORTxn</td>
+                                    <td>PUD</td>
+                                    <td>I / O<br></td>
+                                    <td>Pull-up <br></td>
+                                    <td>Comments</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke;text-align:center">0</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke;text-align:center">0</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke;text-align:center">x</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">input</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">No</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">Tri-state (Hi-Z)</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke;text-align:center">0</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke;text-align:center">1</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke;text-align:center">0</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">input</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">Yes</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">Pxn will source
+                                        current if external<br> pulled low.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke;text-align:center">0</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke;text-align:center">1</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke;text-align:center">1</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">input</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">No</td>
+                                    <td style="color:rgb(128,128,128);background-color:whitesmoke">Tri-state (Hi-Z)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">x</td>
+                                    <td>output</td>
+                                    <td>No</td>
+                                    <td>Output Low (Sink)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">x</td>
+                                    <td>output</td>
+                                    <td>No</td>
+                                    <td>Output High (Source)</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="mt-4">
+                            This table tells us everything we need to know, we just have to know how to read it. Since
+                            we are talking about outputs only the last 2 rows apply. What they state is that we have a
+                            common register that we have to set to 1 for output named DDxn (Data Direction Register),
+                            leaving the pin LOW(0) will make it an input but setting it to HIGH(1) will make it an
+                            output. Once DDxn is HIGH(1) we can set PORTxn to LOW(0) in order to provide us with a GND
+                            signal a.k.a. "output low (sink)". Or we could set it to HIGH(1) or provide us with a Vcc
+                            signal a.k.a. "Output High (Source)". The PUD(Pull Up Disable) register doesn't matter, so we
+                            are done.
+                        </p>
+                        <p>
+                            The only mystery that remains is what's with the xn? "x" defines which Port we are using B,
+                            C
+                            or D (there is no A port on the ATmega328, but some like the Atmega32 do have them). The "n"
+                            defines the pin number. So this chart is telling us that if we want to make the PD0 pin an
+                            output we have to turn on DDD0 to HIGH(1) and after that when we change PORTD0 to a HIGH(1)
+                            we will output 5V and if we leave it LOW(0) we will get GND(or 0V).
+                        </p>
+                        <p>
+                            We are almost done, there is just one thing left to do. We need to find what register where
+                            DDD0 and PORTD0 live in. So if you go to the "Register Summary" section, you can see that
+                            DDD0 is a bit within the DDRD register and the PORTD0 is a bit within the PORTD register.
+                        </p>
+                        <p style="color: red">
+                            NOTE: A lot of programmers will simply use 0-7 instead of PORTx0-PORTx7 and DDx0-DDx7, so
+                            don't be surprised if you see that if your going though peoples code.
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">SOFTWARE:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <p class="fst-italic">ATmega8 & ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    #include &lt;avr/io.h&gt;
+
+    int main(void)
+    {
+        DDRD |= (1 << DDD0);        // sets bit DDD0 to 1 within register DDRD
+        // PD0 is now an output WOOT !!!
+
+        PORTD |= (1 << PORTD0);     // turn on PD0
+        // PD0 is now an output and is sourcing VCC
+
+        PORTD &= ~(1 << PORTD0);     // turn off PD0
+        // PDO is still an output and is now sinking 0V
+
+        while(1)
+        {
+            // main loop
+        }
+    }</pre>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <p>
+                        Behold the mystery of the output revealed
+                    </p>
+                    <br/>Cheers<br/>Q
+                    <div><br/></div>
+                    <br/>
+                </div>
+            </main>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 mode-toggle" id="darkMoodDropdown">
+    <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center" id="theme" type="button"
+            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+            <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="theme-text">Toggle theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="theme-text" id="darkMoodDropdownMenu">
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="light"
+                    aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#sun-fill"></use>
+                </svg>
+                Light
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="dark" aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#moon-stars-fill"></use>
+                </svg>
+                Dark
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-mode="auto"
+                    aria-pressed="true">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#circle-half"></use>
+                </svg>
+                Auto
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+    </ul>
+</div>
+
+<script src="../assets/js/jquery-3.5.1.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/prettify.js"></script>
 
 </body>
-
 </html>

@@ -1,0 +1,503 @@
+<!Doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>WHAT YOU NEED TO GET STARTED - QEEWiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <meta name="description" content="Guide For Working With AVR Microcontrollers"/>
+    <meta name="keywords"
+          content="atmega8, atmega168, atmega328, atmega328p, interrupt, timer, adc, analog comparator, pwm, fast pwm, phase correct pwm, spi, uart, i2c, eeprom, tutorial, datasheet"/>
+    <meta name="author" content="Chayan Mistry">
+
+    <meta property="og:url" content="https://avr-guide.github.io"/>
+    <meta property="og:site_name" content="AVR GUIDE - QEEWiki"/>
+    <link rel="icon" href="../assets/img/favicon.ico">
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check2" viewBox="0 0 16 16">
+        <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+        <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path
+                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+    </symbol>
+</svg>
+
+<div id="wrapper">
+    <div class="wrap-container ">
+        <header class="navbar">
+            <h4>
+                <a href="/">QEEWiki</a>
+                <button class="navbar-toggler d-block d-md-none" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </h4>
+        </header>
+        <div class="d-flex">
+            <nav class="navbar" id="sidebar">
+                <div class="container-fluid px-md-0">
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                         aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header border-bottom d-flex d-md-none">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">QEEWiki</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body px-md-0 pt-0">
+                            <ul class="navbar-nav justify-content-end flex-grow-1">
+                                <li class="nav-item">
+                                    <b>Navigation</b>
+                                    <ul>
+                                        <li><a href="https://chayanforyou.github.io/">Home</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button"
+                                               data-bs-toggle="dropdown"
+                                               aria-expanded="true">
+                                                AVR Guide
+                                            </a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="#">AVR Basics</a></li>
+                                                <li><a class="dropdown-item" href="#">Digital I/O</a></li>
+                                                <li><a class="dropdown-item" href="#">Interrupts</a></li>
+                                                <li><a class="dropdown-item" href="#">Timers</a></li>
+                                                <li><a class="dropdown-item" href="#">Analog I/O</a></li>
+                                                <li><a class="dropdown-item" href="#">Communication</a></li>
+                                                <li><a class="dropdown-item" href="#">Other</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Usefull Engineering Stuff</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <b>Resources</b>
+                                    <ul>
+                                        <li><a href="https://www.sparkfun.com/">Sparkfun</a></li>
+                                        <li><a href="https://arduino.cc/en/Reference/HomePage">Arduino Reference</a>
+                                        </li>
+                                        <li><a href="https://www.eevblog.com/">EEVBlog</a></li>
+                                        <li><a href="https://tahmidmc.blogspot.com/">Tahmid's Blog</a></li>
+                                        <li><a href="https://labprojectsbd.com/">Lab Projects BD</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button" aria-expanded="true">Atmel</a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="/assets/docs/ATmega8A.pdf"
+                                                       target="_blank" rel="nofollow">Atmega8 Datasheet</a></li>
+                                                <li><a class="dropdown-item"
+                                                       href="/assets/docs/ATmega48A-PA-88A-PA-168A-PA-328-P.pdf"
+                                                       target="_blank" rel="nofollow">ATMega168/328 Datasheet</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <main id="contentBox">
+
+                <nav aria-label="breadcrumb" id="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">AVR Guide</a></li>
+                        <li class="breadcrumb-item"><a href="#">AVR Basics</a></li>
+                    </ol>
+                </nav>
+
+                <div class="main-content">
+                    <h3>WHAT YOU NEED TO GET STARTED</h3>
+                    <div><br/></div>
+                    <br/>
+                    <h5 class="fw-semibold">INTRODUCTION:</h5>
+                    <p class="ms-4 pt-3">
+                        If you managed to get here you probably know about microcontrollers. But you might not know what
+                        you need in order to get started. The truth is that electronics isn't a more expansive of a
+                        hobby than say woodworking.
+                    </p>
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">TOOLS:</h5>
+                    <div class="chapter ms-4 pt-3">
+                        <h4><b>Light:</b></h4>
+                        <p class="ms-4">
+                            Get yourself some sort of work light, the better lit your work area is the easier it
+                            will be to work. I picked up a small florescent light fixture for under $30 bucks,
+                            and it works great.
+                        </p>
+                        <h4><b>Digital Multi-Meter:</b></h4>
+                        <p class="ms-4">
+                            Any multi meter will do that can measure DC voltage, AC voltage, resistance and
+                            current. I use a $200 meter at work and it does the same job that the meter that i
+                            got at the local hardware shop on special for $15. The only difference is that the
+                            one we use at work is weatherproof, do high 600V testing (which you will not need)
+                            and can take a 3-story fall.
+                        </p>
+                        <h4><b>Flush Cutters:</b></h4>
+                        <p class="ms-4">
+                            You can pick up a pair for a few bucks. They are great for working with electronics.
+                        </p>
+                        <h4><b>Wire strippers:</b></h4>
+                        <p class="ms-4">
+                            There are many styles of Wire strippers. Stay away from the automatic strippers (especially
+                            the butterfly style). I use to build electrical panels for a living, so I use to strip a lot
+                            of wire, and <a
+                                href="https://www.kleintools.com/catalog/strippers-cutters-and-crimpers/wire-strippers/combination-cable-and-wire-stripping-tools"
+                                target="_blank" rel="nofollow">Klein Wire Cutters</a> are THE BEST, its worth spending
+                            the extra bit of money for conform. As a hobbyist you will work with smaller wire gages (the
+                            higher the AWG# the smaller the wire). I find 22AWG a really nice gage to work with.
+                        </p>
+                        <h4><b>Breadboard:</b></h4>
+                        <p class="ms-4">
+                            A breadboard is a prototype board, it is used to prototype circuits without having
+                            to solder components together, A must-have.
+                        </p>
+                        <h4><b>Soldering Iron:</b></h4>
+                        <p class="ms-4">
+                            You can go without a soldering as long as you do not want to build
+                            anything permanent. When you do decide to spend some money buy the <a
+                                href="https://www.sparkfun.com/products/85" target="_blank" rel="nofollow">AOYUE
+                            2900</a>. Its 70 watt, it heats up fast (2-5 seconds), the tips last a long time,
+                            the tips are inexpensive (and contain the heater element, so when you replace the
+                            tip you also replace the heater). The problem with cheap irons is that they are not
+                            meant to last, the heater and the tips are only good for 20-40 hours, and then your
+                            stuck replacing them, and for the price of 5 cheap irons you could own this one
+                            which holds its own against irons that cost 5 times as much.
+                        </p>
+                        <h4><b>Tweezers:</b></h4>
+                        <p class="ms-4">
+                            At some point, your going to have to align a small part (or hold one in place) its $5 that
+                            will save you a lot of frustration.
+                        </p>
+                        <h4><b>Jewelers Screw Driver Set:</b></h4>
+                        <p class="ms-4">
+                            You could pick up a set for $5-$20. I like the larger screw plastic body sets over the thin
+                            metal sets, but its a personal preference, so get a set that feels comfortable to use.
+                        </p>
+                        <h4><b>Needle Nose Pliers:</b></h4>
+                        <p class="ms-4">
+                            Pick up a set that feels nice in your hand. I have 2 sets on my desk, one set has a spring
+                            that lets me operated it with one hand, and the other does not. I suggest picking up one of
+                            each.
+                        </p>
+                        <h4><b>Small Clamps:</b></h4>
+                        <p class="ms-4">
+                            You could pick up some small clamps for really cheap at the dollar store. Get twice as much
+                            as you think you will need. No matter how many you have you will find yourself needing more.
+                        </p>
+                        <h4><b>Tooth Brushes:</b></h4>
+                        <p class="ms-4">
+                            Get some rough tooth brushes from the dollar store, they are great for cleaning up your
+                            circuit boards after soldering.
+                        </p>
+                        <h4><b>Other:</b></h4>
+                        <p class="ms-4">
+                            As you move on you will add more tools to your toolbox but you don't need much more than
+                            what is included here to get started. I, for one, love my Oscilloscope, but I don't
+                            recommend anyone who is starting out buying one.
+                        </p>
+
+                        <p class="mt-4">
+                            Sparkfun has a great <a href="https://www.sparkfun.com/products/9467" target="_blank"
+                                                    rel="nofollow">Beginners Tool Kit</a> if you don't have any tools
+                            this is a great set. If you eventually decide to build your own boards from scratch you'll
+                            need a <a
+                                href="https://www.digikey.com/en/products/detail/microchip-technology/ATAVRISP2/898891"
+                                target="_blank" rel="nofollow">AVR ISP programmer</a>, but if you only plan on sticking
+                            though the Arduino you won't need it
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">CONSUMABLES:</h5>
+                    <div class="chapter ms-4 pt-3">
+                        <h4><b>Solder:</b></h4>
+                        <p class="ms-4">
+                            There many types of solder on the market, The easiest to use is Leaded 63Sn/37Pb with a
+                            water-soluble flux core, Although the no-clean stuff sounds good don't use it, it continues
+                            to slowly eat at the board over time and requires worse chemicals than any other flux type
+                            to fully clean off. Leaded 60Sn/40Pb with a Flux core is the most common solder found in
+                            hardware stores. A good high quality solder will make soldering a lot easier. I do not
+                            recommend Lead-Free (Silver) solder, it has a higher melting point and does not flow as
+                            smoothly as Lead solder, in short, its a pain in the ass to use on a good day.
+                        </p>
+                        <h4><b>Flux:</b></h4>
+                        <p class="ms-4">
+                            Flux is basically a mild acid that you use to clean your soldering surfaces before
+                            soldering. Using flux makes soldering much easier, the downside is that you need to clear
+                            the flux off once you are done soldering or the acid will continue to eat at your board. I
+                            highly recommend a Water soluble Flux, Standard flux requires Isopropyl Alcohol to clean.
+                        </p>
+                        <h4><b>Wick:</b></h4>
+                        <p class="ms-4">
+                            We all make mistakes, and sometimes being able to de-solder something is just as important
+                            to solder something. Out of all the devices made for removing solder the wick is by far the
+                            easiest and best (aside from an expansive hot air rework station).
+                        </p>
+                        <h4><b>Wire:</b></h4>
+                        <p class="ms-4">
+                            Wire is rated in AWG (American Wire Gage) the higher the number the thinker the wire
+                            (basically this number states how many times a wire goes through a roller in order to get
+                            its thickness, so a 30 AWG wire went through a roller 30 times). Use 26-30 AWG is a nice
+                            thickness for electronics applications. Wire also comes in 2 varieties Stranded and Solid
+                            core. Solid core is good for breadboards and Stranded is better for soldering. A wide array
+                            of colors is recommended. I recommend Red (for positive power), Green(or white for ground)
+                            and Black (for Signals). There are many different types of Insulation and any will do for
+                            electronics.
+                        </p>
+                        <h4><b>Isopropyl Alcohol:</b></h4>
+                        <p class="ms-4">
+                            Used to clear Flux of your board after soldering.
+                        </p>
+                        <h4><b>Electric Tape:</b></h4>
+                        <p class="ms-4">
+                            It always comes in handy, the shiny stuff is the cheap stuff, avoid it.
+                        </p>
+                        <h4><b>Heat Shrink:</b></h4>
+                        <p class="ms-4">
+                            Heat shrink is great, It's basically a tube that shrinks to half it sizes when heated, this
+                            is great for shielding wire after you have spliced 2 wires together. I use a lighter to
+                            shrink heat-shrink (hold the heat shrink ABOVE the flame and turn slowly). Get the 1/8 inch
+                            diameter stuff, that's good for most of the hobbyist applications.
+                        </p>
+                        <h4><b>Jewelers Screw Driver Set:</b></h4>
+                        <p class="ms-4">
+                            You could pick up a set for $5-$20. I like the larger screw plastic body sets over the thin
+                            metal sets, but its a personal preference, so get a set that feels comfortable to use.
+                        </p>
+                        <h4><b>Needle Nose Pliers:</b></h4>
+                        <p class="ms-4">
+                            Pick up a set that feels nice in your hand. I have 2 sets on my desk, one set has a spring
+                            that lets me operated it with one hand, and the other does not. I suggest picking up one of
+                            each.
+                        </p>
+                        <h4><b>Small Clamps:</b></h4>
+                        <p class="ms-4">
+                            You could pick up some small clamps for really cheap at the dollar store. Get twice as much
+                            as you think you will need. No matter how many you have you will find yourself needing more.
+                        </p>
+                        <h4><b>Tooth Brushes:</b></h4>
+                        <p class="ms-4">
+                            Get some rough tooth brushes from the dollar store, they are great for cleaning up your
+                            circuit boards after soldering.
+                        </p>
+                        <h4><b>Other:</b></h4>
+                        <p class="ms-4">
+                            As you move on you will add more tools to your toolbox but you don't need much more than
+                            what is included here to get started. I, for one, love my Oscilloscope, but I don't
+                            recommend anyone who is starting out buying one.
+                        </p>
+
+                        <p class="mt-4">
+                            Sparkfun has a great <a href="https://www.sparkfun.com/products/9467" target="_blank"
+                                                    rel="nofollow">Beginners Tool Kit</a> if you don't have any tools
+                            this is a great set. If you eventually decide to build your own boards from scratch you'll
+                            need a <a
+                                href="https://www.digikey.com/en/products/detail/microchip-technology/ATAVRISP2/898891"
+                                target="_blank" rel="nofollow">AVR ISP programmer</a>, but if you only plan on sticking
+                            though the Arduino you won't need it
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">SOFTWARE:</h5>
+                    <div class="chapter ms-4 pt-3">
+                        <h4>
+                            <a href="https://sourceforge.net/projects/winavr/files/WinAVR/20100110/"
+                               target="_blank" rel="nofollow"><b>WinAVR:</b>
+                            </a>
+                        </h4>
+                        <p class="ms-4">
+                            This is the C compiler and associated software for the AVR. All of my tutorials have been
+                            written using this software.
+                        </p>
+                        <h4>
+                            <a href="https://ww1.microchip.com/downloads/archive/as5installer-5.0.1163-full.exe"
+                               target="_blank" rel="nofollow"><b>AVR Studio 5</b>
+                            </a>
+                            or
+                            <a href="https://ww1.microchip.com/downloads/archive/AvrStudio4Setup.exe"
+                               target="_blank" rel="nofollow"><b>AVR Studio 4</b>
+                            </a>
+                        </h4>
+                        <p class="ms-4">
+                            This is the IDE developed by ATMEL.
+                        </p>
+                        <h4>
+                            <a href="https://www.nongnu.org/avrdude/" target="_blank"
+                               rel="nofollow"><b>AVR DUDE:</b>
+                            </a>
+                        </h4>
+                        <p class="ms-4">
+                            The AVR Downloader / Uploader. This is that we are going to use in order to upload the code
+                            to your AVR over USB once a Bootloader installed on the AVR.
+                        </p>
+                        <h4>
+                            <a href="https://github.com/chayanforyou/xLoader" target="_blank"
+                               rel="nofollow"><b>xLoader:</b>
+                            </a>
+                        </h4>
+                        <p class="ms-4">
+                            The Software that lets you send .hex files to the AVR via the Arduino
+                            <a href="https://www.arduino.cc/playground/Learning/Burn168" target="_blank"
+                               rel="nofollow">Bootloader</a>.
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">ELECTRICAL COMPONENTS SHOPPING LIST:</h5>
+                    <div class="chapter ms-4 pt-3">
+                        <h4><b>Arduino:</b></h4>
+                        <p class="ms-4">
+                            The Arduino is a wicked piece of kit, it's a simple board with an AVR (at this time the
+                            ATmega328), all the voltage hookups and a bootloader that basically allows it to be
+                            programmed using a USB port, no extra programmer required! WOOT for saving money!
+                        </p>
+                        <h4><b>Resistors:</b></h4>
+                        <p class="ms-4">
+                            Resistors are the most common and versatile component used in electronics. 1/8 watt
+                            resistors are inexpensive and will work for most applications, but if you could get 1/4 watt
+                            resistors for the same cost nab them up, any rating higher than 1/4 Watt is used for special
+                            applications thus are more expansive. 270,333,1k,4.7k and 10k are the most common used
+                            resistor values.
+                        </p>
+                        <h4><b>Capacitors:</b></h4>
+                        <p class="ms-4">
+                            Every project that you will work on will have a capacitor in it somewhere so make sure you
+                            pick up a variety pack.
+                        </p>
+                        <h4><b>Push Buttons:</b></h4>
+                        <p class="ms-4">
+                            The easiest device to hook up to an input. "Tac Switches" are fairly cheap and come in all
+                            shapes, colors and sizes, use what you like.
+                        </p>
+                        <h4><b>LEDs:</b></h4>
+                        <p class="ms-4">
+                            An LED is the simplest device that you could connect to an output, and let's be honest, we
+                            all love flashing lights. A mix of various colors of Diffused type 5mm LEDs (red, green and
+                            yellow).
+                        </p>
+                        <h4><b>Voltage Regulator:</b></h4>
+                        <p class="ms-4">
+                            A great little device, that well... regulates the input voltage into a given value. In
+                            simpler words, most devices work on 3.3V or 5V the voltage regulator reduces the power of a
+                            standard 9V battery to your desired voltage.
+                        </p>
+                        <h4><b>Transistor:</b></h4>
+                        <p class="ms-4">
+                            While you're not going to need them right away, they do come in handy. Transistors have many
+                            uses in electronics. trust me, add a few 'small signal' PNP and NPN transistors to your
+                            electronics order, you'll be glad you did because eventually you will need them.
+                        </p>
+                        <h4><b>Diode:</b></h4>
+                        <p class="ms-4">
+                            Diodes are another really common component used for many things, they are really cheap so
+                            make sure you keep a few around. The 1N4001 diode is a nice generic choice.
+                        </p>
+                        <p>
+                            Over time your parts shelf will grow larger and larger, but the above list is a great place
+                            to start.
+                        </p>
+                    </div>
+
+                    <div class="chapter ms-4">
+                        <h4><b>Shopping lists:</b></h4>
+                        <p class="ms-4">
+                            Again Sparkfun to the rescue, I the <a href="https://www.sparkfun.com/products/10173"
+                                                                   target="_blank" rel="nofollow">Arduino Inventors
+                            kit</a> is a great kit for just under 100 bucks that has everything your going to need
+                            to tinker with electronics. I would also advise you to also get the <a
+                                href="https://www.sparkfun.com/products/9258" target="_blank" rel="nofollow">Resistor
+                            Kit</a> and if you got a bit of extra cash the <a
+                                href="https://www.sparkfun.com/products/10003" target="_blank" rel="nofollow">Beginners
+                            Parts Kit</a> is a great additional kit.
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <p>
+                        I think that covers it all, if you could think of something that I haven't though of, send me a
+                        line.
+                    </p>
+                    <br/>Cheers<br/>Q
+                    <div><br/></div>
+                    <br/>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 mode-toggle" id="darkMoodDropdown">
+    <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center" id="theme" type="button"
+            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+            <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="theme-text">Toggle theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="theme-text" id="darkMoodDropdownMenu">
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="light"
+                    aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#sun-fill"></use>
+                </svg>
+                Light
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="dark" aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#moon-stars-fill"></use>
+                </svg>
+                Dark
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-mode="auto"
+                    aria-pressed="true">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#circle-half"></use>
+                </svg>
+                Auto
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+    </ul>
+</div>
+
+<script src="../assets/js/jquery-3.5.1.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

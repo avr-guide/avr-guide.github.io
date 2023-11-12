@@ -1,0 +1,228 @@
+/***** Google fonts *****/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #ffffff;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  border: 1px solid #adb5bd;
+}
+
+.table {
+  margin: 0 !important;
+  border-color: #adb5bd;
+}
+
+.table td,
+.table th {
+  padding: 1px 5px;
+}
+
+td.disable-cell {
+  color: rgb(128,128,128);
+  background-color: whitesmoke;
+}
+
+/* Apply the filter directly on the body tag */
+#wrapper {
+  padding: 20px;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+#wrapper.dark-mode {
+  background-color: #d7d7d7;
+}
+
+#wrapper.dark-mode,
+#wrapper.dark-mode img,
+#wrapper.dark-mode video,
+#wrapper.dark-mode iframe,
+#wrapper.dark-mode canvas,
+#wrapper.dark-mode svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+
+
+/*** Fixed Height and Parent div flex ***/
+.verticalCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/***********css Animation*********/
+.wrap-container {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.025);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+  padding: 15px;
+  border-radius: 4px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+header {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+header h4 {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+header a {
+  text-decoration: none;
+  color: #111111;
+  font-size: 26px;
+}
+
+#sidebar {
+  border-right: 1px solid #ccc;
+  padding: 10px 5px 10px 0;
+  max-width: 250px;
+  width: 250px;
+  font-size: 14px;
+  line-height: 26px;
+  align-items: start;
+}
+
+#sidebar ul.navbar-nav > li > b {
+  font-size: 16px;
+}
+
+#sidebar ul.navbar-nav > li > ul > li > a {
+  font-weight: 700;
+}
+
+#sidebar ul.navbar-nav > li {
+  border-bottom: 1px solid #cccccc;
+  padding: 8px 0;
+}
+
+#sidebar ul.navbar-nav > li a {
+  color: #111111;
+  text-decoration: none;
+}
+
+#sidebar ul.navbar-nav li.dropdown > a {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#sidebar ul.navbar-nav li a:hover {
+  color: rgb(23, 58, 117);
+  text-decoration: underline;
+}
+
+#sidebar ul.navbar-nav > li > ul {
+  padding: 5px 10px;
+}
+
+#sidebar ul.navbar-nav li .dropdown-menu {
+  border: none;
+  padding: 0;
+}
+
+#contentBox {
+  width: 100%;
+  padding: 15px;
+}
+
+#breadcrumb {
+  margin-bottom: 15px;
+}
+
+#darkMoodDropdown > button svg {
+  fill: #ffffff;
+}
+
+.chapter h4 {
+  font-size: 14px;
+}
+
+.chapter h4 a {
+  text-decoration: none
+}
+
+.max-width-400 {
+  max-width: 400px
+}
+
+.max-width-550 {
+  max-width: 550px
+}
+
+.max-width-600 {
+  max-width: 600px
+}
+
+.max-width-650 {
+  max-width: 650px
+}
+
+.max-width-700 {
+  max-width: 700px
+}
+
+/*Override prettify design*/
+pre, code{
+  white-space: pre-wrap;
+  border: 0 !important;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* UXCam scheme for google prettify*/
+pre.prettyprint { display: block; background-color: #f8f9fa;}
+
+/* IE indents via margin-left */
+li.L0,li.L1,li.L2,li.L3,li.L4,li.L5,li.L6,li.L7,li.L8 {
+  list-style-type: decimal !important;
+}
+
+/* Alternate shading for lines */
+li.L1,li.L3,li.L5,li.L7,li.L9 {
+  background-color: transparent !important;
+}
+
+.linenums li{
+  border-left: 1px solid #e4e4e4;
+}
+
+/** FOR ONLY DESKTOP AND TAB **/
+@media screen and (min-width: 768px) {
+  #sidebar .offcanvas,
+  #sidebar .offcanvas.offcanvas-end {
+    position: relative;
+    transform: translateX(0);
+    visibility: visible;
+    border: none;
+  }
+}
+
+/** FOR ONLY MOBILE **/
+@media screen and (max-width: 767px) {
+  #sidebar {
+    width: 0;
+    padding: 0;
+  }
+
+  .wrap-container {
+    max-width: 100%;
+  }
+}
