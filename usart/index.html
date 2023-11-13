@@ -1,0 +1,942 @@
+<!Doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>USART - QEEWiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <meta name="description" content="Guide For Working With AVR Microcontrollers"/>
+    <meta name="keywords"
+          content="atmega8, atmega168, atmega328, atmega328p, interrupt, timer, adc, analog comparator, pwm, fast pwm, phase correct pwm, spi, uart, i2c, eeprom, tutorial, datasheet"/>
+    <meta name="author" content="Chayan Mistry">
+
+    <meta property="og:url" content="https://avr-guide.github.io"/>
+    <meta property="og:site_name" content="AVR GUIDE - QEEWiki"/>
+    <link rel="icon" href="../assets/img/favicon.ico">
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/prettify.css">
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check2" viewBox="0 0 16 16">
+        <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+        <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path
+                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+    </symbol>
+</svg>
+
+<div id="wrapper">
+    <div class="wrap-container ">
+        <header class="navbar">
+            <h4>
+                <a href="/">QEEWiki</a>
+                <button class="navbar-toggler d-block d-md-none" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </h4>
+        </header>
+        <div class="d-flex">
+            <nav class="navbar" id="sidebar">
+                <div class="container-fluid px-md-0">
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                         aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header border-bottom d-flex d-md-none">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">QEEWiki</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body px-md-0 pt-0">
+                            <ul class="navbar-nav justify-content-end flex-grow-1">
+                                <li class="nav-item">
+                                    <b>Navigation</b>
+                                    <ul>
+                                        <li><a href="https://chayanforyou.github.io/">Home</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button"
+                                               data-bs-toggle="dropdown"
+                                               aria-expanded="true">
+                                                AVR Guide
+                                            </a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="#">AVR Basics</a></li>
+                                                <li><a class="dropdown-item" href="#">Digital I/O</a></li>
+                                                <li><a class="dropdown-item" href="/#interrupts">Interrupts</a></li>
+                                                <li><a class="dropdown-item" href="#">Timers</a></li>
+                                                <li><a class="dropdown-item" href="#">Analog I/O</a></li>
+                                                <li><a class="dropdown-item" href="#">Communication</a></li>
+                                                <li><a class="dropdown-item" href="#">Other</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Usefull Engineering Stuff</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <b>Resources</b>
+                                    <ul>
+                                        <li><a href="https://www.sparkfun.com/">Sparkfun</a></li>
+                                        <li><a href="https://arduino.cc/en/Reference/HomePage">Arduino Reference</a>
+                                        </li>
+                                        <li><a href="https://www.eevblog.com/">EEVBlog</a></li>
+                                        <li><a href="https://tahmidmc.blogspot.com/">Tahmid's Blog</a></li>
+                                        <li><a href="https://labprojectsbd.com/">Lab Projects BD</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button" aria-expanded="true">Atmel</a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="/assets/docs/ATmega8A.pdf"
+                                                       target="_blank" rel="nofollow">Atmega8 Datasheet</a></li>
+                                                <li><a class="dropdown-item"
+                                                       href="/assets/docs/ATmega48A-PA-88A-PA-168A-PA-328-P.pdf"
+                                                       target="_blank" rel="nofollow">ATMega168/328 Datasheet</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <main id="contentBox">
+
+                <nav aria-label="breadcrumb" id="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">AVR Guide</a></li>
+                        <li class="breadcrumb-item"><a href="#">Communication</a></li>
+                    </ol>
+                </nav>
+
+                <div class="main-content">
+                    <h3>USART</h3>
+                    <br/>
+                    <h5 class="fw-semibold">INTRODUCTION:</h5>
+                    <div class="chapter ms-4 pt-2">
+                        <p>
+                            In lamest terms the USART (Universal Synchronous and Asynchronous serial Receiver and
+                            Transmitter) is a 0-5V version of the RS232 serial protocol. A lot of devices communicate
+                            over this protocol and several devices exist to boost the USART to RS232 levels so that you
+                            could talk to serial devices. RS232 was the protocol of choice before USB and many
+                            industrial and aviation hardware still contain RS232 ports.
+                        </p>
+                    </div>
+
+                    <hr class="mb-4"/>
+                    <h5 class="fw-semibold">HARDWARE:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <img class="img-fluid mt-3" src="/usart/ATmega8 - USART.JPG" alt="ATmega8 - USART">
+                        <p class="fw-light">Figure 1: ATmega8 USART</p>
+                        <p>
+                            Hardware wise serial is simple. Most the time you will be using 2 pins and a ground, the RXD
+                            (Receive Data) and TXD (Transmit Data). The device that you are trying to talk to will also
+                            have a TX and a RX pin, in order to get the two devices talking you have to hook up the TX
+                            of each device to the RX pin of the other. If you think about if it's just like your
+                            telephone at home, you talk into the microphone (transmitter) and the person on the other
+                            end hears what you said on the Receiver (speaker). A clock pin also exits XCK, however, most
+                            devices do not need this line.
+                        </p>
+                        <img class="img-fluid mt-3" src="/usart/USART - Xbee Hookup.JPG" alt="USART - Xbee Hookup">
+                        <p class="fw-light">Figure 2: ATmega8 & ATmega168/328 to Xbee Hookup</p>
+                        <p>
+                            Like any other device, it is important to tie the grounds of both devices together. Failure
+                            to do so will result in garbage data and can damage both devices.
+                        </p>
+                        <p>
+                            Lastly remember that both the devices are rated at the same voltage or that the lower
+                            voltage device can take the voltage of the higher device on on its receive pin. The perfect
+                            example is the <a href="https://www.sparkfun.com/products/8664" target="_blank"
+                                              rel="nofollow">Xbee</a> which is a 3.3V device, however, its serial data
+                            pins are 5V tolerant so an AVR running at any voltage up to 5V and still talk to the 3.3V
+                            Xbee. If the 3.3V device is not 5V tolerant you could use a <a
+                                href="https://www.sparkfun.com/products/8745" target="_blank" rel="nofollow">Logic Level
+                            Converter</a> (I love you <a href="https://www.sparkfun.com/" target="_blank"
+                                                         rel="nofollow">Sparkfun</a>).
+                        </p>
+                        <p>
+                            Now a few cool things about the USART. If hook the RX and TX signal on the AVR you can test
+                            to see if your AVR is transmitting/receiving properly.
+                        </p>
+                        <p>
+                            Using the <a href="https://www.sparkfun.com/products/316" target="_blank" rel="nofollow">MAX232</a>
+                            in order to convert from the TTL levels to RS232 levels in order to communicate with your
+                            PC. Or an <a href="https://www.sparkfun.com/products/9716" target="_blank" rel="nofollow">FTDI
+                            FT232RL</a> Serial to USB chip in order to use Serial over USB (more and more common now
+                            that PCs do not come with serial ports. The Arduino has one built in).
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">THEORY OF OPERATION:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <p>
+                            The USART outputs serial data over the TX (transmit) pin and listens for data on the RX
+                            (Receive) pin using TTL voltage levels (0-5V). The protocol is fairly simple, if the
+                            settings on both devices match they should be able to talk to each other.
+                        </p>
+                        <p>
+                            The AVR datasheet gives a good writeup of the protocol, so I'm not going to go into any
+                            detail about it. I however say that the most common setting is:
+                        </p>
+                        <p class="ms-4" style="color: blue">
+                            Baud rate: 9600<br>
+                            Data bits: 8<br>
+                            Parity: None<br>
+                            Stop Bit: 1<br>
+                            Flow Control: None
+                        </p>
+                        <p>
+                            The difference between the registers on the ATmega8 and the ATmega168/328 is mostly a "0" at
+                            the end of most register names. I'm guessing that this is preparations for AVRs with
+                            multiple USART ports. In this section I am going to change up for format a bit and show both
+                            registers under the same table.
+                        </p>
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                    <th>AVR Type</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>UCSRA</th>
+                                    <td>RXC</td>
+                                    <td>TXC</td>
+                                    <td>UDRE</td>
+                                    <td>FE</td>
+                                    <td>DOR</td>
+                                    <td>PE</td>
+                                    <td>U2X</td>
+                                    <td>MPCM</td>
+                                    <td>ATmega8</td>
+                                </tr>
+                                <tr>
+                                    <th>UCSR0A</th>
+                                    <td>RXCn</td>
+                                    <td>TXCn</td>
+                                    <td>UDREn</td>
+                                    <td>FEn</td>
+                                    <td>DORn</td>
+                                    <td>PEn</td>
+                                    <td>U2Xn</td>
+                                    <td>MPCMn</td>
+                                    <td>ATmega168/328</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">USART Control and Status Register A</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                    <th>AVR Type</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>UCSRB</th>
+                                    <td>RXCIE</td>
+                                    <td>TXCIE</td>
+                                    <td>UDRIE</td>
+                                    <td>RXEN</td>
+                                    <td>TXEN</td>
+                                    <td>UCSZ2</td>
+                                    <td>RXB8</td>
+                                    <td>TXB8</td>
+                                    <td>ATmega8</td>
+                                </tr>
+                                <tr>
+                                    <th>UCSR0B</th>
+                                    <td>RXCIE0</td>
+                                    <td>TXCIE0</td>
+                                    <td>UDRIE0</td>
+                                    <td>RXEN0</td>
+                                    <td>TXEN0</td>
+                                    <td>UCSZ02</td>
+                                    <td>RXB80</td>
+                                    <td>TXB80</td>
+                                    <td>ATmega168/328</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">USART Control and Status Register B</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                    <th>AVR Type</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>UCSRC</th>
+                                    <td>URSEL*</td>
+                                    <td>UMSEL</td>
+                                    <td>UPM1</td>
+                                    <td>UPM0</td>
+                                    <td>USBS</td>
+                                    <td>UCSZ1</td>
+                                    <td>UCSZ0</td>
+                                    <td>UCPOL</td>
+                                    <td>ATmega8</td>
+                                </tr>
+                                <tr>
+                                    <th>UCSR0C</th>
+                                    <td>UMSELn1</td>
+                                    <td>UMSELn0</td>
+                                    <td>UPMn1</td>
+                                    <td>UPMn0</td>
+                                    <td>USBSn</td>
+                                    <td>UCSZn1</td>
+                                    <td>UCSZn0</td>
+                                    <td>UCPOLn</td>
+                                    <td>ATmega168/328</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">USART Control and Status Register C (* ATmega8 only)</p>
+
+                        <div class="table-responsive mt-4 ms-4">
+                            <table class="table table-bordered max-width-400">
+                                <tbody>
+                                <tr>
+                                    <th>UMSEL</th>
+                                    <th>MODE</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td>Asynchronous Operation</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td>Synchronous Operation</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light ms-4">UMSEL Bit Settings (ATmega8 only)</p>
+
+                        <div class="table-responsive mt-4 ms-4">
+                            <table class="table table-bordered max-width-400">
+                                <tbody>
+                                <tr>
+                                    <th>UMSELn</th>
+                                    <th>UMSELn0</th>
+                                    <th>MODE</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Asynchronous Operation</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Synchronous Operation</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Master SPI Mode</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light ms-4">UMSEL Bits Settings (ATmega168/328 Only)</p>
+
+                        <div class="table-responsive mt-4 ms-4">
+                            <table class="table table-bordered max-width-400">
+                                <tbody>
+                                <tr>
+                                    <th>UPM1<br>(UPMn1)</th>
+                                    <th>UPM0<br>(UPM00)</th>
+                                    <th>PARITY MODE</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Disabled</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Enabled, Even Parity</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Enabled, Odd Parity</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light ms-4">UPM (UPMn) Bit Settings</p>
+
+                        <div class="table-responsive mt-4 ms-4">
+                            <table class="table table-bordered max-width-400">
+                                <tbody>
+                                <tr>
+                                    <th>USBS (USBS0)</th>
+                                    <th>Stop Bit(s)</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td>1 bit</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td>2 bit</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light ms-4">USBS (USBS0) Bit Settings</p>
+
+                        <div class="table-responsive mt-4 ms-4">
+                            <table class="table table-bordered max-width-550">
+                                <tbody>
+                                <tr>
+                                    <th>UCSZ2 (UCSZ02)</th>
+                                    <th>UCSZ1 (UCSZ01)</th>
+                                    <th>UCSZ0 (UCSZ00)</th>
+                                    <th>CHAR SIZE</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>5-bit</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>6-bit</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>7-bit</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>8-bit</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>9-bit</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light ms-4">UCSZ (UCSZn) Bit Settings</p>
+
+                        <div class="table-responsive mt-4 ms-4">
+                            <table class="table table-bordered max-width-400">
+                                <tbody>
+                                <tr>
+                                    <th>UCPOL (UCPOLn)</th>
+                                    <th>TX Data Change</th>
+                                    <th>RX Data Sampled</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td>Rising XCK Edge</td>
+                                    <td>Falling XCK Edge</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td>Falling XCK Edge</td>
+                                    <td>Rising XCK Edge</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light ms-4">UCPOL (UCPOL0) Bit Settings</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered max-width-600">
+                                <tbody>
+                                <tr>
+                                    <th>NAME</th>
+                                    <th>FUNCTION</th>
+                                    <th>SIZE</th>
+                                    <th>AVR TYPE</th>
+                                </tr>
+                                <tr>
+                                    <td>UDR</td>
+                                    <td>Transmit / Receive Buffer</td>
+                                    <td>8 bit</td>
+                                    <td>ATmega8</td>
+                                </tr>
+                                <tr>
+                                    <td>UDRn</td>
+                                    <td>Transmit / Receive Buffer</td>
+                                    <td>8 bit</td>
+                                    <td>ATmega328</td>
+                                </tr>
+                                <tr>
+                                    <td>UBRRH</td>
+                                    <td>Baud Rate Register upper 4 bits</td>
+                                    <td>8 bit (3:0 used)</td>
+                                    <td>ATmega8</td>
+                                </tr>
+                                <tr>
+                                    <td>UBRRnH</td>
+                                    <td>Baud Rate Register upper 4 bits</td>
+                                    <td>8 bit (3:0 used)</td>
+                                    <td>ATmega328</td>
+                                </tr>
+                                <tr>
+                                    <td>UBRRL</td>
+                                    <td>Baud Rate Register Lower 8 bits</td>
+                                    <td>8 bit</td>
+                                    <td>ATmega8</td>
+                                </tr>
+                                <tr>
+                                    <td>UBRRRnL</td>
+                                    <td>Baud Rate Register Lower 8 bits</td>
+                                    <td>8 bit</td>
+                                    <td>ATmega328</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">Other Registers</p>
+
+                        <p>
+                            So we have 3 Control and Status Registers (A, B & C). Register A mainly contains status
+                            data. Register B contains all interrupt settings and some none optional settings. Register C
+                            contains all the configuration settings.
+                        </p>
+
+                        <p class="fw-semibold mt-4">Transmitting Speed:</p>
+                        <p>
+                            For whatever reason the USART circuitry within the AVR really likes clock frequencies
+                            divisible by 1.8432MHz. If your clock source is not divisible by 1.8432 you will have a
+                            percentage of error which will result in unstable communications. The datasheet provides a
+                            large table called "Examples of Baud Rate Setting" under the "USART" section which shows you
+                            the Error rate for all baud rates at given System Clock Settings, As long as the value is
+                            less then 0.5% your communication should be solid. The chart also shows you the value that
+                            you want to write into the UBRR register.
+                        </p>
+                        <p>
+                            Most programmers choose to use a a formula in code to figure this out, this way they don't
+                            have to reference the datasheet every time they need to change the speed. The formula for
+                            this is:
+                        </p>
+                        <p class="ms-4" style="color: blue">
+                            ubrr_value = (Clock_Speed[a.k.a. FOSC] / 16 / Baud_Rate) - 1
+                        </p>
+                        <p>
+                            Just remember this value can be up to 12 bits in size, and has to be written across 2
+                            different 8 bit registers, so make sure you make ubrr_value an integer. Then we need to
+                            split the register the value into the upper and lowest 8 bits into the UBRRL(UBRRnL)
+                            register and the highest 4 bits into the UBRRH (UBRRnH) register.
+                        </p>
+
+                        <p style="color: red">Special Note for ATmega8:</p>
+                        <p style="background: yellow">
+                            The C register (UCRSC) on the ATmega8 contains URSEL (USART Select) bit. In order to write
+                            data to the UBRRH register the URSEL bit needs to be LOW(0), and in order to write to write
+                            to register C (UCRSC) you need to set this bit (URSEL) to HIGH(1). This does not exist on
+                            the ATmega168/328.
+                        </p>
+
+                        <p class="fw-semibold">Frame Formats:</p>
+                        <p>
+                            Now that we know how fast to send the data, we have to figure out how to format our data so
+                            that the other device could understand the data that we are sending it (and so that we could
+                            understand the data that is being sent to us). All of our configuration options are located
+                            in Register C (UCRSC or UCSRnC).
+                        </p>
+                        <p>
+                            The first thing we want to do is setup the character size which is controlled by the
+                            UCSZ1(UCSZn1) bit and UCSZ0(UCSZn0) bit which are located in Register C, and the oddball
+                            UCSZ2(UCSZn2) in register B (which is used for 9 bit data, this rare).
+                        </p>
+                        <p>
+                            The next thing we want to setup is the parity which is set by the UPM1 (UPMn1) bit and the
+                            UPM0 (UPMn0) bit, the most common parity setting is NONE so we can simply leave the bits LOW
+                            (0).
+                        </p>
+                        <p>
+                            Lastly the stop bit which is controlled by the USBS(USBS0) bit, again, 2 bit stop is rarely
+                            used so we usually leave this bit LOW(0) for 1bit.
+                        </p>
+
+                        <p class="fw-semibold">Enabling Communication:</p>
+                        <p>
+                            Now this is something really cool, you can enable the transmission and receive functionality
+                            independently. Both the RXEN(RXENn) bit (Receive Enable) and the TXEN(TXENn) bit
+                            (Transmitter Enable) are both located in the B Register (UCSRB or UCSRnB)
+                        </p>
+
+                        <p class="fw-semibold">Transmit and Receive Buffer:</p>
+                        <p>
+                            This is something that blows my mind, the Transmit and Receive share the same register the
+                            UDR(UDRn). Whats even more wild is that the Receive buffer can store 2 characters. While
+                            this sound a bit crazy it does work. We have to keep 2 things in mind in order to get
+                            flawless operation. The buffer has to be clear in order to transmit. So all we really have
+                            to do is check to see if the buffer is clear UDR(UDRn) and if it is we can transmit. If it
+                            is not clear, reading the data will will cause it clear (much like reading the ADC clears
+                            it).
+                        </p>
+
+                        <p class="fw-semibold">Status and Fault Bits:</p>
+                        <p>
+                            Now that we have our communication up and running we need to be able to monitor its status
+                            and any faults. This is done by Register A (UCSRA or UCSRnA)
+                        </p>
+                        <p>
+                            The RXC(RXCn) bit (Receive Complete) will be set to HIGH(1) when data has been received and
+                            is available in the UDR (UDR0) buffer.
+                        </p>
+                        <p>
+                            The TXC(TXCn) bit (Transmission Complete) is set to HIGH(1) when a transmission is completed
+                            and there is no other data to send.
+                        </p>
+                        <p>
+                            The UDRE(UDREn) is set to HIGH(1) when the buffer (UDR/UDRn) is empty, and therefore ready
+                            to be written.
+                        </p>
+                        <p>
+                            The FE(FE0) bit (Frame Error) is set HIGH(1) if the next bit in the receive buffer has a
+                            Frame Error. If the recieve buffer is read the FE(FE0) bit is cleared.
+                        </p>
+                        <p>
+                            The DOR(DORn) bit (Data OverRun) is set HIGH(1) if the receive buffer is full (2
+                            characters). The bit is cleared LOW(0) if the UDR(UDRn) is read.
+                        </p>
+                        <p>
+                            The UPE(UPEn) bit (Parity Error) is set HIGH(1) if the next character in the receive buffer
+                            has a parity error. The bit is cleared LOW(0) if the UDR(UDRn) is read.
+                        </p>
+
+                        <p class="fw-semibold">Interrupts:</p>
+                        <p>
+                            Finally, the interrupts. There are 3 of them. Receive Complete, Data Register Empty and,
+                            Transmit Complete. All 3 of the bits required to set these interrupts are located in the B
+                            register (UCSRB or UCSRnB). Setting the RXCIE(RXCIEn) bit (Receive Complete Interrupt
+                            Enable) to HIGH(1) enables the Receive interrupt. Setting the TXCIE(TXCIEn) bit (Transmit
+                            Complete Interrupt Enable) to HIGH(1) enables the Transmit interrupt. Setting the
+                            UDRIE(UDRIEn) bit (USART Data Register Empty Interrupt Enable) enables the USART Data
+                            Register Empty Interrupt.
+                        </p>
+                        <p style="color:red;">
+                            IMPORTANT: If you enable the receiver interrupt you MUST READ the UDR register in order to
+                            clear the interrupt flag. If you fail to read the UDR register in the interrupt routine the
+                            interrupt flag will not be cleared. This will cause the program to will jump back to the
+                            main routine, execute 1 line of code (Remember this back from Interrupt Tutorial) then jump
+                            back into the interrupt routine.
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">SOFTWARE:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <p>
+                            Let's put some code down to all this theory.
+                        </p>
+                        <p class="fst-italic mt-4">ATmega8 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    // This code waits for a character and transmits the character back (No interrupts)
+
+    #include &lt;avr/io.h&gt;
+    #include &lt;stdint.h&gt;                     // needed for uint8_t
+
+    #define FOSC 16000000                   // Clock Speed
+    #define BAUD 9600
+    #define MYUBRR FOSC/16/BAUD -1
+
+    char ReceivedChar;
+
+    int main( void )
+    {
+        /* Set baud rate */
+        UBRRH = (MYUBRR >> 8);
+        UBRRL = MYUBRR;
+
+        UCSRB |= (1 << RXEN) | (1 << TXEN);      // Enable receiver and transmitter
+        UCSRC |= (1 << URSEL) |(1 << UCSZ1) | (1 << UCSZ0);    // Set frame: 8data, 1 stp
+
+        while(1)
+        {
+            while ( !(UCSRA & (1 << RXC)) )      // Wait until data is received
+
+            ReceivedChar = UDR;                  // Read the data from the RX buffer
+
+            while ( !(UCSRA & (1 << UDRE)) )     // Wait until buffer is empty
+
+            UDR = ReceivedChar;                  // Send the data to the TX buffer
+        }
+    }</pre>
+
+                        <p class="fst-italic mt-4">ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    // This code waits for a character and transmits the character back (No interrupts)
+
+    #include &lt;avr/io.h&gt;
+    #include &lt;stdint.h&gt;                     // needed for uint8_t
+
+    #define FOSC 16000000                   // Clock Speed
+    #define BAUD 9600
+    #define MYUBRR FOSC/16/BAUD -1
+
+    char ReceivedChar;
+
+    int main( void )
+    {
+        /* Set baud rate */
+        UBRR0H = (MYUBRR >> 8);
+        UBRR0L = MYUBRR;
+
+        UCSR0B |= (1 << RXEN0) | (1 << TXEN0);      // Enable receiver and transmitter
+        UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);    // Set frame: 8data, 1 stp
+
+        while(1)
+        {
+            while ( !(UCSR0A & (1 << RXC0)) )       // Wait until data is received
+
+            ReceivedChar = UDR0;                    // Read the data from the RX buffer
+
+            while ( !(UCSR0A & (1 << UDRE0)) )      // Wait until buffer is empty
+
+            UDR0 = ReceivedChar;                    // Send the data to the TX buffer
+        }
+    }</pre>
+
+                        <p>
+                            Now let's do the same but this time use interrupts.
+                        </p>
+
+                        <p class="fst-italic mt-4">ATmega8 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    // This code waits for a character and transmits the character back (with interrupts)
+
+    #include &lt;avr/io.h&gt;
+    #include &lt;stdint.h&gt;                     // needed for uint8_t
+    #include &lt;avr/interrupt.h&gt;
+
+    #define FOSC 16000000                   // Clock Speed
+    #define BAUD 9600
+    #define MYUBRR FOSC/16/BAUD -1
+
+    volatile char ReceivedChar;
+
+    int main( void )
+    {
+        /* Set baud rate */
+        UBRRH = (MYUBRR >> 8);
+        UBRRL = MYUBRR;
+
+        UCSRB |= (1 << RXEN) | (1 << TXEN);      // Enable receiver and transmitter
+        UCSRB |= (1 << RXCIE);                   // Enable the receiver interrupt
+        UCSRC |= (1 << URSEL) |(1 << UCSZ1) | (1 << UCSZ0);    // Set frame: 8data, 1 stp
+
+        sei();
+
+        while(1)
+        {
+           ;                                    // main loop
+        }
+    }
+
+    ISR (USART_RXC_vect)
+    {
+        ReceivedChar = UDR;                     // Read data from the RX buffer
+        UDR = ReceivedChar;                     // Write the data to the TX buffer
+    }</pre>
+
+                        <p class="fst-italic mt-4">ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    // This code waits for a character and transmits the character back (with interrupts)
+
+    #include &lt;avr/io.h&gt;
+    #include &lt;stdint.h&gt;                     // needed for uint8_t
+    #include &lt;avr/interrupt.h&gt;
+
+    #define FOSC 16000000                   // Clock Speed
+    #define BAUD 9600
+    #define MYUBRR FOSC/16/BAUD -1
+
+    volatile char ReceivedChar;
+
+    int main( void )
+    {
+        /*Set baud rate */
+        UBRR0H = (MYUBRR >> 8);
+        UBRR0L = MYUBRR;
+
+        UCSR0B |= (1 << RXEN0) | (1 << TXEN0);      // Enable receiver and transmitter
+        UCSR0B |= (1 << RXCIE0);                    // Enable reciever interrupt
+        UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);    // Set frame: 8data, 1 stp
+
+        sei();                                      // Lets not forget to enable interrupts =P
+
+        while(1)
+        {
+            ;                                      // Main loop
+        }
+    }
+
+    ISR (USART_RX_vect)
+    {
+        ReceivedChar = UDR0;                       // Read data from the RX buffer
+        UDR0 = ReceivedChar;                       // Write the data to the TX buffer
+    }</pre>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <p>
+                        There you go guys, the secrets of the USART are now yours. If you enslave mankind with this
+                        knowledge pay me back by putting me to work in the easiest pits.
+                    </p>
+                    <br/>Cheers<br/>Q
+                    <div><br/></div>
+                    <br/>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 mode-toggle" id="darkMoodDropdown">
+    <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center" id="theme" type="button"
+            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+            <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="theme-text">Toggle theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="theme-text" id="darkMoodDropdownMenu">
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="light"
+                    aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#sun-fill"></use>
+                </svg>
+                Light
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="dark" aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#moon-stars-fill"></use>
+                </svg>
+                Dark
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-mode="auto"
+                    aria-pressed="true">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#circle-half"></use>
+                </svg>
+                Auto
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+    </ul>
+</div>
+
+<script src="../assets/js/jquery-3.5.1.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/prettify.js"></script>
+
+</body>
+</html>
