@@ -1,0 +1,728 @@
+<!Doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>SPI (SERIAL PERIPHERAL INTERFACE) - QEEWiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <meta name="description" content="Guide For Working With AVR Microcontrollers"/>
+    <meta name="keywords"
+          content="atmega8, atmega168, atmega328, atmega328p, interrupt, timer, adc, analog comparator, pwm, fast pwm, phase correct pwm, spi, uart, i2c, eeprom, tutorial, datasheet"/>
+    <meta name="author" content="Chayan Mistry">
+
+    <meta property="og:url" content="https://avr-guide.github.io"/>
+    <meta property="og:site_name" content="AVR GUIDE - QEEWiki"/>
+    <link rel="icon" href="../assets/img/favicon.ico">
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/prettify.css">
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check2" viewBox="0 0 16 16">
+        <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+        <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path
+                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+    </symbol>
+</svg>
+
+<div id="wrapper">
+    <div class="wrap-container ">
+        <header class="navbar">
+            <h4>
+                <a href="/">QEEWiki</a>
+                <button class="navbar-toggler d-block d-md-none" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </h4>
+        </header>
+        <div class="d-flex">
+            <nav class="navbar" id="sidebar">
+                <div class="container-fluid px-md-0">
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                         aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header border-bottom d-flex d-md-none">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">QEEWiki</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body px-md-0 pt-0">
+                            <ul class="navbar-nav justify-content-end flex-grow-1">
+                                <li class="nav-item">
+                                    <b>Navigation</b>
+                                    <ul>
+                                        <li><a href="https://chayanforyou.github.io/">Home</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button"
+                                               data-bs-toggle="dropdown"
+                                               aria-expanded="true">
+                                                AVR Guide
+                                            </a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="#">AVR Basics</a></li>
+                                                <li><a class="dropdown-item" href="#">Digital I/O</a></li>
+                                                <li><a class="dropdown-item" href="/#interrupts">Interrupts</a></li>
+                                                <li><a class="dropdown-item" href="#">Timers</a></li>
+                                                <li><a class="dropdown-item" href="#">Analog I/O</a></li>
+                                                <li><a class="dropdown-item" href="#">Communication</a></li>
+                                                <li><a class="dropdown-item" href="#">Other</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Usefull Engineering Stuff</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <b>Resources</b>
+                                    <ul>
+                                        <li><a href="https://www.sparkfun.com/">Sparkfun</a></li>
+                                        <li><a href="https://arduino.cc/en/Reference/HomePage">Arduino Reference</a>
+                                        </li>
+                                        <li><a href="https://www.eevblog.com/">EEVBlog</a></li>
+                                        <li><a href="https://tahmidmc.blogspot.com/">Tahmid's Blog</a></li>
+                                        <li><a href="https://labprojectsbd.com/">Lab Projects BD</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle show" role="button" aria-expanded="true">Atmel</a>
+                                            <ul class="dropdown-menu show ">
+                                                <li><a class="dropdown-item" href="/assets/docs/ATmega8A.pdf"
+                                                       target="_blank" rel="nofollow">Atmega8 Datasheet</a></li>
+                                                <li><a class="dropdown-item"
+                                                       href="/assets/docs/ATmega48A-PA-88A-PA-168A-PA-328-P.pdf"
+                                                       target="_blank" rel="nofollow">ATMega168/328 Datasheet</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <main id="contentBox">
+
+                <nav aria-label="breadcrumb" id="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">AVR Guide</a></li>
+                        <li class="breadcrumb-item"><a href="#">Communication</a></li>
+                    </ol>
+                </nav>
+
+                <div class="main-content">
+                    <h3>SPI (SERIAL PERIPHERAL INTERFACE)</h3>
+                    <br/>
+                    <h5 class="fw-semibold">INTRODUCTION:</h5>
+                    <div class="chapter ms-4 pt-2">
+                        <p>
+                            The SPI is a very simply Synchronous (allows devices to send and receive data at the same
+                            time) protocol developed by Motorola. It is found on many devices and like I2C can be used
+                            to chain many devices together. The SPI protocol can simply be implemented in software
+                            however, the AVR has hardware SPI capability.
+                        </p>
+                    </div>
+
+                    <hr class="mb-4"/>
+                    <h5 class="fw-semibold">HARDWARE:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <img class="img-fluid mt-3" src="/spi/ATmega - SPI.JPG" alt="ATmega - SPI">
+                        <p class="fw-light">Figure 1: SPI Pinouts</p>
+                        <p>
+                            SPI uses 4 pins, A system clock (SCK), a Master Output Slave Input (MOSI), a Master Input
+                            Slave Output (MISO) and a Slave Select (SS). These pins have many other commonly used names:
+                        </p>
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered max-width-400">
+                                <tbody>
+                                <tr>
+                                    <th>NAME</th>
+                                    <th>ALTERNATE NAMES</th>
+                                </tr>
+                                <tr>
+                                    <td>SCK</td>
+                                    <td>CLK</td>
+                                </tr>
+                                <tr>
+                                    <td>MISO</td>
+                                    <td>SOMI, SDO, DO, SO</td>
+                                </tr>
+                                <tr>
+                                    <td>MOSI</td>
+                                    <td>SIMO, SDI, DI, SI</td>
+                                </tr>
+                                <tr>
+                                    <td>SS</td>
+                                    <td>CS, CSB, CSN, STE</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">Table 1: Alternate SPI pin names</p>
+
+                        <p>
+                            Because each slave device needs a dedicated SS line, you require <span style="color: blue">3 + #_of_Slave_Devices</span>
+                            pins in order to operate a multi slave buss.
+                        </p>
+                        <p>
+                            No additional hardware is required in order to run the SPI, no pullup resistors (like I2C),
+                            no end cap resistors, and no capacitors.
+                        </p>
+
+                        <img class="img-fluid mt-3" src="/spi/SPI - Single Slaves.JPG" alt="SPI - Single Slaves">
+                        <p class="fw-light">Figure 2: Single Slave</p>
+
+                        <p>
+                            Note one thing, if you use a single slave, you could save yourself a pin by hooking up the
+                            SS pin on the slave to GND and the SS on the master to VCC.
+                        </p>
+
+                        <img class="img-fluid mt-3" src="/spi/SPI - Multi Slaves.JPG" alt="SPI - Multi Slaves">
+                        <p class="fw-light">Figure 3: Multiple Slaves</p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">THEORY OF OPERATION:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <img class="img-fluid mt-3" src="/spi/SPI - Block Diagram.JPG" alt="SPI - Block Diagram">
+                        <p class="fw-light">Figure 4: SPI Communication Block Diagram</p>
+                        <p>
+                            The master generates the clock for the entire system and, is responsible for choosing which
+                            slave it wants to talk to. Setting the CS line LOW(GND) for the selected device will select
+                            it as the source device. The clock speed should be set to less than or equal to maximum
+                            speed of the slowest slave on your buss. When the clock pulses the Slave will read the state
+                            of the MOSI pin and the Master will read the state of the MISO pin. The AVR uses an 8 bit
+                            shift register, this means that after 8 pulses of the clock the 8 bit Master and Slave have
+                            both exchanged a bite of data.
+                        </p>
+
+                        <p class="fw-semibold">Shift Register:</p>
+                        <p>
+                            The previously mentioned shift register is a bit crazy. Let's say we are transmitting from
+                            the Master to the Slave. Each clock cycle the register will be shifted to the left by one in
+                            both the Master and the Slave. The most significant bit (MSB or 7 bit) of the Master will be
+                            pushed to the least significant bit (LSB or 0 bit) of the Slave (MOSI line on Figure 4) and,
+                            the Slaves MSB will be pushed to the Masters LSB (MISO line on Figure 4). So after 8 of
+                            these exchanges the contents of both registers will be exchanged with each other.
+                        </p>
+
+                        <p class="fw-semibold">Clock Polarity and Clock Phase:</p>
+                        <p>
+                            It can't be as simple as setting the clock speed can it? Well you'r right. We also have to
+                            set up the SPI mode. The mode consists of 2 settings the Clock Polarity and Clock Phase:
+                        </p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered max-width-400">
+                                <tbody>
+                                <tr>
+                                    <th>Mode</th>
+                                    <th>CPOL</th>
+                                    <th>CPHA</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">0</td>
+                                    <td style="text-align: center">0</td>
+                                    <td style="text-align: center">0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">1</td>
+                                    <td style="text-align: center">0</td>
+                                    <td style="text-align: center">1</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">2</td>
+                                    <td style="text-align: center">1</td>
+                                    <td style="text-align: center">0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">3</td>
+                                    <td style="text-align: center">1</td>
+                                    <td style="text-align: center">1</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">Table 2: SPI Modes</p>
+
+                        <p>
+                            So, what do these modes mean?
+                        </p>
+                        <p>
+                            The Clock Polarity decides what whether the data is sent on rising edge or the falling edge.
+                            If CPOL is set to LOW(0) data is sent/received on the Rising Edge and the status of the pins
+                            updated(for the next read) on the Falling Edge. If CPOL is set to HIGH(1) data is
+                            sent/received on the Falling Edge and the status of the pins is updated(for the next read)
+                            on the Rising Edge.
+                        </p>
+                        <p>
+                            The Clock Phase decides when to read the data. If CPHA is set to LOW(0) data will be reed on
+                            the leading edge of the clock. If CPHA is set to HIGH(1) data will be reed on the trailing
+                            edge of the clock.
+                        </p>
+                        <img class="img-fluid mt-3" src="/spi/SPI - Timing.JPG" alt="SPI - Timing">
+                        <p class="fw-light">Figure 5: SPI Timing Diagram</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>SPCR</th>
+                                    <td>SPIE</td>
+                                    <td>SPE</td>
+                                    <td>DORD</td>
+                                    <td>MSTR</td>
+                                    <td>CPOL</td>
+                                    <td>CPHA</td>
+                                    <td>SPR1</td>
+                                    <td>SPR0</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">SPI Control Register</p>
+
+                        <div class="table-responsive mt-4 ms-4">
+                            <table class="table table-bordered max-width-400">
+                                <tbody>
+                                <tr>
+                                    <th>Mode</th>
+                                    <th>CPOL</th>
+                                    <th>CPHA</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">0</td>
+                                    <td style="text-align: center">0</td>
+                                    <td style="text-align: center">0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">1</td>
+                                    <td style="text-align: center">0</td>
+                                    <td style="text-align: center">1</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">2</td>
+                                    <td style="text-align: center">1</td>
+                                    <td style="text-align: center">0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">3</td>
+                                    <td style="text-align: center">1</td>
+                                    <td style="text-align: center">1</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light ms-4">Table 2: SPI Modes</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>SPSR</th>
+                                    <td>SPIF</td>
+                                    <td>WCOL</td>
+                                    <td class="disable-cell">-</td>
+                                    <td class="disable-cell">-</td>
+                                    <td class="disable-cell">-</td>
+                                    <td class="disable-cell">-</td>
+                                    <td class="disable-cell">-</td>
+                                    <td>SPI2X</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">SPI Status Register</p>
+
+                        <div class="table-responsive mt-4 ms-4">
+                            <table class="table table-bordered max-width-550">
+                                <tbody>
+                                <tr>
+                                    <th>SPI2X</th>
+                                    <th>SPR1</th>
+                                    <th>SPR0</th>
+                                    <th>SCK Frequency</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Clock / 4</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Clock / 16</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Clock / 64</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Clock / 128</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Clock / 2</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Clock / 8</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">0</td>
+                                    <td>Clock / 32</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td style="text-align:center">1</td>
+                                    <td>Clock / 64</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light ms-4">System Clock Division Factor</p>
+
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered text-center max-width-600">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>7 bit</th>
+                                    <th>6 bit</th>
+                                    <th>5 bit</th>
+                                    <th>4 bit</th>
+                                    <th>3 bit</th>
+                                    <th>2 bit</th>
+                                    <th>1 bit</th>
+                                    <th>0 bit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>SPDR</th>
+                                    <td>MSB</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>LSB</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="fw-light">SPI Data Register</p>
+
+                        <p>
+                            Setting the SPE bit within the SPCR register enables SPI.
+                        </p>
+                        <p>
+                            Setting the SPIE bit HIGH (1) enables the SPI interrupt.
+                        </p>
+                        <p>
+                            The DORD bit within the SPCR register controls the direction of the transmission. The
+                            default is LOW(0) will transmits MSB first and LSB last, if the bit is SET(1) will transmit
+                            the LSB first and the MSB last.
+                        </p>
+                        <p>
+                            The MSTR bit within the SPCR register tells the AVR whether it is a master or a slave. If
+                            the SS pin is set as an input while the AVR is in Master Mode and, the pin is driven LOW
+                            (GND), the MSTR bit will be cleared (0) and the user must set the bit HIGH(1) to
+                            re-establish Master mode.
+                        </p>
+                        <p>
+                            The SPIF bit within the SPSR sets HIGH(1) whenever data transmission is complete even if
+                            interrupts are not enabled. This is useful because we could check the status of the bit in
+                            order to figure out if it is safe to write the SPDR register.
+                        </p>
+                        <p>
+                            Writing to the SPDR register causes data to be loaded into the shift register and
+                            automatically triggers the AVR to transmit. Reading from the SPDR register causes the data
+                            to be read from the reception shift register.
+                        </p>
+                        <p>
+                            The WCOL bit within the SPSR register will be set HIGH(1) if you attempt to write data into
+                            the SPDR register during data transmission. WCOL will be cleared (0) when the SPDR is reed.
+                        </p>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">SOFTWARE:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <p>
+                            It's not very often when the ATmega8 and ATmega168/328 use the same registers, but guess
+                            what the SPI is the same. I love it because it saves me from writing another tutorial.
+                        </p>
+                        <p class="fst-italic mt-4">ATmega8 & ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    // this program enables SPI communication and
+    // Sets the AVR into Master mode
+
+    #include &lt;avr/io.h&gt;
+
+    int main (void)
+    {
+        char data;
+
+        DDRB |= (1 << 2) | (1 << 3) | (1 << 5);    // SCK, MOSI and SS as outputs
+        DDRB &= ~(1 << 4);                         // MISO as input
+
+        SPCR |= (1 << MSTR);                 // Set as Master
+        SPCR |= (1 << SPR0) | (1 << SPR1);   // divided clock by 128
+        SPCR |= (1 << SPE);                  // Enable SPI
+
+        while(1)
+        {
+            SPDR = data;                   // send the data
+            while(!(SPSR & (1 << SPIF)));  // wait until transmission is complete
+
+            // if you have multiple slaves, this is where you want to switch
+        }
+    }</pre>
+                        <p>
+                            Now I shall use my captain obvious powers to say, both of these programs can be used to
+                            communicate with each other.
+                        </p>
+                        <p class="fst-italic mt-4">ATmega8 & ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    // this program enables SPI communication and
+    // Sets the AVR into Slave mode
+
+    #include &lt;avr/io.h&gt;
+
+    int main (void)
+    {
+        char data;
+
+        DDRB &= ~((1 << 2) | (1 << 3) | (1 << 5));   // SCK, MOSI and SS as inputs
+        DDRB |= (1 << 4);                            // MISO as output
+
+        SPCR &= ~(1 << MSTR);                    // Set as slave
+        SPCR |= (1 << SPR0) | (1 << SPR1);       // divide clock by 128
+        SPCR |= (1 << SPE);                      // Enable SPI
+
+        while(1)
+        {
+            while(!(SPSR & (1 << SPIF)));    // wait until all data is received
+            data = SPDR;                     // hurray, we now have our data
+        }
+    }
+    </pre>
+
+                        <p>
+                            Alternately, we could do the same BUT with using interrupts.
+                        </p>
+
+                        <p class="fst-italic mt-4">ATmega8 & ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    // this program enables SPI communication and
+    // Sets the AVR into Master mode using interrupts
+
+    #include &lt;avr/io.h&gt;
+    #include &lt;avr/interrupt.h&gt;
+
+    volatile data;
+
+    int main (void)
+    {
+        char blah;
+
+        DDRB |= (1 << 2) | (1 << 3) | (1 << 5);    // SCK, MOSI and SS as outputs
+        DDRB &= ~(1 << 4);                         // MISO as input
+
+        SPCR |= (1 << MSTR);                   // Set as Master
+        SPCR |= (1 << SPR0) | (1 << SPR1);     // divided clock by 128
+        SPCR |= (1 << SPIE);                   // Enable SPI  Interrupt
+        SPCR |= (1 << SPE);                    // Enable SPI
+
+        sei();
+
+        while(1)
+        {
+            if ((SPSR & (1 << SPIF)) > 0)  // checks to see if the SPI bit is clear
+                data=blah;                 // send the data
+
+            // if you use multiple slaves, switch slave here.
+        }
+    }
+
+
+    ISR (SPI_STC_vect)
+    {
+        SPDR = data;
+    }</pre>
+
+                        <p class="fst-italic mt-4">ATmega8 & ATmega168/328 Code:</p>
+                        <pre class="prettyprint linenums lang-c">
+    // this program enables SPI communication and
+    // Sets the AVR into Slave mode
+
+    #include &lt;avr/io.h&gt;
+    #include &lt;avr/interrupt.h&gt;
+
+    volatile data;
+
+    int main (void)
+    {
+        DDRB &= ~((1 << 2) | (1 << 3) | (1 << 5));   // SCK, MOSI and SS as inputs
+        DDRB |= (1 << 4);                            // MISO as output
+
+        SPCR &= ~(1 << MSTR);                    // Set as slave
+        SPCR |= (1 << SPR0) | (1 << SPR1);       // divide clock by 128
+        SPCR |= (1 << SPIE);                     // Enable SPI  Interrupt
+        SPCR |= (1 << SPE);                      // Enable SPI
+
+        sei();
+
+        while(1)
+        {
+            ;
+        }
+    }
+
+    ISR (SPI_STC_vect)
+    {
+        data = SPDR;
+        // do something with the received data
+    }</pre>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <h5 class="fw-semibold">OTHER RESOURCES:</h5>
+                    <div class="chapter ms-4 py-2">
+                        <a href="/assets/docs/Atmel-2585-Setup-and-Use-of-the-SPI_ApplicationNote_AVR151.pdf"
+                           target="_blank" rel="nofollow">AVR151: Setup And Use of The SPI</a>
+                        <br>
+                        <a href="/assets/docs/Using-the-XMEGA-SPI_ApplicationNote_AVR1309.pdf"
+                           target="_blank" rel="nofollow">AVR1309: Using the XMEGA SPI</a>
+                        <br>
+                        <a href="/assets/docs/Master-and-Slave-SPI-Driver_ApplicationNote_AVR32105.pdf"
+                           target="_blank" rel="nofollow">AVR32105: Master and Slave SPI Driver</a>
+                    </div>
+
+                    <hr class="mt-4 mb-4"/>
+                    <p>
+                        Woot, all the episodes of Angel are now on Netflix I love Darla (Julie M. Benz). Google it, I
+                        can't do everything for you.
+                    </p>
+                    <br/>Cheers<br/>Q
+                    <div><br/></div>
+                    <br/>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 mode-toggle" id="darkMoodDropdown">
+    <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center" id="theme" type="button"
+            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+            <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="theme-text">Toggle theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="theme-text" id="darkMoodDropdownMenu">
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="light"
+                    aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#sun-fill"></use>
+                </svg>
+                Light
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-mode="dark" aria-pressed="false">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#moon-stars-fill"></use>
+                </svg>
+                Dark
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-mode="auto"
+                    aria-pressed="true">
+                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                    <use href="#circle-half"></use>
+                </svg>
+                Auto
+                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+    </ul>
+</div>
+
+<script src="../assets/js/jquery-3.5.1.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/prettify.js"></script>
+
+</body>
+</html>
